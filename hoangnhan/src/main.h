@@ -2,10 +2,9 @@
 #define MAIN_H
 
 #include <iostream>
+#include <string>
 #include <fstream>
 #include <regex>
-#include <string>
-
 #include "error.h"
 
 #endif

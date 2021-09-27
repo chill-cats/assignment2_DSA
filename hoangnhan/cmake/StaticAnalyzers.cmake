@@ -11,7 +11,9 @@ if(ENABLE_CPPCHECK)
         --suppress=unmatchedSuppression
         --enable=all
         --inline-suppr
-        --inconclusive)
+        --inconclusive
+        --std=c++14
+        --report-progress)
     if(WARNINGS_AS_ERRORS)
       list(APPEND CMAKE_CXX_CPPCHECK --error-exitcode=2)
     endif()

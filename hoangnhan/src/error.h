@@ -1,80 +1,107 @@
-#ifndef ERROR_H
-#define ERROR_H
-
-#include <exception>
+#ifndef DSA_EXCEPTION_H
+#define DSA_EXCEPTION_H
 #include <string>
+#include <stdio.h>
+#include <string.h>
+#include <iostream>
 
-class Undeclared : public std::exception {
-private:
-    const std::string m_value;
-
-public:
-    explicit Undeclared(std::string &&instr) : m_value{ "Undeclared: " + instr } {}
-
-    const char *what() const noexcept override { return m_value.c_str(); }
-};
-
-class Redeclared : public std::exception {
-private:
-    const std::string m_value;
+using namespace std;
+class InvalidInstruction : public exception
+{
+    string mess;
 
 public:
-    explicit Redeclared(std::string &&instr) : m_value{ "Redeclared: " + instr } {}
-
-    const char *what() const noexcept override {
-        return m_value.c_str();
+    InvalidInstruction(string instruction)
+    {
+        mess = "Invalid: " + instruction;
+    }
+    const char *what() const throw()
+    {
+        return mess.c_str();
     }
 };
-
-class InvalidDeclaration : public std::exception {
-private:
-    const std::string m_value;
+class TypeMismatch : public exception
+{
+    string mess;
 
 public:
-    explicit InvalidDeclaration(std::string &&instr) : m_value{ "InvalidDeclaration: " + instr } {}
-
-    const char *what() const noexcept override {
-        return m_value.c_str();
+    TypeMismatch(string instruction)
+    {
+        mess = "TypeMismatch: " + instruction;
+    }
+    const char *what() const throw()
+    {
+        return mess.c_str();
     }
 };
-
-class TypeMismatch : public std::exception {
-private:
-    const std::string m_value;
+class Undeclared : public exception
+{
+    string mess;
 
 public:
-    explicit TypeMismatch(std::string &&instr) : m_value{ "TypeMismatch: " + instr } {}
-
-    const char *what() const noexcept override {
-        return m_value.c_str();
+    Undeclared(string instruction)
+    {
+        mess = "Undeclared: " + instruction;
+    }
+    const char *what() const throw()
+    {
+        return mess.c_str();
     }
 };
-
-class UnclosedBlock : public std::exception {
-private:
-    const std::string m_blockLevel;
+class Redeclared : public exception
+{
+    string mess;
 
 public:
-    explicit UnclosedBlock(int blockLevel) : m_blockLevel("UnclosedBlock: " + std::to_string(blockLevel)) {}
-    const char *what() const noexcept override {
-        return m_blockLevel.c_str();
+    Redeclared(string instruction)
+    {
+        mess = "Redeclared: " + instruction;
+    }
+    const char *what() const throw()
+    {
+        return mess.c_str();
     }
 };
+class InvalidDeclaration : public exception
+{
+    string mess;
 
-class UnknownBlock : public std::exception {
 public:
-    const char *what() const noexcept override {
-        return "UnknownBlock";
+    InvalidDeclaration(string instruction)
+    {
+        mess = "Undeclared: " + instruction;
+    }
+    const char *what() const throw()
+    {
+        return mess.c_str();
     }
 };
-class InvalidInstruction : public std::exception {
-private:
-    const std::string m_value;
+class UnclosedBlock : public exception
+{
+    string mess;
 
 public:
-    explicit InvalidInstruction(std::string &&instr) : m_value{ "InvalidInstruction: " + instr } {}
-    const char *what() const noexcept override {
-        return m_value.c_str();
+    UnclosedBlock(int level)
+    {
+        mess = "UnclosedBlock: " + to_string(level);
+    }
+    const char *what() const throw()
+    {
+        return mess.c_str();
+    }
+};
+class UnknownBlock : public exception
+{
+    string mess;
+
+public:
+    UnknownBlock()
+    {
+        mess = "UnknownBlock";
+    }
+    const char *what() const throw()
+    {
+        return mess.c_str();
     }
 };
 #endif
