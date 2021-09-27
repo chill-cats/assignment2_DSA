@@ -1,0 +1,20 @@
+{
+  "configurations": {
+   "Debug main": {
+      "adapter": "vscode-cpptools",
+      "configuration": {
+        "type":    "cppdbg",
+        "request": "launch",
+        "program": "${workspaceRoot}/cmake-build/src/main",
+        "args": ["${workspaceRoot}/testcase/test1.txt"],
+        "cwd": "${workspaceRoot}",
+        "externalConsole": false,
+        "stopAtEntry": true,
+        "MIMode": "lldb",
+        "logging": {
+          "engineLogging": false
+        }
+      }
+    }
+  }
+}
