@@ -24,9 +24,11 @@ void SymbolTable::detectUnclosedBlock() const {
     throw UnclosedBlock(static_cast<int>(this->smallestScopeLevel));
 }
 
-std::string SymbolTable::processLine(const std::string &line) {// NOLINT
+std::string SymbolTable::processLine(const std::string &line) {
     static const std::regex INSERT_REGEX{ R"(^INSERT ([a-z]\w*) (string|number|\((?:|(?:number|string)(?:,(?:number|string))*)\)->(?:number|string)) (true|false)$)" };
-    static const std::regex ASSIGN_REGEX{ R"()" };
+    static const std::regex ASSIGN_REGEX{
+        R"(^ASSIGN ([a-z]\w*) (\d+|'[\dA-Za-z\s]*'|[a-z]\w*|[a-z]\w*\((?:|(?:\d+|'[\dA-Za-z\s]*'|[a-z]\w*)(?:,(?:\d+|'[\dA-Za-z\s]*'|[a-z]\w*))*)\))$)"
+    };
     static const char *BEGIN_COMMAND{ "BEGIN" };
     static const char *END_COMMAND{ "END" };
     static const std::regex LOOKUP_REGEX{ R"()" };
