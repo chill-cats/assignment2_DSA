@@ -31,7 +31,7 @@ std::string SymbolTable::processLine(const std::string &line) {
     };
     static const char *BEGIN_COMMAND{ "BEGIN" };
     static const char *END_COMMAND{ "END" };
-    static const std::regex LOOKUP_REGEX{ R"()" };
+    static const std::regex LOOKUP_REGEX{ R"(^LOOKUP ([a-z]\w*))" };
     static const char *PRINT_COMMAND{ "PRINT" };
 
     std::smatch matches;
