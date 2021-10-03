@@ -1,0 +1,5 @@
+---
+Checks:          '*,-altera-*,-fuchsia-*,-google-*,-zircon-*,-abseil-*,-modernize-use-trailing-return-type,-llvm*,-cppcoreguidelines-owning-memory, -hicpp-avoid-c-arrays, -modernize-avoid-c-arrays, -cppcoreguidelines-avoid-c-arrays'
+WarningsAsErrors: ''
+HeaderFilterRegex: ''
+FormatStyle:     none

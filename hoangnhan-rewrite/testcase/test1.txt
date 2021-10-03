@@ -1,0 +1,6 @@
+INSERT a1 number false
+INSERT b2 string false
+INSERT b1 (number,number)->string false
+INSERT a1 number false
+INSERT b2 string false
+INSERT b1 (number,number)->string false
