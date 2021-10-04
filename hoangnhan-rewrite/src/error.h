@@ -1,106 +1,69 @@
 #ifndef DSA_EXCEPTION_H
 #define DSA_EXCEPTION_H
 #include <string>
-#include <stdio.h>
-#include <string.h>
 #include <iostream>
 
 using namespace std;
-class InvalidInstruction : public exception
-{
+class InvalidInstruction : public exception {
     string mess;
 
 public:
-    InvalidInstruction(string instruction)
-    {
-        mess = "Invalid: " + instruction;
-    }
-    const char *what() const throw()
-    {
+    explicit InvalidInstruction(const string &instruction) : mess("Invalid: " + instruction) {}
+    const char *what() const noexcept override {
         return mess.c_str();
     }
 };
-class TypeMismatch : public exception
-{
+class TypeMismatch : public exception {
     string mess;
 
 public:
-    TypeMismatch(string instruction)
-    {
-        mess = "TypeMismatch: " + instruction;
-    }
-    const char *what() const throw()
-    {
+    explicit TypeMismatch(const string &instruction) : mess("TypeMismatch: " + instruction) {}
+    const char *what() const noexcept override {
         return mess.c_str();
     }
 };
-class Undeclared : public exception
-{
+class Undeclared : public exception {
     string mess;
 
 public:
-    Undeclared(string instruction)
-    {
-        mess = "Undeclared: " + instruction;
-    }
-    const char *what() const throw()
-    {
+    explicit Undeclared(const string &instruction) : mess("Undeclared: " + instruction) {}
+    const char *what() const noexcept override {
         return mess.c_str();
     }
 };
-class Redeclared : public exception
-{
+class Redeclared : public exception {
     string mess;
 
 public:
-    Redeclared(string instruction)
-    {
-        mess = "Redeclared: " + instruction;
-    }
-    const char *what() const throw()
-    {
+    explicit Redeclared(const string &instruction) : mess("Redeclared: " + instruction) {}
+    const char *what() const noexcept override {
         return mess.c_str();
     }
 };
-class InvalidDeclaration : public exception
-{
+class InvalidDeclaration : public exception {
     string mess;
 
 public:
-    InvalidDeclaration(string instruction)
-    {
-        mess = "Undeclared: " + instruction;
-    }
-    const char *what() const throw()
-    {
+    explicit InvalidDeclaration(const string &instruction) : mess("Undeclared: " + instruction) {}
+    const char *what() const noexcept override {
         return mess.c_str();
     }
 };
-class UnclosedBlock : public exception
-{
+class UnclosedBlock : public exception {
     string mess;
 
 public:
-    UnclosedBlock(int level)
-    {
-        mess = "UnclosedBlock: " + to_string(level);
-    }
-    const char *what() const throw()
-    {
+    explicit UnclosedBlock(int level) : mess("UnclosedBlock: " + to_string(level)) {}
+    const char *what() const noexcept override {
         return mess.c_str();
     }
 };
-class UnknownBlock : public exception
-{
+class UnknownBlock : public exception {
     string mess;
 
 public:
-    UnknownBlock()
-    {
-        mess = "UnknownBlock";
-    }
-    const char *what() const throw()
-    {
+    UnknownBlock() : mess("UnknownBlock") {}
+    const char *what() const noexcept override {
         return mess.c_str();
     }
 };
