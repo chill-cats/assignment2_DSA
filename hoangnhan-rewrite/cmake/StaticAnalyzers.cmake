@@ -13,7 +13,8 @@ if(ENABLE_CPPCHECK)
         --inline-suppr
         --inconclusive
         --std=c++14
-        --report-progress)
+        --report-progress
+        --project=${CMAKE_SOURCE_DIR}/cmake-build/compile_commands.json)
     if(WARNINGS_AS_ERRORS)
       list(APPEND CMAKE_CXX_CPPCHECK --error-exitcode=2)
     endif()

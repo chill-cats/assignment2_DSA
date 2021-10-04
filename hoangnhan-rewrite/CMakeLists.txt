@@ -64,4 +64,9 @@ if (ENABLE_TESTING)
     add_subdirectory(test)
 endif()
 
+option(ENABLE_COC_CLANGD_CONFIG "This generate nvim coc config file from template in the .vim folder" OFF)
+if (ENABLE_COC_CLANGD_CONFIG)
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/.vim/coc-settings.json.in
+                ${CMAKE_CURRENT_SOURCE_DIR}/.vim/coc-settings.json)
+endif()
 add_subdirectory(src)

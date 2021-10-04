@@ -1,0 +1,3 @@
+{
+    "clangd.compilationDatabasePath": "${PROJECT_BINARY_DIR}"
+}
