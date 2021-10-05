@@ -16,7 +16,7 @@ void SymbolTable::run(const string& filename) {
             smatch data;
 
             if (regex_match(s, data, insert)) {
-                identifier_name newID(data[1], data[2], "", level);
+                //identifier_name newID(data[1], data[2], "", level);
 
 
             } else if (regex_match(s, data, assign)) {
@@ -36,7 +36,7 @@ void SymbolTable::run(const string& filename) {
 
 
             } else if (regex_match(s, data, lookup)) {
-                if (splay_tree.look_up(data[1], level) == -1) {
+                if (splay_tree.look_up(data[1], level) == nullptr) {
                     throw Undeclared(s);
                 } else {
                     cout << splay_tree.look_up(data[1], level) << endl;
@@ -51,20 +51,6 @@ void SymbolTable::run(const string& filename) {
         }
     }
     myfile.close();
-}
-
-int compare(string str, string str1) {
-    for (int i = 0; i < (int) str.length() && i < (int) str1.length(); i++) {
-        if (str[i] < str1[i]) {
-            return 0;
-        } else if (str[i] > str1[i]) {
-            return 1;
-        }
-    }
-    if ((int) str.length() > (int) str1.length()) {
-        return 1;
-    }
-    return 0;
 }
 
 identifier_node* Tree::right_rol(identifier_node *h) {
@@ -111,7 +97,7 @@ identifier_node* Tree::left_rol(identifier_node *h) {
     return right_h;
 }
 
-int Tree::splay(identifier_node* h) {
+int Tree::splay(identifier_node* h) {                           // num_splay
     if (h->parent == nullptr) {
         return 0;
     }
@@ -146,14 +132,12 @@ int Tree::splay(identifier_node* h) {
     return count;
 }
 
-void Tree::insert_tree(const identifier_name& newID, const string& line) {
+int Tree::insert_tree(const identifier_name& newID) {           // num_com
     int num_compare = 0;
-    int num_splay = 0;
     auto *new_node = new identifier_node(newID, nullptr, nullptr, nullptr);
     if (this->root == nullptr) {
         this->root = new_node;
-        cout << num_compare << " " << num_splay;
-        return;
+        return -1;
     }
 
     identifier_node *h;
@@ -177,8 +161,8 @@ void Tree::insert_tree(const identifier_name& newID, const string& line) {
 
         } else {                                                //compare ID
             if (newID.ID == h->data.ID) {
-                throw Redeclared(line);
-            } else if (compare(newID.ID, h->data.ID) == 0) {
+                return -1;
+            } else if (newID.ID.compare(h->data.ID) == -1) {
                 if (h->left_child == nullptr) {
                     h->left_child = new_node;
                     new_node->parent = h;
@@ -186,7 +170,7 @@ void Tree::insert_tree(const identifier_name& newID, const string& line) {
                 }
                 h = h->left_child;
 
-            } else if (compare(newID.ID, h->data.ID) == 1) {
+            } else if (newID.ID.compare(h->data.ID) == 1) {
                 if (h->right_child == nullptr) {
                     h->right_child = new_node;
                     new_node->parent = h;
@@ -196,29 +180,94 @@ void Tree::insert_tree(const identifier_name& newID, const string& line) {
             }
         }
     }
-    num_splay = this->splay(new_node);
-    cout << num_compare << " " << num_splay << endl;
+    return num_compare;
 }
 
-void Tree::assign_tree(string ID, string det_type, string value, string line) {
+void Tree::assign_tree(const string& ID, string det_type, int level) {
+    auto *h = this->look_up(ID, level);                     // crisis of BK ass
+    if (h != nullptr) {
 
+    }
+    //throw Undeclared(line);
 }
 
-void Tree::end_level(int level) {}
+identifier_node* Tree::find_max(identifier_node *node) {
+    if (node->left_child == nullptr) {
+        return nullptr;
+    }
+    auto *n = node->left_child;
+    while (n->right_child) {
+        n = n->right_child;
+    }
+    return n;
+}
 
-int Tree::look_up(const string& ID, int level) {
+void Tree::delete_node(identifier_node *node) {
+    auto *par = node->parent;
+    if (node->left_child == nullptr) {                      // when reaches condition to delete
+        if (node->right_child == nullptr) {                 // if it singled
+            if (par == nullptr) {                           // delete root when it singled
+                delete node;
+                this->root = nullptr;
+            } else if (par->left_child == node) {
+                delete node;
+                par->left_child = nullptr;
+            } else {
+                delete node;
+                par->right_child = nullptr;
+            }
+        } else {                                            // if it has right child
+            if (par == nullptr) {                           // delete root when it not singled
+                this->root = node->right_child;
+                delete node;
+            } else if (par->left_child == node) {
+                par->left_child = node->right_child;
+                node->right_child->parent = par;
+                delete node;
+            } else {
+                par->right_child = node->right_child;
+                node->right_child->parent = par;
+                delete node;
+            }
+        }
+    } else {
+        auto *max = find_max(node);                         // max is the biggest member
+        auto tmp = max->data;                               // |
+        max->data = node->data;                             // |  swap node and
+        node->data = tmp;                                   // |    run delete_node again
+        node = max;                                         // |
+        delete_node(node);
+    }
+}
+
+void Tree::end_level(identifier_node *node, int level) {
+    if (node == nullptr) {
+        return;
+    }
+
+    if (node->data.level == level) {
+        delete_node(node);
+    }
+    // run till left_ end
+    end_level(node->left_child, level);
+
+    // run till right_ end
+    end_level(node->right_child, level);
+}
+
+identifier_node* Tree::look_up(const string& ID, int level) {   // NEED MORE INFORMATION~~~~~~~~~~~~~
     if (this->root == nullptr) {
-        return -1;
+        return nullptr;
     }
 
     for (auto *h = this->root; ; ) {
-        if (level > h->data.level) {             //for level higher root
+        if (level > h->data.level) {                            //for level higher root
             if (h->right_child == nullptr) {
                 break;
             }
             h = h->right_child;
 
-        } else if (level < h->data.level) {      //for level lower
+        } else if (level < h->data.level) {                     //for level lower
             if (h->left_child == nullptr) {
                 break;
             }
@@ -226,14 +275,15 @@ int Tree::look_up(const string& ID, int level) {
 
         } else {                                                //compare ID
             if (ID == h->data.ID) {
-                return level;
-            } else if (compare(ID, h->data.ID) == 0) {
+                return h;
+
+            } else if (ID.compare(h->data.ID) == -1) {
                 if (h->left_child == nullptr) {
                     break;
                 }
                 h = h->left_child;
 
-            } else if (compare(ID, h->data.ID) == 1) {
+            } else if (ID.compare(h->data.ID) == 1) {
                 if (h->right_child == nullptr) {
                     break;
                 }
@@ -242,7 +292,7 @@ int Tree::look_up(const string& ID, int level) {
         }
     }
     if (level == 0) {
-        return -1;
+        return nullptr;
     } else {
         return look_up(ID, level - 1);
     }

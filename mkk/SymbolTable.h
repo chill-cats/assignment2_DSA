@@ -4,11 +4,13 @@
 
 class identifier_name {
 public:
-    identifier_name(): ID(""), type(""), level(0) {}
-    identifier_name(string ID, string type, string value, int level): ID(ID), type(type), level(level) {}
+    identifier_name(): ID(""), type(""), level(0), static_check("") {}
+    identifier_name(string &ID, string &type, int &level,
+                    string &static_check): ID(ID), type(type), level(level), static_check(static_check) {}
     string ID;
     string type;
     int level;
+    string static_check;
 };
 
 class identifier_node {
@@ -40,13 +42,17 @@ public:
 
     int splay(identifier_node* h);
 
-    void insert_tree(const identifier_name& newID, const string& line);
+    int insert_tree(const identifier_name& newID);
 
-    void assign_tree(string ID, string det_type, string value, string line);
+    void assign_tree(const string& ID, string det_type, int level);
 
-    void end_level(int level);
+    static identifier_node* find_max(identifier_node *node);
 
-    int look_up(const string& ID, int level);
+    void delete_node(identifier_node *node);
+
+    void end_level(identifier_node *node, int level);
+
+    identifier_node* look_up(const string& ID, int level);
 
     void print(identifier_node* &node);
 };
