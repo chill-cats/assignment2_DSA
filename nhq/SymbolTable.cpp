@@ -296,7 +296,7 @@ void SplayTree::splay(Node* node, int &splay)
     if(node->parent == nullptr)
         return;
     
-    Node* tmpParent = node->parent; //y
+    Node* tmpParent = node->parent;
     if(tmpParent->parent == nullptr)
     {
         if(tmpParent->left == node)  rightRotate(tmpParent);
@@ -305,7 +305,7 @@ void SplayTree::splay(Node* node, int &splay)
     }
     else
     {
-        Node*tmp = tmpParent->parent; //z
+        Node*tmp = tmpParent->parent;
         if(tmp->left == tmpParent){
             if(tmpParent->left == node)
                 rightRoll(tmp);
@@ -340,7 +340,7 @@ void SplayTree::insert_node(Node* root, Node*add, int& comp)
         }
         else   insert_node(root->right, add, comp);
     }
-    if(add->left->level == root->level){ //Then compare the identifier name
+    if(add->level == root->level){ //Then compare the identifier name
         comp++;
         auto check = add->data.name.compare(root->data.name);
         if(check < 0) // ADD to left
