@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/SymbolTable.cpp
+SymbolTable.h
+/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/SymbolTable.h
+utility
+-
+
+/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/SymbolTable.h
+main.h
+/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/main.h
+
+/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/error.h
+string
+-
+stdio.h
+-
+string.h
+-
+iostream
+-
+
+/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/main.cpp
+SymbolTable.h
+/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/SymbolTable.h
+SymbolTable.cpp
+/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/SymbolTable.cpp
+
+/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/main.h
+iostream
+-
+string
+-
+fstream
+-
+regex
+-
+error.h
+/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/error.h
+
