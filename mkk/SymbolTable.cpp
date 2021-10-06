@@ -162,7 +162,7 @@ int Tree::insert_tree(const identifier_name& newID) {           // num_com
         } else {                                                //compare ID
             if (newID.ID == h->data.ID) {
                 return -1;
-            } else if (newID.ID.compare(h->data.ID) == -1) {
+            } else if (newID.ID.compare(h->data.ID) < 0) {
                 if (h->left_child == nullptr) {
                     h->left_child = new_node;
                     new_node->parent = h;
@@ -170,7 +170,7 @@ int Tree::insert_tree(const identifier_name& newID) {           // num_com
                 }
                 h = h->left_child;
 
-            } else if (newID.ID.compare(h->data.ID) == 1) {
+            } else if (newID.ID.compare(h->data.ID) > 0) {
                 if (h->right_child == nullptr) {
                     h->right_child = new_node;
                     new_node->parent = h;
@@ -277,13 +277,13 @@ identifier_node* Tree::look_up(const string& ID, int level) {   // NEED MORE INF
             if (ID == h->data.ID) {
                 return h;
 
-            } else if (ID.compare(h->data.ID) == -1) {
+            } else if (ID.compare(h->data.ID) < 0) {
                 if (h->left_child == nullptr) {
                     break;
                 }
                 h = h->left_child;
 
-            } else if (ID.compare(h->data.ID) == 1) {
+            } else if (ID.compare(h->data.ID) > 0) {
                 if (h->right_child == nullptr) {
                     break;
                 }
