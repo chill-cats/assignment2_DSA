@@ -2,7 +2,7 @@
 #define SYMBOLTABLE_H
 #include "main.h"
 
-class Symbol {//NOLINT
+class Symbol {    //NOLINT
 
 public:
     enum class SymbolType {
@@ -42,24 +42,14 @@ public:
     inline DataType getDataType() const noexcept {
         return dataType;
     }
-    inline bool operator==(const Symbol &rhs) const noexcept {
-        return level == rhs.level && name == rhs.name;
-    }
-    inline bool operator<(const Symbol &rhs) const noexcept {
-        if (level == rhs.level) {
-            return name < rhs.name;
-        }
-        return level < rhs.level;
-    }
-    inline bool operator>(const Symbol &rhs) const noexcept {
-        if (level == rhs.level) {
-            return name > rhs.name;
-        }
-        return level > rhs.level;
-    }
+    virtual bool operator==(const Symbol &rhs) const noexcept;
+    virtual bool operator<(const Symbol &rhs) const noexcept;
+    virtual bool operator>(const Symbol &rhs) const noexcept;
+
+    std::string toString() const;
 };
 
-class FunctionSymbol : public Symbol {//NOLINT
+class FunctionSymbol : public Symbol {    //NOLINT
 
     const std::unique_ptr<DataType[]> paramsType;
     const int paramCount = 0;
@@ -69,7 +59,7 @@ public:
     FunctionSymbol(const FunctionSymbol &other);
 };
 
-class VariableSymbol : public Symbol {//NOLINT
+class VariableSymbol : public Symbol {    //NOLINT
 
 public:
     VariableSymbol(const std::string &name, int level, DataType dataType);
@@ -78,17 +68,24 @@ public:
 
 class SymbolTable {
     struct OpResult {
-        int compNum = 0;
-        int splayNum = 0;
+        int compNum = 0;     // NOLINT
+        int splayNum = 0;    // NOLINT
+        OpResult &operator+=(const OpResult &rhs);
     };
 
+    enum class TraversalMethod {
+        PREORDER,
+        INORDER,
+        POSTORDER
+    };
     class Tree {
         class TreeNode {
             std::unique_ptr<Symbol> data;
-            std::unique_ptr<TreeNode> leftChild;
-            std::unique_ptr<TreeNode> rightChild;
-
             TreeNode *parent = nullptr;
+
+            TreeNode *leftChild = nullptr;
+            TreeNode *rightChild = nullptr;
+
             inline bool hasLeftChild() const {
                 return leftChild != nullptr;
             }
@@ -97,19 +94,38 @@ class SymbolTable {
                 return rightChild != nullptr;
             }
 
-            static std::unique_ptr<TreeNode> rotateWithRightChild(std::unique_ptr<TreeNode> node);
-            static std::unique_ptr<TreeNode> rotateWithLeftChild(std::unique_ptr<TreeNode> node);
-
         public:
             explicit TreeNode(std::unique_ptr<Symbol> &&data);
-            TreeNode(std::unique_ptr<Symbol> &&data, std::unique_ptr<TreeNode> &&leftChild, std::unique_ptr<TreeNode> &&rightChild, TreeNode *parent = nullptr);
+            TreeNode(std::unique_ptr<Symbol> &&data, TreeNode *leftChild, TreeNode *rightChild, TreeNode *parent = nullptr);
             friend class Tree;
             friend class SymbolTable;
         };
 
-        std::unique_ptr<TreeNode> root;
+        TreeNode *root = nullptr;
 
-        OpResult splay(const Symbol &data);
+        OpResult splay(TreeNode *node);
+
+        /**
+         * @brief   this function rotate a node with it's right child and return a pointer to new root
+         * @param   node Node to rotate with it's right child
+         * @return  node's right child now become new root of that subtree
+         */
+        void rotateWithRightChild(TreeNode *node);
+        void leftRotate(TreeNode *node);
+
+        /**
+         * @brief   this function rotate a node with it's left child and return a pointer to new root
+         * @param   node Node to rotate with it's left child
+         * @return  node's left child now become new root of that subtree
+         */
+        void rotateWithLeftChild(TreeNode *node);
+        void rightRotate(TreeNode *node);
+
+        std::string toString(TraversalMethod method);
+
+        static void preOrderToString(const TreeNode *currentRoot, std::string &output);
+        static void inOrderToString(const TreeNode *currentRoot, std::string &output);
+        static void postOrderToString(const TreeNode *currentRoot, std::string &output);
 
         friend class SymbolTable;
     };
@@ -125,5 +141,6 @@ public:
     void detectUnclosedBlock() const;
 
     OpResult insert(const std::string &name, const std::string &value, bool isStatic, const std::string &line);
+    static void test();
 };
 #endif

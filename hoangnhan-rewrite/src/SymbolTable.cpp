@@ -1,5 +1,4 @@
 #include "SymbolTable.h"
-
 void SymbolTable::run(const std::string &filename) {
     std::ifstream file(filename);
     std::string line;
@@ -34,6 +33,8 @@ std::string SymbolTable::processLine(const std::string &line) {
 }
 
 SymbolTable::OpResult SymbolTable::insert(const std::string &name, const std::string &value, const bool isStatic, const std::string &line) {
+    using TreeNode = Tree::TreeNode;
+
     const int targetLevel = isStatic ? 0 : currentLevel;
     OpResult result;
     std::unique_ptr<Symbol> newData;
@@ -62,24 +63,34 @@ SymbolTable::OpResult SymbolTable::insert(const std::string &name, const std::st
 
         newData = std::make_unique<FunctionSymbol>(name, targetLevel, returnType, static_cast<int>(paramNum), std::move(param));
     }
-    if (tree.root == nullptr) {
-        tree.root = std::make_unique<Tree::TreeNode>(std::move(newData));
-        return { 0, 0 };
+    auto *ptr = tree.root;
+    TreeNode *ptrParent = nullptr;
+
+    while (ptr != nullptr) {
+        ptrParent = ptr;
+        result.compNum++;
+        if (*dynamic_cast<Symbol *>(newData.get()) > *dynamic_cast<Symbol *>(ptr->data.get())) {
+
+            ptr = ptr->rightChild;
+        } else if (*dynamic_cast<Symbol *>(newData.get()) < *dynamic_cast<Symbol *>(ptr->data.get())) {
+            ptr = ptr->leftChild;
+        } else {
+            throw Redeclared(line);
+        }
+    }
+    ptr = new TreeNode(std::move(newData));
+    ptr->parent = ptrParent;
+
+    if (ptrParent == nullptr) {
+        tree.root = ptr;
+    } else if (*dynamic_cast<Symbol *>(ptr->data.get()) > *dynamic_cast<Symbol *>(ptrParent->data.get())) {
+        ptrParent->rightChild = ptr;
+    } else {
+        ptrParent->leftChild = ptr;
     }
 
-    result = tree.splay(*newData);
-    if (tree.root->data == newData) {
-        throw Redeclared(line);
-    }
-    std::unique_ptr<Tree::TreeNode> newNode = std::make_unique<Tree::TreeNode>(std::move(newData));
-    if (*(newNode->data) < *(tree.root->data.get())) {
-        newNode->leftChild = std::move(tree.root->leftChild);
-        newNode->rightChild = std::move(tree.root);
-    } else if (*(newNode->data) > *(tree.root->data.get())) {
-        newNode->rightChild = std::move(tree.root->rightChild);
-        newNode->leftChild = std::move(tree.root);
-    }
-    tree.root = std::move(newNode);
+    result += tree.splay(ptr);
+
     return result;
 }
 void SymbolTable::detectUnclosedBlock() const {
@@ -87,99 +98,181 @@ void SymbolTable::detectUnclosedBlock() const {
         throw UnclosedBlock(currentLevel);
     }
 }
-SymbolTable::OpResult SymbolTable::Tree::splay(const Symbol &data) {//NOLINT
-    if (root == nullptr) {
-        return { 0, 0 };
+
+SymbolTable::OpResult SymbolTable::Tree::splay(TreeNode *node) {    //NOLINT
+    OpResult result;
+    if (node == root || node == nullptr) {
+        return result;
     }
-    std::unique_ptr<TreeNode> leftHeader;
-    std::unique_ptr<TreeNode> rightHeader;
-
-    std::unique_ptr<TreeNode> *leftMostNode = &rightHeader;
-    std::unique_ptr<TreeNode> *rightMostNode = &leftHeader;
-
-    std::unique_ptr<TreeNode> currentRoot = std::move(root);
-
-    OpResult result{ 0, 0 };
-
-    for (;;) {
-        const auto &rootData = *(currentRoot->data);
-
-        if (data < rootData) {
-            result.compNum++;
-            if (currentRoot->hasLeftChild() && data < *(currentRoot->leftChild->data)) {
-                currentRoot = TreeNode::rotateWithRightChild(std::move(currentRoot));
-            }
-            if (!currentRoot->hasLeftChild()) {
-                break;
-            }
-
-            if (rightHeader == nullptr) {
-                rightHeader = std::move(currentRoot);
-            } else {
-                (*leftMostNode)->leftChild = std::move(currentRoot);
-                leftMostNode = &((*leftMostNode)->leftChild);
-            }
-            currentRoot = std::move((*leftMostNode)->leftChild);
+    while (node != root) {
+        if (node->parent == root) {    // ZIG case
             result.splayNum++;
-            continue;
-        }
-        if (data > rootData) {
-            result.compNum++;
-            if (currentRoot->hasRightChild() && data > *(currentRoot->rightChild->data)) {
-                currentRoot = TreeNode::rotateWithLeftChild(std::move(currentRoot));
+            if (node == node->parent->leftChild) {    // ZIG left
+                rotateWithLeftChild(node->parent);
+
+            } else if (node == node->parent->rightChild) {
+                rotateWithRightChild(node->parent);    // ZIG right
             }
-            if (!currentRoot->hasRightChild()) {
-                break;
-            }
-            if (leftHeader == nullptr) {
-                leftHeader = std::move(currentRoot);
-            } else {
-                (*rightMostNode)->rightChild = std::move(currentRoot);
-                rightMostNode = &((*rightMostNode)->rightChild);
-            }
-            currentRoot = std::move((*rightMostNode)->rightChild);
+        } else {
             result.splayNum++;
-            continue;
+            if (node == node->parent->leftChild && node->parent == node->parent->leftChild) {    // ZIG ZIG left
+                rotateWithLeftChild(node->parent->parent);
+                rotateWithLeftChild(node->parent);
+            } else if (node == node->parent->rightChild && node->parent == node->parent->rightChild) {    // ZIG ZIG right
+                rotateWithRightChild(node->parent->parent);
+                rotateWithRightChild(node->parent);
+            } else if (node == node->parent->leftChild && node->parent == node->parent->parent->rightChild) {    // ZIG ZAG
+                rotateWithLeftChild(node->parent);
+                rotateWithRightChild(node->parent);
+            } else if (node == node->parent->rightChild && node->parent == node->parent->parent->leftChild) {
+                rotateWithRightChild(node->parent);
+                rotateWithLeftChild(node->parent);
+            }
         }
-        break;
     }
 
-    if (leftHeader == nullptr) {
-        leftHeader = std::move(currentRoot->leftChild);
-    } else {
-        (*rightMostNode)->rightChild = std::move(currentRoot->leftChild);
-    }
-
-    if (rightHeader == nullptr) {
-        rightHeader = std::move(currentRoot->rightChild);
-    } else {
-        (*leftMostNode)->leftChild = std::move(currentRoot->rightChild);
-    }
-
-
-    currentRoot->rightChild = std::move(rightHeader);
-    currentRoot->leftChild = std::move(leftHeader);
-    root = std::move(currentRoot);
     return result;
 }
 
-std::unique_ptr<SymbolTable::Tree::TreeNode> SymbolTable::Tree::TreeNode::rotateWithLeftChild(std::unique_ptr<SymbolTable::Tree::TreeNode> node) {
-    std::unique_ptr<SymbolTable::Tree::TreeNode> tempNode = std::move(node->rightChild);
-    node->rightChild = std::move(tempNode->leftChild);
-    tempNode->leftChild = std::move(node);
-    node = std::move(tempNode);
-    return node;
+std::string SymbolTable::Tree::toString(TraversalMethod method) {
+    std::string output;
+    switch (method) {
+    case TraversalMethod::INORDER:
+        inOrderToString(root, output);
+        break;
+    case TraversalMethod::POSTORDER:
+        postOrderToString(root, output);
+        break;
+    case TraversalMethod::PREORDER:
+        preOrderToString(root, output);
+    }
+    return output;
 }
 
-std::unique_ptr<SymbolTable::Tree::TreeNode> SymbolTable::Tree::TreeNode::rotateWithRightChild(std::unique_ptr<SymbolTable::Tree::TreeNode> node) {
-    std::unique_ptr<SymbolTable::Tree::TreeNode> tempNode = std::move(node->leftChild);
-    node->leftChild = std::move(tempNode->rightChild);
-    tempNode->rightChild = std::move(node);
-    node = std::move(tempNode);
-    return node;
+void SymbolTable::Tree::preOrderToString(const TreeNode *currentRoot, std::string &output) {
+    if (currentRoot == nullptr) {
+        return;
+    }
+    output += currentRoot->data->toString();
+    output += ' ';
+    preOrderToString(currentRoot->leftChild, output);
+    preOrderToString(currentRoot->rightChild, output);
+}
+
+void SymbolTable::Tree::inOrderToString(const TreeNode *currentRoot, std::string &output) {
+    if (currentRoot == nullptr) {
+        return;
+    }
+    inOrderToString(currentRoot->leftChild, output);
+    output += currentRoot->data->toString();
+    output += ' ';
+    inOrderToString(currentRoot->rightChild, output);
+}
+
+void SymbolTable::Tree::postOrderToString(const TreeNode *currentRoot, std::string &output) {
+    if (currentRoot == nullptr) {
+        return;
+    }
+    preOrderToString(currentRoot->leftChild, output);
+    preOrderToString(currentRoot->rightChild, output);
+    output += currentRoot->data->toString();
+    output += ' ';
+}
+
+void SymbolTable::Tree::rotateWithLeftChild(TreeNode *node) {
+    if (node == nullptr || !node->hasLeftChild()) {
+        return;
+    }
+    auto *oldLeftChild = node->leftChild;
+    auto *parent = node->parent;
+
+    node->leftChild = oldLeftChild->rightChild;
+    if (node->hasLeftChild()) {
+        node->leftChild->parent = node;
+    }
+    oldLeftChild->rightChild = node;
+
+    if (node->parent == nullptr) {
+        node->parent = oldLeftChild;
+        oldLeftChild->parent = nullptr;
+        root = oldLeftChild;
+        return;
+    }
+    if (node == node->parent->leftChild) {
+        node->parent->leftChild = oldLeftChild;
+        node->parent = oldLeftChild;
+        oldLeftChild->parent = parent;
+        return;
+    }
+    if (node == node->parent->rightChild) {
+        node->parent->rightChild = oldLeftChild;
+        node->parent = oldLeftChild;
+        oldLeftChild->parent = parent;
+        return;
+    }
+}
+
+void SymbolTable::Tree::rightRotate(TreeNode *node) {
+    return rotateWithLeftChild(node);
+}
+
+void SymbolTable::Tree::rotateWithRightChild(TreeNode *node) {
+    if (node == nullptr || !node->hasRightChild()) {
+        return;
+    }
+    auto *oldRightChild = node->rightChild;
+    auto *parent = node->parent;
+
+    node->rightChild = oldRightChild->leftChild;
+    if (node->hasRightChild()) {
+        node->rightChild->parent = node;
+    }
+
+    oldRightChild->leftChild = node;
+
+    if (node->parent == nullptr) {
+        node->parent = oldRightChild;
+        oldRightChild->parent = nullptr;
+        root = oldRightChild;
+        return;
+    }
+    if (node == node->parent->leftChild) {
+        node->parent->leftChild = oldRightChild;
+        node->parent = oldRightChild;
+        oldRightChild->parent = parent;
+        return;
+    }
+    if (node == node->parent->rightChild) {
+        node->parent->rightChild = oldRightChild;
+        node->parent = oldRightChild;
+        oldRightChild->parent = parent;
+        return;
+    }
+}
+
+void SymbolTable::Tree::leftRotate(TreeNode *node) {
+    return rotateWithRightChild(node);
 }
 
 Symbol::Symbol(std::string name, int level, SymbolType symbolType, DataType dataType) : name(std::move(name)), level(level), symbolType(symbolType), dataType(dataType) {}
+bool Symbol::operator==(const Symbol &rhs) const noexcept {
+    return level == rhs.level && name == rhs.name;
+}
+bool Symbol::operator<(const Symbol &rhs) const noexcept {
+    if (level == rhs.level) {
+        return name < rhs.name;
+    }
+    return level < rhs.level;
+}
+bool Symbol::operator>(const Symbol &rhs) const noexcept {
+    if (level == rhs.level) {
+        return name > rhs.name;
+    }
+    return level > rhs.level;
+}
+std::string Symbol::toString() const {
+    return name + "//" + std::to_string(level);
+}
 
 VariableSymbol::VariableSymbol(const std::string &name, int level, DataType dataType) : Symbol(name, level, SymbolType::VARIABLE, dataType) {}
 VariableSymbol::VariableSymbol(const VariableSymbol &other) : Symbol(other.getName(), other.getLevel(), SymbolType::VARIABLE, other.getDataType()) {}
@@ -187,3 +280,9 @@ VariableSymbol::VariableSymbol(const VariableSymbol &other) : Symbol(other.getNa
 FunctionSymbol::FunctionSymbol(std::string name, int level, DataType returnType, int paramCount, std::unique_ptr<DataType[]> &&paramsType) : Symbol(std::move(name), level, SymbolType::FUNCTION, returnType), paramsType(std::move(paramsType)), paramCount(paramCount) {}
 
 SymbolTable::Tree::TreeNode::TreeNode(std::unique_ptr<Symbol> &&data) : data(std::move(data)) {}
+
+SymbolTable::OpResult &SymbolTable::OpResult::operator+=(const OpResult &rhs) {
+    compNum += rhs.compNum;
+    splayNum += rhs.splayNum;
+    return *this;
+}

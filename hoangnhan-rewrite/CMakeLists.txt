@@ -39,7 +39,12 @@ enable_sanitizers(project_options)
 # allow for static analysis option
 include(cmake/StaticAnalyzers.cmake)
 
-option(ENABLE_TESING "Enable Test Builds" ON)
+option(ENABLE_TESTING "Enable Test Builds" ON)
+if (ENABLE_TESTING)
+    enable_testing()
+    message("Building Tests. Be sure to check out test directory")
+    add_subdirectory(test)
+endif()
 
 option(ENABLE_PCH "Enalbe precompiled Headers" OFF)
 if (ENABLE_PCH)
@@ -56,12 +61,6 @@ option(ENABLE_CONAN "Use conan for dependency management" OFF)
 if (ENABLE_CONAN)
     include(cmake/Conan.cmake)
     run_conan()
-endif()
-
-if (ENABLE_TESTING)
-    enable_testing()
-    message("Building Tests.")
-    add_subdirectory(test)
 endif()
 
 option(ENABLE_COC_CLANGD_CONFIG "This generate nvim coc config file from template in the .vim folder" OFF)
