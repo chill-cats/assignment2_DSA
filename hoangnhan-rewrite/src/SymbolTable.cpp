@@ -1,4 +1,5 @@
 #include "SymbolTable.h"
+
 void SymbolTable::run(const std::string &filename) {
     std::ifstream file(filename);
     std::string line;
@@ -33,6 +34,7 @@ std::string SymbolTable::processLine(const std::string &line) {
         auto result = insert(name, value, isStatic, line);
         return std::to_string(result.compNum) + ' ' + std::to_string(result.splayNum);
     }
+
     if (line == "BEGIN") {
         begin();
         return "";
@@ -44,7 +46,7 @@ std::string SymbolTable::processLine(const std::string &line) {
     if (line == "PRINT") {
         auto str = tree.toString(TraversalMethod::PREORDER);
         printFlag = !str.empty();
-        return { str.begin(), str.end() - 1 };
+        return std::string{ str.begin(), str.end() - 1 };
     }
 
     if (std::regex_search(line, tokens, LOOKUP_REGEX)) {
@@ -277,6 +279,9 @@ SymbolTable::OpResult SymbolTable::insert(const std::string &name, const std::st
         const Symbol::DataType type = value == "string" ? Symbol::DataType::STRING : Symbol::DataType::NUMBER;
         newData = std::make_unique<VariableSymbol>(name, targetLevel, type);
     } else {
+        if (targetLevel != 0) {
+            throw InvalidDeclaration(line);
+        }
         static const std::regex captureParam(R"((string|number)(?=,|\)))");
         static const std::regex captureType(R"(->(string|number))");
 
