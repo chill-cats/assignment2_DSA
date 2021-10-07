@@ -6,6 +6,8 @@ target_link_libraries(
     PRIVATE project_options
             project_warnings)
 add_library(symbolTable SymbolTable.cpp SymbolTable.h error.h main.h)
+target_include_directories(symbolTable INTERFACE .)
+
 target_link_libraries(
     symbolTable
     PRIVATE project_options

@@ -1,5 +1,8 @@
-INSERT a (string,string)->number true
-INSERT b (number)->string false
-INSERT c ()->string false
-INSERT d (string,number,string)->number true
-INSERT e (string,number,string,number)->number true
+INSERT x number false
+INSERT y string false
+BEGIN
+INSERT x number false
+INSERT z number false
+LOOKUP y
+PRINT
+END
