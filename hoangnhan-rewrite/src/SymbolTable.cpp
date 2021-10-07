@@ -71,53 +71,27 @@ SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::st
     OpResult result;
 
     if (std::regex_match(value, LITERAL_NUMBER_REGEX)) {
-        auto *node = findSymbolWithoutSplay(name, &result);
-        if (node == nullptr) {
-            throw Undeclared(line);
-        }
-        if (node->data->getSymbolType() != Symbol::SymbolType::VARIABLE || node->data->getDataType() != Symbol::DataType::NUMBER) {
+        auto typeOfAssignee = resolveType(name, result, line);
+        if (typeOfAssignee != Symbol::DataType::NUMBER) {
             throw TypeMismatch(line);
         }
-        result += tree.splay(node);
         return result;
     }
     if (std::regex_match(value, LITERAL_STRING_REGEX)) {
-        auto *node = findSymbolWithoutSplay(name, &result);
-        if (node == nullptr) {
-            throw Undeclared(line);
-        }
-        if (node->data->getSymbolType() != Symbol::SymbolType::VARIABLE || node->data->getDataType() != Symbol::DataType::STRING) {
+        auto typeOfAssignee = resolveType(name, result, line);
+        if (typeOfAssignee != Symbol::DataType::STRING) {
             throw TypeMismatch(line);
         }
-        result += tree.splay(node);
         return result;
     }
     if (std::regex_match(value, VARIABLE_SYMBOL_REGEX)) {
-        OpResult findAssigneeRes;
-        auto *assigner = findSymbolWithoutSplay(value, &result);
+        auto typeOfValue = resolveType(value, result, line);
+        auto typeOfAssignee = resolveType(name, result, line);
 
-        result += findAssigneeRes;
-
-        if (assigner == nullptr) {
-            throw Undeclared(line);
-        }
-        if (assigner->data->getSymbolType() == Symbol::SymbolType::FUNCTION) {
+        if (typeOfAssignee != typeOfValue) {
             throw TypeMismatch(line);
         }
-        result += tree.splay(assigner);
 
-        auto *assignee = findSymbolWithoutSplay(name, &findAssigneeRes);
-        if (assignee == nullptr) {
-            throw Undeclared(line);
-        }
-        if (assignee->data->getSymbolType() == Symbol::SymbolType::FUNCTION) {
-            throw TypeMismatch(line);
-        }
-        result += tree.splay(assignee);
-
-        if (assignee->data->getDataType() != assigner->data->getDataType()) {
-            throw TypeMismatch(line);
-        }
         return result;
     }
     // value is a function
@@ -145,14 +119,12 @@ SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::st
     }
 
     // then convert each param to the respective type, splay in the process
-    OpResult resolveResult;
     std::regex_search(value, tokens, PARAMS_CAPTURE_REGEX);
 
     auto paramCount = tokens.size();
     std::unique_ptr<Symbol::DataType[]> paramsType = std::make_unique<Symbol::DataType[]>(paramCount);
     for (auto i = 0UL; i < paramCount; i++) {
-        paramsType[i] = resolveType(tokens[i], resolveResult, line);
-        result += resolveResult;
+        paramsType[i] = resolveType(tokens[i], result, line);
     }
 
     // then match the type of param to type of function
@@ -161,16 +133,10 @@ SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::st
     }
 
     // then find the assignee
-    OpResult findAssigneeResult;
-    auto *assignee = findSymbolWithoutSplay(name, &findAssigneeResult);
-    if (assignee == nullptr) {
-        throw Undeclared(line);
-    }
-    if (assignee->data->getSymbolType() == Symbol::SymbolType::FUNCTION || assignee->data->getDataType() != functionSymbol->getDataType()) {
+    auto assigneeType = resolveType(name, result, line);
+    if (assigneeType != functionNode->data->getDataType()) {
         throw TypeMismatch(line);
     }
-    result += tree.splay(assignee);
-    result += findAssigneeResult;
     return result;
 }
 
@@ -193,7 +159,7 @@ Symbol::DataType SymbolTable::resolveType(const std::string &value, OpResult &re
     if (node->data->getSymbolType() != Symbol::SymbolType::VARIABLE) {
         throw TypeMismatch(line);
     }
-    tree.splay(node);
+    result += tree.splay(node);
     return tree.root->data->getDataType();
 }
 
@@ -264,7 +230,7 @@ SymbolTable::Tree::TreeNode *SymbolTable::findSymbolWithoutSplay(const std::stri
         }
     }
     if (result != nullptr) {
-        *result = tempResult;
+        *result += tempResult;
     }
     return node;
 }
@@ -526,9 +492,6 @@ void SymbolTable::Tree::rotateWithLeftChild(TreeNode *node) noexcept {
     }
 }
 
-void SymbolTable::Tree::rightRotate(TreeNode *node) noexcept {
-    return rotateWithLeftChild(node);
-}
 
 void SymbolTable::Tree::rotateWithRightChild(TreeNode *node) noexcept {
     if (node == nullptr || !node->hasRightChild()) {
@@ -562,10 +525,6 @@ void SymbolTable::Tree::rotateWithRightChild(TreeNode *node) noexcept {
         oldRightChild->parent = parent;
         return;
     }
-}
-
-void SymbolTable::Tree::leftRotate(TreeNode *node) noexcept {
-    return rotateWithRightChild(node);
 }
 
 SymbolTable::Tree::~Tree() {

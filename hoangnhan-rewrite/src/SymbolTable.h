@@ -114,7 +114,6 @@ class SymbolTable {
          * @return  node's right child now become new root of that subtree
          */
         void rotateWithRightChild(TreeNode *node) noexcept;
-        void leftRotate(TreeNode *node) noexcept;
 
         /**
          * @brief   this function rotate a node with it's left child and return a pointer to new root
@@ -122,7 +121,6 @@ class SymbolTable {
          * @return  node's left child now become new root of that subtree
          */
         void rotateWithLeftChild(TreeNode *node) noexcept;
-        void rightRotate(TreeNode *node) noexcept;
 
         std::string toString(TraversalMethod method);
 
