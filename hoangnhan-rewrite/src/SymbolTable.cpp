@@ -19,6 +19,9 @@ void SymbolTable::run(const std::string &filename) {
 std::string SymbolTable::processLine(const std::string &line) {
     static const std::regex INSERT_REGEX{ R"(^INSERT ([a-z]\w*) (string|number|\((?:|(?:number|string)(?:,(?:number|string))*)\)->(?:number|string)) (true|false)$)" };
     static const std::regex LOOKUP_REGEX{ R"(^LOOKUP ([a-z]\w*)$)" };
+    static const std::regex ASSIGN_REGEX{
+        R"(^ASSIGN ([a-z]\w*) (\d+|'[\dA-Za-z\s]*'|[a-z]\w*|[a-z]\w*\((?:|(?:\d+|'[\dA-Za-z\s]*'|[a-z]\w*)(?:,(?:\d+|'[\dA-Za-z\s]*'|[a-z]\w*))*)\))$)"
+    };
 
     std::smatch tokens;
     if (std::regex_search(line, tokens, INSERT_REGEX)) {
@@ -49,9 +52,149 @@ std::string SymbolTable::processLine(const std::string &line) {
         printFlag = true;
         return std::to_string(lookup(name, line));
     }
-
+    if (std::regex_search(line, tokens, ASSIGN_REGEX)) {
+        const auto &name = tokens[1];
+        const auto &value = tokens[2];
+        auto result = assign(name, value, line);
+        printFlag = true;
+        return std::to_string(result.compNum) + ' ' + std::to_string(result.splayNum);
+    }
     throw InvalidInstruction(line);
 }
+
+SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::string &value, const std::string &line) {
+    static const std::regex VARIABLE_SYMBOL_REGEX{ R"(^[a-z]\w*$)" };
+    static const std::regex LITERAL_STRING_REGEX{ R"(^'[\dA-Za-z\s]*'$)" };
+    static const std::regex LITERAL_NUMBER_REGEX{ R"(^\d+)" };
+    OpResult result;
+
+    if (std::regex_match(value, LITERAL_NUMBER_REGEX)) {
+        auto *node = findSymbolWithoutSplay(name, &result);
+        if (node == nullptr) {
+            throw Undeclared(line);
+        }
+        if (node->data->getSymbolType() != Symbol::SymbolType::VARIABLE || node->data->getDataType() != Symbol::DataType::NUMBER) {
+            throw TypeMismatch(line);
+        }
+        result += tree.splay(node);
+        return result;
+    }
+    if (std::regex_match(value, LITERAL_STRING_REGEX)) {
+        auto *node = findSymbolWithoutSplay(name, &result);
+        if (node == nullptr) {
+            throw Undeclared(line);
+        }
+        if (node->data->getSymbolType() != Symbol::SymbolType::VARIABLE || node->data->getDataType() != Symbol::DataType::STRING) {
+            throw TypeMismatch(line);
+        }
+        result += tree.splay(node);
+        return result;
+    }
+    if (std::regex_match(value, VARIABLE_SYMBOL_REGEX)) {
+        OpResult findAssigneeRes;
+        auto *assigner = findSymbolWithoutSplay(value, &result);
+
+        result += findAssigneeRes;
+
+        if (assigner == nullptr) {
+            throw Undeclared(line);
+        }
+        if (assigner->data->getSymbolType() == Symbol::SymbolType::FUNCTION) {
+            throw TypeMismatch(line);
+        }
+        result += tree.splay(assigner);
+
+        auto *assignee = findSymbolWithoutSplay(name, &findAssigneeRes);
+        if (assignee == nullptr) {
+            throw Undeclared(line);
+        }
+        if (assignee->data->getSymbolType() == Symbol::SymbolType::FUNCTION) {
+            throw TypeMismatch(line);
+        }
+        result += tree.splay(assignee);
+
+        if (assignee->data->getDataType() != assigner->data->getDataType()) {
+            throw TypeMismatch(line);
+        }
+        return result;
+    }
+    // value is a function
+    static const std::regex PARAMS_CAPTURE_REGEX{ R"((\d+|'[\dA-Za-z\s]*'|[a-z]\w*)(?=,|\)))" };
+    static const std::regex FUNC_NAME_CAPTURE_REGEX{ R"([a-z]\w*(?=\())" };
+
+    std::smatch tokens;
+    // first search for the function symbol
+    std::regex_search(value, tokens, FUNC_NAME_CAPTURE_REGEX);
+
+    OpResult findFuctionResult;
+    auto *functionNode = findSymbolWithoutSplay(tokens[0], &findFuctionResult);
+    if (functionNode == nullptr) {
+        throw Undeclared(line);
+    }
+    if (functionNode->data->getSymbolType() != Symbol::SymbolType::FUNCTION) {
+        throw TypeMismatch(line);
+    }
+    result += findFuctionResult;
+    result += tree.splay(functionNode);
+
+    const auto *functionSymbol = dynamic_cast<FunctionSymbol *>(tree.root->data.get());
+    if (functionSymbol == nullptr) {
+        throw TypeMismatch(line);
+    }
+
+    // then convert each param to the respective type, splay in the process
+    OpResult resolveResult;
+    std::regex_search(value, tokens, PARAMS_CAPTURE_REGEX);
+
+    auto paramCount = tokens.size();
+    std::unique_ptr<Symbol::DataType[]> paramsType = std::make_unique<Symbol::DataType[]>(paramCount);
+    for (auto i = 0UL; i < paramCount; i++) {
+        paramsType[i] = resolveType(tokens[i], resolveResult, line);
+        result += resolveResult;
+    }
+
+    // then match the type of param to type of function
+    if (!functionSymbol->matchParams(paramsType, paramCount)) {
+        throw TypeMismatch(line);
+    }
+
+    // then find the assignee
+    OpResult findAssigneeResult;
+    auto *assignee = findSymbolWithoutSplay(name, &findAssigneeResult);
+    if (assignee == nullptr) {
+        throw Undeclared(line);
+    }
+    if (assignee->data->getSymbolType() == Symbol::SymbolType::FUNCTION || assignee->data->getDataType() != functionSymbol->getDataType()) {
+        throw TypeMismatch(line);
+    }
+    result += tree.splay(assignee);
+    result += findAssigneeResult;
+    return result;
+}
+
+Symbol::DataType SymbolTable::resolveType(const std::string &value, OpResult &result, const std::string &line) {
+    static const std::regex NUMBER_REGEX{ R"(\d+)" };
+    static const std::regex STRING_REGEX{ R"('[\dA-Za-z\s]*')" };
+
+    if (std::regex_match(value, NUMBER_REGEX)) {
+        return Symbol::DataType::NUMBER;
+    }
+
+    if (std::regex_match(value, STRING_REGEX)) {
+        return Symbol::DataType::STRING;
+    }
+
+    auto *node = findSymbolWithoutSplay(value, &result);
+    if (node == nullptr) {
+        throw Undeclared(line);
+    }
+    if (node->data->getSymbolType() != Symbol::SymbolType::VARIABLE) {
+        throw TypeMismatch(line);
+    }
+    tree.splay(node);
+    return tree.root->data->getDataType();
+}
+
 void SymbolTable::end() {
     if (currentLevel == 0) {
         throw UnknownBlock();
@@ -59,39 +202,42 @@ void SymbolTable::end() {
     tree.deleteAllNodeWithLevel(currentLevel);
     currentLevel--;
 }
+
 int SymbolTable::lookup(const std::string &name, const std::string &line) {
-    if (tree.root == nullptr) {
-        throw Undeclared(line);
-    }
-    auto level = currentLevel;
-    Tree::TreeNode *node = nullptr;
-    while (node == nullptr && level >= 0) {
-        node = tree.findSymbolWithoutSplay(name, level);
-        level--;
-    }
+    auto *node = findSymbolWithoutSplay(name, nullptr);
+
     if (node == nullptr) {
         throw Undeclared(line);
     }
+
     tree.splay(node);
 
     return node->data->getLevel();
 }
 
-SymbolTable::Tree::TreeNode *SymbolTable::Tree::findSymbolWithoutSplay(const std::string &name, int level) const {
+SymbolTable::Tree::TreeNode *SymbolTable::Tree::findSymbolWithoutSplay(const std::string &name, int level, OpResult *result) const noexcept {
     VariableSymbol symbolToSearchFor(name, level, Symbol::DataType::STRING);
     auto *ptr = root;
-
     for (;;) {
         if (symbolToSearchFor == *static_cast<Symbol *>(ptr->data.get())) {
+            if (result != nullptr) {
+                result->compNum++;
+            }
             return ptr;
         }
         if (symbolToSearchFor < *static_cast<Symbol *>(ptr->data.get())) {
+            if (result != nullptr) {
+                result->compNum++;
+            }
             if (ptr->hasLeftChild()) {
                 ptr = ptr->leftChild;
             } else {
                 return nullptr;
             }
         } else {
+            if (result != nullptr) {
+                result->compNum++;
+            }
             if (ptr->hasRightChild()) {
                 ptr = ptr->rightChild;
             } else {
@@ -100,6 +246,27 @@ SymbolTable::Tree::TreeNode *SymbolTable::Tree::findSymbolWithoutSplay(const std
         }
     }
 }
+
+SymbolTable::Tree::TreeNode *SymbolTable::findSymbolWithoutSplay(const std::string &name, OpResult *result) const {
+    if (tree.root == nullptr) {
+        return nullptr;
+    }
+    auto level = currentLevel;
+    Tree::TreeNode *node = nullptr;
+    OpResult tempResult;
+    while (node == nullptr && level >= 0) {
+        node = tree.findSymbolWithoutSplay(name, level, &tempResult);
+        level--;
+        if (node == nullptr) {    // if not found, reset op counter
+            tempResult = {};
+        }
+    }
+    if (result != nullptr) {
+        *result = tempResult;
+    }
+    return node;
+}
+
 SymbolTable::OpResult SymbolTable::insert(const std::string &name, const std::string &value, const bool isStatic, const std::string &line) {
     using TreeNode = Tree::TreeNode;
 
@@ -421,8 +588,23 @@ std::string Symbol::toString() const {
 }
 
 VariableSymbol::VariableSymbol(const std::string &name, int level, DataType dataType) : Symbol(name, level, SymbolType::VARIABLE, dataType) {}
+
 VariableSymbol::VariableSymbol(const VariableSymbol &other) : Symbol(other.getName(), other.getLevel(), SymbolType::VARIABLE, other.getDataType()) {}
+
 FunctionSymbol::FunctionSymbol(std::string name, int level, DataType returnType, int paramCount, std::unique_ptr<DataType[]> &&paramsType) : Symbol(std::move(name), level, SymbolType::FUNCTION, returnType), paramsType(std::move(paramsType)), paramCount(paramCount) {}
+
+bool FunctionSymbol::matchParams(const std::unique_ptr<DataType[]> &paramsToMatch, unsigned long count) const {
+    if (paramCount != static_cast<int>(count)) {
+        return false;
+    }
+
+    for (int i = 0; i < static_cast<int>(count); i++) {
+        if (paramsToMatch[static_cast<unsigned long>(i)] != paramsType[static_cast<unsigned long>(i)]) {
+            return false;
+        }
+    }
+    return true;
+}
 
 SymbolTable::Tree::TreeNode::TreeNode(std::unique_ptr<Symbol> &&data) : data(std::move(data)) {}
 

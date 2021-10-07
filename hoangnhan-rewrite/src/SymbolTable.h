@@ -57,6 +57,8 @@ class FunctionSymbol : public Symbol {    //NOLINT
 public:
     FunctionSymbol(std::string name, int level, DataType returnType, int paramCount, std::unique_ptr<DataType[]> &&paramsType);
     FunctionSymbol(const FunctionSymbol &other);
+
+    bool matchParams(const std::unique_ptr<DataType[]> &paramsToMatch, unsigned long count) const;
 };
 
 class VariableSymbol : public Symbol {    //NOLINT
@@ -132,7 +134,7 @@ class SymbolTable {
         void deleteAllNodeWithLevel(TreeNode *currentRoot, int level);
         void deleteNode(TreeNode *node);
 
-        TreeNode *findSymbolWithoutSplay(const std::string &name, int level) const;
+        TreeNode *findSymbolWithoutSplay(const std::string &name, int level, SymbolTable::OpResult *result) const noexcept;
         ~Tree();
         friend class SymbolTable;
     };
@@ -150,8 +152,12 @@ class SymbolTable {
     void begin() noexcept;
     void end();
 
+    Symbol::DataType resolveType(const std::string &value, OpResult &result, const std::string &line);
     int lookup(const std::string &name, const std::string &line);
 
+    Tree::TreeNode *findSymbolWithoutSplay(const std::string &name, OpResult *result) const;
+
+    OpResult assign(const std::string &name, const std::string &value, const std::string &line);
 
 public:
     void run(const string &filename);
