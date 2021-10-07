@@ -78,8 +78,8 @@ class SymbolTable {
         INORDER,
         POSTORDER
     };
-    class Tree {
-        class TreeNode {
+    class Tree {            //NOLINT
+        class TreeNode {    // NOLINT
             std::unique_ptr<Symbol> data;
             TreeNode *parent = nullptr;
 
@@ -97,29 +97,30 @@ class SymbolTable {
         public:
             explicit TreeNode(std::unique_ptr<Symbol> &&data);
             TreeNode(std::unique_ptr<Symbol> &&data, TreeNode *leftChild, TreeNode *rightChild, TreeNode *parent = nullptr);
+            ~TreeNode();
             friend class Tree;
             friend class SymbolTable;
         };
 
         TreeNode *root = nullptr;
 
-        OpResult splay(TreeNode *node);
+        OpResult splay(TreeNode *node) noexcept;
 
         /**
          * @brief   this function rotate a node with it's right child and return a pointer to new root
          * @param   node Node to rotate with it's right child
          * @return  node's right child now become new root of that subtree
          */
-        void rotateWithRightChild(TreeNode *node);
-        void leftRotate(TreeNode *node);
+        void rotateWithRightChild(TreeNode *node) noexcept;
+        void leftRotate(TreeNode *node) noexcept;
 
         /**
          * @brief   this function rotate a node with it's left child and return a pointer to new root
          * @param   node Node to rotate with it's left child
          * @return  node's left child now become new root of that subtree
          */
-        void rotateWithLeftChild(TreeNode *node);
-        void rightRotate(TreeNode *node);
+        void rotateWithLeftChild(TreeNode *node) noexcept;
+        void rightRotate(TreeNode *node) noexcept;
 
         std::string toString(TraversalMethod method);
 
@@ -127,6 +128,12 @@ class SymbolTable {
         static void inOrderToString(const TreeNode *currentRoot, std::string &output);
         static void postOrderToString(const TreeNode *currentRoot, std::string &output);
 
+        void deleteAllNodeWithLevel(int level);
+        void deleteAllNodeWithLevel(TreeNode *currentRoot, int level);
+        void deleteNode(TreeNode *node);
+
+        TreeNode *findSymbolWithoutSplay(const std::string &name, int level) const;
+        ~Tree();
         friend class SymbolTable;
     };
 
@@ -135,12 +142,19 @@ class SymbolTable {
 
     Tree tree;
 
-public:
-    void run(const string &filename);
     std::string processLine(const std::string &line);
     void detectUnclosedBlock() const;
 
     OpResult insert(const std::string &name, const std::string &value, bool isStatic, const std::string &line);
+
+    void begin() noexcept;
+    void end();
+
+    int lookup(const std::string &name, const std::string &line);
+
+
+public:
+    void run(const string &filename);
     static void test();
 };
 #endif

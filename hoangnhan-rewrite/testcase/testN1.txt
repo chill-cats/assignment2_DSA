@@ -1,5 +1,2 @@
-INSERT a (string,string)->number true
-INSERT b (number)->string false
-INSERT c ()->string false
-INSERT d (string,number,string)->number true
-INSERT e (string,number,string,number)->number true
+INSERT x string true
+LOOKUP y

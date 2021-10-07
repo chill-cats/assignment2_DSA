@@ -1,3 +1,8 @@
-INSERT a1 number false
-INSERT b2 string false
-INSERT b1 (number,number)->string false
+INSERT x number false
+INSERT y string false
+BEGIN
+INSERT x number false
+INSERT z number false
+LOOKUP y
+END
+PRINT
