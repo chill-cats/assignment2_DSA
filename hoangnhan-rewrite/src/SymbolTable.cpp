@@ -41,7 +41,7 @@ std::string SymbolTable::processLine(const std::string &line) {
     if (line == "PRINT") {
         auto str = tree.toString(TraversalMethod::PREORDER);
         printFlag = !str.empty();
-        return str;
+        return { str.begin(), str.end() - 1 };
     }
 
     if (std::regex_search(line, tokens, LOOKUP_REGEX)) {
@@ -137,9 +137,9 @@ SymbolTable::OpResult SymbolTable::insert(const std::string &name, const std::st
     while (ptr != nullptr) {
         ptrParent = ptr;
         result.compNum++;
-        if (*dynamic_cast<Symbol *>(newData.get()) > *dynamic_cast<Symbol *>(ptr->data.get())) {
+        if (*static_cast<Symbol *>(newData.get()) > *static_cast<Symbol *>(ptr->data.get())) {
             ptr = ptr->rightChild;
-        } else if (*dynamic_cast<Symbol *>(newData.get()) < *dynamic_cast<Symbol *>(ptr->data.get())) {
+        } else if (*static_cast<Symbol *>(newData.get()) < *static_cast<Symbol *>(ptr->data.get())) {
             ptr = ptr->leftChild;
         } else {
             throw Redeclared(line);
@@ -150,7 +150,7 @@ SymbolTable::OpResult SymbolTable::insert(const std::string &name, const std::st
 
     if (ptrParent == nullptr) {
         tree.root = ptr;
-    } else if (*dynamic_cast<Symbol *>(ptr->data.get()) > *dynamic_cast<Symbol *>(ptrParent->data.get())) {
+    } else if (*static_cast<Symbol *>(ptr->data.get()) > *static_cast<Symbol *>(ptrParent->data.get())) {
         ptrParent->rightChild = ptr;
     } else {
         ptrParent->leftChild = ptr;
