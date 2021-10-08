@@ -2,7 +2,7 @@
 #define SYMBOLTABLE_H
 #include "main.h"
 
-class Symbol {    //NOLINT
+class Symbol {    // NOLINT
 
 public:
     enum class SymbolType {
@@ -49,7 +49,7 @@ public:
     std::string toString() const;
 };
 
-class FunctionSymbol : public Symbol {    //NOLINT
+class FunctionSymbol : public Symbol {    // NOLINT
 
     const std::unique_ptr<DataType[]> paramsType;
     const int paramCount = 0;
@@ -61,7 +61,7 @@ public:
     bool matchParams(const std::unique_ptr<DataType[]> &paramsToMatch, unsigned long count) const;
 };
 
-class VariableSymbol : public Symbol {    //NOLINT
+class VariableSymbol : public Symbol {    // NOLINT
 
 public:
     VariableSymbol(const std::string &name, int level, DataType dataType);
@@ -75,12 +75,17 @@ class SymbolTable {
         OpResult &operator+=(const OpResult &rhs);
     };
 
+    struct TokenizeResult {
+        std::unique_ptr<std::string[]> data;
+        unsigned long size = 0;
+    };
+
     enum class TraversalMethod {
         PREORDER,
         INORDER,
         POSTORDER
     };
-    class Tree {            //NOLINT
+    class Tree {            // NOLINT
         class TreeNode {    // NOLINT
             std::unique_ptr<Symbol> data;
             TreeNode *parent = nullptr;
@@ -156,6 +161,8 @@ class SymbolTable {
     Tree::TreeNode *findSymbolWithoutSplay(const std::string &name, OpResult *result) const;
 
     OpResult assign(const std::string &name, const std::string &value, const std::string &line);
+
+    static TokenizeResult tokenizeParams(const std::string &commaSeparatedString);
 
 public:
     void run(const string &filename);

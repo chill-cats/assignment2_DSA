@@ -95,7 +95,7 @@ SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::st
         return result;
     }
     // value is a function
-    static const std::regex PARAMS_CAPTURE_REGEX{ R"((\d+|'[\dA-Za-z\s]*'|[a-z]\w*)(?=,|\)))" };
+    static const std::regex IN_PARAN_CAPTURE_REGEX{ R"(\((.*?)\))" };
     static const std::regex FUNC_NAME_CAPTURE_REGEX{ R"([a-z]\w*(?=\())" };
 
     std::smatch tokens;
@@ -118,13 +118,19 @@ SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::st
         throw TypeMismatch(line);
     }
 
-    // then convert each param to the respective type, splay in the process
-    std::regex_search(value, tokens, PARAMS_CAPTURE_REGEX);
+    // capture everything inside paranthesis
+    std::smatch inParan;
+    std::regex_search(value, inParan, IN_PARAN_CAPTURE_REGEX);
 
-    auto paramCount = tokens.size();
+    // split by comma
+    TokenizeResult tokenizedParams = tokenizeParams(inParan[1]);
+
+    auto paramCount = tokenizedParams.size;
     std::unique_ptr<Symbol::DataType[]> paramsType = std::make_unique<Symbol::DataType[]>(paramCount);
+
+    // resolve type of each param
     for (auto i = 0UL; i < paramCount; i++) {
-        paramsType[i] = resolveType(tokens[i], result, line);
+        paramsType[i] = resolveType(tokenizedParams.data[i], result, line);
     }
 
     // then match the type of param to type of function
@@ -134,10 +140,32 @@ SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::st
 
     // then find the assignee
     auto assigneeType = resolveType(name, result, line);
+
+    // if data type is different
     if (assigneeType != functionNode->data->getDataType()) {
         throw TypeMismatch(line);
     }
     return result;
+}
+
+SymbolTable::TokenizeResult SymbolTable::tokenizeParams(const std::string &commaSeparatedString) {
+    if (commaSeparatedString.empty()) {
+        return {};
+    }
+    auto commaNum = std::count_if(commaSeparatedString.begin(), commaSeparatedString.end(), [](char c) { return c == ','; });
+    auto tokenNum = commaNum + 1;
+    std::unique_ptr<std::string[]> tokens = std::make_unique<std::string[]>(static_cast<unsigned long>(tokenNum));
+    unsigned long currentIndex = 0;
+
+    for (char c : commaSeparatedString) {
+        if (c != ',') {
+            tokens[currentIndex] += c;
+        } else {
+            currentIndex++;
+        }
+    }
+
+    return { std::move(tokens), static_cast<unsigned long>(tokenNum) };
 }
 
 Symbol::DataType SymbolTable::resolveType(const std::string &value, OpResult &result, const std::string &line) {
@@ -171,7 +199,7 @@ void SymbolTable::end() {
     currentLevel--;
 }
 
-int SymbolTable::lookup(const std::string &name, const std::string &line) {
+int SymbolTable::lookup(const std::string &name, const std::string &line) {    // NOLINT
     auto *node = findSymbolWithoutSplay(name, nullptr);
 
     if (node == nullptr) {
@@ -235,7 +263,7 @@ SymbolTable::Tree::TreeNode *SymbolTable::findSymbolWithoutSplay(const std::stri
     return node;
 }
 
-SymbolTable::OpResult SymbolTable::insert(const std::string &name, const std::string &value, const bool isStatic, const std::string &line) {
+SymbolTable::OpResult SymbolTable::insert(const std::string &name, const std::string &value, const bool isStatic, const std::string &line) {    // NOLINT
     using TreeNode = Tree::TreeNode;
 
     const int targetLevel = isStatic ? 0 : currentLevel;
@@ -248,24 +276,24 @@ SymbolTable::OpResult SymbolTable::insert(const std::string &name, const std::st
         if (targetLevel != 0) {
             throw InvalidDeclaration(line);
         }
-        static const std::regex captureParam(R"((string|number)(?=,|\)))");
         static const std::regex captureType(R"(->(string|number))");
+        static const std::regex IN_PARAN_CAPTURE_REGEX{ R"(\((.*?)\))" };
+        std::smatch returnTypeCapture;
+        std::regex_search(value, returnTypeCapture, captureType);
 
-        std::smatch paramMatches;
-        std::smatch typeMatches;
+        std::smatch insideParanCapture;
+        std::regex_search(value, insideParanCapture, IN_PARAN_CAPTURE_REGEX);
+        auto tokenizedParams = tokenizeParams(insideParanCapture[1]);
 
-        std::regex_search(value, paramMatches, captureParam);
-        std::regex_search(value, typeMatches, captureType);
-
-        unsigned long paramNum = paramMatches.size();
+        unsigned long paramNum = tokenizedParams.size;
 
         std::unique_ptr<Symbol::DataType[]> param = std::make_unique<Symbol::DataType[]>(paramNum);
 
-        for (unsigned long i = 0; i < paramMatches.size(); i++) {
-            param[i] = paramMatches[i] == "string" ? Symbol::DataType::STRING : Symbol::DataType::NUMBER;
+        for (unsigned long i = 0; i < paramNum; i++) {
+            param[i] = tokenizedParams.data[i] == "string" ? Symbol::DataType::STRING : Symbol::DataType::NUMBER;
         }
 
-        Symbol::DataType returnType = typeMatches[1] == "string" ? Symbol::DataType::STRING : Symbol::DataType::NUMBER;
+        Symbol::DataType returnType = returnTypeCapture[0] == "string" ? Symbol::DataType::STRING : Symbol::DataType::NUMBER;
 
         newData = std::make_unique<FunctionSymbol>(name, targetLevel, returnType, static_cast<int>(paramNum), std::move(param));
     }
@@ -379,7 +407,7 @@ void SymbolTable::Tree::deleteNode(TreeNode *node) {
     delete ptr;
 }
 
-SymbolTable::OpResult SymbolTable::Tree::splay(TreeNode *node) noexcept {    //NOLINT
+SymbolTable::OpResult SymbolTable::Tree::splay(TreeNode *node) noexcept {    // NOLINT
     OpResult result;
     if (node == root || node == nullptr) {
         return result;
