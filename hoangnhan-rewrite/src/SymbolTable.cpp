@@ -123,7 +123,7 @@ SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::st
     std::regex_search(value, inParan, IN_PARAN_CAPTURE_REGEX);
 
     // split by comma
-    TokenizeResult tokenizedParams = tokenizeParams(inParan[1]);
+    TokenizeResult tokenizedParams = tokenizeParams(inParan[1].first, inParan[1].second);
 
     auto paramCount = tokenizedParams.size;
     std::unique_ptr<Symbol::DataType[]> paramsType = std::make_unique<Symbol::DataType[]>(paramCount);
@@ -148,21 +148,45 @@ SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::st
     return result;
 }
 
-SymbolTable::TokenizeResult SymbolTable::tokenizeParams(const std::string &commaSeparatedString) {
-    if (commaSeparatedString.empty()) {
+SymbolTable::FunctionDeclarationTokenizeResult SymbolTable::tokenizeFunctionDeclaration(const std::string &functionDeclaration) {
+    FunctionDeclarationTokenizeResult result;
+
+    auto firstBracket = functionDeclaration.cbegin();
+    auto lastBracket = std::find(functionDeclaration.cbegin(), functionDeclaration.cend(), ')');
+
+    auto paramsTokenizeResult = tokenizeParams(++firstBracket, lastBracket);
+
+    result.params = std::move(paramsTokenizeResult.data);
+    result.paramCount = paramsTokenizeResult.size;
+
+    auto arrow = std::find(lastBracket, functionDeclaration.end(), '>');
+    result.returnType = std::string(++arrow, functionDeclaration.end());
+    return result;
+}
+
+SymbolTable::TokenizeResult SymbolTable::tokenizeParams(std::string::const_iterator start, std::string::const_iterator end) {
+    if (start == end) {
         return {};
     }
-    auto commaNum = std::count_if(commaSeparatedString.begin(), commaSeparatedString.end(), [](char c) { return c == ','; });
-    auto tokenNum = commaNum + 1;
-    std::unique_ptr<std::string[]> tokens = std::make_unique<std::string[]>(static_cast<unsigned long>(tokenNum));
-    unsigned long currentIndex = 0;
 
-    for (char c : commaSeparatedString) {
-        if (c != ',') {
-            tokens[currentIndex] += c;
-        } else {
-            currentIndex++;
+    auto commaNum = std::count_if(start, end, [](char c) { return c == ','; });
+
+    auto tokenNum = commaNum + 1;
+    std::unique_ptr<std::string[]> tokens =
+        std::make_unique<std::string[]>(static_cast<unsigned long>(tokenNum));
+    unsigned long currentIndex = 0;
+    auto currentEnd = start;
+
+    for (; currentEnd != end; ++currentEnd) {
+        if (*currentEnd == ',') {
+            tokens[currentIndex++] = { start, currentEnd };
+            ++currentEnd;
+            start = currentEnd;
         }
+    }
+
+    if (start != end) {
+        tokens[currentIndex] = { start, end };
     }
 
     return { std::move(tokens), static_cast<unsigned long>(tokenNum) };
@@ -269,34 +293,33 @@ SymbolTable::OpResult SymbolTable::insert(const std::string &name, const std::st
     const int targetLevel = isStatic ? 0 : currentLevel;
     OpResult result;
     std::unique_ptr<Symbol> newData;
+
     if (value == "string" || value == "number") {
         const Symbol::DataType type = value == "string" ? Symbol::DataType::STRING : Symbol::DataType::NUMBER;
         newData = std::make_unique<VariableSymbol>(name, targetLevel, type);
-    } else {
+
+    } else {    // if function
         if (targetLevel != 0) {
-            throw InvalidDeclaration(line);
-        }
-        static const std::regex captureType(R"(->(string|number))");
-        static const std::regex IN_PARAN_CAPTURE_REGEX{ R"(\((.*?)\))" };
-        std::smatch returnTypeCapture;
-        std::regex_search(value, returnTypeCapture, captureType);
-
-        std::smatch insideParanCapture;
-        std::regex_search(value, insideParanCapture, IN_PARAN_CAPTURE_REGEX);
-        auto tokenizedParams = tokenizeParams(insideParanCapture[1]);
-
-        unsigned long paramNum = tokenizedParams.size;
-
-        std::unique_ptr<Symbol::DataType[]> param = std::make_unique<Symbol::DataType[]>(paramNum);
-
-        for (unsigned long i = 0; i < paramNum; i++) {
-            param[i] = tokenizedParams.data[i] == "string" ? Symbol::DataType::STRING : Symbol::DataType::NUMBER;
+            throw InvalidDeclaration(line);    // cannot declare a function in level other than 0
         }
 
-        Symbol::DataType returnType = returnTypeCapture[0] == "string" ? Symbol::DataType::STRING : Symbol::DataType::NUMBER;
+        const auto tokenizedFunctionDeclaration = tokenizeFunctionDeclaration(value);
 
-        newData = std::make_unique<FunctionSymbol>(name, targetLevel, returnType, static_cast<int>(paramNum), std::move(param));
+        const auto &paramCount = tokenizedFunctionDeclaration.paramCount;
+        const auto &params = tokenizedFunctionDeclaration.params;
+        const auto &returnTypeStr = tokenizedFunctionDeclaration.returnType;
+
+        std::unique_ptr<Symbol::DataType[]> param = std::make_unique<Symbol::DataType[]>(paramCount);
+
+        for (unsigned long i = 0; i < paramCount; i++) {
+            param[i] = params[i] == "string" ? Symbol::DataType::STRING : Symbol::DataType::NUMBER;
+        }
+
+        Symbol::DataType returnType = returnTypeStr == "string" ? Symbol::DataType::STRING : Symbol::DataType::NUMBER;
+
+        newData = std::make_unique<FunctionSymbol>(name, targetLevel, returnType, static_cast<int>(paramCount), std::move(param));
     }
+
     auto *ptr = tree.root;
     TreeNode *ptrParent = nullptr;
 
@@ -311,6 +334,7 @@ SymbolTable::OpResult SymbolTable::insert(const std::string &name, const std::st
             throw Redeclared(line);
         }
     }
+
     ptr = new TreeNode(std::move(newData));
     ptr->parent = ptrParent;
 
