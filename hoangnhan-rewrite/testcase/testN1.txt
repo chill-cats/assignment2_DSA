@@ -1,8 +1,5 @@
-INSERT x number false
-INSERT y string false
+INSERT foo (string)->string false
+INSERT x string true
 BEGIN
-INSERT x number false
-INSERT z number false
-LOOKUP y
-PRINT
+ASSIGN x foo(x)
 END

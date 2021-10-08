@@ -1,0 +1,8 @@
+INSERT foo (number)->string true
+INSERT a string false
+INSERT b number false
+INSERT c string true
+INSERT d number true
+INSERT e string false
+INSERT f number true
+ASSIGN e foo(b)
