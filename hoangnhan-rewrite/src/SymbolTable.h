@@ -86,6 +86,13 @@ class SymbolTable {
         std::string returnType;
     };
 
+    struct FunctionCallTokenizeResult {
+        std::string functionName;
+
+        std::unique_ptr<std::string[]> paramsList;
+        unsigned long paramsCount = 0;
+    };
+
     enum class TraversalMethod {
         PREORDER,
         INORDER,
@@ -170,6 +177,7 @@ class SymbolTable {
 
     static TokenizeResult tokenizeParams(std::string::const_iterator start, std::string::const_iterator end);
     static FunctionDeclarationTokenizeResult tokenizeFunctionDeclaration(const std::string &functionDeclaration);
+    static FunctionCallTokenizeResult tokenizeFunctionCall(const std::string &functionCall);
 
 public:
     void run(const string &filename);

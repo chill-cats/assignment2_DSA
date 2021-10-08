@@ -94,23 +94,16 @@ SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::st
 
         return result;
     }
-    // value is a function
-    static const std::regex IN_PARAN_CAPTURE_REGEX{ R"(\((.*?)\))" };
-    static const std::regex FUNC_NAME_CAPTURE_REGEX{ R"([a-z]\w*(?=\())" };
 
-    std::smatch tokens;
-    // first search for the function symbol
-    std::regex_search(value, tokens, FUNC_NAME_CAPTURE_REGEX);
+    auto tokenizedFunctionCall = tokenizeFunctionCall(value);
 
-    OpResult findFuctionResult;
-    auto *functionNode = findSymbolWithoutSplay(tokens[0], &findFuctionResult);
+    auto *functionNode = findSymbolWithoutSplay(tokenizedFunctionCall.functionName, &result);
     if (functionNode == nullptr) {
         throw Undeclared(line);
     }
     if (functionNode->data->getSymbolType() != Symbol::SymbolType::FUNCTION) {
         throw TypeMismatch(line);
     }
-    result += findFuctionResult;
     result += tree.splay(functionNode);
 
     const auto *functionSymbol = dynamic_cast<FunctionSymbol *>(tree.root->data.get());
@@ -118,49 +111,48 @@ SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::st
         throw TypeMismatch(line);
     }
 
-    // capture everything inside paranthesis
-    std::smatch inParan;
-    std::regex_search(value, inParan, IN_PARAN_CAPTURE_REGEX);
-
-    // split by comma
-    TokenizeResult tokenizedParams = tokenizeParams(inParan[1].first, inParan[1].second);
-
-    auto paramCount = tokenizedParams.size;
-    std::unique_ptr<Symbol::DataType[]> paramsType = std::make_unique<Symbol::DataType[]>(paramCount);
+    std::unique_ptr<Symbol::DataType[]> paramsType = std::make_unique<Symbol::DataType[]>(tokenizedFunctionCall.paramsCount);
 
     // resolve type of each param
-    for (auto i = 0UL; i < paramCount; i++) {
-        paramsType[i] = resolveType(tokenizedParams.data[i], result, line);
+    for (auto i = 0UL; i < tokenizedFunctionCall.paramsCount; i++) {
+        paramsType[i] = resolveType(tokenizedFunctionCall.paramsList[i], result, line);
     }
 
     // then match the type of param to type of function
-    if (!functionSymbol->matchParams(paramsType, paramCount)) {
+    if (!functionSymbol->matchParams(paramsType, tokenizedFunctionCall.paramsCount)) {
         throw TypeMismatch(line);
     }
 
-    // then find the assignee
     auto assigneeType = resolveType(name, result, line);
 
-    // if data type is different
     if (assigneeType != functionNode->data->getDataType()) {
         throw TypeMismatch(line);
     }
     return result;
 }
 
+SymbolTable::FunctionCallTokenizeResult SymbolTable::tokenizeFunctionCall(const std::string &functionCall) {
+
+    auto startOfFunctionName = functionCall.begin();
+    auto endOfFunctionName = std::find(functionCall.begin(), functionCall.end(), '(');
+
+    auto tokenizedParams = tokenizeParams(endOfFunctionName + 1, --functionCall.end());
+    return { { startOfFunctionName, endOfFunctionName }, std::move(tokenizedParams.data), tokenizedParams.size };
+}
+
 SymbolTable::FunctionDeclarationTokenizeResult SymbolTable::tokenizeFunctionDeclaration(const std::string &functionDeclaration) {
     FunctionDeclarationTokenizeResult result;
 
-    auto firstBracket = functionDeclaration.cbegin();
-    auto lastBracket = std::find(functionDeclaration.cbegin(), functionDeclaration.cend(), ')');
+    auto firstBracket = functionDeclaration.begin();
+    auto lastBracket = std::find(functionDeclaration.begin(), functionDeclaration.end(), ')');
 
-    auto paramsTokenizeResult = tokenizeParams(++firstBracket, lastBracket);
+    auto paramsTokenizeResult = tokenizeParams(firstBracket + 1, lastBracket);
 
     result.params = std::move(paramsTokenizeResult.data);
     result.paramCount = paramsTokenizeResult.size;
 
     auto arrow = std::find(lastBracket, functionDeclaration.end(), '>');
-    result.returnType = std::string(++arrow, functionDeclaration.end());
+    result.returnType = std::string(arrow + 1, functionDeclaration.end());
     return result;
 }
 
@@ -389,6 +381,7 @@ void SymbolTable::Tree::deleteNode(TreeNode *node) {
         delete node;
         return;
     }
+
     if (!node->hasLeftChild()) {    // node doesn't have left child, replace it by it's right child
         if (node->parent != nullptr) {
             if (node == node->parent->leftChild) {
@@ -411,7 +404,7 @@ void SymbolTable::Tree::deleteNode(TreeNode *node) {
     while (ptr->hasRightChild()) {
         ptr = ptr->rightChild;
     }
-    // swap everything between node and greatest node's data
+    // swap data between node and greatest node's data
     std::unique_ptr<Symbol> nodeData = std::move(node->data);
 
     std::unique_ptr<Symbol> sucessorData = std::move(ptr->data);
@@ -431,7 +424,7 @@ void SymbolTable::Tree::deleteNode(TreeNode *node) {
     delete ptr;
 }
 
-SymbolTable::OpResult SymbolTable::Tree::splay(TreeNode *node) noexcept {    // NOLINT
+SymbolTable::OpResult SymbolTable::Tree::splay(TreeNode *node) noexcept {
     OpResult result;
     if (node == root || node == nullptr) {
         return result;
