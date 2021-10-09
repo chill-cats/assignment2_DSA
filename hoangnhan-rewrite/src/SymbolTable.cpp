@@ -46,7 +46,7 @@ std::string SymbolTable::processLine(const std::string &line) {
     if (line == "PRINT") {
         auto str = tree.toString(TraversalMethod::PREORDER);
         printFlag = !str.empty();
-        return std::string{ str.begin(), str.end() - 1 };
+        return str;
     }
 
     if (std::regex_search(line, tokens, LOOKUP_REGEX)) {
@@ -95,7 +95,7 @@ SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::st
         return result;
     }
 
-    auto tokenizedFunctionCall = tokenizeFunctionCall(value);
+    const auto tokenizedFunctionCall{ tokenizeFunctionCall(value) };
 
     auto *functionNode = findSymbolWithoutSplay(tokenizedFunctionCall.functionName, &result);
     if (functionNode == nullptr) {
@@ -123,7 +123,7 @@ SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::st
         throw TypeMismatch(line);
     }
 
-    auto assigneeType = resolveType(name, result, line);
+    auto assigneeType{ resolveType(name, result, line) };
 
     if (assigneeType != functionNode->data->getDataType()) {
         throw TypeMismatch(line);
@@ -133,27 +133,24 @@ SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::st
 
 SymbolTable::FunctionCallTokenizeResult SymbolTable::tokenizeFunctionCall(const std::string &functionCall) {
 
-    auto startOfFunctionName = functionCall.begin();
-    auto endOfFunctionName = std::find(functionCall.begin(), functionCall.end(), '(');
+    auto startOfFunctionName{ functionCall.begin() };
+    auto endOfFunctionName{ std::find(functionCall.begin(), functionCall.end(), '(') };
 
-    auto tokenizedParams = tokenizeParams(endOfFunctionName + 1, --functionCall.end());
+    auto tokenizedParams{ tokenizeParams(endOfFunctionName + 1, std::prev(functionCall.end())) };
     return { { startOfFunctionName, endOfFunctionName }, std::move(tokenizedParams.data), tokenizedParams.size };
 }
 
 SymbolTable::FunctionDeclarationTokenizeResult SymbolTable::tokenizeFunctionDeclaration(const std::string &functionDeclaration) {
-    FunctionDeclarationTokenizeResult result;
+    auto firstBracket{ functionDeclaration.begin() };
+    auto lastBracket{ std::find(functionDeclaration.begin(), functionDeclaration.end(), ')') };
 
-    auto firstBracket = functionDeclaration.begin();
-    auto lastBracket = std::find(functionDeclaration.begin(), functionDeclaration.end(), ')');
-
-    auto paramsTokenizeResult = tokenizeParams(firstBracket + 1, lastBracket);
-
-    result.params = std::move(paramsTokenizeResult.data);
-    result.paramCount = paramsTokenizeResult.size;
+    auto paramsTokenizeResult{ tokenizeParams(firstBracket + 1, lastBracket) };
 
     auto arrow = std::find(lastBracket, functionDeclaration.end(), '>');
-    result.returnType = std::string(arrow + 1, functionDeclaration.end());
-    return result;
+
+    return {
+        std::move(paramsTokenizeResult.data), paramsTokenizeResult.size, std::string{ arrow + 1, functionDeclaration.end() }
+    };
 }
 
 SymbolTable::TokenizeResult SymbolTable::tokenizeParams(std::string::const_iterator start, std::string::const_iterator end) {
@@ -360,6 +357,7 @@ void SymbolTable::Tree::deleteAllNodeWithLevel(TreeNode *currentRoot, const int 
     if (currentRoot == nullptr) {
         return;
     }
+
     deleteAllNodeWithLevel(currentRoot->leftChild, level);
     deleteAllNodeWithLevel(currentRoot->rightChild, level);
     if (currentRoot->data->getLevel() == level) {
@@ -370,7 +368,7 @@ void SymbolTable::Tree::deleteAllNodeWithLevel(TreeNode *currentRoot, const int 
 void SymbolTable::Tree::deleteNode(TreeNode *node) {
     if (!node->hasLeftChild() && !node->hasRightChild()) {    // leaf node
         if (node->parent != nullptr) {
-            if (node == node->parent->leftChild) {
+            if (node->parent->isMyLeftChild(node)) {
                 node->parent->leftChild = nullptr;
             } else {
                 node->parent->rightChild = nullptr;
@@ -378,13 +376,15 @@ void SymbolTable::Tree::deleteNode(TreeNode *node) {
         } else {
             root = nullptr;
         }
+        node->leftChild = nullptr;
+        node->rightChild = nullptr;
         delete node;
         return;
     }
 
     if (!node->hasLeftChild()) {    // node doesn't have left child, replace it by it's right child
         if (node->parent != nullptr) {
-            if (node == node->parent->leftChild) {
+            if (node->parent->isMyLeftChild(node)) {
                 node->parent->leftChild = node->rightChild;
             } else {
                 node->parent->rightChild = node->rightChild;
@@ -394,6 +394,8 @@ void SymbolTable::Tree::deleteNode(TreeNode *node) {
             root = node->rightChild;
             node->rightChild->parent = nullptr;
         }
+        node->leftChild = nullptr;
+        node->rightChild = nullptr;
         delete node;
         return;
     }
@@ -412,8 +414,10 @@ void SymbolTable::Tree::deleteNode(TreeNode *node) {
     node->data = std::move(sucessorData);
     ptr->data = std::move(nodeData);
 
-    if (ptr == ptr->parent->leftChild) {    // ptr is node's direct left child
+    if (ptr->parent->isMyLeftChild(ptr)) {    // ptr is node's direct left child
         node->leftChild = nullptr;
+        ptr->leftChild = nullptr;
+        ptr->rightChild = nullptr;
         delete ptr;
         return;
     }
@@ -421,6 +425,8 @@ void SymbolTable::Tree::deleteNode(TreeNode *node) {
     if (ptr->hasLeftChild()) {
         ptr->leftChild->parent = ptr->parent;
     }
+    ptr->leftChild = nullptr;
+    ptr->rightChild = nullptr;
     delete ptr;
 }
 
@@ -429,27 +435,31 @@ SymbolTable::OpResult SymbolTable::Tree::splay(TreeNode *node) noexcept {
     if (node == root || node == nullptr) {
         return result;
     }
+
     while (node != root) {
         if (node->parent == root) {    // ZIG case
             result.splayNum++;
-            if (node == node->parent->leftChild) {    // ZIG left
+            if (node->parent->isMyLeftChild(node)) {    // ZIG left
                 rotateWithLeftChild(node->parent);
 
-            } else if (node == node->parent->rightChild) {
+            } else if (node->parent->isMyRightChild(node)) {
                 rotateWithRightChild(node->parent);    // ZIG right
             }
         } else {
             result.splayNum++;
-            if (node == node->parent->leftChild && node->parent == node->parent->parent->leftChild) {    // ZIG ZIG left
+            if (node->parent->isMyLeftChild(node) && node->parent->parent->isMyLeftChild(node->parent)) {    // ZIG ZIG left
                 rotateWithLeftChild(node->parent->parent);
                 rotateWithLeftChild(node->parent);
-            } else if (node == node->parent->rightChild && node->parent == node->parent->parent->rightChild) {    // ZIG ZIG right
+
+            } else if (node->parent->isMyRightChild(node) && node->parent->parent->isMyRightChild(node->parent)) {    // ZIG ZIG right
                 rotateWithRightChild(node->parent->parent);
                 rotateWithRightChild(node->parent);
-            } else if (node == node->parent->leftChild && node->parent == node->parent->parent->rightChild) {    // ZIG ZAG
+
+            } else if (node->parent->isMyLeftChild(node) && node->parent->parent->isMyRightChild(node->parent)) {    // ZIG ZAG
                 rotateWithLeftChild(node->parent);
                 rotateWithRightChild(node->parent);
-            } else if (node == node->parent->rightChild && node->parent == node->parent->parent->leftChild) {
+
+            } else if (node->parent->isMyRightChild(node) && node->parent->parent->isMyLeftChild(node->parent)) {
                 rotateWithRightChild(node->parent);
                 rotateWithLeftChild(node->parent);
             }
@@ -471,6 +481,12 @@ std::string SymbolTable::Tree::toString(TraversalMethod method) {
     case TraversalMethod::PREORDER:
         preOrderToString(root, output);
     }
+    auto endIter = output.rbegin();
+
+    if (*endIter == ' ') {
+        output.erase(std::next(endIter).base());
+    }
+
     return output;
 }
 
@@ -523,13 +539,13 @@ void SymbolTable::Tree::rotateWithLeftChild(TreeNode *node) noexcept {
         root = oldLeftChild;
         return;
     }
-    if (node == node->parent->leftChild) {
+    if (node->parent->isMyLeftChild(node)) {
         node->parent->leftChild = oldLeftChild;
         node->parent = oldLeftChild;
         oldLeftChild->parent = parent;
         return;
     }
-    if (node == node->parent->rightChild) {
+    if (node->parent->isMyRightChild(node)) {
         node->parent->rightChild = oldLeftChild;
         node->parent = oldLeftChild;
         oldLeftChild->parent = parent;
@@ -558,13 +574,13 @@ void SymbolTable::Tree::rotateWithRightChild(TreeNode *node) noexcept {
         root = oldRightChild;
         return;
     }
-    if (node == node->parent->leftChild) {
+    if (node->parent->isMyLeftChild(node)) {
         node->parent->leftChild = oldRightChild;
         node->parent = oldRightChild;
         oldRightChild->parent = parent;
         return;
     }
-    if (node == node->parent->rightChild) {
+    if (node->parent->isMyRightChild(node)) {
         node->parent->rightChild = oldRightChild;
         node->parent = oldRightChild;
         oldRightChild->parent = parent;

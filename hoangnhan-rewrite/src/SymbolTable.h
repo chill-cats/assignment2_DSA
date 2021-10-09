@@ -106,12 +106,18 @@ class SymbolTable {
             TreeNode *leftChild = nullptr;
             TreeNode *rightChild = nullptr;
 
-            inline bool hasLeftChild() const {
+            inline bool hasLeftChild() const noexcept {
                 return leftChild != nullptr;
             }
 
-            inline bool hasRightChild() const {
+            inline bool hasRightChild() const noexcept {
                 return rightChild != nullptr;
+            }
+            inline bool isMyLeftChild(const TreeNode *const node) const noexcept {
+                return hasLeftChild() && leftChild == node;
+            }
+            inline bool isMyRightChild(const TreeNode *const node) const noexcept {
+                return hasRightChild() && rightChild == node;
             }
 
         public:
