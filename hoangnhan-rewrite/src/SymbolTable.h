@@ -2,7 +2,7 @@
 #define SYMBOLTABLE_H
 #include "main.h"
 
-class Symbol {    //NOLINT
+class Symbol {    // NOLINT
 
 public:
     enum class SymbolType {
@@ -49,7 +49,7 @@ public:
     std::string toString() const;
 };
 
-class FunctionSymbol : public Symbol {    //NOLINT
+class FunctionSymbol : public Symbol {    // NOLINT
 
     const std::unique_ptr<DataType[]> paramsType;
     const int paramCount = 0;
@@ -61,7 +61,7 @@ public:
     bool matchParams(const std::unique_ptr<DataType[]> &paramsToMatch, unsigned long count) const;
 };
 
-class VariableSymbol : public Symbol {    //NOLINT
+class VariableSymbol : public Symbol {    // NOLINT
 
 public:
     VariableSymbol(const std::string &name, int level, DataType dataType);
@@ -75,12 +75,30 @@ class SymbolTable {
         OpResult &operator+=(const OpResult &rhs);
     };
 
+    struct TokenizeResult {
+        std::unique_ptr<std::string[]> data;
+        unsigned long size = 0;
+    };
+
+    struct FunctionDeclarationTokenizeResult {
+        std::unique_ptr<std::string[]> params;
+        unsigned long paramCount = 0;
+        std::string returnType;
+    };
+
+    struct FunctionCallTokenizeResult {
+        std::string functionName;
+
+        std::unique_ptr<std::string[]> paramsList;
+        unsigned long paramsCount = 0;
+    };
+
     enum class TraversalMethod {
         PREORDER,
         INORDER,
         POSTORDER
     };
-    class Tree {            //NOLINT
+    class Tree {            // NOLINT
         class TreeNode {    // NOLINT
             std::unique_ptr<Symbol> data;
             TreeNode *parent = nullptr;
@@ -88,12 +106,18 @@ class SymbolTable {
             TreeNode *leftChild = nullptr;
             TreeNode *rightChild = nullptr;
 
-            inline bool hasLeftChild() const {
+            inline bool hasLeftChild() const noexcept {
                 return leftChild != nullptr;
             }
 
-            inline bool hasRightChild() const {
+            inline bool hasRightChild() const noexcept {
                 return rightChild != nullptr;
+            }
+            inline bool isMyLeftChild(const TreeNode *const node) const noexcept {
+                return hasLeftChild() && leftChild == node;
+            }
+            inline bool isMyRightChild(const TreeNode *const node) const noexcept {
+                return hasRightChild() && rightChild == node;
             }
 
         public:
@@ -156,6 +180,10 @@ class SymbolTable {
     Tree::TreeNode *findSymbolWithoutSplay(const std::string &name, OpResult *result) const;
 
     OpResult assign(const std::string &name, const std::string &value, const std::string &line);
+
+    static TokenizeResult tokenizeParams(std::string::const_iterator start, std::string::const_iterator end);
+    static FunctionDeclarationTokenizeResult tokenizeFunctionDeclaration(const std::string &functionDeclaration);
+    static FunctionCallTokenizeResult tokenizeFunctionCall(const std::string &functionCall);
 
 public:
     void run(const string &filename);

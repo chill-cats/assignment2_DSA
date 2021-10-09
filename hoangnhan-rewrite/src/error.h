@@ -44,7 +44,7 @@ class InvalidDeclaration : public exception {
     string mess;
 
 public:
-    explicit InvalidDeclaration(const string &instruction) : mess("Undeclared: " + instruction) {}
+    explicit InvalidDeclaration(const string &instruction) : mess("InvalidDeclaration: " + instruction) {}
     const char *what() const noexcept override {
         return mess.c_str();
     }

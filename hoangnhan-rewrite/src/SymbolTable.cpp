@@ -46,7 +46,7 @@ std::string SymbolTable::processLine(const std::string &line) {
     if (line == "PRINT") {
         auto str = tree.toString(TraversalMethod::PREORDER);
         printFlag = !str.empty();
-        return std::string{ str.begin(), str.end() - 1 };
+        return str;
     }
 
     if (std::regex_search(line, tokens, LOOKUP_REGEX)) {
@@ -94,23 +94,16 @@ SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::st
 
         return result;
     }
-    // value is a function
-    static const std::regex PARAMS_CAPTURE_REGEX{ R"((\d+|'[\dA-Za-z\s]*'|[a-z]\w*)(?=,|\)))" };
-    static const std::regex FUNC_NAME_CAPTURE_REGEX{ R"([a-z]\w*(?=\())" };
 
-    std::smatch tokens;
-    // first search for the function symbol
-    std::regex_search(value, tokens, FUNC_NAME_CAPTURE_REGEX);
+    const auto tokenizedFunctionCall{ tokenizeFunctionCall(value) };
 
-    OpResult findFuctionResult;
-    auto *functionNode = findSymbolWithoutSplay(tokens[0], &findFuctionResult);
+    auto *functionNode = findSymbolWithoutSplay(tokenizedFunctionCall.functionName, &result);
     if (functionNode == nullptr) {
         throw Undeclared(line);
     }
     if (functionNode->data->getSymbolType() != Symbol::SymbolType::FUNCTION) {
         throw TypeMismatch(line);
     }
-    result += findFuctionResult;
     result += tree.splay(functionNode);
 
     const auto *functionSymbol = dynamic_cast<FunctionSymbol *>(tree.root->data.get());
@@ -118,26 +111,74 @@ SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::st
         throw TypeMismatch(line);
     }
 
-    // then convert each param to the respective type, splay in the process
-    std::regex_search(value, tokens, PARAMS_CAPTURE_REGEX);
+    std::unique_ptr<Symbol::DataType[]> paramsType = std::make_unique<Symbol::DataType[]>(tokenizedFunctionCall.paramsCount);
 
-    auto paramCount = tokens.size();
-    std::unique_ptr<Symbol::DataType[]> paramsType = std::make_unique<Symbol::DataType[]>(paramCount);
-    for (auto i = 0UL; i < paramCount; i++) {
-        paramsType[i] = resolveType(tokens[i], result, line);
+    // resolve type of each param
+    for (auto i = 0UL; i < tokenizedFunctionCall.paramsCount; i++) {
+        paramsType[i] = resolveType(tokenizedFunctionCall.paramsList[i], result, line);
     }
 
     // then match the type of param to type of function
-    if (!functionSymbol->matchParams(paramsType, paramCount)) {
+    if (!functionSymbol->matchParams(paramsType, tokenizedFunctionCall.paramsCount)) {
         throw TypeMismatch(line);
     }
 
-    // then find the assignee
-    auto assigneeType = resolveType(name, result, line);
+    auto assigneeType{ resolveType(name, result, line) };
+
     if (assigneeType != functionNode->data->getDataType()) {
         throw TypeMismatch(line);
     }
     return result;
+}
+
+SymbolTable::FunctionCallTokenizeResult SymbolTable::tokenizeFunctionCall(const std::string &functionCall) {
+
+    auto startOfFunctionName{ functionCall.begin() };
+    auto endOfFunctionName{ std::find(functionCall.begin(), functionCall.end(), '(') };
+
+    auto tokenizedParams{ tokenizeParams(endOfFunctionName + 1, std::prev(functionCall.end())) };
+    return { { startOfFunctionName, endOfFunctionName }, std::move(tokenizedParams.data), tokenizedParams.size };
+}
+
+SymbolTable::FunctionDeclarationTokenizeResult SymbolTable::tokenizeFunctionDeclaration(const std::string &functionDeclaration) {
+    auto firstBracket{ functionDeclaration.begin() };
+    auto lastBracket{ std::find(functionDeclaration.begin(), functionDeclaration.end(), ')') };
+
+    auto paramsTokenizeResult{ tokenizeParams(firstBracket + 1, lastBracket) };
+
+    auto arrow = std::find(lastBracket, functionDeclaration.end(), '>');
+
+    return {
+        std::move(paramsTokenizeResult.data), paramsTokenizeResult.size, std::string{ arrow + 1, functionDeclaration.end() }
+    };
+}
+
+SymbolTable::TokenizeResult SymbolTable::tokenizeParams(std::string::const_iterator start, std::string::const_iterator end) {
+    if (start == end) {
+        return {};
+    }
+
+    auto commaNum = std::count_if(start, end, [](char c) { return c == ','; });
+
+    auto tokenNum = commaNum + 1;
+    std::unique_ptr<std::string[]> tokens =
+        std::make_unique<std::string[]>(static_cast<unsigned long>(tokenNum));
+    unsigned long currentIndex = 0;
+    auto currentEnd = start;
+
+    for (; currentEnd != end; ++currentEnd) {
+        if (*currentEnd == ',') {
+            tokens[currentIndex++] = { start, currentEnd };
+            ++currentEnd;
+            start = currentEnd;
+        }
+    }
+
+    if (start != end) {
+        tokens[currentIndex] = { start, end };
+    }
+
+    return { std::move(tokens), static_cast<unsigned long>(tokenNum) };
 }
 
 Symbol::DataType SymbolTable::resolveType(const std::string &value, OpResult &result, const std::string &line) {
@@ -171,7 +212,7 @@ void SymbolTable::end() {
     currentLevel--;
 }
 
-int SymbolTable::lookup(const std::string &name, const std::string &line) {
+int SymbolTable::lookup(const std::string &name, const std::string &line) {    // NOLINT
     auto *node = findSymbolWithoutSplay(name, nullptr);
 
     if (node == nullptr) {
@@ -235,40 +276,39 @@ SymbolTable::Tree::TreeNode *SymbolTable::findSymbolWithoutSplay(const std::stri
     return node;
 }
 
-SymbolTable::OpResult SymbolTable::insert(const std::string &name, const std::string &value, const bool isStatic, const std::string &line) {
+SymbolTable::OpResult SymbolTable::insert(const std::string &name, const std::string &value, const bool isStatic, const std::string &line) {    // NOLINT
     using TreeNode = Tree::TreeNode;
 
     const int targetLevel = isStatic ? 0 : currentLevel;
     OpResult result;
     std::unique_ptr<Symbol> newData;
+
     if (value == "string" || value == "number") {
         const Symbol::DataType type = value == "string" ? Symbol::DataType::STRING : Symbol::DataType::NUMBER;
         newData = std::make_unique<VariableSymbol>(name, targetLevel, type);
-    } else {
+
+    } else {    // if function
         if (targetLevel != 0) {
-            throw InvalidDeclaration(line);
-        }
-        static const std::regex captureParam(R"((string|number)(?=,|\)))");
-        static const std::regex captureType(R"(->(string|number))");
-
-        std::smatch paramMatches;
-        std::smatch typeMatches;
-
-        std::regex_search(value, paramMatches, captureParam);
-        std::regex_search(value, typeMatches, captureType);
-
-        unsigned long paramNum = paramMatches.size();
-
-        std::unique_ptr<Symbol::DataType[]> param = std::make_unique<Symbol::DataType[]>(paramNum);
-
-        for (unsigned long i = 0; i < paramMatches.size(); i++) {
-            param[i] = paramMatches[i] == "string" ? Symbol::DataType::STRING : Symbol::DataType::NUMBER;
+            throw InvalidDeclaration(line);    // cannot declare a function in level other than 0
         }
 
-        Symbol::DataType returnType = typeMatches[1] == "string" ? Symbol::DataType::STRING : Symbol::DataType::NUMBER;
+        const auto tokenizedFunctionDeclaration = tokenizeFunctionDeclaration(value);
 
-        newData = std::make_unique<FunctionSymbol>(name, targetLevel, returnType, static_cast<int>(paramNum), std::move(param));
+        const auto &paramCount = tokenizedFunctionDeclaration.paramCount;
+        const auto &params = tokenizedFunctionDeclaration.params;
+        const auto &returnTypeStr = tokenizedFunctionDeclaration.returnType;
+
+        std::unique_ptr<Symbol::DataType[]> param = std::make_unique<Symbol::DataType[]>(paramCount);
+
+        for (unsigned long i = 0; i < paramCount; i++) {
+            param[i] = params[i] == "string" ? Symbol::DataType::STRING : Symbol::DataType::NUMBER;
+        }
+
+        Symbol::DataType returnType = returnTypeStr == "string" ? Symbol::DataType::STRING : Symbol::DataType::NUMBER;
+
+        newData = std::make_unique<FunctionSymbol>(name, targetLevel, returnType, static_cast<int>(paramCount), std::move(param));
     }
+
     auto *ptr = tree.root;
     TreeNode *ptrParent = nullptr;
 
@@ -283,6 +323,7 @@ SymbolTable::OpResult SymbolTable::insert(const std::string &name, const std::st
             throw Redeclared(line);
         }
     }
+
     ptr = new TreeNode(std::move(newData));
     ptr->parent = ptrParent;
 
@@ -316,6 +357,7 @@ void SymbolTable::Tree::deleteAllNodeWithLevel(TreeNode *currentRoot, const int 
     if (currentRoot == nullptr) {
         return;
     }
+
     deleteAllNodeWithLevel(currentRoot->leftChild, level);
     deleteAllNodeWithLevel(currentRoot->rightChild, level);
     if (currentRoot->data->getLevel() == level) {
@@ -326,7 +368,7 @@ void SymbolTable::Tree::deleteAllNodeWithLevel(TreeNode *currentRoot, const int 
 void SymbolTable::Tree::deleteNode(TreeNode *node) {
     if (!node->hasLeftChild() && !node->hasRightChild()) {    // leaf node
         if (node->parent != nullptr) {
-            if (node == node->parent->leftChild) {
+            if (node->parent->isMyLeftChild(node)) {
                 node->parent->leftChild = nullptr;
             } else {
                 node->parent->rightChild = nullptr;
@@ -334,12 +376,15 @@ void SymbolTable::Tree::deleteNode(TreeNode *node) {
         } else {
             root = nullptr;
         }
+        node->leftChild = nullptr;
+        node->rightChild = nullptr;
         delete node;
         return;
     }
+
     if (!node->hasLeftChild()) {    // node doesn't have left child, replace it by it's right child
         if (node->parent != nullptr) {
-            if (node == node->parent->leftChild) {
+            if (node->parent->isMyLeftChild(node)) {
                 node->parent->leftChild = node->rightChild;
             } else {
                 node->parent->rightChild = node->rightChild;
@@ -349,6 +394,8 @@ void SymbolTable::Tree::deleteNode(TreeNode *node) {
             root = node->rightChild;
             node->rightChild->parent = nullptr;
         }
+        node->leftChild = nullptr;
+        node->rightChild = nullptr;
         delete node;
         return;
     }
@@ -359,7 +406,7 @@ void SymbolTable::Tree::deleteNode(TreeNode *node) {
     while (ptr->hasRightChild()) {
         ptr = ptr->rightChild;
     }
-    // swap everything between node and greatest node's data
+    // swap data between node and greatest node's data
     std::unique_ptr<Symbol> nodeData = std::move(node->data);
 
     std::unique_ptr<Symbol> sucessorData = std::move(ptr->data);
@@ -367,8 +414,10 @@ void SymbolTable::Tree::deleteNode(TreeNode *node) {
     node->data = std::move(sucessorData);
     ptr->data = std::move(nodeData);
 
-    if (ptr == ptr->parent->leftChild) {    // ptr is node's direct left child
+    if (ptr->parent->isMyLeftChild(ptr)) {    // ptr is node's direct left child
         node->leftChild = nullptr;
+        ptr->leftChild = nullptr;
+        ptr->rightChild = nullptr;
         delete ptr;
         return;
     }
@@ -376,35 +425,41 @@ void SymbolTable::Tree::deleteNode(TreeNode *node) {
     if (ptr->hasLeftChild()) {
         ptr->leftChild->parent = ptr->parent;
     }
+    ptr->leftChild = nullptr;
+    ptr->rightChild = nullptr;
     delete ptr;
 }
 
-SymbolTable::OpResult SymbolTable::Tree::splay(TreeNode *node) noexcept {    //NOLINT
+SymbolTable::OpResult SymbolTable::Tree::splay(TreeNode *node) noexcept {
     OpResult result;
     if (node == root || node == nullptr) {
         return result;
     }
+
     while (node != root) {
         if (node->parent == root) {    // ZIG case
             result.splayNum++;
-            if (node == node->parent->leftChild) {    // ZIG left
+            if (node->parent->isMyLeftChild(node)) {    // ZIG left
                 rotateWithLeftChild(node->parent);
 
-            } else if (node == node->parent->rightChild) {
+            } else if (node->parent->isMyRightChild(node)) {
                 rotateWithRightChild(node->parent);    // ZIG right
             }
         } else {
             result.splayNum++;
-            if (node == node->parent->leftChild && node->parent == node->parent->parent->leftChild) {    // ZIG ZIG left
+            if (node->parent->isMyLeftChild(node) && node->parent->parent->isMyLeftChild(node->parent)) {    // ZIG ZIG left
                 rotateWithLeftChild(node->parent->parent);
                 rotateWithLeftChild(node->parent);
-            } else if (node == node->parent->rightChild && node->parent == node->parent->parent->rightChild) {    // ZIG ZIG right
+
+            } else if (node->parent->isMyRightChild(node) && node->parent->parent->isMyRightChild(node->parent)) {    // ZIG ZIG right
                 rotateWithRightChild(node->parent->parent);
                 rotateWithRightChild(node->parent);
-            } else if (node == node->parent->leftChild && node->parent == node->parent->parent->rightChild) {    // ZIG ZAG
+
+            } else if (node->parent->isMyLeftChild(node) && node->parent->parent->isMyRightChild(node->parent)) {    // ZIG ZAG
                 rotateWithLeftChild(node->parent);
                 rotateWithRightChild(node->parent);
-            } else if (node == node->parent->rightChild && node->parent == node->parent->parent->leftChild) {
+
+            } else if (node->parent->isMyRightChild(node) && node->parent->parent->isMyLeftChild(node->parent)) {
                 rotateWithRightChild(node->parent);
                 rotateWithLeftChild(node->parent);
             }
@@ -426,6 +481,12 @@ std::string SymbolTable::Tree::toString(TraversalMethod method) {
     case TraversalMethod::PREORDER:
         preOrderToString(root, output);
     }
+    auto endIter = output.rbegin();
+
+    if (*endIter == ' ') {
+        output.erase(std::next(endIter).base());
+    }
+
     return output;
 }
 
@@ -478,13 +539,13 @@ void SymbolTable::Tree::rotateWithLeftChild(TreeNode *node) noexcept {
         root = oldLeftChild;
         return;
     }
-    if (node == node->parent->leftChild) {
+    if (node->parent->isMyLeftChild(node)) {
         node->parent->leftChild = oldLeftChild;
         node->parent = oldLeftChild;
         oldLeftChild->parent = parent;
         return;
     }
-    if (node == node->parent->rightChild) {
+    if (node->parent->isMyRightChild(node)) {
         node->parent->rightChild = oldLeftChild;
         node->parent = oldLeftChild;
         oldLeftChild->parent = parent;
@@ -513,13 +574,13 @@ void SymbolTable::Tree::rotateWithRightChild(TreeNode *node) noexcept {
         root = oldRightChild;
         return;
     }
-    if (node == node->parent->leftChild) {
+    if (node->parent->isMyLeftChild(node)) {
         node->parent->leftChild = oldRightChild;
         node->parent = oldRightChild;
         oldRightChild->parent = parent;
         return;
     }
-    if (node == node->parent->rightChild) {
+    if (node->parent->isMyRightChild(node)) {
         node->parent->rightChild = oldRightChild;
         node->parent = oldRightChild;
         oldRightChild->parent = parent;

@@ -1,0 +1,3 @@
+INSERT a ()->string false
+INSERT b string false
+ASSIGN b a()

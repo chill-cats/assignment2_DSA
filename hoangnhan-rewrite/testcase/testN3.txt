@@ -1,0 +1,5 @@
+INSERT foo ()->string false
+INSERT x string true
+ASSIGN x foo()
+BEGIN
+END

@@ -4,13 +4,15 @@
 
 class identifier_name {
 public:
-    identifier_name(): ID(""), type(""), level(0), static_check("") {}
-    identifier_name(string &ID, string &type, int &level,
-                    string &static_check): ID(ID), type(type), level(level), static_check(static_check) {}
+    identifier_name(): ID(""), type(""), level(0), static_check(""), num_com(0) {}
+    identifier_name(string ID, string type, int level,
+                    string static_check, int num_com):
+                    ID(ID), type(type), level(level), static_check(static_check), num_com(num_com) {}
     string ID;
     string type;
     int level;
     string static_check;
+    int num_com;
 };
 
 class identifier_node {
@@ -32,8 +34,13 @@ public:
 
 public:
     Tree(): root(nullptr) {};
-
-    ~Tree() {};
+    /*
+    ~Tree() {
+        while (this->root) {
+            delete_node(this->root);
+        }
+    };
+*/
 public:
 
     static identifier_node* right_rol(identifier_node* h);
@@ -42,9 +49,9 @@ public:
 
     int splay(identifier_node* h);
 
-    int insert_tree(const identifier_name& newID);
+    identifier_node* insert_tree(const identifier_name& newID);
 
-    void assign_tree(const string& ID, string det_type, int level);
+    string assign_tree(const string& ID, const string& det_type, int level);
 
     static identifier_node* find_max(identifier_node *node);
 
@@ -57,10 +64,45 @@ public:
     void print(identifier_node* &node);
 };
 
+class Node {
+public:
+    string data;
+    Node *next{};
+};
+
+class LinkedLisst {
+public:
+    Node* head;
+    Node* tail{};
+    int size;
+public:
+    LinkedLisst(): head(nullptr) {};
+    ~LinkedLisst() {
+        while (this->head) {
+            auto *h = this->head;
+            this->head = this->head->next;
+            delete h;
+        }
+    };
+
+    void insert_lisst(string data) {
+        auto *new_node = new Node;
+        new_node->data = move(data);
+        new_node->next = nullptr;
+        if (this->head == nullptr) {
+            this->head = new_node;
+            this->tail = this->head;
+            this->size = 1;
+        } else {
+            this->tail->next = new_node;
+            this->tail = this->tail->next;
+            this->size++;
+        }
+    }
+};
+
 class SymbolTable {
 public:
-    SymbolTable() {}
-
     static void run(const string& filename);
 };
 #endif

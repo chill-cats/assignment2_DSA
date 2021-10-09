@@ -1,0 +1,8 @@
+INSERT gh (string,string,number,string)->string true
+INSERT ab string false
+INSERT bc number false
+INSERT cd string true
+INSERT de number true
+INSERT ef string false
+INSERT fg number true
+ASSIGN ef gh(ef,ab,fg,cd)
