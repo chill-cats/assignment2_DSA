@@ -98,6 +98,14 @@ class SymbolTable {
         INORDER,
         POSTORDER
     };
+
+    enum class ValueType {
+        STRING,
+        NUMBER,
+        SYMBOL,
+        FUNCTION_CALL,
+    };
+
     class Tree {            // NOLINT
         class TreeNode {    // NOLINT
             std::unique_ptr<Symbol> data;
@@ -167,6 +175,7 @@ class SymbolTable {
     Tree tree;
 
     std::string processLine(const std::string &line);
+
     void detectUnclosedBlock() const;
 
     OpResult insert(const std::string &name, const std::string &value, bool isStatic, const std::string &line);
@@ -175,6 +184,9 @@ class SymbolTable {
     void end();
 
     Symbol::DataType resolveType(const std::string &value, OpResult &result, const std::string &line);
+
+    static SymbolTable::ValueType resolveValueType(const std::string &value);
+
     int lookup(const std::string &name, const std::string &line);
 
     Tree::TreeNode *findSymbolWithoutSplay(const std::string &name, OpResult *result) const;

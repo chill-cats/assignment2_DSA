@@ -65,26 +65,24 @@ std::string SymbolTable::processLine(const std::string &line) {
 }
 
 SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::string &value, const std::string &line) {
-    static const std::regex VARIABLE_SYMBOL_REGEX{ R"(^[a-z]\w*$)" };
-    static const std::regex LITERAL_STRING_REGEX{ R"(^'[\dA-Za-z\s]*'$)" };
-    static const std::regex LITERAL_NUMBER_REGEX{ R"(^\d+)" };
+    auto valueType = resolveValueType(value);
     OpResult result;
 
-    if (std::regex_match(value, LITERAL_NUMBER_REGEX)) {
+    if (valueType == ValueType::NUMBER) {
         auto typeOfAssignee = resolveType(name, result, line);
         if (typeOfAssignee != Symbol::DataType::NUMBER) {
             throw TypeMismatch(line);
         }
         return result;
     }
-    if (std::regex_match(value, LITERAL_STRING_REGEX)) {
+    if (valueType == ValueType::STRING) {
         auto typeOfAssignee = resolveType(name, result, line);
         if (typeOfAssignee != Symbol::DataType::STRING) {
             throw TypeMismatch(line);
         }
         return result;
     }
-    if (std::regex_match(value, VARIABLE_SYMBOL_REGEX)) {
+    if (valueType == ValueType::SYMBOL) {
         auto typeOfValue = resolveType(value, result, line);
         auto typeOfAssignee = resolveType(name, result, line);
 
@@ -94,41 +92,43 @@ SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::st
 
         return result;
     }
+    if (valueType == ValueType::FUNCTION_CALL) {
+        const auto tokenizedFunctionCall{ tokenizeFunctionCall(value) };
 
-    const auto tokenizedFunctionCall{ tokenizeFunctionCall(value) };
+        auto *functionNode = findSymbolWithoutSplay(tokenizedFunctionCall.functionName, &result);
+        if (functionNode == nullptr) {
+            throw Undeclared(line);
+        }
+        if (functionNode->data->getSymbolType() != Symbol::SymbolType::FUNCTION) {
+            throw TypeMismatch(line);
+        }
+        result += tree.splay(functionNode);
 
-    auto *functionNode = findSymbolWithoutSplay(tokenizedFunctionCall.functionName, &result);
-    if (functionNode == nullptr) {
-        throw Undeclared(line);
+        const auto *functionSymbol = dynamic_cast<FunctionSymbol *>(tree.root->data.get());
+        if (functionSymbol == nullptr) {
+            throw TypeMismatch(line);
+        }
+
+        std::unique_ptr<Symbol::DataType[]> paramsType = std::make_unique<Symbol::DataType[]>(tokenizedFunctionCall.paramsCount);
+
+        // resolve type of each param
+        for (auto i = 0UL; i < tokenizedFunctionCall.paramsCount; i++) {
+            paramsType[i] = resolveType(tokenizedFunctionCall.paramsList[i], result, line);
+        }
+
+        // then match the type of param to type of function
+        if (!functionSymbol->matchParams(paramsType, tokenizedFunctionCall.paramsCount)) {
+            throw TypeMismatch(line);
+        }
+
+        auto assigneeType{ resolveType(name, result, line) };
+
+        if (assigneeType != functionNode->data->getDataType()) {
+            throw TypeMismatch(line);
+        }
+        return result;
     }
-    if (functionNode->data->getSymbolType() != Symbol::SymbolType::FUNCTION) {
-        throw TypeMismatch(line);
-    }
-    result += tree.splay(functionNode);
-
-    const auto *functionSymbol = dynamic_cast<FunctionSymbol *>(tree.root->data.get());
-    if (functionSymbol == nullptr) {
-        throw TypeMismatch(line);
-    }
-
-    std::unique_ptr<Symbol::DataType[]> paramsType = std::make_unique<Symbol::DataType[]>(tokenizedFunctionCall.paramsCount);
-
-    // resolve type of each param
-    for (auto i = 0UL; i < tokenizedFunctionCall.paramsCount; i++) {
-        paramsType[i] = resolveType(tokenizedFunctionCall.paramsList[i], result, line);
-    }
-
-    // then match the type of param to type of function
-    if (!functionSymbol->matchParams(paramsType, tokenizedFunctionCall.paramsCount)) {
-        throw TypeMismatch(line);
-    }
-
-    auto assigneeType{ resolveType(name, result, line) };
-
-    if (assigneeType != functionNode->data->getDataType()) {
-        throw TypeMismatch(line);
-    }
-    return result;
+    throw std::logic_error("Cannot reach here!");
 }
 
 SymbolTable::FunctionCallTokenizeResult SymbolTable::tokenizeFunctionCall(const std::string &functionCall) {
@@ -181,27 +181,43 @@ SymbolTable::TokenizeResult SymbolTable::tokenizeParams(std::string::const_itera
     return { std::move(tokens), static_cast<unsigned long>(tokenNum) };
 }
 
-Symbol::DataType SymbolTable::resolveType(const std::string &value, OpResult &result, const std::string &line) {
-    static const std::regex NUMBER_REGEX{ R"(\d+)" };
-    static const std::regex STRING_REGEX{ R"('[\dA-Za-z\s]*')" };
+SymbolTable::ValueType SymbolTable::resolveValueType(const std::string &value) {
+    auto firstChar = *value.begin();
+    auto lastChar = *value.rbegin();
+    if (firstChar == '\'') {
+        return ValueType::STRING;
+    }
+    if ('0' < firstChar && firstChar < '9') {
+        return ValueType::NUMBER;
+    }
+    if (lastChar == ')') {
+        return ValueType::FUNCTION_CALL;
+    }
+    return ValueType::SYMBOL;
+}
 
-    if (std::regex_match(value, NUMBER_REGEX)) {
+Symbol::DataType SymbolTable::resolveType(const std::string &value, OpResult &result, const std::string &line) {
+    auto valueType = resolveValueType(value);
+
+    if (valueType == ValueType::NUMBER) {
         return Symbol::DataType::NUMBER;
     }
 
-    if (std::regex_match(value, STRING_REGEX)) {
+    if (valueType == ValueType::STRING) {
         return Symbol::DataType::STRING;
     }
-
-    auto *node = findSymbolWithoutSplay(value, &result);
-    if (node == nullptr) {
-        throw Undeclared(line);
+    if (valueType == ValueType::SYMBOL) {
+        auto *node = findSymbolWithoutSplay(value, &result);
+        if (node == nullptr) {
+            throw Undeclared(line);
+        }
+        if (node->data->getSymbolType() != Symbol::SymbolType::VARIABLE) {
+            throw TypeMismatch(line);
+        }
+        result += tree.splay(node);
+        return tree.root->data->getDataType();
     }
-    if (node->data->getSymbolType() != Symbol::SymbolType::VARIABLE) {
-        throw TypeMismatch(line);
-    }
-    result += tree.splay(node);
-    return tree.root->data->getDataType();
+    throw TypeMismatch(line);
 }
 
 void SymbolTable::end() {
