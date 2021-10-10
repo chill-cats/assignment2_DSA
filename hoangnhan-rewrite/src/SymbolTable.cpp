@@ -187,7 +187,7 @@ SymbolTable::ValueType SymbolTable::resolveValueType(const std::string &value) {
     if (firstChar == '\'') {
         return ValueType::STRING;
     }
-    if ('0' < firstChar && firstChar < '9') {
+    if ('0' <= firstChar && firstChar <= '9') {
         return ValueType::NUMBER;
     }
     if (lastChar == ')') {
@@ -431,7 +431,7 @@ void SymbolTable::Tree::deleteNode(TreeNode *node) {
     ptr->data = std::move(nodeData);
 
     if (ptr->parent->isMyLeftChild(ptr)) {    // ptr is node's direct left child
-        node->leftChild = nullptr;
+        node->leftChild = ptr->leftChild;
         ptr->leftChild = nullptr;
         ptr->rightChild = nullptr;
         delete ptr;

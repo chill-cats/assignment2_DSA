@@ -31,7 +31,7 @@
                 "request": "launch",
                 "program":"${workspaceRoot}/cmake-build/src/main",
                 "args": [
-                    "${workspaceRoot}/testcase/testN5.txt"
+                    "${workspaceRoot}/testcase/testN6.txt"
                 ],
                 "cwd":"${workspaceRoot}",
                 "externalConsole": false,

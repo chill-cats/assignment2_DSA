@@ -1,3 +1,14 @@
-INSERT a ()->string false
-INSERT b string false
-ASSIGN b a()
+BEGIN
+INSERT helloworldfsalfjal string true
+INSERT thisistheendoftheuniverse number false
+BEGIN
+INSERT tomcruiser string false
+INSERT emmawatson string false
+INSERT tom (string,number,string,string,string,number,number,string,number,string)->string true
+BEGIN
+INSERT jlkajfal number false
+INSERT k string false
+ASSIGN emmawatson tom(k,123,'emma watson have sex',tomcruiser,'lmaofjasflasjflasjfjlas fkljsalkfj fafjakl',1942840920942904,9013810958310480192,'this is supppoeriklafja',84204801283401284092,'024820840128401284018401284091284012840')
+END
+END
+END
