@@ -1,0 +1,313 @@
+BEGIN
+PRINT
+INSERT r1g number true
+BEGIN
+PRINT
+END
+PRINT
+END
+BEGIN
+LOOKUP r1g
+INSERT gVfMA (string,number)->number true
+INSERT tE (string,number,number)->string true
+INSERT yw8NS string false
+PRINT
+LOOKUP yw8NS
+LOOKUP gVfMA
+END
+PRINT
+LOOKUP tE
+PRINT
+LOOKUP gVfMA
+ASSIGN saZjV mzUz
+INSERT l ()->string true
+PRINT
+BEGIN
+BEGIN
+PRINT
+INSERT jU number false
+LOOKUP zUs
+PRINT
+ASSIGN r1g l()
+BEGIN
+ASSIGN yw8NS tE('23xf',jU,198)
+LOOKUP r1g
+BEGIN
+PRINT
+PRINT
+INSERT ler7nR number true
+LOOKUP x34SbJ
+BEGIN
+LOOKUP r1g
+INSERT l (number)->number false
+INSERT vEv number true
+PRINT
+ASSIGN jU l()
+ASSIGN gVfMA jU
+PRINT
+INSERT o52 (string)->number false
+INSERT xij string true
+INSERT p9AGX string false
+INSERT z5 number true
+LOOKUP o52
+INSERT tk15 (number)->number true
+BEGIN
+ND
+LOOKUP mEYlmC
+INSERT oz0X0D number false
+LOOKUP yw8NS
+BEGIN
+ASSIGN tE yw8NS
+PRINT
+END
+END
+INSERT oft9M number false
+LOOKUP l
+BEGIN
+BEGIN
+INSERT i (number,string,number)->string true
+LOOKUP l
+INSERT j number true
+LOOKUP yw8NS
+BEGIN
+END
+BEGIN
+ASSIGN i vEv
+BEGIN
+BEGIN
+PRINT
+LOOKUP fvBT
+END
+INSERT rAMf string false
+LOOKUP p9AGX
+LOOKUP i
+LOOKUP oz0X0D
+BEGIN
+INSERT mA3i0 string true
+ASSIGN j p9AGX
+PRINT
+BEGIN
+PRINT
+INSERT iW string false
+BEGIN
+PRINT
+ASSIGN oft9M ler7nR
+END
+END
+BEGIN
+INSERT qFd string true
+END
+ASSIGN lD lm
+ASSIGN ler7nR r
+PRINT
+LOOKUP mA3i0
+LOOKUP yw8NS
+LOOKUP qFd
+END
+PRINT
+END
+INSERT hT1 string false
+INSERT r3f6cZ number false
+BEGIN
+PRINT
+PRINT
+INSERT fceW95 string false
+LOOKUP l
+ASSIGN ler7nR l()
+ASSIGN en3an r1g
+END
+LOOKUP hT1
+BEGIN
+PRINT
+END
+ASSIGN l ler7nR
+INSERT mF9 string false
+PRINT
+PRINT
+ASSIGN far gVfMA(p9AGX,618)
+LOOKUP mF9
+PRINT
+LOOKUP tk15
+END
+PRINT
+LOOKUP tk15
+ASSIGN yw8NS oft9M
+ASSIGN o52 p9AGX
+ASSIGN iW r3f6cZ
+ASSIGN r1g xij
+ASSIGN rAMf mA3i0
+INSERT dR4af0 string true
+END
+ASSIGN ler7nR ler7nR
+ASSIGN gVfMA xij
+INSERT jAb string false
+INSERT xF number true
+ASSIGN dR4af0 l(l)
+PRINT
+ASSIGN r1g tk15(hT1)
+INSERT w1Ji string true
+INSERT c50CLb number false
+BEGIN
+BEGIN
+PRINT
+END
+END
+INSERT vzFM5 (string)->string false
+INSERT e string true
+BEGIN
+LOOKUP yw8NS
+BEGIN
+INSERT g (string,number,number)->string true
+PRINT
+INSERT r (number,string)->number false
+PRINT
+PRINT
+END
+BEGIN
+PRINT
+LOOKUP e
+ASSIGN ler7nR nGKHUd
+END
+END
+ASSIGN j vEv
+END
+BEGIN
+ASSIGN xij yOiJjJ
+BEGIN
+BEGIN
+BEGIN
+INSERT h string true
+ASSIGN i xF
+PRINT
+PRINT
+ASSIGN xF n6i
+PRINT
+LOOKUP oft9M
+LOOKUP yw8NS
+INSERT utIr (number)->string false
+ASSIGN gVfMA ler7nR
+INSERT uHKpN number true
+ASSIGN dR4af0 t
+PRINT
+END
+ASSIGN ive_f mF9
+PRINT
+BEGIN
+END
+LOOKUP p9AGX
+PRINT
+PRINT
+ASSIGN r tE(hT1,883,922)
+INSERT aRVKeP number true
+LOOKUP l
+INSERT rJ4 string true
+END
+ASSIGN rAMf rJ4
+INSERT r3aQts string false
+INSERT ibuH number false
+END
+END
+INSERT z (number)->string false
+ASSIGN qFd r3f6cZ
+END
+ASSIGN h jU
+PRINT
+BEGIN
+LOOKUP c50CLb
+INSERT lUXN number true
+LOOKUP mA3i0
+END
+PRINT
+END
+LOOKUP w1Ji
+PRINT
+LOOKUP utIr
+BEGIN
+BEGIN
+LOOKUP j
+ASSIGN l o52(xij)
+BEGIN
+INSERT jQE number false
+BEGIN
+BEGIN
+BEGIN
+ASSIGN c50CLb rJ4
+PRINT
+INSERT c string false
+BEGIN
+ASSIGN w1Ji c50CLb
+END
+LOOKUP rAMf
+BEGIN
+LOOKUP r3f6cZ
+LOOKUP o
+BEGIN
+INSERT zPll (string)->string true
+ASSIGN jU rAMf
+ASSIGN oz0X0D i(lUXN,'yk',jQE)
+LOOKUP r3f6cZ
+PRINT
+INSERT zC string true
+BEGIN
+ASSIGN qFd p9AGX
+INSERT pMW string false
+LOOKUP j
+END
+BEGIN
+INSERT z number true
+INSERT cHwCyk string false
+INSERT cDMhd number true
+PRINT
+END
+END
+INSERT h8PT (string,number,number)->string true
+BEGIN
+BEGIN
+BEGIN
+ASSIGN vq cHwCyk
+ASSIGN r ler7nR
+END
+END
+INSERT ngwf6 ()->string false
+INSERT w0s2eY (number,number)->string false
+ASSIGN pMW cDMhd
+END
+ASSIGN fceW95 c50CLb
+BEGIN
+BEGIN
+ASSIGN xF i
+INSERT u6y5 string false
+PRINT
+BEGIN
+ASSIGN r1g l()
+LOOKUP a0
+BEGIN
+END
+BEGIN
+PRINT
+ASSIGN cDMhd lUXN
+ASSIGN oft9M m355
+LOOKUP rQN0
+PRINT
+BEGIN
+ASSIGN ny5RPH rJ4
+BEGIN
+END
+LOOKUP z
+BEGIN
+END
+LOOKUP iW
+ASSIGN iW w1Ji
+END
+END
+END
+ASSIGN cHwCyk fceW95
+LOOKUP ai
+ASSIGN g r(pMW,cHwCyk)
+END
+LOOKUP ler7nR
+ASSIGN c ngwf6()
+INSERT w number false
+END
+LOOKUP vEv
+BEGIN

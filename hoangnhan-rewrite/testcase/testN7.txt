@@ -1,0 +1,12 @@
+INSERT a string true
+INSERT b string false
+INSERT cfjal3 number true
+INSERT cafe32 (string,number,string)->string false
+INSERT hell  yeah lmao
+ASSIGN foo 'bar'
+ASSIGN bar 123
+ASSIGN bar (123,'hello','Gia Bao')
+ASSIGN bar foo
+ASSIGN bar  foo
+ASSIGN  bar foo
+ASSIGN  bar  foo

@@ -1,0 +1,19 @@
+BEGIN
+INSERT a number false
+ASSIGN a a
+INSERT a number true
+BEGIN
+LOOKUP a
+INSERT eq5 number true
+PRINT
+ASSIGN a a
+END
+PRINT                         a//1
+BEGIN                        /    \
+PRINT                       /      eq5//0
+INSERT b number true -> b//0
+END                         \
+END                          a//0
+PRINT
+INSERT sV number false
+LOOKUP a

@@ -1,0 +1,126 @@
+INSERT w string false
+BEGIN
+PRINT
+INSERT jLu number false
+PRINT
+BEGIN
+END
+LOOKUP jLu
+PRINT
+BEGIN
+INSERT pm7 number false
+BEGIN
+LOOKUP pm7
+LOOKUP w
+ASSIGN jLu pm7
+LOOKUP jLu
+END
+INSERT x7Zz7 number true
+INSERT pEZyL6 (string)->string true
+LOOKUP pEZyL6
+INSERT wkIh (string,number)->string true
+END
+PRINT
+INSERT anchTD string false
+INSERT p056hm string true
+INSERT nIPG string true
+BEGIN
+END
+PRINT
+ASSIGN nIPG w
+ASSIGN x7Zz7 x7Zz7
+LOOKUP nIPG
+INSERT v8_hD7 number false
+PRINT
+LOOKUP x7Zz7
+PRINT
+ASSIGN jLu nIPG
+END
+END
+INSERT a (number)->number true
+END
+END
+ASSIGN jLu tro
+BEGIN
+END
+ASSIGN sP v8_hD7
+END
+BEGIN
+LOOKUP anchTD
+END
+ASSIGN w anchTD
+BEGIN
+LOOKUP w
+BEGIN
+BEGIN
+INSERT bAuTb ()->string true
+PRINT
+LOOKUP jLu
+ASSIGN v8_hD7 pm7
+PRINT
+BEGIN
+ASIGN anchTD anchTD
+PRINT
+ASSIGN p056hm pEZyL6(p056hm)
+INSERT p (number)->number true
+END
+ASSIGN v8_hD7 jLu
+END
+PRINT
+ASSIGN wkIh w
+END
+END
+END
+LOOKUP p056hm
+BEGIN
+PRINT
+PRINT
+ASSIGN w p056hm
+ASSIGN pEZyL6 bAuTb()
+END
+END
+BEGIN
+BEGIN
+END
+INSERT wW1si (number,string,string)->number true
+END
+INSERT q number false
+ASSIGN v8_hD7 p056hm
+INSERT xbi number false
+INSERT lNjj number true
+PRINT
+PRINT
+INSERT dWE number false
+ASSIGN q jLu
+BEGIN
+PRINT
+LOOKUP v8_hD7
+END
+INSERT xP5 number false
+BEGIN
+PRINT
+END
+INSERT kFKK6 string false
+LOOKUP a
+INSERT b2sWL string true
+PRINT
+INSERT hw string false
+PRINT
+PRINT
+ASSIGN b2sWL pEZyL6(' t')
+PRINT
+INSERT r (number,number)->number false
+ASSIGN x7Zz7 bAuTb()
+ASSIGN p056hm lNjj
+INSERT fgZtjZ string false
+END
+ASSIGN fgZtjZ p056hm
+PRINT
+PRINT
+ASSIGN a fgZtjZ
+END
+ASSIGN xP5 v8_hD7
+END
+ASSIGN pm7 xbi
+PRINT
+LOOKUP pEZyL6S

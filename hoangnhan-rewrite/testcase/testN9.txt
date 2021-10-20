@@ -1,0 +1,176 @@
+BEGIN
+PRINT
+INSERT kg string false
+INSERT pfEF string false
+ASSIGN pfEF pfEF
+LOOKUP pfEF
+PRINT
+INSERT mtN string true
+ASSIGN pfEF kg
+BEGIN
+PRINT
+PRINT
+LOOKUP pfEF
+INSERT bh string false
+END
+LOOKUP mtN
+ASSIGN kg pfEF
+INSERT yG number true
+END
+LOOKUP kg
+ASSIGN pfEF mtN
+LOOKUP yG
+END
+INSERT wJpq number false
+END
+LOOKUP yG
+LOOKUP bh
+BEGIN
+LOOKUP gxvv
+INSERT aUWU (number,number,number)->string false
+BEGIN
+END
+BEGIN
+BEGIN
+LOOKUP yG
+ASSIGN yG bh
+ASSIGN mtN gUNspX
+LOOKUP nBEfZb
+INSERT tBxi_n string false
+END
+PRINT
+LOOKUP aUWU
+PRINT
+INSERT gQ number false
+LOOKUP bz
+INSERT prqL (string,number,string)->string false
+PRINT
+PRINT
+END
+END
+ASSIGN prqL mtN
+PRINT
+LOOKUP wJpq
+BEGIN
+BEGIN
+ASSIGN wJpq gQ
+PRINT
+LOOKUP wJpq
+LOOKUP prqL
+ASSIGN yG yG
+BEGIN
+ASSIGN yG c
+BEGIN
+ED
+INSERT e (number,string)->string false
+ASSIGN kg gQ
+LOOKUP mtN
+BEGIN
+END
+LOOKUP bh
+PRINT
+PRINT
+PRINT
+END
+INSERT r (string,number)->number false
+END
+PRINT
+PRINT
+LOOKUP tBxi_n
+END
+ASSIGN bh yG
+LOOKUP mtN
+LOOKUP r
+INSERT wYDh number true
+INSERT vMO number false
+PRINT
+PRINT
+LOOKUP r
+END
+PRINT
+BEGIN
+INSERT fAVC5 (number,string)->string true
+END
+ASSIGN vMO yG
+BEGIN
+BEGIN
+END
+LOOKUP wYDh
+PRINT
+PRINT
+PRINT
+ASSIGN r tBxi_n
+PRINT
+PRINT
+PRINT
+INSERT wNUJsC number true
+INSERT n number true
+PRINT
+INSERT wrYSK (number,string)->string false
+LOOKUP yG
+BEGIN
+LOOKUP e
+PRINT
+BEGIN
+END
+INSERT e6K ()->number false
+END
+ASSIGN bh tBxi_n
+END
+PRINT
+BEGIN
+END
+PRINT
+ASSIGN fAVC5 bh
+INSERT bmmrF (string)->string true
+LOOKUP wiKN
+PRINT
+LOOKUP mtN
+ASSIGN fAVC5 yG
+LOOKUP r
+ASSIGN bmmrF wYDh
+PRINT
+INSERT tOsds6 string false
+INSERT r1I number true
+ASSIGN vMO e6K()
+END
+LOOKUP mtN
+ASSIGN aUWU e(gQ,'Esj')
+PRINT
+ASSIGN tOsds6 r1I
+BEGIN
+PRINT
+PRINT
+BEGIN
+BEGIN
+BEGIN
+LOOKUP tBxi_n
+END
+PRINT
+LOOKUP tFkCn
+PRINT
+PRINT
+INSERT q4wr string true
+END
+END
+ASSIGN e6K gQ
+INSERT iTx string false
+LOOKUP r
+END
+ASSIGN r1I yI
+ASSIGN gQ aUWU(87,r1I,e)
+LOOKUP bmmrF
+PRINT
+PRINT
+BEGIN
+LOOKUP r1I
+BEGIN
+PRINT
+INSERT eBvMsk ()->number true
+END
+END
+ASSIGN wJpq r1I
+LOOKUP aUWU
+BEGIN
+END
+ENDN

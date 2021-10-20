@@ -199,6 +199,5 @@ class SymbolTable {
 
 public:
     void run(const string &filename);
-    static void test();
 };
 #endif
