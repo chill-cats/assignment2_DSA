@@ -1,0 +1,19 @@
+INSERT ziW number true
+PRINT
+INSERT tuN number true
+LOOKUP ziW
+PRINT
+ASSIGN tuN ziW
+INSERT hD string true
+PRINT
+ASSIGN tuN ziW
+LOOKUP hD
+BEGIN
+INSERT z number false
+PRINT
+END
+PRINT
+INSERT v ()->string false
+ASSIGN ziW ziW
+PRINT
+END

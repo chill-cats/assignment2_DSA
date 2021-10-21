@@ -8,12 +8,12 @@ INSERT eq5 number true
 PRINT
 ASSIGN a a
 END
-PRINT                         a//1
-BEGIN                        /    \
-PRINT                       /      eq5//0
-INSERT b number true -> b//0
-END                         \
-END                          a//0
+PRINT
+BEGIN
+PRINT
+INSERT b number true
+END
+END
 PRINT
 INSERT sV number false
 LOOKUP a

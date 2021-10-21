@@ -51,14 +51,14 @@ public:
 
 class FunctionSymbol : public Symbol {    // NOLINT
 
-    const std::unique_ptr<DataType[]> paramsType;
+    const std::unique_ptr<DataType[]> paramsType;    // NOLINT
     const int paramCount = 0;
 
 public:
-    FunctionSymbol(std::string name, int level, DataType returnType, int paramCount, std::unique_ptr<DataType[]> &&paramsType);
+    FunctionSymbol(std::string name, int level, DataType returnType, int paramCount, std::unique_ptr<DataType[]> &&paramsType);    // NOLINT
     FunctionSymbol(const FunctionSymbol &other);
 
-    bool matchParams(const std::unique_ptr<DataType[]> &paramsToMatch, unsigned long count) const;
+    bool matchParams(const std::unique_ptr<DataType[]> &paramsToMatch, unsigned long count) const;    // NOLINT
 };
 
 class VariableSymbol : public Symbol {    // NOLINT
@@ -76,12 +76,12 @@ class SymbolTable {
     };
 
     struct TokenizeResult {
-        std::unique_ptr<std::string[]> data;
+        std::unique_ptr<std::string[]> data;    // NOLINT
         unsigned long size = 0;
     };
 
     struct FunctionDeclarationTokenizeResult {
-        std::unique_ptr<std::string[]> params;
+        std::unique_ptr<std::string[]> params;    // NOLINT
         unsigned long paramCount = 0;
         std::string returnType;
     };
@@ -89,7 +89,7 @@ class SymbolTable {
     struct FunctionCallTokenizeResult {
         std::string functionName;
 
-        std::unique_ptr<std::string[]> paramsList;
+        std::unique_ptr<std::string[]> paramsList;    // NOLINT
         unsigned long paramsCount = 0;
     };
 
@@ -136,6 +136,7 @@ class SymbolTable {
             friend class SymbolTable;
         };
 
+
         TreeNode *root = nullptr;
 
         OpResult splay(TreeNode *node) noexcept;
@@ -160,19 +161,56 @@ class SymbolTable {
         static void inOrderToString(const TreeNode *currentRoot, std::string &output);
         static void postOrderToString(const TreeNode *currentRoot, std::string &output);
 
-        void deleteAllNodeWithLevel(int level);
-        void deleteAllNodeWithLevel(TreeNode *currentRoot, int level);
-        void deleteNode(TreeNode *node);
 
         TreeNode *findSymbolWithoutSplay(const std::string &name, int level, SymbolTable::OpResult *result) const noexcept;
+
+        void deleteNode(TreeNode *node);
         ~Tree();
         friend class SymbolTable;
+    };
+
+    class SymbolList {
+        class Scope {
+            struct ScopeNode {
+                Tree::TreeNode *ptr = nullptr;
+                ScopeNode *next = nullptr;
+            };
+            ScopeNode *head = nullptr;
+
+            Scope *nextScope = nullptr;
+
+        public:
+            void pushFront(Tree::TreeNode *node);
+            Tree::TreeNode *popFront();
+
+            Scope() = default;
+            Scope(Scope &&other) = delete;
+            Scope(const Scope &other) = delete;
+
+            Scope &operator=(const Scope &other) = delete;
+            Scope &operator=(Scope &&other) = delete;
+
+            ~Scope();
+
+            friend class SymbolList;
+        };
+        Scope *head = nullptr;
+        Scope *tail = nullptr;
+
+    public:
+        void addMoreScope();
+        void deleteScope();
+
+        Scope *getHead() const noexcept;
+        Scope *getTail() const noexcept;
     };
 
     int currentLevel = 0;
     bool printFlag = false;
 
     Tree tree;
+    SymbolList symbols;
+
 
     std::string processLine(const std::string &line);
 
@@ -198,6 +236,7 @@ class SymbolTable {
     static FunctionCallTokenizeResult tokenizeFunctionCall(const std::string &functionCall);
 
 public:
+    SymbolTable();
     void run(const string &filename);
 };
 #endif

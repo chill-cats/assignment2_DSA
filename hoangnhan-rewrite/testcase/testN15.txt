@@ -1,0 +1,9 @@
+INSERT n_z number false
+PRINT
+INSERT pSvoB ()->string false
+INSERT gTJo number true
+INSERT aX (number,string,string)->number false
+PRINT
+INSERT hDLk string true
+INSERT bVfE (number,number,number)->number true
+LOOKUP n_z

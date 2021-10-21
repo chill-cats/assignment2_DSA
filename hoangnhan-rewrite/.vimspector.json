@@ -7,7 +7,7 @@
                 "request": "launch",
                 "program": "${workspaceRoot}/cmake-build/src/main",
                 "args": [
-                    "${workspaceRoot}/testcase/testN7.txt"
+                    "${workspaceRoot}/testcase/testN15.txt"
                 ],
                 "cwd": "${workspaceRoot}",
                 "externalConsole": false,
@@ -31,29 +31,10 @@
                 "request": "launch",
                 "program": "${workspaceRoot}/cmake-build/src/main",
                 "args": [
-                    "${workspaceRoot}/testcase/testN12.txt"
+                    "${workspaceRoot}/testcase/testN15.txt"
                 ],
                 "cwd":"${workspaceRoot}",
                 "externalConsole": true,
-                "stopAtEntry": true,
-                "MIMode":"lldb"
-            }
-        },
-        "Debug test": {
-            "adapter": "CodeLLDB",
-            "breakpoints": {
-                "exception": {
-                    "cpp_throw": "Y",
-                    "cpp_catch": "N"
-                }
-            },
-            "configuration": {
-                "type": "lldb",
-                "request": "launch",
-                "program":"${workspaceRoot}/cmake-build/test/tests",
-                "args": [],
-                "cwd":"${workspaceRoot}",
-                "externalConsole": false,
                 "stopAtEntry": true,
                 "MIMode":"lldb"
             }
