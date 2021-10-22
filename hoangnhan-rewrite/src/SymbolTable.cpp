@@ -394,9 +394,9 @@ SymbolTable::OpResult SymbolTable::insert(const std::string &name, const std::st
     result += tree.splay(ptr);
 
     if (targetLevel == 0) {
-        symbols.getTail()->pushFront(tree.root);
+        symbols.getTail()->pushRear(tree.root);
     } else {
-        symbols.getHead()->pushFront(tree.root);
+        symbols.getHead()->pushRear(tree.root);
     }
 
     return result;
@@ -413,46 +413,39 @@ void SymbolTable::begin() noexcept {
 }
 
 SymbolTable::OpResult SymbolTable::Tree::splay(TreeNode *node) noexcept {
-    OpResult result;
     if (node == root || node == nullptr || root == nullptr) {
-        return result;
+        return { 0, 0 };
     }
 
     while (node != root) {
         if (node->parent == root) {                     // ZIG case
             if (node->parent->isMyLeftChild(node)) {    // ZIG left
-                result.splayNum++;
                 rotateWithLeftChild(node->parent);
 
             } else if (node->parent->isMyRightChild(node)) {
-                result.splayNum++;
                 rotateWithRightChild(node->parent);    // ZIG right
             }
         } else {
             if (node->parent->isMyLeftChild(node) && node->parent->parent->isMyLeftChild(node->parent)) {    // ZIG ZIG left
-                result.splayNum++;
                 rotateWithLeftChild(node->parent->parent);
                 rotateWithLeftChild(node->parent);
 
             } else if (node->parent->isMyRightChild(node) && node->parent->parent->isMyRightChild(node->parent)) {    // ZIG ZIG right
-                result.splayNum++;
                 rotateWithRightChild(node->parent->parent);
                 rotateWithRightChild(node->parent);
 
             } else if (node->parent->isMyLeftChild(node) && node->parent->parent->isMyRightChild(node->parent)) {    // ZIG ZAG
-                result.splayNum++;
                 rotateWithLeftChild(node->parent);
                 rotateWithRightChild(node->parent);
 
             } else if (node->parent->isMyRightChild(node) && node->parent->parent->isMyLeftChild(node->parent)) {
-                result.splayNum++;
                 rotateWithRightChild(node->parent);
                 rotateWithLeftChild(node->parent);
             }
         }
     }
 
-    return result;
+    return { 0, 1 };
 }
 
 std::string SymbolTable::Tree::toString(TraversalMethod method) {
@@ -577,54 +570,43 @@ void SymbolTable::Tree::rotateWithRightChild(TreeNode *node) noexcept {
     }
 }
 void SymbolTable::Tree::deleteNode(TreeNode *node) {
-    if (node == nullptr) {
-        return;
-    }
-
     splay(node);
-    TreeNode *leftSubTree = node->leftChild;
-    TreeNode *rightSubTree = node->rightChild;
 
+    Tree leftSubTree;
+    Tree rightSubTree;
+    leftSubTree.root = node->leftChild;
+    rightSubTree.root = node->rightChild;
     node->leftChild = nullptr;
     node->rightChild = nullptr;
+
+    if (leftSubTree.root != nullptr) {
+        leftSubTree.root->parent = nullptr;
+    }
+
+    if (rightSubTree.root != nullptr) {
+        rightSubTree.root->parent = nullptr;
+    }
     delete node;
-
-    if (leftSubTree == nullptr && rightSubTree == nullptr) {
-        root = nullptr;
+    if (leftSubTree.root == nullptr) {
+        root = rightSubTree.root;
+        rightSubTree.root = nullptr;
         return;
     }
-
-    if (leftSubTree == nullptr) {
-        rightSubTree->parent = nullptr;
-        root = rightSubTree;
-        return;
+    // left sub tree is not null
+    if (rightSubTree.root != nullptr) {
+        auto *maxPtr = leftSubTree.root;
+        for (; maxPtr->hasRightChild(); maxPtr = maxPtr->rightChild) {}
+        leftSubTree.splay(maxPtr);
     }
-
-    if (rightSubTree == nullptr) {
-        leftSubTree->parent = nullptr;
-        root = leftSubTree;
-        auto *ptrToLargestNodeInLeftSubtree = root;
-        while (ptrToLargestNodeInLeftSubtree->hasRightChild()) {
-            ptrToLargestNodeInLeftSubtree = ptrToLargestNodeInLeftSubtree->rightChild;
-        }
-        splay(ptrToLargestNodeInLeftSubtree);
-        return;
+    root = leftSubTree.root;
+    leftSubTree.root = nullptr;
+    if (rightSubTree.root != nullptr) {
+        root->rightChild = rightSubTree.root;
+        rightSubTree.root = nullptr;
     }
-
-    Tree leftTree;
-    leftTree.root = leftSubTree;
-
-    auto *ptrToLargestNodeInLeftSubtree = leftSubTree;
-    while (ptrToLargestNodeInLeftSubtree->hasRightChild()) {
-        ptrToLargestNodeInLeftSubtree = ptrToLargestNodeInLeftSubtree->rightChild;
+    if (root->hasRightChild()) {
+        root->rightChild->parent = root;
     }
-    leftTree.splay(ptrToLargestNodeInLeftSubtree);
-
-    leftSubTree = leftTree.root;
-    leftTree.root = nullptr;
-
-    root = leftSubTree;
-    root->rightChild = rightSubTree;
 }
 
 SymbolTable::Tree::~Tree() { delete root; }
@@ -703,7 +685,7 @@ SymbolTable::SymbolList::Scope *SymbolTable::SymbolList::getTail() const noexcep
 }
 
 SymbolTable::SymbolList::Scope::~Scope() {
-    auto *symbol = head;
+    auto *symbol = front;
     while (symbol != nullptr) {
         auto *ptr = symbol;
         symbol = symbol->next;
@@ -712,26 +694,30 @@ SymbolTable::SymbolList::Scope::~Scope() {
 }
 
 SymbolTable::Tree::TreeNode *SymbolTable::SymbolList::Scope::popFront() {
-    if (head == nullptr) {
+    if (front == nullptr) {
         return nullptr;
     }
-    auto *oldHead = head;
-    auto *oldHeadPtr = oldHead->ptr;
-    head = head->next;
-    delete oldHead;
-    return oldHeadPtr;
+    auto *oldFront = front;
+    auto *oldFrontPtr = front->ptr;
+
+    front = front->next;
+
+    if (front == nullptr) {
+        rear = nullptr;
+    }
+    delete oldFront;
+    return oldFrontPtr;
 }
 
-void SymbolTable::SymbolList::Scope::pushFront(Tree::TreeNode *node) {
-    if (head == nullptr) {
-        head = new ScopeNode();
-        head->ptr = node;
+void SymbolTable::SymbolList::Scope::pushRear(Tree::TreeNode *node) {
+    auto *newNode = new ScopeNode{ node };
+    if (rear == nullptr) {
+        front = newNode;
+        rear = front;
         return;
     }
-    auto *newNode = new ScopeNode();
-    newNode->next = head;
-    newNode->ptr = node;
-    head = newNode;
+    rear->next = newNode;
+    rear = rear->next;
 }
 
 void SymbolTable::SymbolList::addMoreScope() {
@@ -753,8 +739,18 @@ void SymbolTable::SymbolList::deleteScope() {
         delete head;
         tail = nullptr;
         head = nullptr;
+        return;
     }
     auto *oldHead = head;
     head = head->nextScope;
     delete oldHead;
+}
+
+SymbolTable::SymbolList::~SymbolList() {
+    auto *list = head;
+    while (list != nullptr) {
+        auto *ptr = list;
+        list = list->nextScope;
+        delete ptr;
+    }
 }

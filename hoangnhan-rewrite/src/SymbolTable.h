@@ -175,12 +175,13 @@ class SymbolTable {
                 Tree::TreeNode *ptr = nullptr;
                 ScopeNode *next = nullptr;
             };
-            ScopeNode *head = nullptr;
+            ScopeNode *front = nullptr;
+            ScopeNode *rear = nullptr;
 
             Scope *nextScope = nullptr;
 
         public:
-            void pushFront(Tree::TreeNode *node);
+            void pushRear(Tree::TreeNode *node);
             Tree::TreeNode *popFront();
 
             Scope() = default;
@@ -203,6 +204,8 @@ class SymbolTable {
 
         Scope *getHead() const noexcept;
         Scope *getTail() const noexcept;
+
+        ~SymbolList();
     };
 
     int currentLevel = 0;

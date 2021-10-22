@@ -1,23 +1,5 @@
 {
     "configurations": {
-        "Debug main": {
-            "adapter": "vscode-cpptools",
-            "configuration": {
-                "type": "cppdbg",
-                "request": "launch",
-                "program": "${workspaceRoot}/cmake-build/src/main",
-                "args": [
-                    "${workspaceRoot}/testcase/testN15.txt"
-                ],
-                "cwd": "${workspaceRoot}",
-                "externalConsole": false,
-                "stopAtEntry": true,
-                "MIMode": "lldb",
-                "logging": {
-                    "engineLogging": false
-                }
-            }
-        },
         "Debug main LLDB": {
             "adapter": "CodeLLDB",
             "breakpoints": {
@@ -31,7 +13,7 @@
                 "request": "launch",
                 "program": "${workspaceRoot}/cmake-build/src/main",
                 "args": [
-                    "${workspaceRoot}/testcase/testN15.txt"
+                    "${workspaceRoot}/testcase/testN23-incorrect-error.txt"
                 ],
                 "cwd":"${workspaceRoot}",
                 "externalConsole": true,
