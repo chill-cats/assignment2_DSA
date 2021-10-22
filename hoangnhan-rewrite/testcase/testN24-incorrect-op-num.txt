@@ -1,0 +1,10 @@
+INSERT m4aKx (string,string)->string false
+INSERT b (number,number)->string false
+BEGIN
+INSERT u3sK string true
+INSERT e5uK string false
+INSERT oUDvdM string false
+INSERT qN string true
+END
+INSERT d (string,string,string)->number true
+LOOKUP oUDvdM

@@ -1,0 +1,5 @@
+BEGIN
+INSERT m7xNx string true
+INSERT rtWd string false
+INSERT kWXu1 string false
+END

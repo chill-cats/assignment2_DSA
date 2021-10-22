@@ -1,0 +1,16 @@
+BEGIN
+BEGIN
+BEGIN
+INSERT rh number false
+INSERT sImaQ (number,number)->string true
+PRINT
+LOOKUP rh
+LOOKUP rh
+INSERT cbeKv6 number true
+PRINT
+INSERT mdf (string,number)->string true
+LOOKUP cbeKv6
+PRINT
+END
+ASSIGN cbeKv6 cbeKv6
+ASSIGN cbeKv6 rh

@@ -1,0 +1,13 @@
+INSERT aC number true
+BEGIN
+BEGIN
+INSERT aK string true
+INSERT x1 string true
+INSERT lX string false
+PRINT
+INSERT rt number true
+END
+PRINT
+END
+INSERT rD number false
+LOOKUP sk

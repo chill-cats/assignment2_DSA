@@ -1,0 +1,14 @@
+INSERT k string true
+BEGIN
+INSERT ykAosr number true
+INSERT bI string true
+BEGIN
+INSERT dY4F8 string true
+BEGIN
+INSERT fz string false
+END
+LOOKUP k
+BEGIN
+BEGIN
+PRINT
+ASSIGN bI z5P4HP

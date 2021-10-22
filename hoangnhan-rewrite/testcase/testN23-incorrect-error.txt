@@ -1,0 +1,24 @@
+BEGIN
+PRINT
+INSERT djUi3 string true
+ASSIGN djUi3 djUi3
+PRINT
+PRINT
+LOOKUP djUi3
+PRINT
+LOOKUP djUi3
+BEGIN
+INSERT awRoR (number,string)->string true
+PRINT
+BEGIN
+LOOKUP djUi3
+END
+LOOKUP djUi3
+INSERT h2k number false
+END
+INSERT aTfin string false
+BEGIN
+END
+END
+PRINT
+ASSIGN h2k awRoR(awRoR,aTfin)

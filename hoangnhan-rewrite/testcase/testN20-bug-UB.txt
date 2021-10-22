@@ -1,0 +1,11 @@
+INSERT gzq0 string false
+INSERT gWeSAB string false
+LOOKUP gWeSAB
+INSERT oQs string true
+BEGIN
+INSERT t number false
+INSERT sSJq number false
+PRINT
+END
+PRINT
+ASSIGN sSJq syjU

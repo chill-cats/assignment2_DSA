@@ -1,0 +1,26 @@
+INSERT uTVE number true
+LOOKUP uTVE
+INSERT az9 string false
+INSERT d28 (string,string)->string false
+PRINT
+LOOKUP d28
+BEGIN
+PRINT
+BEGIN
+INSERT eovU string false
+INSERT c string false
+PRINT
+ASSIGN c az9
+END
+PRINT
+BEGIN
+END
+BEGIN
+PRINT
+LOOKUP az9
+INSERT o string true
+PRINT
+PRINT
+PRINT
+LOOKUP o
+LOOKUP x9i

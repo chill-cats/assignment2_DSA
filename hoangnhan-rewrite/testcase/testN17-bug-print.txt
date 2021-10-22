@@ -1,0 +1,12 @@
+INSERT bM_ string true
+INSERT b3T3N (number,number,number)->number true
+PRINT
+LOOKUP bM_
+PRINT
+INSERT e1E (number,string)->number false
+BEGIN
+INSERT l number true
+LOOKUP bM_
+INSERT wy4BWO string false
+END
+PRINT

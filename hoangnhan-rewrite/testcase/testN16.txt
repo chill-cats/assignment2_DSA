@@ -1,0 +1,14 @@
+BEGIN
+INSERT m7xNx string true
+ASSIGN m7xNx m7xNx
+INSERT rtWd string false
+PRINT
+INSERT kWXu1 string false
+END
+BEGIN
+PRINT
+LOOKUP rtWd
+PRINT
+END
+ASSIGN m7xNx rtWd
+LOOKUP rtWd
