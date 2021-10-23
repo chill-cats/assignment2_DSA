@@ -1,0 +1,12 @@
+INSERT x number false
+INSERT gLQ number false
+LOOKUP gLQ
+LOOKUP x
+BEGIN
+BEGIN
+INSERT b7uStI number true
+PRINT
+PRINT
+ASSIGN b7uStI x
+PRINT
+END

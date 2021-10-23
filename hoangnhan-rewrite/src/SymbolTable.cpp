@@ -1,4 +1,160 @@
 #include "SymbolTable.h"
+#include "error.h"
+#include <iterator>
+
+namespace match {
+TokenizedParam parseInsert(StrCIter begin, StrCIter end, const std::string &line) {
+    // a string true
+    //  ^      ^
+    //  first  |
+    //         second
+    auto firstSpace = std::find(begin, end, ' ');
+    if (firstSpace == end) {
+        throw InvalidInstruction(line);
+    }
+
+    if (*begin < 'a' || 'z' < *begin) {
+        throw InvalidInstruction(line);
+    }
+
+    if (std::any_of(begin, firstSpace, [](char c) {
+            return (c < '0' || '9' < c) && (c < 'a' || 'z' < c) && (c < 'A' || 'Z' < c) && c != '_';
+        })) {
+        throw InvalidInstruction(line);
+    }
+
+    TokenizedParam param(3);
+    param[0] = { begin, firstSpace };
+
+    auto secondSpace = std::find(std::next(firstSpace), end, ' ');
+    if (secondSpace == end) {
+        throw InvalidInstruction(line);
+    }
+    param[1] = { std::next(firstSpace), secondSpace };
+
+    const char *true_WORD = "true";
+    const char *false_WORD = "false";
+    const size_t true_LEN = 4;
+    const size_t false_LEN = 5;
+
+    if (!std::equal(true_WORD, true_WORD + true_LEN, std::next(secondSpace)) && !std::equal(false_WORD, false_WORD + false_LEN, std::next(secondSpace))) {    // NOLINT
+        throw InvalidInstruction(line);
+    }
+    param[2] = { std::next(secondSpace), end };
+    return param;
+}
+TokenizedParam parseAssign(StrCIter begin, StrCIter end, const std::string &line) {
+    // a foo(12,'h e')
+    //  ^
+    //  firstspace
+    auto firstSpace = std::find(begin, end, ' ');
+    if (firstSpace == end) {
+        throw InvalidInstruction(line);
+    }
+
+    if (*begin < 'a' || 'z' < *begin) {
+        throw InvalidInstruction(line);
+    }
+
+    if (std::any_of(begin, firstSpace, [](char c) {
+            return (c < '0' || '9' < c) && (c < 'a' || 'z' < c) && (c < 'A' || 'Z' < c) && c != '_';
+        })) {
+        throw InvalidInstruction(line);
+    }
+    TokenizedParam param;
+    param[0] = { begin, firstSpace };
+    param[1] = { std::next(firstSpace), end };
+    return param;
+}
+
+MatchResult parseInstruction(const std::string &line) {    // NOLINT(readability-function-cognitive-complexity): Expected complicated function
+    // minimum size instruction:
+    // END
+    if (line.size() < 3) {
+        throw InvalidInstruction(line);
+    }
+
+    if (*line.begin() == 'I') {    // maybe INSERT, min INSERT instruction: INSERT a string true
+        const size_t MIN_INSERT_LEN = 20;
+        if (line.size() < MIN_INSERT_LEN) {
+            throw InvalidInstruction(line);
+        }
+
+        const char *INSERT_WORD = "INSERT";
+        const size_t INSERT_LEN = 6;
+        if (!std::equal(INSERT_WORD, INSERT_WORD + INSERT_LEN, line.begin())) {    // NOLINT
+            throw InvalidInstruction(line);
+        }
+        auto firstSpace = line.begin() + INSERT_LEN;
+
+        if (*firstSpace != ' ') {
+            throw InvalidInstruction(line);
+        }
+
+        MatchResult res{ InstructionType::INSERT, parseInsert(std::next(firstSpace), line.end(), line) };
+        return res;
+    }
+
+    if (*line.begin() == 'A') {    // maybe ASSIGN, min ASSIGN instruction: ASSIGN a b
+        const size_t MIN_ASSIGN_LEN = 10;
+        if (line.size() < MIN_ASSIGN_LEN) {
+            throw InvalidInstruction(line);
+        }
+        const char *ASSIGN_WORD = "ASSIGN";
+        const size_t ASSIGN_LEN = 6;
+        if (!std::equal(ASSIGN_WORD, ASSIGN_WORD + ASSIGN_LEN, line.begin())) {    // NOLINT
+            throw InvalidInstruction(line);
+        }
+        auto firstSpace = line.begin() + ASSIGN_LEN;    // NOLINT
+        if (*firstSpace != ' ') {
+            throw InvalidInstruction(line);
+        }
+        MatchResult res{ InstructionType::ASSIGN, parseAssign(std::next(firstSpace), line.end(), line) };
+    }
+
+    if (*line.begin() == 'L') {    // maybe LOOKUP, min LOOKUP instruction: LOOKUP a
+        const size_t MIN_LOOKUP_LEN = 8;
+        if (line.size() < MIN_LOOKUP_LEN) {
+            throw InvalidInstruction(line);
+        }
+        const char *LOOKUP_WORD = "LOOKUP";
+        const size_t LOOKUP_LEN = 6;
+        if (!std::equal(LOOKUP_WORD, LOOKUP_WORD + LOOKUP_LEN, line.end())) {    // NOLINT
+            throw InvalidInstruction(line);
+        }
+        auto firstSpace = line.begin() + LOOKUP_LEN;
+        if (*firstSpace != ' ') {
+            throw InvalidInstruction(line);
+        }
+        if (*std::next(firstSpace) < 'a' || 'z' < *std::next(firstSpace)) {
+            throw InvalidInstruction(line);
+        }
+        if (std::any_of(std::next(firstSpace), line.end(), [](char c) {
+                return (c < 'a' || 'z' < c) && (c < 'A' || 'Z' < c) && (c < '0' || '9' < c) && c != '_';
+            })) {
+            throw InvalidInstruction(line);
+        }
+        MatchResult res{ InstructionType::LOOKUP, TokenizedParam(1) };
+        res.params[0] = { std::next(firstSpace), line.end() };
+        return res;
+    }
+
+    if (line == "BEGIN") {
+        return { InstructionType::BEGIN, TokenizedParam() };
+    }
+
+    if (line == "END") {
+        return { InstructionType::END, TokenizedParam() };
+    }
+
+    if (line == "PRINT") {
+        return { InstructionType::PRINT, TokenizedParam() };
+    }
+
+    throw InvalidInstruction(line);
+}
+
+}    // namespace match
 
 SymbolTable::SymbolTable() {
     symbols.addMoreScope();
@@ -614,21 +770,25 @@ SymbolTable::Tree::~Tree() { delete root; }
 Symbol::Symbol(std::string name, int level, SymbolType symbolType, DataType dataType)
     : name(std::move(name)), level(level), symbolType(symbolType),
       dataType(dataType) {}
+
 bool Symbol::operator==(const Symbol &rhs) const noexcept {
     return level == rhs.level && name == rhs.name;
 }
+
 bool Symbol::operator<(const Symbol &rhs) const noexcept {
     if (level == rhs.level) {
         return name < rhs.name;
     }
     return level < rhs.level;
 }
+
 bool Symbol::operator>(const Symbol &rhs) const noexcept {
     if (level == rhs.level) {
         return name > rhs.name;
     }
     return level > rhs.level;
 }
+
 std::string Symbol::toString() const {
     return name + "//" + std::to_string(level);
 }
