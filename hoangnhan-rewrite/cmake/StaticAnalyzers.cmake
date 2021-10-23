@@ -13,8 +13,8 @@ if(ENABLE_CPPCHECK)
         --inline-suppr
         --inconclusive
         --std=c++14
-        --cppcheck-build-dir=${CMAKE_SOURCE_DIR}/cmake-build
-        --project=${CMAKE_SOURCE_DIR}/cmake-build/compile_commands.json)
+        --cppcheck-build-dir=${CMAKE_SOURCE_DIR}/${CMAKE_BINARY_DIR}
+        --project=${CMAKE_BINARY_DIR}/compile_commands.json)
     if(WARNINGS_AS_ERRORS)
       list(APPEND CMAKE_CXX_CPPCHECK --error-exitcode=2)
     endif()

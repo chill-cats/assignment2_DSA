@@ -68,5 +68,11 @@ if (ENABLE_COC_CLANGD_CONFIG)
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/.vim/coc-settings.json.in
                 ${CMAKE_CURRENT_SOURCE_DIR}/.vim/coc-settings.json)
 endif()
+
+option(USE_EXPERIMENTAL_PARSING "This turn on experimental parsing code instead of regex" OFF)
+if (USE_EXPERIMENTAL_PARSING)
+    add_definitions(-DEXPERIMENTAL_PARSING)
+endif()
+
 add_subdirectory(src)
 # add_subdirectory(src-refactor)

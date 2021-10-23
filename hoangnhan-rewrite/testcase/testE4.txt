@@ -1,0 +1,5 @@
+PRINT
+INSERT vRr (string,string)->string true
+LOOKUP vRr
+PRINT
+ASSIGN vRr vRr('S7','e')

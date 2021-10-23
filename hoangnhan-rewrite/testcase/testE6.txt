@@ -1,0 +1,5 @@
+PRINT
+INSERT y (string,string)->number true
+INSERT wx string false
+LOOKUP wx
+ASSIGN y y('Jku','ORf')

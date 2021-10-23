@@ -64,7 +64,9 @@ FixedSizeVec<T>::FixedSizeVec(size_type size) : m_data(std::make_unique<value_ty
 
 template<typename T>
 FixedSizeVec<T>::FixedSizeVec(const FixedSizeVec &other) : m_data(std::make_unique<value_type[]>(other.m_size)), m_size(other.m_size) {    // NOLINT
-    other.m_size = 0;
+    for (size_type i = 0; i < m_size; ++i) {
+        m_data[i] = other.m_data[i];
+    }
 }
 
 template<typename T>
@@ -170,24 +172,15 @@ template<typename T>
 typename FixedSizeVec<T>::const_reverse_iterator FixedSizeVec<T>::crend() const noexcept {
     return std::reverse_iterator<const_iterator>(m_data.get());
 }
+template<typename T>
+typename FixedSizeVec<T>::size_type FixedSizeVec<T>::size() const noexcept {
+    return m_size;
+}
 
-namespace match {
-using TokenizedParam = FixedSizeVec<std::string>;
-using StrCIter = std::string::const_iterator;
-
-enum class InstructionType {
-    INSERT,
-    ASSIGN,
-    LOOKUP,
-    PRINT,
-    BEGIN,
-    END,
-};
-struct MatchResult {
-    InstructionType type = InstructionType::PRINT;
-    TokenizedParam params;
-};
-}    // namespace match
+template<typename T>
+bool FixedSizeVec<T>::empty() const noexcept {
+    return size() == 0;
+}
 
 class Symbol {    // NOLINT
 public:
@@ -235,15 +228,14 @@ public:
     std::string toString() const;
 };
 
-class FunctionSymbol : public Symbol {               // NOLINT
-    const std::unique_ptr<DataType[]> paramsType;    // NOLINT
-    const int paramCount = 0;
+class FunctionSymbol : public Symbol {    // NOLINT
+    FixedSizeVec<DataType> paramsType;    // NOLINT
 
 public:
-    FunctionSymbol(std::string name, int level, DataType returnType, int paramCount, std::unique_ptr<DataType[]> &&paramsType);    // NOLINT
+    FunctionSymbol(std::string name, int level, DataType returnType, FixedSizeVec<DataType> &&paramsType);    // NOLINT
     FunctionSymbol(const FunctionSymbol &other);
 
-    bool matchParams(const std::unique_ptr<DataType[]> &paramsToMatch, unsigned long count) const;    // NOLINT
+    bool matchParams(FixedSizeVec<DataType>) const;    // NOLINT
 };
 
 class VariableSymbol : public Symbol {    // NOLINT
@@ -265,16 +257,13 @@ class SymbolTable {
     };
 
     struct FunctionDeclarationTokenizeResult {
-        std::unique_ptr<std::string[]> params;    // NOLINT
-        unsigned long paramCount = 0;
         std::string returnType;
+        FixedSizeVec<std::string> params;
     };
 
     struct FunctionCallTokenizeResult {
         std::string functionName;
-
-        std::unique_ptr<std::string[]> paramsList;    // NOLINT
-        unsigned long paramsCount = 0;
+        FixedSizeVec<std::string> params;
     };
 
     enum class TraversalMethod {

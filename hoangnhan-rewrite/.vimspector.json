@@ -13,7 +13,7 @@
                 "request": "launch",
                 "program": "${workspaceRoot}/cmake-build/src/main",
                 "args": [
-                    "${workspaceRoot}/testcase/testN23-incorrect-error.txt"
+                    "${workspaceRoot}/testcase/testE6.txt"
                 ],
                 "cwd":"${workspaceRoot}",
                 "externalConsole": true,

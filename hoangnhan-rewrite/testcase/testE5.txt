@@ -1,0 +1,3 @@
+PRINT
+INSERT mYqPTG (string)->string false
+ASSIGN mYqPTG mYqPTG('FMvw')

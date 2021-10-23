@@ -1,0 +1,1 @@
+INSERT jo (number)->number true

@@ -1,8 +1,225 @@
 #include "SymbolTable.h"
-#include "error.h"
-#include <iterator>
-
+#define EXPERIMENTAL_PARSING 1
 namespace match {
+using TokenizedParam = FixedSizeVec<std::string>;
+using StrCIter = std::string::const_iterator;
+
+enum class InstructionType {
+    INSERT,
+    ASSIGN,
+    LOOKUP,
+    PRINT,
+    BEGIN,
+    END,
+};
+
+struct MatchResult {
+    InstructionType type = InstructionType::PRINT;
+    TokenizedParam params;
+};
+
+struct TokenizedFunctionDeclaration {
+    Symbol::DataType returnType = Symbol::DataType::STRING;
+    FixedSizeVec<Symbol::DataType> paramType;
+};
+
+enum class AssignValueType {
+    LITERAL_NUMBER,
+    LITERAL_STRING,
+    IDENTIFIER,
+    FUNC_CALL
+};
+
+struct ParsedAssignValue {
+    AssignValueType type = AssignValueType::FUNC_CALL;
+    FixedSizeVec<std::string> param;    // this will have size of 0 when type is LITERAL_STRING or LITERAL_NUMBER
+                                        // size of 1 and store name of Symbol if type is IDENTIFIER
+                                        // size of min 1 and store name of function at index 0 and param at index > 0
+};
+
+ParsedAssignValue parseAssignValue(const std::string &value, const std::string &line) {    // NOLINT
+    if (value.empty() || ('A' <= *value.begin() && *value.begin() <= 'Z')) {
+        throw InvalidInstruction(line);
+    }
+
+    if (std::all_of(value.begin(), value.end(), [](char c) { return '0' <= c && c <= '9'; })) {
+        return { AssignValueType::LITERAL_NUMBER, FixedSizeVec<std::string>() };
+    }
+
+    if (value.length() >= 2 && *value.begin() == '\'' && *std::prev(value.end()) == '\'') {
+        if (std::any_of(std::next(value.begin()), std::prev(value.end()), [](char c) {
+                return (c < '0' || '9' < c) && (c < 'a' || 'z' < c) && (c < 'A' || 'Z' < c) && c != ' ';
+            })) {
+            throw InvalidInstruction(line);
+        }
+        return { AssignValueType::LITERAL_STRING, FixedSizeVec<std::string>() };
+    }
+
+    if (std::all_of(value.begin(), value.end(), [](char c) {
+            return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || ('0' <= c && c <= '9') || c == '_';
+        })) {
+        ParsedAssignValue val{ AssignValueType::IDENTIFIER, FixedSizeVec<std::string>(1) };
+        val.param[0] = value;
+        return val;
+    }
+
+    // minimal function call: a()
+    const size_t MIN_LENGTH = 3;
+    if (value.length() < MIN_LENGTH) {
+        throw InvalidInstruction(line);
+    }
+    auto openParan = std::find(value.begin(), value.end(), '(');
+    if (openParan == value.end()) {
+        throw InvalidInstruction(line);
+    }
+    auto closeParan = std::find(value.begin(), value.end(), ')');
+    if (closeParan != std::prev(value.end())) {
+        throw InvalidInstruction(line);
+    }
+    if (std::next(openParan) == closeParan) {
+        ParsedAssignValue val{ AssignValueType::FUNC_CALL, FixedSizeVec<std::string>(1) };
+        val.param[0] = { value.begin(), openParan };
+        return val;
+    }
+
+    auto commaNum = std::count_if(std::next(openParan), closeParan, [](char c) { return c == ','; });
+    auto tokenNum = commaNum + 1;
+
+    unsigned long currentIndex = 1;
+    auto currentEnd = std::next(openParan);
+    auto start = currentEnd;
+
+    ParsedAssignValue val{ AssignValueType::FUNC_CALL, FixedSizeVec<std::string>(static_cast<unsigned long>(tokenNum + 1)) };
+    val.param[0] = { value.begin(), openParan };
+
+    for (; currentEnd != closeParan; ++currentEnd) {
+        if (*currentEnd == ',') {
+            std::string token = { start, currentEnd };
+            //            std::clog << token << " Line 97\n";
+            if (token.empty() || ('A' <= *token.begin() && *token.begin() <= 'Z')) {
+                throw InvalidInstruction(line);
+            }
+            if (std::all_of(token.begin(), token.end(), [](char c) { return '0' <= c && c <= '9'; })) {    // NOLINT
+                val.param[currentIndex++] = std::move(token);
+            } else if (token.length() >= 2 && *token.begin() == '\'' && *std::prev(token.end()) == '\'') {
+                if (std::any_of(std::next(token.begin()), std::prev(token.end()), [](char c) {
+                        return (c < '0' || '9' < c) && (c < 'a' || 'z' < c) && (c < 'A' || 'Z' < c) && c != ' ';
+                    })) {
+                    throw InvalidInstruction(line);
+                }
+                val.param[currentIndex++] = std::move(token);
+            } else if (std::all_of(token.begin(), token.end(), [](char c) {
+                           return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || ('0' <= c && c <= '9') || c == '_';
+                       })) {
+                val.param[currentIndex++] = std::move(token);
+            } else {
+                throw InvalidInstruction(line);
+            }
+            ++currentEnd;
+            start = currentEnd;
+        }
+    }
+
+    if (start != closeParan) {
+        std::string token = { start, currentEnd };
+        //       std::clog << token << " Line 124\n";
+        if (token.empty() || ('A' <= *token.begin() && *token.begin() <= 'Z')) {
+            throw InvalidInstruction(line);
+        }
+        if (std::all_of(token.begin(), token.end(), [](char c) { return '0' <= c && c <= '9'; })) {    // NOLINT
+            val.param[currentIndex++] = std::move(token);
+        } else if (token.length() >= 2 && *token.begin() == '\'' && *std::prev(token.end()) == '\'') {
+            if (std::any_of(std::next(token.begin()), std::prev(token.end()), [](char c) {
+                    return (c < '0' || '9' < c) && (c < 'a' || 'z' < c) && (c < 'A' || 'Z' < c) && c != ' ';
+                })) {
+                throw InvalidInstruction(line);
+            }
+            val.param[currentIndex++] = std::move(token);
+        } else if (std::all_of(token.begin(), token.end(), [](char c) {
+                       return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || ('0' <= c && c <= '9') || c == '_';
+                   })) {
+            val.param[currentIndex++] = std::move(token);
+        } else {
+            throw InvalidInstruction(line);
+        }
+    }
+    return val;
+}
+
+TokenizedFunctionDeclaration tokenizeFunctionDeclaration(StrCIter begin, StrCIter end, const std::string &line) {
+    // min length: ()->number
+    TokenizedFunctionDeclaration decl;
+
+    const long MIN_LENGTH = 10;
+    if (end - begin < MIN_LENGTH || *begin != '(') {
+        throw InvalidInstruction(line);
+    }
+    auto closingParan = std::find(begin, end, ')');
+    if (closingParan == end) {
+        throw InvalidInstruction(line);
+    }
+    auto dash = std::next(closingParan);
+    if (dash == end || *dash != '-') {
+        throw InvalidInstruction(line);
+    }
+    auto arrow = std::next(dash);
+    if (arrow == end || *arrow != '>') {
+        throw InvalidInstruction(line);
+    }
+
+    const char *number_WORD = "number";
+    const char *string_WORD = "string";
+    const size_t word_LEN = 6;
+
+    if (std::equal(number_WORD, number_WORD + word_LEN, std::next(arrow))) {    // NOLINT
+        decl.returnType = Symbol::DataType::NUMBER;
+    } else if (std::equal(string_WORD, string_WORD + word_LEN, std::next(arrow))) {    // NOLINT
+        decl.returnType = Symbol::DataType::STRING;
+    } else {
+        throw InvalidInstruction(line);
+    }
+
+    if (std::next(begin) == closingParan) {
+        return decl;
+    }
+
+    auto commaNum = std::count_if(std::next(begin), closingParan, [](char c) { return c == ','; });
+    auto tokenNum = commaNum + 1;
+
+    // NOLINTNEXTLINE(hicpp-avoid-c-arrays, modernize-avoid-c-arrays, cppcoreguidelines-avoid-c-arrays)
+    decl.paramType = FixedSizeVec<Symbol::DataType>(static_cast<unsigned long>(tokenNum));
+    unsigned long currentIndex = 0;
+    auto currentEnd = std::next(begin);
+    auto start = currentEnd;
+
+    for (; currentEnd != closingParan; ++currentEnd) {
+        if (*currentEnd == ',') {
+            std::string token = { start, currentEnd };
+            if (token == "string") {
+                decl.paramType[currentIndex++] = Symbol::DataType::STRING;
+            } else if (token == "number") {
+                decl.paramType[currentIndex++] = Symbol::DataType::NUMBER;
+            } else {
+                throw InvalidInstruction(line);
+            }
+            ++currentEnd;
+            start = currentEnd;
+        }
+    }
+
+    if (start != closingParan) {
+        std::string token = { start, currentEnd };
+        if (token == "string") {
+            decl.paramType[currentIndex] = Symbol::DataType::STRING;
+        } else if (token == "number") {
+            decl.paramType[currentIndex] = Symbol::DataType::NUMBER;
+        } else {
+            throw InvalidInstruction(line);
+        }
+    }
+    return decl;
+}
+
 TokenizedParam parseInsert(StrCIter begin, StrCIter end, const std::string &line) {
     // a string true
     //  ^      ^
@@ -61,7 +278,7 @@ TokenizedParam parseAssign(StrCIter begin, StrCIter end, const std::string &line
         })) {
         throw InvalidInstruction(line);
     }
-    TokenizedParam param;
+    TokenizedParam param(2);
     param[0] = { begin, firstSpace };
     param[1] = { std::next(firstSpace), end };
     return param;
@@ -110,6 +327,7 @@ MatchResult parseInstruction(const std::string &line) {    // NOLINT(readability
             throw InvalidInstruction(line);
         }
         MatchResult res{ InstructionType::ASSIGN, parseAssign(std::next(firstSpace), line.end(), line) };
+        return res;
     }
 
     if (*line.begin() == 'L') {    // maybe LOOKUP, min LOOKUP instruction: LOOKUP a
@@ -119,7 +337,7 @@ MatchResult parseInstruction(const std::string &line) {    // NOLINT(readability
         }
         const char *LOOKUP_WORD = "LOOKUP";
         const size_t LOOKUP_LEN = 6;
-        if (!std::equal(LOOKUP_WORD, LOOKUP_WORD + LOOKUP_LEN, line.end())) {    // NOLINT
+        if (!std::equal(LOOKUP_WORD, LOOKUP_WORD + LOOKUP_LEN, line.begin())) {    // NOLINT
             throw InvalidInstruction(line);
         }
         auto firstSpace = line.begin() + LOOKUP_LEN;
@@ -178,6 +396,42 @@ void SymbolTable::run(const std::string &filename) {
 }
 
 std::string SymbolTable::processLine(const std::string &line) {
+#ifdef EXPERIMENTAL_PARSING
+    auto instr = match::parseInstruction(line);
+    switch (instr.type) {
+    case match::InstructionType::INSERT: {
+        bool isStatic = instr.params[2] == "true";
+        printFlag = true;
+
+        auto result = insert(instr.params[0], instr.params[1], isStatic, line);
+        return std::to_string(result.compNum) + ' ' + std::to_string(result.splayNum);
+    }
+    case match::InstructionType::ASSIGN: {
+        const auto &name = instr.params[0];
+        const auto &value = instr.params[1];
+        printFlag = true;
+
+        auto result = assign(name, value, line);
+        return std::to_string(result.compNum) + ' ' + std::to_string(result.splayNum);
+    }
+    case match::InstructionType::LOOKUP: {
+        printFlag = true;
+        return std::to_string(lookup(instr.params[0], line));
+    }
+    case match::InstructionType::BEGIN:
+        begin();
+        return "";
+    case match::InstructionType::END:
+        end();
+        return "";
+    case match::InstructionType::PRINT: {
+        auto str = tree.toString(TraversalMethod::PREORDER);
+        printFlag = true;
+        return str;
+    }
+    }
+
+#else
     static const std::regex INSERT_REGEX{
         R"(^INSERT ([a-z]\w*) (string|number|\((?:|(?:number|string)(?:,(?:number|string))*)\)->(?:number|string)) (true|false)$)"
     };
@@ -224,14 +478,74 @@ std::string SymbolTable::processLine(const std::string &line) {
         return std::to_string(result.compNum) + ' ' + std::to_string(result.splayNum);
     }
     throw InvalidInstruction(line);
+#endif
 }
 
-SymbolTable::OpResult SymbolTable::assign(const std::string &name,
-    const std::string &value,
-    const std::string &line) {
-    auto valueType = resolveValueType(value);
+SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::string &value, const std::string &line) {    // NOLINT
     OpResult result;
 
+#ifdef EXPERIMENTAL_PARSING
+    auto val = match::parseAssignValue(value, line);
+    switch (val.type) {
+    case match::AssignValueType::LITERAL_NUMBER: {
+        auto typeOfAssignee = resolveType(name, result, line);
+        if (typeOfAssignee != Symbol::DataType::NUMBER) {
+            throw TypeMismatch(line);
+        }
+        return result;
+    }
+    case match::AssignValueType::LITERAL_STRING: {
+        auto typeOfAssignee = resolveType(name, result, line);
+        if (typeOfAssignee != Symbol::DataType::STRING) {
+            throw TypeMismatch(line);
+        }
+        return result;
+    }
+    case match::AssignValueType::IDENTIFIER: {
+        auto typeOfValue = resolveType(val.param[0], result, line);
+        auto typeOfAssignee = resolveType(name, result, line);
+
+        if (typeOfAssignee != typeOfValue) {
+            throw TypeMismatch(line);
+        }
+
+        return result;
+    }
+    case match::AssignValueType::FUNC_CALL: {
+        auto *functionNode = findSymbolWithoutSplay(val.param[0], &result);
+        if (functionNode == nullptr) {
+            throw Undeclared(line);
+        }
+        if (functionNode->data->getSymbolType() != Symbol::SymbolType::FUNCTION) {
+            throw TypeMismatch(line);
+        }
+        result += tree.splay(functionNode);
+        const auto *functionNodeReal = static_cast<FunctionSymbol *>(functionNode->data.get());    // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast): functionNode is guranteed to be FunctionSymbol
+
+        FixedSizeVec<Symbol::DataType> paramsType(val.param.size() - 1);
+
+        // resolve type of each param
+        for (auto i = 1UL; i < val.param.size(); i++) {
+            paramsType[i - 1] =
+                resolveType(val.param[i], result, line);
+        }
+
+        // then match the type of param to type of function
+        if (!functionNodeReal->matchParams(paramsType)) {
+            throw TypeMismatch(line);
+        }
+
+        auto assigneeType{ resolveType(name, result, line) };
+
+        if (assigneeType != functionNode->data->getDataType()) {
+            throw TypeMismatch(line);
+        }
+        return result;
+    }
+    }
+    throw InvalidInstruction(line);
+#else
+    auto valueType = resolveValueType(value);
     if (valueType == ValueType::NUMBER) {
         auto typeOfAssignee = resolveType(name, result, line);
         if (typeOfAssignee != Symbol::DataType::NUMBER) {
@@ -282,8 +596,7 @@ SymbolTable::OpResult SymbolTable::assign(const std::string &name,
         }
 
         // then match the type of param to type of function
-        if (!functionSymbol->matchParams(paramsType,
-                tokenizedFunctionCall.paramsCount)) {
+        if (!functionSymbol->matchParams(paramsType, tokenizedFunctionCall.paramsCount)) {
             throw TypeMismatch(line);
         }
 
@@ -295,8 +608,9 @@ SymbolTable::OpResult SymbolTable::assign(const std::string &name,
         return result;
     }
     throw std::logic_error("Cannot reach here!");
+#endif
 }
-
+/*
 SymbolTable::FunctionCallTokenizeResult
     SymbolTable::tokenizeFunctionCall(const std::string &functionCall) {
 
@@ -313,9 +627,7 @@ SymbolTable::FunctionCallTokenizeResult
         tokenizedParams.size };
 }
 
-SymbolTable::FunctionDeclarationTokenizeResult
-    SymbolTable::tokenizeFunctionDeclaration(
-        const std::string &functionDeclaration) {
+SymbolTable::FunctionDeclarationTokenizeResult SymbolTable::tokenizeFunctionDeclaration(const std::string &functionDeclaration) {
     auto firstBracket{ functionDeclaration.begin() };
     auto lastBracket{
         std::find(functionDeclaration.begin(), functionDeclaration.end(), ')')
@@ -325,12 +637,12 @@ SymbolTable::FunctionDeclarationTokenizeResult
 
     auto arrow = std::find(lastBracket, functionDeclaration.end(), '>');
 
-    return { std::move(paramsTokenizeResult.data), paramsTokenizeResult.size, std::string{ arrow + 1, functionDeclaration.end() } };
+    return { std::string{ arrow + 1, functionDeclaration.end() }, paramsTokenizeResult };
 }
+*/
 
-SymbolTable::TokenizeResult
-    SymbolTable::tokenizeParams(std::string::const_iterator start,
-        std::string::const_iterator end) {
+SymbolTable::TokenizeResult SymbolTable::tokenizeParams(std::string::const_iterator start,
+    std::string::const_iterator end) {
     if (start == end) {
         return {};
     }
@@ -488,6 +800,24 @@ SymbolTable::OpResult SymbolTable::insert(const std::string &name, const std::st
     OpResult result;
     std::unique_ptr<Symbol> newData;
 
+#ifdef EXPERIMENTAL_PARSING
+    if (value == "string") {
+        const auto type = Symbol::DataType::STRING;
+        newData = std::make_unique<VariableSymbol>(name, targetLevel, type);
+
+    } else if (value == "number") {
+        const auto type = Symbol::DataType::NUMBER;
+        newData = std::make_unique<VariableSymbol>(name, targetLevel, type);
+    } else {
+        if (targetLevel != 0) {
+            throw InvalidDeclaration(line);
+        }
+        auto tokenizedDeclaration = match::tokenizeFunctionDeclaration(value.begin(), value.end(), line);
+        newData = std::make_unique<FunctionSymbol>(name, targetLevel, tokenizedDeclaration.returnType, std::move(tokenizedDeclaration.paramType));
+    }
+
+#else
+
     if (value == "string" || value == "number") {
         const Symbol::DataType type =
             value == "string" ? Symbol::DataType::STRING : Symbol::DataType::NUMBER;
@@ -495,12 +825,10 @@ SymbolTable::OpResult SymbolTable::insert(const std::string &name, const std::st
 
     } else {    // if function
         if (targetLevel != 0) {
-            throw InvalidDeclaration(
-                line);    // cannot declare a function in level other than 0
+            throw InvalidDeclaration(line);    // cannot declare a function in level other than 0
         }
 
-        const auto tokenizedFunctionDeclaration =
-            tokenizeFunctionDeclaration(value);
+        const auto tokenizedFunctionDeclaration = tokenizeFunctionDeclaration(value);
 
         const auto &paramCount = tokenizedFunctionDeclaration.paramCount;
         const auto &params = tokenizedFunctionDeclaration.params;
@@ -520,6 +848,7 @@ SymbolTable::OpResult SymbolTable::insert(const std::string &name, const std::st
 
         newData = std::make_unique<FunctionSymbol>(name, targetLevel, returnType, static_cast<int>(paramCount), std::move(param));
     }
+#endif
 
     auto *ptr = tree.root;
     TreeNode *ptrParent = nullptr;
@@ -800,23 +1129,13 @@ VariableSymbol::VariableSymbol(const VariableSymbol &other)
     : Symbol(other.getName(), other.getLevel(), SymbolType::VARIABLE, other.getDataType()) {}
 
 // NOLINTNEXTLINE(hicpp-avoid-c-arrays, modernize-avoid-c-arrays, cppcoreguidelines-avoid-c-arrays)
-FunctionSymbol::FunctionSymbol(std::string name, int level, DataType returnType, int paramCount, std::unique_ptr<DataType[]> &&paramsType)
+FunctionSymbol::FunctionSymbol(std::string name, int level, DataType returnType, FixedSizeVec<DataType> &&paramsType)
     : Symbol(std::move(name), level, SymbolType::FUNCTION, returnType),
-      paramsType(std::move(paramsType)), paramCount(paramCount) {}
+      paramsType(paramsType) {}
 
 // NOLINTNEXTLINE(hicpp-avoid-c-arrays, modernize-avoid-c-arrays, cppcoreguidelines-avoid-c-arrays)
-bool FunctionSymbol::matchParams(const std::unique_ptr<DataType[]> &paramsToMatch,
-    unsigned long count) const {
-    if (paramCount != static_cast<int>(count)) {
-        return false;
-    }
-
-    for (int i = 0; i < static_cast<int>(count); i++) {
-        if (paramsToMatch[static_cast<unsigned long>(i)] != paramsType[static_cast<unsigned long>(i)]) {
-            return false;
-        }
-    }
-    return true;
+bool FunctionSymbol::matchParams(FixedSizeVec<DataType> paramsToMatch) const {
+    return std::equal(paramsToMatch.begin(), paramsToMatch.end(), paramsType.begin(), paramsType.end());
 }
 
 SymbolTable::Tree::TreeNode::TreeNode(std::unique_ptr<Symbol> &&data)

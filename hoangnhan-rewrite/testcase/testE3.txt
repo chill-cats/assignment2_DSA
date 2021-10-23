@@ -1,0 +1,14 @@
+INSERT zaXC number false
+PRINT
+PRINT
+ASSIGN zaXC zaXC
+INSERT m9Ag (string)->string false
+INSERT pjVCf number true
+ASSIGN zaXC m9Ag('0QsGC')
+PRINT
+BEGIN
+BEGIN
+LOOKUP zaXC
+PRINT
+END
+ASSIGN pjVCf z
