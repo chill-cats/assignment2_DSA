@@ -425,7 +425,7 @@ std::string SymbolTable::processLine(const std::string &line) {
         return "";
     case match::InstructionType::PRINT: {
         auto str = tree.toString(TraversalMethod::PREORDER);
-        printFlag = true;
+        printFlag = !str.empty();
         return str;
     }
     }
@@ -468,19 +468,15 @@ SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::st
             throw TypeMismatch(line);
         }
         result += tree.splay(functionNode);
-        const auto *functionNodeReal = static_cast<FunctionSymbol *>(functionNode->data.get());    // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast): functionNode is guranteed to be FunctionSymbol
 
-        FixedSizeVec<Symbol::DataType> paramsType(val.param.size() - 1);
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast): functionNode is guranteed to be FunctionSymbol
+        const auto *functionNodeReal = static_cast<FunctionSymbol *>(functionNode->data.get());
 
-        // resolve type of each param
         for (auto i = 1UL; i < val.param.size(); i++) {
-            paramsType[i - 1] =
-                resolveType(val.param[i], result, line);
-        }
-
-        // then match the type of param to type of function
-        if (!functionNodeReal->matchParams(paramsType)) {
-            throw TypeMismatch(line);
+            auto paramType = resolveType(val.param[i], result, line);
+            if (functionNodeReal->getArgumentType()[i - 1] != paramType) {
+                throw TypeMismatch(line);
+            }
         }
 
         auto assigneeType{ resolveType(name, result, line) };
@@ -930,14 +926,12 @@ VariableSymbol::VariableSymbol(const std::string &name, int level, DataType data
 VariableSymbol::VariableSymbol(const VariableSymbol &other)
     : Symbol(other.getName(), other.getLevel(), SymbolType::VARIABLE, other.getDataType()) {}
 
-// NOLINTNEXTLINE(hicpp-avoid-c-arrays, modernize-avoid-c-arrays, cppcoreguidelines-avoid-c-arrays)
 FunctionSymbol::FunctionSymbol(std::string name, int level, DataType returnType, FixedSizeVec<DataType> &&paramsType)
     : Symbol(std::move(name), level, SymbolType::FUNCTION, returnType),
       paramsType(paramsType) {}
 
-// NOLINTNEXTLINE(hicpp-avoid-c-arrays, modernize-avoid-c-arrays, cppcoreguidelines-avoid-c-arrays)
-bool FunctionSymbol::matchParams(FixedSizeVec<DataType> paramsToMatch) const {
-    return std::equal(paramsToMatch.begin(), paramsToMatch.end(), paramsType.begin(), paramsType.end());
+const FixedSizeVec<Symbol::DataType> &FunctionSymbol::getArgumentType() const {
+    return paramsType;
 }
 
 SymbolTable::Tree::TreeNode::TreeNode(std::unique_ptr<Symbol> &&data)

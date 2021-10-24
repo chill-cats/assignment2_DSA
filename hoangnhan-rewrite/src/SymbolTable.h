@@ -232,14 +232,14 @@ public:
     std::string toString() const;
 };
 
-class FunctionSymbol : public Symbol {    // NOLINT
-    FixedSizeVec<DataType> paramsType;    // NOLINT
+class FunctionSymbol : public Symbol {          // NOLINT
+    const FixedSizeVec<DataType> paramsType;    // NOLINT
 
 public:
     FunctionSymbol(std::string name, int level, DataType returnType, FixedSizeVec<DataType> &&paramsType);    // NOLINT
     FunctionSymbol(const FunctionSymbol &other);
 
-    bool matchParams(FixedSizeVec<DataType>) const;    // NOLINT
+    const FixedSizeVec<DataType> &getArgumentType() const;
 };
 
 class VariableSymbol : public Symbol {    // NOLINT
