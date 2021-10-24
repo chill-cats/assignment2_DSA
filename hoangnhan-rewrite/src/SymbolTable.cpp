@@ -471,7 +471,9 @@ SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::st
 
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast): functionNode is guranteed to be FunctionSymbol
         const auto *functionNodeReal = static_cast<FunctionSymbol *>(functionNode->data.get());
-
+        if (val.param.size() - 1 != functionNodeReal->getArgumentType().size()) {
+            throw TypeMismatch(line);
+        }
         for (auto i = 1UL; i < val.param.size(); i++) {
             auto paramType = resolveType(val.param[i], result, line);
             if (functionNodeReal->getArgumentType()[i - 1] != paramType) {
