@@ -14,7 +14,7 @@ void test(const string &filename) {
     auto end = std::chrono::high_resolution_clock::now();
     std::cout.flush();
     std::clog << "\n============\nTime: ";
-    std::clog << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << "ms\n";
+    std::clog << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() << "µs\n";
 }
 
 int main(int argc, char **argv) {

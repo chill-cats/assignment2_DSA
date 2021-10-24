@@ -1,0 +1,15 @@
+BEGIN
+INSERT cT string true
+LOOKUP cT
+BEGIN
+INSERT z48rnV string false
+LOOKUP z48rnV
+PRINT
+ASSIGN cT cT
+LOOKUP z48rnV
+LOOKUP z48rnV
+INSERT x (number,number,string)->number true
+ASSIGN z48rnV z48rnV
+END
+END
+ASSIGN z48rnV x(cT,207,z48rnV)

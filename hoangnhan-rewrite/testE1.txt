@@ -1,0 +1,16 @@
+INSERT vHg8 number true
+BEGIN
+PRINT
+LOOKUP vHg8
+INSERT ia string false
+PRINT
+PRINT
+END
+INSERT nQRyFc (string,string)->string false
+BEGIN
+INSERT mFcXS number false
+PRINT
+INSERT c0 number false
+ASSIGN mFcXS mFcXS
+ASSIGN vHg8 nQRyFc(mFcXS,ia)
+ASSIGN ut c0

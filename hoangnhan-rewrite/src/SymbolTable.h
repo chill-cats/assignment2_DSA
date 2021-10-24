@@ -221,9 +221,13 @@ public:
     inline DataType getDataType() const noexcept {
         return dataType;
     }
-    virtual bool operator==(const Symbol &rhs) const noexcept;
-    virtual bool operator<(const Symbol &rhs) const noexcept;
-    virtual bool operator>(const Symbol &rhs) const noexcept;
+    bool operator==(const Symbol &rhs) const noexcept;
+    bool operator<(const Symbol &rhs) const noexcept;
+    bool operator>(const Symbol &rhs) const noexcept;
+
+    bool equal(const std::string &nameToComp, int levelToComp) const noexcept;
+    bool lessThan(const std::string &nameToComp, int levelToComp) const noexcept;
+    bool greaterThan(const std::string &nameToComp, int levelToComp) const noexcept;
 
     std::string toString() const;
 };

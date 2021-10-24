@@ -738,16 +738,15 @@ int SymbolTable::lookup(const std::string &name, const std::string &line) {    /
 
 SymbolTable::Tree::TreeNode *
     SymbolTable::Tree::findSymbolWithoutSplay(const std::string &name, int level, OpResult *result) const noexcept {
-    VariableSymbol symbolToSearchFor(name, level, Symbol::DataType::STRING);
     auto *ptr = root;
     for (;;) {
-        if (symbolToSearchFor == *static_cast<Symbol *>(ptr->data.get())) {
+        if (ptr->data->equal(name, level)) {
             if (result != nullptr) {
                 result->compNum++;
             }
             return ptr;
         }
-        if (symbolToSearchFor < *static_cast<Symbol *>(ptr->data.get())) {
+        if (ptr->data->greaterThan(name, level)) {
             if (result != nullptr) {
                 result->compNum++;
             }
@@ -769,9 +768,7 @@ SymbolTable::Tree::TreeNode *
     }
 }
 
-SymbolTable::Tree::TreeNode *
-    SymbolTable::findSymbolWithoutSplay(const std::string &name,
-        OpResult *result) const {
+SymbolTable::Tree::TreeNode *SymbolTable::findSymbolWithoutSplay(const std::string &name, OpResult *result) const {
     if (tree.root == nullptr) {
         return nullptr;
     }
@@ -1116,6 +1113,24 @@ bool Symbol::operator>(const Symbol &rhs) const noexcept {
         return name > rhs.name;
     }
     return level > rhs.level;
+}
+
+bool Symbol::equal(const std::string &nameToComp, int levelToComp) const noexcept {
+    return level == levelToComp && name == nameToComp;
+}
+
+bool Symbol::lessThan(const std::string &nameToComp, int levelToComp) const noexcept {
+    if (level == levelToComp) {
+        return name < nameToComp;
+    }
+    return level < levelToComp;
+}
+
+bool Symbol::greaterThan(const std::string &nameToComp, int levelToComp) const noexcept {
+    if (level == levelToComp) {
+        return name > nameToComp;
+    }
+    return level > levelToComp;
 }
 
 std::string Symbol::toString() const {
