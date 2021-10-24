@@ -50,8 +50,10 @@ void SymbolTable::run(const string& filename) {
                 level--;
 
             } else if (s == "PRINT") {
-                splay_tree.print(splay_tree.root);
-                cout << endl;
+                if (splay_tree.root != nullptr) {
+                    splay_tree.print(splay_tree.root);
+                    cout << endl;
+                }
 
             } else if (regex_match(s, data, lookup)) {
                 string out = splay_tree.look_up(data[1], level, 0);
@@ -353,6 +355,9 @@ string Tree::assign_tree(LinkedLisst& lisst, const string& ID, const string& val
         string out = this->look_up(value, level, num_com);      //lookup ID_value node
         if (out == "no") {
             return "undeclared";
+        }
+        if (this->root->data.type != "string" && this->root->data.type != "number") {
+            return "mismatch";
         }
         num_com+=this->root->data.num_com;
         num_splay+=this->root->data.num_splay;

@@ -1,21 +1,31 @@
-INSERT aijfpqwru string false
-INSERT b942jlna string false
+INSERT cD string true
+ASSIGN cD cD
 BEGIN
-INSERT canarjqwp string true
-INSERT dfhaposhfw number false
+PRINT
+INSERT jJK string false
+ASSIGN jJK jJK
 BEGIN
-INSERT daruqpwj (number,number,string,number,string,number,string,number,string,number)->string true
-INSERT gjaupqr number true
-INSERT p8urq string false
+ASSIGN jJK jJK
+LOOKUP cD
+ASSIGN jJK jJK
 BEGIN
-ASSIGN p8urq daruqpwj(123,dfhaposhfw,canarjqwp,842873124,'heloo wrold',gjaupqr,'tommy tran',18329348,aijfpqwru,dfhaposhfw)
-END
-INSERT jfalfo string false
+INSERT w number false
+LOOKUP w
 BEGIN
-INSERT rwfjal number true
-INSERT fas (string,number)->number true
-INSERT fjafwerb number false
-ASSIGN fjafwerb fas(jfalfo,rwfjal)
+LOOKUP w
+PRINT
 END
+PRINT
 END
+BEGIN
+BEGIN
 END
+BEGIN
+PRINT
+INSERT uN number false
+PRINT
+END
+LOOKUP w
+END
+LOOKUP uN
+BEGIN
