@@ -186,7 +186,6 @@ TokenizedFunctionDeclaration tokenizeFunctionDeclaration(StrCIter begin, StrCIte
     auto commaNum = std::count_if(std::next(begin), closingParan, [](char c) { return c == ','; });
     auto tokenNum = commaNum + 1;
 
-    // NOLINTNEXTLINE(hicpp-avoid-c-arrays, modernize-avoid-c-arrays, cppcoreguidelines-avoid-c-arrays)
     decl.paramType = FixedSizeVec<Symbol::DataType>(static_cast<unsigned long>(tokenNum));
     unsigned long currentIndex = 0;
     auto currentEnd = std::next(begin);
@@ -429,6 +428,7 @@ std::string SymbolTable::processLine(const std::string &line) {
         return str;
     }
     }
+    throw std::logic_error("Cannot reach here");
 }
 
 SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::string &value, const std::string &line) {    // NOLINT
@@ -598,7 +598,7 @@ SymbolTable::Tree::TreeNode *SymbolTable::findSymbolWithoutSplay(const std::stri
     while (node == nullptr && level >= 0) {
         node = tree.findSymbolWithoutSplay(name, level, &tempResult);
         level--;
-        if (node == nullptr) {    // if not found, reset op counter
+        if (node == nullptr) {    // if not found, reSet op counter
             tempResult = {};
         }
     }
@@ -1024,10 +1024,10 @@ void SymbolTable::SymbolList::deleteScope() {
 }
 
 SymbolTable::SymbolList::~SymbolList() {
-    auto *list = head;
-    while (list != nullptr) {
-        auto *ptr = list;
-        list = list->nextScope;
+    auto *current = head;
+    while (current != nullptr) {
+        auto *ptr = current;
+        current = current->nextScope;
         delete ptr;
     }
 }

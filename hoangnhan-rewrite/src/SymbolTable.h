@@ -1,7 +1,6 @@
 #ifndef SYMBOLTABLE_H
 #define SYMBOLTABLE_H
 #include "main.h"
-#include <iterator>
 
 template<typename T>
 class FixedSizeVec {
@@ -19,7 +18,7 @@ public:
     using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
 private:
-    std::unique_ptr<value_type[]> m_data;    // NOLINT(cppcoreguidelines-avoid-c-arrays,modernize-avoid-c-arrays,hicpp-avoid-c-arrays): We are not allow to use vector
+    std::unique_ptr<value_type[]> m_data;
     size_type m_size = 0;
 
 public:
@@ -381,6 +380,11 @@ class SymbolTable {
 
         Scope *getHead() const noexcept;
         Scope *getTail() const noexcept;
+        SymbolList() = default;
+        SymbolList(const SymbolList &other) = delete;
+        SymbolList(SymbolList &&other) = delete;
+        SymbolList &operator=(const SymbolList &other) = delete;
+        SymbolList &operator=(SymbolList &&other) = delete;
 
         ~SymbolList();
     };
