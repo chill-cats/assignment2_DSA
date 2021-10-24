@@ -1,3 +1,3 @@
-/home/ngmkhanh/CLionProjects/ass2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/ngmkhanh/CLionProjects/ass2/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/ngmkhanh/CLionProjects/ass2/cmake-build-debug/CMakeFiles/ass2.dir
+C:/Users/Dell/CLionProjects/ass2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Dell/CLionProjects/ass2/cmake-build-debug/CMakeFiles/ass2.dir
+C:/Users/Dell/CLionProjects/ass2/cmake-build-debug/CMakeFiles/rebuild_cache.dir

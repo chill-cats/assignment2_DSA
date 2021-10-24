@@ -1,0 +1,21 @@
+INSERT aijfpqwru string false
+INSERT b942jlna string false
+BEGIN
+INSERT canarjqwp string true
+INSERT dfhaposhfw number false
+BEGIN
+INSERT daruqpwj (number,number,string,number,string,number,string,number,string,number)->string true
+INSERT gjaupqr number true
+INSERT p8urq string false
+BEGIN
+ASSIGN p8urq daruqpwj(123,dfhaposhfw,canarjqwp,842873124,'heloo wrold',gjaupqr,'tommy tran',18329348,aijfpqwru,dfhaposhfw)
+END
+INSERT jfalfo string false
+BEGIN
+INSERT rwfjal number true
+INSERT fas (string,number)->number true
+INSERT fjafwerb number false
+ASSIGN fjafwerb fas(jfalfo,rwfjal)
+END
+END
+END

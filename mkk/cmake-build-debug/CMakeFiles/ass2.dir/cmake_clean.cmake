@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/ass2.dir/main.cpp.o"
-  "ass2"
+  "CMakeFiles/ass2.dir/main.cpp.obj"
+  "ass2.exe"
+  "ass2.exe.manifest"
+  "ass2.lib"
   "ass2.pdb"
 )
 
