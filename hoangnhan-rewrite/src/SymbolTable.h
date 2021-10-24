@@ -411,10 +411,6 @@ class SymbolTable {
 
     OpResult assign(const std::string &name, const std::string &value, const std::string &line);
 
-    static TokenizeResult tokenizeParams(std::string::const_iterator start, std::string::const_iterator end);
-    static FunctionDeclarationTokenizeResult tokenizeFunctionDeclaration(const std::string &functionDeclaration);
-    static FunctionCallTokenizeResult tokenizeFunctionCall(const std::string &functionCall);
-
 public:
     SymbolTable();
     void run(const string &filename);

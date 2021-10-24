@@ -1,5 +1,5 @@
 #include "SymbolTable.h"
-#define EXPERIMENTAL_PARSING 1
+
 namespace match {
 using TokenizedParam = FixedSizeVec<std::string>;
 using StrCIter = std::string::const_iterator;
@@ -46,7 +46,7 @@ ParsedAssignValue parseAssignValue(const std::string &value, const std::string &
         return { AssignValueType::LITERAL_NUMBER, FixedSizeVec<std::string>() };
     }
 
-    if (value.length() >= 2 && *value.begin() == '\'' && *std::prev(value.end()) == '\'') {
+    if (value.length() >= 2 && *value.begin() == '\'' && *value.rbegin() == '\'') {
         if (std::any_of(std::next(value.begin()), std::prev(value.end()), [](char c) {
                 return (c < '0' || '9' < c) && (c < 'a' || 'z' < c) && (c < 'A' || 'Z' < c) && c != ' ';
             })) {
@@ -101,7 +101,7 @@ ParsedAssignValue parseAssignValue(const std::string &value, const std::string &
             }
             if (std::all_of(token.begin(), token.end(), [](char c) { return '0' <= c && c <= '9'; })) {    // NOLINT
                 val.param[currentIndex++] = std::move(token);
-            } else if (token.length() >= 2 && *token.begin() == '\'' && *std::prev(token.end()) == '\'') {
+            } else if (token.length() >= 2 && *token.begin() == '\'' && *token.rbegin() == '\'') {
                 if (std::any_of(std::next(token.begin()), std::prev(token.end()), [](char c) {
                         return (c < '0' || '9' < c) && (c < 'a' || 'z' < c) && (c < 'A' || 'Z' < c) && c != ' ';
                     })) {
@@ -128,7 +128,7 @@ ParsedAssignValue parseAssignValue(const std::string &value, const std::string &
         }
         if (std::all_of(token.begin(), token.end(), [](char c) { return '0' <= c && c <= '9'; })) {    // NOLINT
             val.param[currentIndex++] = std::move(token);
-        } else if (token.length() >= 2 && *token.begin() == '\'' && *std::prev(token.end()) == '\'') {
+        } else if (token.length() >= 2 && *token.begin() == '\'' && *token.rbegin() == '\'') {
             if (std::any_of(std::next(token.begin()), std::prev(token.end()), [](char c) {
                     return (c < '0' || '9' < c) && (c < 'a' || 'z' < c) && (c < 'A' || 'Z' < c) && c != ' ';
                 })) {
@@ -396,7 +396,6 @@ void SymbolTable::run(const std::string &filename) {
 }
 
 std::string SymbolTable::processLine(const std::string &line) {
-#ifdef EXPERIMENTAL_PARSING
     auto instr = match::parseInstruction(line);
     switch (instr.type) {
     case match::InstructionType::INSERT: {
@@ -430,61 +429,10 @@ std::string SymbolTable::processLine(const std::string &line) {
         return str;
     }
     }
-
-#else
-    static const std::regex INSERT_REGEX{
-        R"(^INSERT ([a-z]\w*) (string|number|\((?:|(?:number|string)(?:,(?:number|string))*)\)->(?:number|string)) (true|false)$)"
-    };
-    static const std::regex LOOKUP_REGEX{ R"(^LOOKUP ([a-z]\w*)$)" };
-    static const std::regex ASSIGN_REGEX{
-        R"(^ASSIGN ([a-z]\w*) (\d+|'[\dA-Za-z\s]*'|[a-z]\w*|[a-z]\w*\((?:|(?:\d+|'[\dA-Za-z\s]*'|[a-z]\w*)(?:,(?:\d+|'[\dA-Za-z\s]*'|[a-z]\w*))*)\))$)"
-    };
-
-    std::smatch tokens;
-    if (std::regex_search(line, tokens, INSERT_REGEX)) {
-        const auto &name = tokens[1];
-        const auto &value = tokens[2];
-        const bool isStatic = tokens[3] == "true";
-
-        printFlag = true;
-        auto result = insert(name, value, isStatic, line);
-        return std::to_string(result.compNum) + ' ' + std::to_string(result.splayNum);
-    }
-
-    if (line == "BEGIN") {
-        begin();
-        return "";
-    }
-    if (line == "END") {
-        end();
-        return "";
-    }
-    if (line == "PRINT") {
-        auto str = tree.toString(TraversalMethod::PREORDER);
-        printFlag = true;
-        return str;
-    }
-
-    if (std::regex_search(line, tokens, LOOKUP_REGEX)) {
-        const auto &name = tokens[1];
-        printFlag = true;
-        return std::to_string(lookup(name, line));
-    }
-    if (std::regex_search(line, tokens, ASSIGN_REGEX)) {
-        const auto &name = tokens[1];
-        const auto &value = tokens[2];
-        auto result = assign(name, value, line);
-        printFlag = true;
-        return std::to_string(result.compNum) + ' ' + std::to_string(result.splayNum);
-    }
-    throw InvalidInstruction(line);
-#endif
 }
 
 SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::string &value, const std::string &line) {    // NOLINT
     OpResult result;
-
-#ifdef EXPERIMENTAL_PARSING
     auto val = match::parseAssignValue(value, line);
     switch (val.type) {
     case match::AssignValueType::LITERAL_NUMBER: {
@@ -544,132 +492,6 @@ SymbolTable::OpResult SymbolTable::assign(const std::string &name, const std::st
     }
     }
     throw InvalidInstruction(line);
-#else
-    auto valueType = resolveValueType(value);
-    if (valueType == ValueType::NUMBER) {
-        auto typeOfAssignee = resolveType(name, result, line);
-        if (typeOfAssignee != Symbol::DataType::NUMBER) {
-            throw TypeMismatch(line);
-        }
-        return result;
-    }
-    if (valueType == ValueType::STRING) {
-        auto typeOfAssignee = resolveType(name, result, line);
-        if (typeOfAssignee != Symbol::DataType::STRING) {
-            throw TypeMismatch(line);
-        }
-        return result;
-    }
-    if (valueType == ValueType::SYMBOL) {
-        auto typeOfValue = resolveType(value, result, line);
-        auto typeOfAssignee = resolveType(name, result, line);
-
-        if (typeOfAssignee != typeOfValue) {
-            throw TypeMismatch(line);
-        }
-
-        return result;
-    }
-    if (valueType == ValueType::FUNCTION_CALL) {
-        const auto tokenizedFunctionCall{ tokenizeFunctionCall(value) };
-
-        auto *functionNode =
-            findSymbolWithoutSplay(tokenizedFunctionCall.functionName, &result);
-        if (functionNode == nullptr) {
-            throw Undeclared(line);
-        }
-        if (functionNode->data->getSymbolType() != Symbol::SymbolType::FUNCTION) {
-            throw TypeMismatch(line);
-        }
-        result += tree.splay(functionNode);
-
-        const auto *functionSymbol =
-            static_cast<FunctionSymbol *>(tree.root->data.get());    // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast): functionNode is guranteed to be FunctionSymbol
-
-        // NOLINTNEXTLINE(hicpp-avoid-c-arrays, modernize-avoid-c-arrays, cppcoreguidelines-avoid-c-arrays)
-        std::unique_ptr<Symbol::DataType[]> paramsType = std::make_unique<Symbol::DataType[]>(tokenizedFunctionCall.paramsCount);
-
-        // resolve type of each param
-        for (auto i = 0UL; i < tokenizedFunctionCall.paramsCount; i++) {
-            paramsType[i] =
-                resolveType(tokenizedFunctionCall.paramsList[i], result, line);
-        }
-
-        // then match the type of param to type of function
-        if (!functionSymbol->matchParams(paramsType, tokenizedFunctionCall.paramsCount)) {
-            throw TypeMismatch(line);
-        }
-
-        auto assigneeType{ resolveType(name, result, line) };
-
-        if (assigneeType != functionNode->data->getDataType()) {
-            throw TypeMismatch(line);
-        }
-        return result;
-    }
-    throw std::logic_error("Cannot reach here!");
-#endif
-}
-/*
-SymbolTable::FunctionCallTokenizeResult
-    SymbolTable::tokenizeFunctionCall(const std::string &functionCall) {
-
-    auto startOfFunctionName{ functionCall.begin() };
-    auto endOfFunctionName{
-        std::find(functionCall.begin(), functionCall.end(), '(')
-    };
-
-    auto tokenizedParams{
-        tokenizeParams(endOfFunctionName + 1, std::prev(functionCall.end()))
-    };
-    return { { startOfFunctionName, endOfFunctionName },
-        std::move(tokenizedParams.data),
-        tokenizedParams.size };
-}
-
-SymbolTable::FunctionDeclarationTokenizeResult SymbolTable::tokenizeFunctionDeclaration(const std::string &functionDeclaration) {
-    auto firstBracket{ functionDeclaration.begin() };
-    auto lastBracket{
-        std::find(functionDeclaration.begin(), functionDeclaration.end(), ')')
-    };
-
-    auto paramsTokenizeResult{ tokenizeParams(firstBracket + 1, lastBracket) };
-
-    auto arrow = std::find(lastBracket, functionDeclaration.end(), '>');
-
-    return { std::string{ arrow + 1, functionDeclaration.end() }, paramsTokenizeResult };
-}
-*/
-
-SymbolTable::TokenizeResult SymbolTable::tokenizeParams(std::string::const_iterator start,
-    std::string::const_iterator end) {
-    if (start == end) {
-        return {};
-    }
-
-    auto commaNum = std::count_if(start, end, [](char c) { return c == ','; });
-
-    auto tokenNum = commaNum + 1;
-
-    // NOLINTNEXTLINE(hicpp-avoid-c-arrays, modernize-avoid-c-arrays, cppcoreguidelines-avoid-c-arrays)
-    std::unique_ptr<std::string[]> tokens = std::make_unique<std::string[]>(static_cast<unsigned long>(tokenNum));
-
-    unsigned long currentIndex = 0;
-    auto currentEnd = start;
-
-    for (; currentEnd != end; ++currentEnd) {
-        if (*currentEnd == ',') {
-            tokens[currentIndex++] = { start, currentEnd };
-            ++currentEnd;
-            start = currentEnd;
-        }
-    }
-
-    if (start != end) {
-        tokens[currentIndex] = { start, end };
-    }
-
-    return { std::move(tokens), static_cast<unsigned long>(tokenNum) };
 }
 
 SymbolTable::ValueType SymbolTable::resolveValueType(const std::string &value) {
@@ -797,7 +619,6 @@ SymbolTable::OpResult SymbolTable::insert(const std::string &name, const std::st
     OpResult result;
     std::unique_ptr<Symbol> newData;
 
-#ifdef EXPERIMENTAL_PARSING
     if (value == "string") {
         const auto type = Symbol::DataType::STRING;
         newData = std::make_unique<VariableSymbol>(name, targetLevel, type);
@@ -812,40 +633,6 @@ SymbolTable::OpResult SymbolTable::insert(const std::string &name, const std::st
         auto tokenizedDeclaration = match::tokenizeFunctionDeclaration(value.begin(), value.end(), line);
         newData = std::make_unique<FunctionSymbol>(name, targetLevel, tokenizedDeclaration.returnType, std::move(tokenizedDeclaration.paramType));
     }
-
-#else
-
-    if (value == "string" || value == "number") {
-        const Symbol::DataType type =
-            value == "string" ? Symbol::DataType::STRING : Symbol::DataType::NUMBER;
-        newData = std::make_unique<VariableSymbol>(name, targetLevel, type);
-
-    } else {    // if function
-        if (targetLevel != 0) {
-            throw InvalidDeclaration(line);    // cannot declare a function in level other than 0
-        }
-
-        const auto tokenizedFunctionDeclaration = tokenizeFunctionDeclaration(value);
-
-        const auto &paramCount = tokenizedFunctionDeclaration.paramCount;
-        const auto &params = tokenizedFunctionDeclaration.params;
-        const auto &returnTypeStr = tokenizedFunctionDeclaration.returnType;
-
-        // NOLINTNEXTLINE(hicpp-avoid-c-arrays, modernize-avoid-c-arrays, cppcoreguidelines-avoid-c-arrays)
-        std::unique_ptr<Symbol::DataType[]> param = std::make_unique<Symbol::DataType[]>(paramCount);
-
-        for (unsigned long i = 0; i < paramCount; i++) {
-            param[i] = params[i] == "string" ? Symbol::DataType::STRING
-                                             : Symbol::DataType::NUMBER;
-        }
-
-        Symbol::DataType returnType = returnTypeStr == "string"
-                                          ? Symbol::DataType::STRING
-                                          : Symbol::DataType::NUMBER;
-
-        newData = std::make_unique<FunctionSymbol>(name, targetLevel, returnType, static_cast<int>(paramCount), std::move(param));
-    }
-#endif
 
     auto *ptr = tree.root;
     TreeNode *ptrParent = nullptr;
