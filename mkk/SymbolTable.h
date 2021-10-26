@@ -16,18 +16,13 @@ public:
 class LinkedLisst {
 public:
     Node* head;
-    Node* tail{};
+    Node* tail;
+    Node* curent_level;
     int size;
-public:
-    LinkedLisst(): head(nullptr), tail(nullptr), size(0) {};
 
-    ~LinkedLisst() {
-        while (this->head) {
-            auto *h = this->head;
-            this->head = this->head->next;
-            delete h;
-        }
-    };
+public:
+    LinkedLisst(): head(nullptr), tail(nullptr), curent_level(nullptr), size(0) {};
+    ~LinkedLisst();
 
     void insert_lisst(string ID, int level);
     void delete_level(const int& level);
@@ -68,12 +63,7 @@ public:
 
 public:
     Tree(): root(nullptr) {};
-
-    ~Tree() {
-        delete_tree(this->root);
-        this->root = nullptr;
-    }
-public:
+    ~Tree();
 
     static void right_rol(identifier_node* &h);
     static void left_rol(identifier_node* &h);

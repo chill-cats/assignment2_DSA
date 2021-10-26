@@ -1,9 +1,15 @@
+INSERT zv number true
+PRINT
+INSERT z string false
 BEGIN
+INSERT wd number true
+LOOKUP zv
+INSERT nfkq string false
 BEGIN
 INSERT jjqa4u string true
 END
+INSERT eTaD (string,string,string)->string true
 INSERT lvV (number)->string true
+PRINT
 BEGIN
-INSERT w2ggE number false
-LOOKUP jjqa4u
-ASSIGN lvV lvV(w2ggE)
+END

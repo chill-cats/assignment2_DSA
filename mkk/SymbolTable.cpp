@@ -219,38 +219,46 @@ void LinkedLisst::insert_lisst(string ID, int level) {
     if (this->head == nullptr) {
         this->head = new_node;
         this->tail = this->head;
+        this->curent_level = this->head;
         this->size = 1;
-    } else {
+        return;
+    }
+    this->size++;
+    if (this->head->level != level) {
+        new_node->next = this->head;
+        this->head->prev = new_node;
+        this->head = this->head->prev;
+        this->curent_level = this->head;
+        return;
+    }
+    if (this->curent_level == this->tail) {
         this->tail->next = new_node;
         new_node->prev = this->tail;
-        this->tail = new_node;
-        this->size++;
+        this->tail = this->tail->next;
+        this->curent_level = this->tail;
+    } else {
+        auto *tmp = this->curent_level->next;
+        this->curent_level->next = new_node;
+        new_node->next = tmp;
+        tmp->prev = new_node;
+        new_node->prev = this->curent_level;
+        this->curent_level = this->curent_level->next;
     }
 }
 
 void LinkedLisst::delete_level(const int& level) {
     if (this->head == nullptr) return;
     auto *h = this->head;
-    while (h) {
-        if (h->level == level) {
-            if (h == this->head) {
-                this->head = this->head->next;
-                if (this->head != nullptr) this->head->prev = nullptr;
-                delete h;
-                h = this->head;
-            } else if (h == this->tail) {
-                this->tail = this->tail->prev;
-                this->tail->next = nullptr;
-                delete h;
-                break;
-            } else {
-                auto *h1 = h->prev;
-                h1->next = h->next;
-                h->next->prev = h1;
-                delete h;
-                h = h1->next;
-            }
-        } else h = h->next;
+    while (h->level == level) {
+        if (h == this->tail) {
+            delete h;
+            this->head = nullptr;
+            this->tail = nullptr;
+            return;
+        }
+        this->head = this->head->next;
+        delete h;
+        h = this->head;
     }
 }
 
@@ -386,31 +394,29 @@ void Tree::end_level(LinkedLisst &lisst, int level) {
     if (this->root == nullptr) return;
 
     auto *t = lisst.head;
-    while (t) {
-        if (t->level == level) {
-            this->look_up(t->ID, level);
-            if (this->root->right_child == nullptr && this->root->left_child == nullptr) {
-                delete this->root;
-                this->root = nullptr;
-            } else if (this->root->right_child == nullptr) {
-                this->root = this->root->left_child;
-                delete this->root->parent;
-                this->root->parent = nullptr;
-            } else if (this->root->left_child == nullptr) {
-                this->root = this->root->right_child;
-                delete this->root->parent;
-                this->root->parent = nullptr;
-            } else {
-                auto *left = this->root->left_child;
-                auto *right = this->root->right_child;
-                delete this->root;
-                this->root = left;
-                left->parent = nullptr;
-                auto *max = this->find_max(left);
-                this->splay(max);
-                this->root->right_child = right;
-                right->parent = this->root;
-            }
+    while (t && t->level == level) {
+        this->look_up(t->ID, level);
+        if (this->root->right_child == nullptr && this->root->left_child == nullptr) {
+            delete this->root;
+            this->root = nullptr;
+        } else if (this->root->right_child == nullptr) {
+            this->root = this->root->left_child;
+            delete this->root->parent;
+            this->root->parent = nullptr;
+        } else if (this->root->left_child == nullptr) {
+            this->root = this->root->right_child;
+            delete this->root->parent;
+            this->root->parent = nullptr;
+        } else {
+            auto *left = this->root->left_child;
+            auto *right = this->root->right_child;
+            delete this->root;
+            this->root = left;
+            left->parent = nullptr;
+            auto *max = this->find_max(left);
+            this->splay(max);
+            this->root->right_child = right;
+            right->parent = this->root;
         }
         t = t->next;
     }
@@ -461,13 +467,24 @@ string Tree::look_up(const string& ID, int level) {
 }
 
 void Tree::print(identifier_node* &node) {
-    if (node == nullptr) {
-        return;
-    }
+    if (node == nullptr)    return;
 
     if (node == this->root) cout << node->data.ID << "//" << node->data.level;
     else                    cout << " " << node->data.ID << "//" << node->data.level;
 
     print(node->left_child);
     print(node->right_child);
+}
+
+LinkedLisst::~LinkedLisst() {
+    while (this->head) {
+        auto *h = this->head;
+        this->head = this->head->next;
+        delete h;
+    }
+}
+
+Tree::~Tree() {
+    delete_tree(this->root);
+    this->root = nullptr;
 }
