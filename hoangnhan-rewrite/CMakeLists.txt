@@ -69,9 +69,9 @@ if (ENABLE_COC_CLANGD_CONFIG)
                 ${CMAKE_CURRENT_SOURCE_DIR}/.vim/coc-settings.json)
 endif()
 
-option(USE_EXPERIMENTAL_PARSING "This turn on experimental parsing code instead of regex" OFF)
-if (USE_EXPERIMENTAL_PARSING)
-    add_definitions(-DEXPERIMENTAL_PARSING)
+option(ENABLE_TESTING_OPCODE "This enable testing purpose OPCODE: PRINTIN, PRINTPOS" OFF)
+if (ENABLE_TESTING_OPCODE)
+    add_definitions(-DHQ_TEST)
 endif()
 
 add_subdirectory(src)

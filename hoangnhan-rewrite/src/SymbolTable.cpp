@@ -11,6 +11,10 @@ enum class InstructionType {
     PRINT,
     BEGIN,
     END,
+#ifdef HQ_TEST
+    PRINTIN,
+    PRINTPOST,
+#endif
 };
 
 struct MatchResult {
@@ -368,6 +372,16 @@ MatchResult parseInstruction(const std::string &line) {    // NOLINT(readability
         return { InstructionType::PRINT, TokenizedParam() };
     }
 
+#ifdef HQ_TEST
+    if (line == "PRINTIN") {
+        return { InstructionType::PRINTIN, TokenizedParam() };
+    }
+
+    if (line == "PRINTPOST") {
+        return { InstructionType::PRINTPOST, TokenizedParam() };
+    }
+#endif
+
     throw InvalidInstruction(line);
 }
 
@@ -427,6 +441,18 @@ std::string SymbolTable::processLine(const std::string &line) {
         printFlag = !str.empty();
         return str;
     }
+#ifdef HQ_TEST
+    case match::InstructionType::PRINTIN: {
+        auto str = tree.toString(TraversalMethod::INORDER);
+        printFlag = !str.empty();
+        return str;
+    }
+    case match::InstructionType::PRINTPOST: {
+        auto str = tree.toString(TraversalMethod::POSTORDER);
+        printFlag = !str.empty();
+        return str;
+    }
+#endif
     }
     throw std::logic_error("Cannot reach here");
 }
