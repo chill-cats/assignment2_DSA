@@ -1,23 +1,47 @@
 #ifndef SYMBOLTABLE_H
 #define SYMBOLTABLE_H
 #include "main.h"
+/*
+Created by Quang Nguyen
+Updated on Oct, 26, 2021
+*/
+
+class ValidMachine{
+public:
+    ValidMachine(string str);
+    ~ValidMachine();
+    string line, name, type, isStatic; // For INSERT
+    string returnType, param; //For insert fucntion
+    string identifier, value; //For ASSIGN
+    
+    const regex valid_insertVar = regex ("^INSERT[ ]([a-z][a-zA-Z0-9_]*)[ ](?:string|number)[ ](?:true|false)");
+    const regex valid_insertFunc = regex ("^INSERT[ ]([a-z][a-zA-Z0-9_]*)[ ]\\((?:|(?:number|string)(?:,(?:number|string))*)\\)->(?:number|string)[ ](?:true|false)$");
+    const regex valid_lookup = regex  ("^LOOKUP[ ][a-z][a-zA-Z0-9_]*$");
+    // const regex valid_identifer = regex ("^[a-z][a-zA-Z0-9_]*$");
+    // const regex valid_number = regex  ("^\\d+$");
+    // const regex valid_string = regex  ("^'[\\dA-Za-z\\s]+'$");
+    const regex valid_assign  = regex {R"(^ASSIGN ([a-z]\w*) (\d+|'[\dA-Za-z\s]*'|[a-z]\w*|[a-z]\w*\((?:|(?:\d+|'[\dA-Za-z\s]*'|[a-z]\w*)(?:,(?:\d+|'[\dA-Za-z\s]*'|[a-z]\w*))*)\))$)"};
+    //string getLine(){return this->line;}
+    bool isInsertVar();
+    bool isInsertFunc();
+    bool isLookup();
+    bool isAssign();
+    void parseInsert(bool Func);
+    void parseAssign();
+    void parseLookup();
+
+};
 
 class Identifier{
 public:
-    Identifier(string name, string type, string value, string returnType);
+    Identifier(string name, string type);
     Identifier();
     ~Identifier();
-    void setLevel(int level);
-    void setName(string _name){this->name = _name;}
-    void setValue(string _value){this->value = _value;}
-    void setType(string _type){this->type = _type;}
-    void setRType(string _return){this->returnType =_return;}
+    void assignLevel(int level);
     string getName(){return this->name;}
     string getType(){return this->type;}
     string getValue(){return this->value;}
     int getLevel(){return this->level;}
-    
-protected:
     string name;
     string type;
     string value;
@@ -27,36 +51,24 @@ protected:
 
 class Node{
 public:
-    Node(const Identifier& identifier);
+    Node( Identifier& identifier);
     Node();
     ~Node();
-    Node* getParent() const;
-    Node* getLeft() const;
-    Node* getRight() const;
-    void setLeft(Node*);
-    void setRight(Node*);
-    void setParent(Node*);
-    Identifier getData() const;
-    void setData(Identifier identifier){this->data = identifier;}
-private:
     Node*parent = nullptr;
     Node*left = nullptr;
     Node*right = nullptr;
     Identifier data;
-    
+    string *paramList;
+    int numParam;
 };
-
 class SplayTree{
 public:
     SplayTree();
     Node *root = nullptr;
+    int count;
     ~SplayTree();
-    Node*find(string name, Node*root);
-    Node* TreeMin(Node*);
+    Node*find(const string& name, int level, int& num_comp);
     Node* TreeMax(Node*);
-    Node* TreeSucc(Node*);
-    Node* TreeProc(Node*);
-
     void insert_node(Node*, Node*, int &comp);
     void addLeft(Node*&, Node*&);
     void addRight(Node*&, Node*&);
@@ -69,7 +81,29 @@ public:
     void rightRoll(Node* node);
     void splay(Node* node, int &splay);
     void destroy(Node* node);
-    void inorder(Node* root); //Testing
+    void deleteNodeSplay(Node*);
+};
+class LixtNode{
+public:
+    LixtNode();
+    LixtNode(Node* data, int level);
+    ~LixtNode();
+    Node* data;
+    int level;
+    LixtNode* next = nullptr;
+};
+
+class HangDoi{
+public:
+    HangDoi();
+    ~HangDoi();
+    int size;
+    LixtNode* front = nullptr;
+    LixtNode* rear = nullptr;
+    LixtNode* levelTrack = nullptr;
+    void append(Node* data, int level);
+    Node* pop_front();
+    bool isEmpty();
 };
 class SymbolTable {
 public:
@@ -78,18 +112,19 @@ public:
     ~SymbolTable();
     int currentLevel;
     SplayTree *tree = nullptr;
+    HangDoi *hangdoi = nullptr;
     void run(string filename);
     void insert(const string& line) const;
-    void lookup(const string& line, Node*, bool&);
-    void assign(const string& line, int type);
-    void print(Node*, bool& flag) const;
+    Node* lookup(const string& name, int destLevel,  int& num_comp);
+    void assign(const string& line, int& comp, int& splay);
+    void print(Node*, bool&);
     void new_scope() ;
-    void end_scope(Node* );
+    void end_scope();
 
-    void handle_exception_insert(const string& line, Node* node);
+    void handle_exception_insert(const string& line);
     int handle_exception_assign(const string& line);
     void handle_end_file() const;
-    pair<string,int> process(const string& line);
+    const string process(const string& line);
 
 };
 #endif

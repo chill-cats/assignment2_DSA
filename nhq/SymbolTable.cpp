@@ -1,84 +1,186 @@
 #include "SymbolTable.h"
-
-
-//========== Utils ====================
-void tokenizeIns(const string& line, string &name, string &type, string&isStatic, string&returnType)
-{
-    auto firstSpace = line.find(' ');
-    auto secondSpace = line.find(' ',firstSpace+1);
-    auto thirdSpace = line.find(' ', secondSpace+1);
-    auto arrowIdx = line.find("->");
-    name = line.substr(firstSpace+1, secondSpace-firstSpace - 1);
-    type = line.substr(secondSpace+1, thirdSpace-secondSpace-1);
-    isStatic = line.substr(thirdSpace+1);
-    if(arrowIdx < line.size())
-        returnType = line.substr(arrowIdx, thirdSpace-arrowIdx-2);
-    
+/*
+Created by Quang Nguyen
+Updated on Oct, 26, 2021
+*/
+//========== HangDoi ====================
+LixtNode::LixtNode(){this->next = nullptr; this->level = 0;}
+LixtNode::LixtNode(Node* data, int level){this->data = data; this->next = nullptr; this->level = level;}
+LixtNode::~LixtNode(){}
+HangDoi::HangDoi(){this->size = 0; this->front = this->rear = nullptr; this->levelTrack = nullptr;}
+void HangDoi::append(Node* name, int level){
+    LixtNode *add_node;
+    if(this->front == nullptr){ //Add the first node
+        add_node = new LixtNode(name, level);
+        this->front = add_node;
+        this->rear = add_node;
+        this->levelTrack = this->front;
+    }
+    else{
+        add_node = new LixtNode(name, level);
+        if(this->front->level < level){
+            add_node->next = this->front;
+            this->front = add_node;
+            levelTrack = this->front;
+        }
+        else if(this->front->level == level){ //If append in the same level then put it back
+            if(this->rear->level == level){
+                this->rear->next = add_node;
+                this->rear = this->rear->next;   
+            }
+            else if (level > this->rear->level){
+                add_node->next = this->levelTrack->next;
+                this->levelTrack->next = add_node;
+                this->levelTrack = this->levelTrack->next;
+            }
+        }
+    }
+    this->size++;
 }
-void tokenizeAss(const string& line, string& identifier, string& value)
-{
-    auto firstSpace = line.find(' ');
-    auto secondSpace = line.find(' ',firstSpace+1);
-    identifier = line.substr(firstSpace+1, secondSpace-firstSpace - 1);
-    value = line.substr(secondSpace+1);
+bool HangDoi::isEmpty(){
+    if(this->front == nullptr) return true;
+    return false;
+}
+Node* HangDoi::pop_front(){
+    //If not empty yet.
+    if(!this->front)    return nullptr;
+    Node* tmp_data;
+    if(this->front == levelTrack){
+        if(levelTrack)  levelTrack = levelTrack->next;
+    }
+    LixtNode *tmp = this->front;
+    this->front = this->front->next;
+    if(!this->front){
+        this->rear = nullptr; this->levelTrack = nullptr;
+    }
+    tmp_data = tmp->data;
+    delete tmp;
+
+    this->size--;
+    return tmp_data;
+}
+
+HangDoi::~HangDoi(){
+    while(this->front){
+        LixtNode *tmp = this->front;
+        this->front = this->front->next;
+        delete tmp;
+    }
+    this->size = 0;
+}
+//========== Utils ====================
+ValidMachine::ValidMachine(string str) {
+    this->line = str;
+    this->name=this->type=this->isStatic=this->value = "";
+}
+ValidMachine::~ValidMachine() = default;
+bool ValidMachine::isInsertFunc()   {return regex_match(this->line, this->valid_insertFunc);}
+bool ValidMachine::isInsertVar()    {return regex_match(this->line, this->valid_insertVar);}
+bool ValidMachine::isLookup()       {return regex_match(this->line, this->valid_lookup);}
+bool ValidMachine::isAssign()       {return regex_match(this->line, this->valid_assign);}
+void ValidMachine::parseLookup() {
+    auto firstSpace = this->line.find(' ');
+    this->name = this->line.substr(firstSpace+1);
+}
+void ValidMachine::parseInsert(bool Func) {
+    auto firstSpace = this->line.find(' ');
+    auto secondSpace = this->line.find(' ',firstSpace+1);
+    auto thirdSpace = this->line.find(' ', secondSpace+1);
+    this->name = line.substr(firstSpace+1, secondSpace-firstSpace - 1);
+    this->isStatic = line.substr(thirdSpace+1);
+    if(Func){
+        auto arrowIdx = line.find("->");
+        this->param = line.substr(line.find('(')+1, arrowIdx-2-line.find('('));
+        this->returnType  = line.substr(arrowIdx+2, thirdSpace-arrowIdx-2);
+    }
+    else    
+        type = line.substr(secondSpace+1, thirdSpace-secondSpace-1);
+}
+void ValidMachine::parseAssign() {
+    auto firstSpace = this->line.find(' ');
+    auto secondSpace = this->line.find(' ',firstSpace+1);
+    this->identifier = this->line.substr(firstSpace+1, secondSpace-firstSpace - 1);
+    this->value = this->line.substr(secondSpace+1);
 }
 //======== Initialization =================
 SymbolTable::SymbolTable()
 {
-    this->tree = new SplayTree;
+    this->tree = new SplayTree; this->hangdoi = new HangDoi;
     this->currentLevel = 0;
 }
-SplayTree::SplayTree() {this->root = nullptr;}
-SplayTree::~SplayTree() {destroy(this->root);}
+SplayTree::SplayTree() {this->root = nullptr; this->count = 0;}
+SplayTree::~SplayTree() {destroy(this->root); this->root = nullptr;}
 Node::Node() {
     parent = nullptr;
     left = nullptr;
     right = nullptr;
+    this->numParam = 0;
+    this->paramList = nullptr;
 }
-Node::Node(const Identifier& identifier) {
+Node::Node(Identifier& identifier) {
     parent = nullptr;
     left = nullptr;
     right = nullptr;
     data = identifier;
+    this->numParam = 0;
+    this->paramList = nullptr;
 }
 Node::~Node(){
+    if(this->paramList) delete[] this->paramList;
     parent = nullptr;
     left = nullptr;
     right = nullptr;
 }
 //=========== Symbol Table =============
-SymbolTable::~SymbolTable(){delete this->tree;} //HANDLE END FILE
+SymbolTable::~SymbolTable(){
+    delete this->hangdoi;
+    delete this->tree;
+} //HANDLE END FILE
 void SymbolTable::run(string filename)
 {
     string line;
-    ifstream infile(filename);
+    ifstream infile(filename, ios::in);
     if(infile.is_open())
     {
+
         while(getline(infile, line)){
             //Doing the main function
-            pair<string,int>command = process(line);
-            if(command.first == "INSERT"){
-                    this->handle_exception_insert(line, this->tree->root);
-                    this->insert(line);
+            const string command = process(line);
+            if(command == "INSERT"){
+                this->insert(line);
+                this->tree->count++;
+                
             }
-            //else if (command.first == "ASSIGN");
-            else if (command.first == "BEGIN")  this->new_scope();
-            else if (command.first == "END"){
-                this->end_scope(this->tree->root);
-                this->currentLevel--;
+            else if (command == "ASSIGN"){
+                int ass_comp = 0, ass_splay = 0;
+                this->assign(line, ass_comp, ass_splay);
+                cout << ass_comp << " " << ass_splay << endl;
             }
-            // else if (command.first == "LOOKUP"){
-            //     bool flag = false;
-            //     this->lookup(line, this->tree->root, flag);
-            //     if(flag == false){
-            //         delete this->tree;
-            //         throw Undeclared(line);
-            //     }
-            // }
-            else if (command.first == "PRINT"){
-                bool flag = false;
-                this->print(this->tree->root, flag);
-                if(flag)    cout << endl;
+            else if (command == "BEGIN")
+                this->new_scope();
+
+            else if (command== "END"){this->end_scope();}
+
+            else if (command == "LOOKUP"){
+                
+                if(!this->tree->root)   throw Undeclared(line);
+                int comp = 0, splay= 0, currentLevel = this->currentLevel;
+                ValidMachine tester = ValidMachine(line);
+                tester.parseLookup();
+                const string name = tester.name;
+                Node*tmp = this->lookup(name,currentLevel,comp);
+                if(tmp == nullptr) throw Undeclared(line);
+                else{
+                    cout << tmp->data.level<<"\n";
+                    this->tree->splay(tmp, splay);
+                }
+            } 
+
+            else if (command == "PRINT"){
+                bool printed = false;
+                this->print(this->tree->root, printed);
+                if(printed == true) 
+                    cout << "\n";
             }
         }
         handle_end_file();
@@ -86,287 +188,456 @@ void SymbolTable::run(string filename)
     //HANDLE END OF FILE
     infile.close();
 }
-
-pair<string, int> SymbolTable::process(const string& line){ //CHECK LỖI NGỮ NGHĨA
+const string SymbolTable::process(const string& line){ //CHECK LỖI NGỮ NGHĨA
     //Check all REGEX MATCH
-    static const regex valid_insert("^INSERT[ ]([a-z][a-zA-Z0-9_]*)[ ](?:string|number)[ ](?:true|false)");
-    static const regex valid_assign("^ASSIGN[ ][a-z][a-zA-Z0-9_]*[ ](?:[a-z][a-zA-Z0-9_]*|\\d+|'[\\dA-Za-z\\s]+')$");
-    static const regex valid_lookup("^LOOKUP[ ][a-z][a-zA-Z0-9_]*$");
-    pair<string, int> command;
+    ValidMachine tester = ValidMachine(line);
+    string command;
     //IF INSERT
-    if(regex_match(line, valid_insert) == 1){ 
-        handle_exception_insert(line, this->tree->root);
-        command.first = "INSERT"; command.second = 1;
+    if(tester.isInsertFunc() || tester.isInsertVar()){
+        handle_exception_insert(line);
+        command = "INSERT"; 
         return command;
     }
      
-    //IF ASSIGN
-    // else if (regex_match(line, valid_assign)){ 
-    //     int type = handle_exception_assign(line);
-    //     command.first = "ASSIGN"; command.second = type;
-    //     return command;
-    // } 
+    else if (tester.isAssign()){ 
+        command = "ASSIGN";
+        return command;
+    } 
 
-    //IF LOOKUP
-    else if (regex_match(line, valid_lookup)){
-        command.first = "LOOKUP"; command.second = 1;
+    else if (tester.isLookup()){
+        command = "LOOKUP";
         return command;
     }
-    // //From this - USE string compare to check
-    // //IF BEGIN
+
     else if (line == "BEGIN"){
-        command.first = "BEGIN"; command.second = 1;
+        command = "BEGIN";
         return command;
     }
-    // //IF END
+    
     else if(line == "END"){
-        command.first = "END"; command.second = 1;
+        command = "END"; 
         return command;
     }
 
-    // //IF PRINT
     else if(line == "PRINT"){
-        command.first = "PRINT"; command.second = 1;
+        command = "PRINT"; 
         return command;
     }
     else throw InvalidInstruction(line);
 }
 
 void SymbolTable::insert(const string& line) const{
+    ValidMachine tester = ValidMachine(line);
+    bool isFunc = tester.isInsertFunc();
+    tester.parseInsert(isFunc); //If insert a function
+    string type = "", returnType = "", name = tester.name;
     int comp = 0, splay = 0, initLevel = 0;
-    string name="", type="", isStatic="", returnType="";
-    tokenizeIns(line, name, type, isStatic, returnType);
 
-    if(isStatic == "false") 
+    if(tester.isStatic == "false") //If not static then xet the current level
         initLevel = this->currentLevel;
-    if(type != "string" && type != "number"){
-        type = "func";
-    }
-    
-    Identifier a = Identifier(name, type, "", returnType);
-    a.setLevel(initLevel);
+
+    //Check type of identifier
+    if(tester.type != "string" && tester.type != "number")  type = "func"; //type of identifier
+    else    type = tester.type;
+    Identifier a = Identifier(name, type);
+    a.assignLevel(initLevel);
     Node* add = new Node(a);
 
+    if(type == "func"){
+        string param = tester.param;
+        add->data.returnType = tester.returnType;
+        //Count the number of param
+        if(param != ""){
+            int paramSize = param.size();
+            for(int i = 0; i < paramSize; i++){
+                if(param[i] == ',') add->numParam++;
+            }
+            add->paramList = new string[++add->numParam];
+        }
+        //Add param to parameter 
+        if(add->numParam == 1)  add->paramList[0] = param;
+        if(add->numParam > 1){
+            int start = 0, comma = 0, num = add->numParam, idx =0 ;
+            while(num >= 1){
+                comma = param.find(',', start);
+                string tmp = param.substr(start, comma-start);
+                start = comma+1;
+                num--;
+                add->paramList[idx] = tmp;
+                idx++;
+            }
+        }
+    }
     this->tree->insert_node(this->tree->root, add, comp);
     this->tree->splay(add, splay);
-    cout << comp << " " << splay << endl;
-    comp = 0; splay = 0;
+    if(initLevel != 0)  
+        this->hangdoi->append(add, initLevel);
+    cout << comp << " " << splay << endl; 
 }
-// void SymbolTable::assign(string line, int type){
-   
-//     cout <<"success";
-//INCLUDING LOOKUP, ASSIGN, BEGIN, END  
-//}
-void SymbolTable::lookup(const string&  line, Node* root, bool&flag) 
-{
-    cout << "CLM Cach moi segmentation dit con me";
-}
-void SymbolTable::new_scope()
-{
-    this->currentLevel += 1;
-}
-void SymbolTable::end_scope(Node* start)
-{
-    auto curLev = this->currentLevel;
 
-    if(curLev == 0) throw UnknownBlock();
-    if(start == nullptr)
+void SymbolTable::assign(const string& line, int& comp, int& splay){
+
+    ValidMachine tester = ValidMachine(line);
+    tester.parseAssign();
+    string tobeAssign  = tester.identifier, valueAssign = tester.value;
+    
+    //If assign a number -> find -> splay
+    if(valueAssign[0]  <= '9' && valueAssign[0] >= '0'){ 
+        
+        int tmpLev = this->currentLevel;
+        Node*tmpIdentifier = nullptr;
+        tmpIdentifier = this->lookup(tobeAssign, tmpLev, comp);
+        if(tmpIdentifier){
+            this->tree->splay(tmpIdentifier, splay);
+            if(tmpIdentifier->data.type != "number")
+                throw TypeMismatch(line); //Found name but not match type    
+        }
+        else  throw Undeclared(line);
+        return;
+    }
+    
+    //If assign a string
+    if(valueAssign[0] == '\''){ //Match with the first hyphen
+        
+        int tmpLev = this->currentLevel;
+        Node*tmpIdentifier = nullptr;
+        tmpIdentifier = this->lookup(tobeAssign, tmpLev, comp);
+        if(tmpIdentifier){
+            this->tree->splay(tmpIdentifier, splay);
+            if(tmpIdentifier->data.type != "string")
+                throw TypeMismatch(line); //Found name but not match type    
+        }
+        else  throw Undeclared(line);
+        return;
+    }
+
+    //If call a function to assign for identifier
+    if(valueAssign[valueAssign.size()-1] == ')'){
+        
+        int start = 0, curLevel = this->currentLevel;
+        string funcName = valueAssign.substr(start, valueAssign.find('('));
+        Node*tmpFuncNode = nullptr;
+        //Check the declaration of function name
+        tmpFuncNode = this->lookup(funcName, curLevel, comp);
+        if(tmpFuncNode){
+            this->tree->splay(tmpFuncNode, splay); //Splay node found
+            if(tmpFuncNode->data.type != "func")    //if found and type matched
+                throw TypeMismatch(line); //If found but type not matched
+        }
+        else   throw Undeclared(line);
+        if(tmpFuncNode){ //Finally, we found then check the param lixt!
+            
+            start = valueAssign.find('(')+1; int comma = 0, num = tmpFuncNode->numParam, count = 0;
+            //Get the real arguments
+            string realParam = valueAssign.substr(start, valueAssign.find(')', start) - start);
+            if(realParam != ""){ //If the parameter is not empty
+                int realParamSize = realParam.size();
+                for(int idx = 0; idx < realParamSize; idx++){
+                    if(realParam[idx] == ',')   count++; //Count the number of real args
+                }
+                if(++count != num)   throw TypeMismatch(line); //If no match between args and real args
+            }
+            start = 0;
+            for(int idx = 0 ; idx < num; idx++){ //Check the match in args and real params
+                
+                comma = realParam.find(',', start);
+                string tmpStr = realParam.substr(start, comma-start); //Tokenize each key in args
+
+                //if key is a identifier
+                if(tmpStr[0] != '\'' && (tmpStr[0] > '9' || tmpStr[0] < '0') && tmpStr[(int)tmpStr.size()-1] != ')'){
+                    
+                    Node* paramNode = nullptr; int curLev = this->currentLevel;
+                    paramNode = this->lookup(tmpStr, curLev, comp);
+                    if(paramNode){
+                        this->tree->splay(paramNode, splay);
+                        if(paramNode->data.type != tmpFuncNode->paramList[idx]) throw TypeMismatch(line);
+                    }
+                    if(!paramNode) throw Undeclared(line);
+                }
+                
+                //If key is number
+                if(tmpStr[0] <= '9' && tmpStr[0] >=  '0'){
+                    if(tmpFuncNode->paramList[idx] != "number")
+                        throw TypeMismatch(line);
+                    
+                }
+                //If key is string
+                if(tmpStr[0] == '\''){
+                    if(tmpFuncNode->paramList[idx] != "string")
+                        throw TypeMismatch(line);
+                    
+                }
+                //if key is a function
+                if(tmpStr[tmpStr.size() - 1] == ')')    throw TypeMismatch(line);
+                start = comma+1;
+            }
+                Node* tobeAssignNode = nullptr;
+                int curLevel = this->currentLevel;
+                tobeAssignNode = this->lookup(tobeAssign, curLevel, comp);
+                if(tobeAssignNode){
+                    this->tree->splay(tobeAssignNode, splay);
+                    if(tobeAssignNode->data.type != tmpFuncNode->data.returnType)    throw TypeMismatch(line);
+                }
+            if(!tobeAssignNode)    throw Undeclared(line);
+        
+        }
         return;
     
-    end_scope(start->getLeft());
-    end_scope(start->getRight());
-    if(start->getData().getLevel() == this->currentLevel){
-        this->tree->deleteNode(start);
-        //return;
+    }
+    
+    //If assign an identifier which does not have a close bracket at the end
+    else{
+        int tmpComp = 0;
+        int currentLevel = this->currentLevel;
+        
+        Node* valueNode = nullptr; 
+        Node* name_node = nullptr;
+        if(!this->tree->root)   throw Undeclared(line);
+        if(this->tree->root){
+            int valueComp = 0;
+            valueNode = this->lookup(valueAssign, currentLevel, valueComp); //If this identifier has not been declared -> throw
+            if(!valueNode)  throw Undeclared(line);
+            else{
+                //cout << "Found: " << valueNode->data.name << endl; //Testing
+                if(valueNode->data.type == "func")  throw TypeMismatch(line);
+                this->tree->splay(valueNode, splay);
+            }
+            tmpComp += valueComp;    
+        }
+        
+        if(this->tree->root){
+            int idComp = 0;
+            name_node = this->lookup(tobeAssign, currentLevel,  idComp);
+            if(!name_node)  throw Undeclared(line);
+            else{
+                this->tree->splay(name_node, splay);
+            }    
+            tmpComp += idComp;
+        }
+        comp = tmpComp;
+        if(valueNode && name_node){
+            if(valueNode->data.type != name_node->data.type)
+                throw TypeMismatch(line);
+        }
     }
 }
-void SymbolTable::print(Node* node, bool& flag) const
+Node* SymbolTable::lookup(const string&  name, int destLevel, int& num_comp) 
+{
+    Node*tmp;
+    int tmp_comp = 0;
+    while(destLevel != -1){ //SEARCHING Process
+        tmp = this->tree->find(name, destLevel, tmp_comp);
+        if(!tmp){
+            destLevel--;
+            tmp_comp = 0;
+        } 
+        else break;
+    }
+    num_comp += tmp_comp; //The number of parisons
+    return tmp;
+}
+void SymbolTable::new_scope(){this->currentLevel += 1;}
+void SymbolTable::end_scope()
+{
+    if(this->currentLevel ==0)  throw UnknownBlock();
+    if(this->hangdoi->front){
+        while(this->hangdoi->front){
+            if(hangdoi->front->level == this->currentLevel){
+                Node* tobeDel = this->hangdoi->pop_front();
+                this->tree->deleteNodeSplay(tobeDel);
+            }
+            else break;
+        }
+    }
+    this->currentLevel--;            
+}
+void SymbolTable::print(Node* node, bool& printed)
 {
     if(node)
     {   
-        flag = true;
-        cout << node->getData().getName() <<"//"<<node->getData().getLevel();
-        if(node->getLeft()){
+        printed = true;
+        cout << node->data.name <<"//"<<node->data.level;
+        if(node->left){
             cout <<" ";
-            print(node->getLeft(), flag);
+            print(node->left, printed);
         }
-        if(node->getRight()){
+        if(node->right){
             cout << " ";
-            print(node->getRight(), flag);
+            print(node->right, printed);
         }
     }
 }
 
-// int SymbolTable::handle_exception_assign(string line) //CHECK LỖI LOGIC TRƯỚC KHI THỰC HIỆN ASSIGN
-// {
-//     static const regex valid_identifer("^[a-z][a-zA-Z0-9_]*$");
-//     static const regex valid_number("^\\d+$");
-//     static const regex valid_string("^'[\\dA-Za-z\\s]+'$");
-//     //static const regex valid_func ("");
-//     return -1;
-// }
-void SymbolTable::handle_exception_insert(const string& line, Node* root) //CHECK LỖI LOGIC TRƯỚC KHI THỰC HIỆN INSERT
+void SymbolTable::handle_exception_insert(const string& line) //CHECK LỖI LOGIC TRƯỚC KHI THỰC HIỆN INSERT
 {
-    if(root)
-    {
-        //static const regex valid_func(""); //Incomplete
-        auto start = line.find(' ');
-        string name, type, isStatic, returnType;
-        tokenizeIns(line, name, type, isStatic, returnType);
+    int comp = 0;
+    ValidMachine tester = ValidMachine(line);
+    tester.parseInsert(false);
+    string name = tester.name, isStatic = tester.isStatic;
+    int check_level = (isStatic == "true")?0:this->currentLevel; //Init level first
 
-        int check_level = (isStatic == "true")?0:this->currentLevel; //Init level first
-
-        //Check INVALID INSTRUCTION (FUNCTION IN LEVEL != 0)
-        //if(regex_match(type, valid_func)){ //If INSERT a function
-         //   if(check_level != 0)
-          //      throw InvalidDeclaration(line);
-        //}
-
-        //Check REDECLARATION
-        if(check_level == root->getData().getLevel()) //If the same level then compare the name
-        {
-            if(name.compare(root->getData().getName()) < 0) //Find in the left
-                handle_exception_insert(line, root->getLeft());
-            else if(name.compare(root->getData().getName()) > 0)
-                handle_exception_insert(line, root->getRight());
-            else //FOUND Identifier in the same level
-                throw Redeclared(line);
-        }
-        if(check_level > root->getData().getLevel())
-            handle_exception_insert(line, root->getRight());
-        if(check_level < root->getData().getLevel())
-            handle_exception_insert(line, root->getLeft());
+    //Check INVALID INSTRUCTION (FUNCTION IN LEVEL != 0)
+    if(tester.isInsertFunc()){ //If INSERT a function
+        if(check_level != 0)
+            throw InvalidDeclaration (line);
     }
+    //Check REDECLARATION
+    Node*tmp = this->tree->find(name, check_level, comp); //Check in the same level
+    if(tmp) throw Redeclared(line);
+
 }
 void SymbolTable::handle_end_file() const
 {
-    if(this->currentLevel != 0){
-        //delete this->tree;
-        throw UnclosedBlock(this->currentLevel);
-    }
+    if(this->currentLevel != 0){throw UnclosedBlock(this->currentLevel);}
 }
-
 //==================== Splay Tree =====================================
 
 void SplayTree::destroy(Node *node) {
     if(node == nullptr)
         return;
-    destroy(node->getLeft());
-    destroy(node->getRight());
+    destroy(node->left);
+    destroy(node->right);
     delete node;
     return;
 }
-Node* SplayTree::find(string name, Node* node)
+Node* SplayTree::find(const string& name, int destLevel, int& num_comp)
 {
-    if(node == nullptr)
-        return nullptr;
-    auto check = node->getData().getName().compare(name);
-    if(check < 0)   find(name, node->getRight());
-    if(check > 0)   find(name, node->getLeft());
-    if(check == 0)  return node;
+    //So sanh level -> So sanh ten
+    Node* searchNode = this->root;
+    Node*found = nullptr;
+    while(searchNode)
+    {
+        if(searchNode->data.level < destLevel){
+            num_comp++;
+            searchNode = searchNode->right;
+        }   
+        else if(searchNode->data.level > destLevel){
+            num_comp++;
+            searchNode = searchNode->left;
+        }
+        else{
+            if(searchNode->data.name == name){
+                num_comp++;
+                found = searchNode; break;
+            }
+            else if(searchNode->data.name.compare(name) > 0){
+                num_comp++;
+                searchNode = searchNode->left;
+            }  
+            else{
+                num_comp++;
+                searchNode = searchNode->right;
+            } 
+        }
+    }
+    return found;
 }
 
 void SplayTree::rightRotate(Node* node)
 {
-    Node* tmpLeft = node->getLeft(); //x
-    Node* tmpParent = node->getParent(); //w
-    Node* tmpLeftRight = tmpLeft->getRight(); //z    
+    if(!node)   return;
+    Node* tmpLeft = node->left; //x
+    Node* tmpParent = node->parent; //w
+    Node* tmpLeftRight = tmpLeft->right; //z    
 
     if(tmpParent)
     {
-        if(tmpParent->getLeft() == node)    tmpParent->setLeft(tmpLeft);
-        else    tmpParent->setRight(tmpLeft);
+        if(tmpParent->left == node)    tmpParent->left = tmpLeft;
+        else if(tmpParent->right == node)   tmpParent->right = tmpLeft;
     }
-    if(tmpLeftRight)    tmpLeftRight->setParent(node);
+    if(tmpLeftRight)    
+        tmpLeftRight->parent = node;
         
-    node->setLeft(tmpLeftRight);
-    tmpLeft->setRight(node);
-    node->setParent(tmpLeft);
-    tmpLeft->setParent(tmpParent);
+    node->left = tmpLeftRight;
+    tmpLeft->right = node;
+    node->parent = tmpLeft;
+    tmpLeft->parent = tmpParent;
 }
 void SplayTree::leftRotate(Node* node)
 {
-    Node* tmpParent = node->getParent(); //w
-    Node* tmpRight = node->getRight(); // y
-    Node* tmpRightLeft = tmpRight->getLeft(); //z
+    Node* tmpParent = node->parent; //w
+    Node* tmpRight = node->right; // y
+    Node* tmpRightLeft = tmpRight->left; //z
 
     if(tmpParent)
     {
-        if(tmpParent->getLeft() == node)    tmpParent->setLeft(tmpRight);
-        else  tmpParent->setRight(tmpRight);
+        if(tmpParent->left == node)    tmpParent->left = tmpRight;
+        else if(tmpParent->right == node) tmpParent->right = tmpRight;
     }
-    if(tmpRightLeft)    tmpRightLeft->setParent(node);
+    if(tmpRightLeft)    tmpRightLeft->parent = node;
 
-    node->setRight(tmpRightLeft);
-    tmpRight->setLeft(node);
-    tmpRight->setParent(tmpParent);
-    node->setParent(tmpRight);
+    node->right = tmpRightLeft;
+    tmpRight->left = node;
+    node->parent = tmpRight;
+    tmpRight->parent = tmpParent;
 }
 
 void SplayTree::leftZZ(Node* node)
 {  
-    Node*tmp = node->getLeft();
+    Node*tmp = node->left;
     leftRotate(tmp);
     rightRotate(node);   
 }
 
 void SplayTree::rightZZ(Node* node)
 {
-    Node*tmp = node->getRight();
+    Node*tmp = node->right;
     rightRotate(tmp);
     leftRotate(node);
 }
 
 void SplayTree::leftRoll(Node* node)
 {
-    Node* tmp = node->getRight();
+    Node* tmp = node->right;
     leftRotate(node);
     leftRotate(tmp);
 }
 
 void SplayTree::rightRoll(Node* node)
 {
-    Node*tmp = node->getLeft();
+    Node*tmp = node->left;
     rightRotate(node);
     rightRotate(tmp);
 }
 
 void SplayTree::splay(Node* node, int &splay)
 {
-    if(node->getParent() == nullptr)
-        return;
-    else
+    if(node->parent == nullptr)
+        return; //If root then do nothing
+    splay += 1;
+    while(node->parent != nullptr)
     {
-        Node* tmpParent = node->getParent(); //y
-        
-        if(tmpParent->getParent() == nullptr)
+        //cout << "Parent of "<< node->data.name <<"//"<<node->data.level <<" :" << node->parent->data.name <<"//"<<node->parent->data.level<< endl;//Testing
+        // cout << "Splay: " << node->data.name <<"//"<<node->data.level << endl;
+        Node* tmpParent = node->parent;
+        if(tmpParent->parent == nullptr)
         {   
-            if(tmpParent->getLeft() == node && tmpParent->getLeft() != nullptr)  
+            if(tmpParent->left == node && tmpParent->left != nullptr)  
                 rightRotate(tmpParent);
             else    
                 leftRotate(tmpParent);
-            splay++;
         }
         else
         {
-            Node*tmp = tmpParent->getParent(); //z
-            if(tmp->getLeft() == tmpParent && tmp->getLeft() != nullptr){
-                if(tmpParent->getLeft() == node && tmpParent->getLeft() != nullptr)
+            Node*tmp = tmpParent->parent;
+            if(tmp->left == tmpParent && tmp->left != nullptr){
+                if(tmpParent->left == node && tmpParent->left != nullptr)
                     rightRoll(tmp);
-                else   
-                    leftZZ(tmp);
+                else    leftZZ(tmp);
             }
-            else{
-                if(tmpParent->getRight() == node && tmpParent->getRight() != nullptr)
+            else if(tmp->right == tmpParent){
+                if(tmpParent->right == node && tmpParent->right != nullptr)
                     leftRoll(tmp);
-                else
-                    rightZZ(tmp);
-                    
+                else    rightZZ(tmp);
             }
-            splay++;
         }
-        this->root = node;
+        // cout << "After Splay: " ;
+        // this->inorder(this->root);
+        // cout << endl;
     }
+    this->root = node;
+    //node->parent = nullptr; // the parent of root is nullptr
+    return;
 }
 
 void SplayTree::insert_node(Node* root, Node*add, int& comp)
@@ -376,161 +647,139 @@ void SplayTree::insert_node(Node* root, Node*add, int& comp)
         this->root = add;
         return;
     }
-    if(add->getData().getLevel() < root->getData().getLevel())
+    if(add->data.getLevel() < root->data.getLevel())
     {
         comp++;
-        if(root->getLeft() == nullptr){
-            this->addLeft(root, add);
+        if(root->left == nullptr){
+            root->left = add;
+            add->parent = root;
             return;
         }
-        else    insert_node(root->getLeft(), add, comp);
+        else    insert_node(root->left, add, comp);
 
     }
-    else if(add->getData().getLevel() > root->getData().getLevel())
+    else if(add->data.getLevel() > root->data.getLevel())
     {
         comp++;
-        if(root->getRight() == nullptr){
-            this->addRight(root, add);
+        if(root->right == nullptr){
+            root->right = add;
+            add->parent = root;
             return;
         }
-        else   insert_node(root->getRight(), add, comp);
+        else   insert_node(root->right, add, comp);
     }
-    else if(add->getData().getLevel() == root->getData().getLevel())//Then compare the identifier name
+    else//Then compare the identifier name
     { 
-        
-        auto check = add->getData().getName().compare(root->getData().getName());
+        auto check = add->data.getName().compare(root->data.getName());
         if(check < 0) // ADD to left
         {
             comp++;
-            if(root->getLeft() == nullptr){
-                this->addLeft(root, add);
+            if(root->left == nullptr){
+                root->left = add;
+                add->parent = root;
                 return;
             }
-            else     insert_node(root->getLeft(), add, comp);
+            else     insert_node(root->left, add, comp);
         }
         else if(check > 0)
         {
             comp++;
-            if(root->getRight() == nullptr){
-                this->addRight(root, add);
+            if(root->right == nullptr){
+                root->right = add;
+                add->parent = root;
                 return;
             }
-            else     insert_node(root->getRight(), add, comp);
+            else     insert_node(root->right, add, comp);
         }
     }
 }
 
-void SplayTree::deleteNode(Node*tobeDel)
-{
-    if(tobeDel == nullptr) //Base case
+void SplayTree::deleteNodeSplay(Node* tobeDel){
+    /*
+        1. Splay node cần xóa lên root.
+        2. Nếu sau khi splay, chỉ có một trong hai cây con thì không cần thay thế, chỉ việc xóa
+            Nếu sau khi splay, có cả hai cây con thì thay thế root bằng right most của sub left.
+            Nếu không có cây con nào, thì xóa chính node đó và xet root = nulptr
+        3. Cập nhật các node
+    */
+    if(tobeDel == nullptr){
+        // cout << "Null!" << endl; //Testing
         return;
-    if(tobeDel->getLeft() == nullptr && tobeDel->getRight() == nullptr) //Delete a internal node (leaf node)
-    {
-        if(tobeDel == this->root) //If we delete a root
-        {
-            delete this->root;    //Delete it first
-            this->root = nullptr; //Set it to null
-        }
-        else
-        {
-            Node* tmpParent = tobeDel->getParent();  //If it was a leaf
-            if(tobeDel == tmpParent->getLeft())      //If it is a left child then its parent has no left child
-                tmpParent->setLeft(nullptr);
-            else    tmpParent->setRight(nullptr);       //Similarly, when it is a right child
-            delete tobeDel;
-            tobeDel = nullptr;
-        }
-    }
-    else //If it has either left or right subtree or both
-    {
-        if(tobeDel->getRight() != nullptr) //Just existing right subtree
-        {
-            Node* tmpSucc = TreeMin(tobeDel->getRight());
-            tobeDel->setData(tmpSucc->getData());
-            deleteNode(tmpSucc);
-        }
-        else //Existing left subtree
-        {
-            Node *tmpProc = TreeMax(tobeDel->getLeft());
-            tobeDel->setData(tmpProc->getData());
-            deleteNode(tmpProc);
-        }
-    }
-}
+    } 
+    int splay = 0;
+    // cout << "Tobe splay: " << tobeDel->data.name <<"//"<<tobeDel->data.level << endl; //Testing
+    this->splay(tobeDel, splay);
+    // cout <<"Deleting " <<tobeDel->data.name<<"//"<<tobeDel->data.level << endl;// Testing
+    if(this->root->left == nullptr && this->root->right == nullptr){
+        // cout << "Node root " << endl;
+        this->root = nullptr;
+        delete tobeDel;
+        return;
+    }   
+    if(tobeDel->left && tobeDel->right == nullptr){ //Neu chi co 1 cay con trai
+        // cout << "Just left" << endl;
+        Node*tmp = this->root;
+        this->root = this->root->left;
+        this->root->parent = nullptr;
+        delete tmp;        
+        // cout << "End delete..." << endl;    
 
-Node *SplayTree::TreeMin(Node *node)
-{
-    Node*tmp = node;
-    while(tmp->getLeft())
-        tmp = tmp->getLeft();
-    return tmp;
+        return;
+    }
+    if(tobeDel->left == nullptr && tobeDel->right){ //Neu chi co 1 cay con phai
+        // cout << "Just right" << endl;
+        Node*tmp = this->root;
+        this->root = this->root->right;
+        this->root->parent = nullptr;
+        delete tmp;
+                // cout << "End delete..." << endl;    
+
+        return;
+    }
+    if(tobeDel->left && tobeDel->right){ //Neu co ca hai cay con
+        // cout << "Both" << endl;
+        Node* tmpLeft = this->root->left; 
+        Node* tmpRight = this->root->right;
+        Node* tmp = this->root;
+        Node* nodeMax;
+        
+        if(tmpLeft->right){
+            nodeMax = tmpLeft->right;
+            nodeMax = this->TreeMax(nodeMax); // Right most of subleft
+            this->splay(nodeMax, splay);
+            nodeMax->right = tmpRight;
+            if(tmpRight)  
+                tmpRight->parent = nodeMax;
+            this->root = nodeMax;
+            this->root->parent = nullptr;
+        }
+
+        else{
+            tmpLeft->right = tmpRight;
+            if(tmpRight)  tmpRight->parent = tmpLeft;
+            this->root = tmpLeft;
+            this->root->parent = nullptr;
+        }
+        delete tmp;
+        // cout << "End delete..." << endl;    
+        //cout <<"Tree :"; this->inorder(this->root);
+        return;
+    }
 }
 
 Node *SplayTree::TreeMax(Node *node) {
     Node*tmp = node;
-    while(tmp->getRight())
-        tmp = tmp->getRight();
+    if(tmp){
+        while(tmp->right)
+            tmp = tmp->right;
+    }
     return tmp;
 }
 
-Node *SplayTree::TreeSucc(Node *node) {
-    Node*tmp = node;
-    if(node->getRight())
-        return TreeMin(node->getRight());
-    else
-    {
-        Node* tmpParent = tmp->getParent();
-        while(tmpParent && tmp == tmpParent->getRight())
-        {
-            tmp = tmpParent;
-            tmpParent = tmpParent->getParent();
-        }
-        return tmpParent;
-    }
-}
-
-Node *SplayTree::TreeProc(Node *node) {
-    Node*tmp = node;
-    if(node->getLeft())
-        return TreeMax(node->getLeft());
-    else
-    {
-        Node* tmpParent = node->getParent();
-        while(tmpParent && tmp == tmpParent->getLeft())
-        {
-            tmp = tmpParent;
-            tmpParent = tmpParent->getParent();
-        }
-        return tmpParent;
-    }
-}
-
-void SplayTree::addLeft(Node*& node, Node*& add){
-    node->setLeft(add);
-    add->setParent(node);
-}
-
-void SplayTree::addRight(Node*& node, Node*& add){
-    node->setRight(add);
-    add->setParent(node);
-}
-
-//================ NODE =======================
-Node* Node::getLeft() const {return this->left;}
-Node* Node::getRight() const {return this->right;}
-Node* Node::getParent() const {return this->parent;}
-void Node::setParent(Node *parent_node)  {this->parent = parent_node;}
-void Node::setRight(Node *right_node) {this->right = right_node;}
-void Node::setLeft(Node *left_node)  {this->left = left_node;}
-Identifier Node::getData() const {return this->data;}
 //================ IDENTIFIER ==================
-Identifier::Identifier(string name, string type, string value, string returnType) {
-    this->name = std::move(name);
-    this->type = std::move(type);
-    this->value = std::move(value);
-    this->returnType = std::move(returnType);
-    this->level = 0;
+Identifier::Identifier(string name, string type) {
+    this->name = std::move(name);   this->type = std::move(type);
+    this->level = 0; 
 }
-void Identifier::setLevel(int level_scope){this->level = level_scope;}
-Identifier::Identifier(){this->level = 0;}
-Identifier::~Identifier() = default;
+void Identifier:: assignLevel(int level_scope){this->level = level_scope;}
+Identifier::Identifier(){this->level = 0; } Identifier::~Identifier(){}
