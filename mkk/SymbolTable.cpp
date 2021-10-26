@@ -20,31 +20,28 @@ void SymbolTable::run(const string& filename) {
 
             if (regex_match(s, data, insert)) {
                 identifier_name newID(data[1], data[2], level, data[8], 0, 0);
-                string out = splay_tree.insert_tree(newID, newID.num_com);
-                if (out == "invaliddeclaration") {
-                    throw InvalidDeclaration(s);
-                } else if (out == "redeclared") {
-                    throw Redeclared(s);
-                }
+                string out = splay_tree.insert_tree(newID);
+
+                if (out == "invaliddeclaration")    throw InvalidDeclaration(s);
+                else if (out == "redeclared")       throw Redeclared(s);
+
                 cout << splay_tree.root->data.num_com << " " << splay_tree.root->data.num_splay << endl;
-                tracking_lisst.insert_lisst(splay_tree.root->data.ID, splay_tree.root->data.type, splay_tree.root->data.level);
+                tracking_lisst.insert_lisst(splay_tree.root->data.ID, splay_tree.root->data.level);
 
             } else if (regex_match(s, data, assign)) {
                 string out = splay_tree.assign_tree(tracking_lisst, data[1], data[2], level);
-                if (out == "mismatch") {
-                    throw TypeMismatch(s);
-                }
-                if (out == "undeclared") {
-                    throw Undeclared(s);
-                }
+
+                if (out == "mismatch")              throw TypeMismatch(s);
+                if (out == "undeclared")            throw Undeclared(s);
+
                 cout << out << endl;
+
             } else if (s == "BEGIN") {
                 level++;
 
             } else if (s == "END") {
-                if (level == 0) {
-                    throw UnknownBlock();
-                }
+                if (level == 0)                     throw UnknownBlock();
+
                 splay_tree.end_level(tracking_lisst, level);
                 tracking_lisst.delete_level(level);
                 level--;
@@ -56,20 +53,15 @@ void SymbolTable::run(const string& filename) {
                 }
 
             } else if (regex_match(s, data, lookup)) {
-                string out = splay_tree.look_up(data[1], level, 0);
-                if (out == "no") {
-                    throw Undeclared(s);
-                } else {
-                    cout << splay_tree.root->data.level << endl;
-                }
+                string out = splay_tree.look_up(data[1], level);
 
-            } else {
-                throw InvalidInstruction(s);
-            }
+                if (out == "no")                    throw Undeclared(s);
+
+                else cout << splay_tree.root->data.level << endl;
+
+            } else                                  throw InvalidInstruction(s);
         }
-        if (level != 0) {
-            throw UnclosedBlock(level);
-        }
+        if (level != 0)                             throw UnclosedBlock(level);
     }
     myfile.close();
 }
@@ -77,9 +69,7 @@ void SymbolTable::run(const string& filename) {
 void Tree::right_rol(identifier_node* &h) {
     auto left_h = h->left_child;
     h->left_child = left_h->right_child;
-    if (left_h->right_child != nullptr) {
-        left_h->right_child->parent = h;
-    }
+    if (left_h->right_child != nullptr)     left_h->right_child->parent = h;
     left_h->right_child = h;
     if (h->parent == nullptr) {
         h->parent = left_h;
@@ -117,9 +107,7 @@ void Tree::left_rol(identifier_node* &h) {
 }
 
 int Tree::splay(identifier_node* &h) {                           // num_splay
-    if (h->parent == nullptr) {
-        return 0;
-    }
+    if (h->parent == nullptr)       return 0;
 
     while (h->parent != nullptr) {
         if (h->parent == this->root) {
@@ -153,7 +141,7 @@ int Tree::splay(identifier_node* &h) {                           // num_splay
     return 1;
 }
 
-string Tree::insert_tree(identifier_name &newID, int &num_com) {
+string Tree::insert_tree(identifier_name &newID) {
     if (newID.static_check == "true") {                         //check if static true ? false
         newID.level = 0;
     }
@@ -167,7 +155,7 @@ string Tree::insert_tree(identifier_name &newID, int &num_com) {
         this->root = new_node;
         return "success";
     }
-
+    int num_com = 0;
     identifier_node *h;
     for (h = this->root; ; ) {
         num_com++;
@@ -189,6 +177,7 @@ string Tree::insert_tree(identifier_name &newID, int &num_com) {
 
         } else {                                                //compare ID
             if (newID.ID == h->data.ID) {
+                delete new_node;
                 return "redeclared";
             } else if (newID.ID.compare(h->data.ID) < 0) {
                 if (h->left_child == nullptr) {
@@ -217,29 +206,21 @@ string type_of_value(const string& value) {
     regex number(R"(\d+)");
     regex string(R"('[a-zA-Z\d ]*')");
     regex id(R"([a-z]\w*)");
-    if (regex_match(value, number))
-        return "number";
-    if (regex_match(value, string))
-        return "string";
-    if (regex_match(value, id))
-        return "ID";
+    if (regex_match(value, number))         return "number";
+    if (regex_match(value, string))         return "string";
+    if (regex_match(value, id))             return "ID";
     return "invalid";
 }
 
-void LinkedLisst::insert_lisst(string ID, string type, int level) {
-    auto *new_node = new Node(move(ID), move(type), level, nullptr, nullptr);
+void LinkedLisst::insert_lisst(string ID, int level) {
+    if (level == 0) return;
 
+    auto *new_node = new Node(move(ID), level, nullptr, nullptr);
     if (this->head == nullptr) {
         this->head = new_node;
         this->tail = this->head;
         this->size = 1;
     } else {
-        if (level == 0) {
-            new_node->next = this->head;
-            this->head->prev = new_node;
-            this->head = new_node;
-            return;
-        }
         this->tail->next = new_node;
         new_node->prev = this->tail;
         this->tail = new_node;
@@ -281,7 +262,7 @@ string Tree::assign_tree(LinkedLisst& lisst, const string& ID, const string& val
     regex function(R"(([a-z]\w*)(\((('[a-zA-Z\d ]*'|\d+|[a-z]\w*)(,('[a-zA-Z\d ]*'|\d+|[a-z]\w*))*)*\))$)");
     smatch data;
     if (regex_match(value, data, function)) {           // for function
-        string out = this->look_up(data[1], level, num_com);
+        string out = this->look_up(data[1], level);
         if (out == "no") {
             return "undeclared";
         }
@@ -301,7 +282,7 @@ string Tree::assign_tree(LinkedLisst& lisst, const string& ID, const string& val
                         break;
                     }
                 }
-                Lisst.insert_lisst(func.substr(i, j - i), "", 1);
+                Lisst.insert_lisst(func.substr(i, j - i), 1);
                 i = i + (j - i);
             }
         }                                                   // lisst tail is the result if right check for all variable(s)
@@ -315,7 +296,7 @@ string Tree::assign_tree(LinkedLisst& lisst, const string& ID, const string& val
                         break;
                     }
                 }
-                Lisst1.insert_lisst(var.substr(i, j - i), "", 1);
+                Lisst1.insert_lisst(var.substr(i, j - i), 1);
                 i = i + (j - i);
             }
         }
@@ -327,7 +308,7 @@ string Tree::assign_tree(LinkedLisst& lisst, const string& ID, const string& val
             for (int i = 0; i < Lisst1.size; i++) {
                 if (h1 == nullptr) break;
                 if (type_of_value(h1->ID) == "ID") {
-                    string out1 = this->look_up(h1->ID, level, num_com);
+                    string out1 = this->look_up(h1->ID, level);
                     if (out1 == "no") {
                         return "undeclared";
                     } else if (this->root->data.type != h->ID) {
@@ -342,7 +323,7 @@ string Tree::assign_tree(LinkedLisst& lisst, const string& ID, const string& val
                 h1 = h1->next;
             }
         }
-        string out1 = this->look_up(ID, level, num_com);              // node assigned
+        string out1 = this->look_up(ID, level);              // node assigned
         if (out1 == "no") {                              // if invalid node
             return "undeclared";
         }
@@ -352,7 +333,7 @@ string Tree::assign_tree(LinkedLisst& lisst, const string& ID, const string& val
             return "mismatch";
         }
     } else if (type_of_value(value) == "ID") {                 // value is another ID
-        string out = this->look_up(value, level, num_com);      //lookup ID_value node
+        string out = this->look_up(value, level);      //lookup ID_value node
         if (out == "no") {
             return "undeclared";
         }
@@ -362,7 +343,7 @@ string Tree::assign_tree(LinkedLisst& lisst, const string& ID, const string& val
         num_com+=this->root->data.num_com;
         num_splay+=this->root->data.num_splay;
         string type_check = this->root->data.type;      // type of ID_value
-        string out1 = this->look_up(ID, level, num_com);       // lookup ID node
+        string out1 = this->look_up(ID, level);       // lookup ID node
         if (out1 == "no") {
             return "undeclared";
         }
@@ -373,7 +354,7 @@ string Tree::assign_tree(LinkedLisst& lisst, const string& ID, const string& val
         }
 
     } else {
-        string out1 = this->look_up(ID, level, num_com);
+        string out1 = this->look_up(ID, level);
         if (out1 == "no") {
             return "undeclared";
         }
@@ -407,7 +388,7 @@ void Tree::end_level(LinkedLisst &lisst, int level) {
     auto *t = lisst.head;
     while (t) {
         if (t->level == level) {
-            this->look_up(t->ID, level, 0);
+            this->look_up(t->ID, level);
             if (this->root->right_child == nullptr && this->root->left_child == nullptr) {
                 delete this->root;
                 this->root = nullptr;
@@ -435,46 +416,48 @@ void Tree::end_level(LinkedLisst &lisst, int level) {
     }
 }
 
-string Tree::look_up(const string& ID, int level, int count) {
-    if (this->root == nullptr || level == -1) {
+string Tree::look_up(const string& ID, int level) {
+    if (this->root == nullptr) {
         return "no";
     }
-    count = 0;
-    for (auto *h = this->root; ; ) {
-        count++;
-        if (level > h->data.level) {                            //for level higher root
-            if (h->right_child == nullptr) {
-                return this->look_up(ID, level - 1, count);
-            }
-            h = h->right_child;
+    for (int i = level; i >= 0; i--) {
+        int count = 0;
+        for (auto *h = this->root;;) {
+            count++;
+            if (i > h->data.level) {                //for level higher root
+                if (h->right_child == nullptr) {
+                    break;
+                }
+                h = h->right_child;
 
-        } else if (level < h->data.level) {                     //for level lower
-            if (h->left_child == nullptr) {
-                return this->look_up(ID, level - 1, count);
-            }
-            h = h->left_child;
-
-        } else {                                                //compare ID
-            if (ID == h->data.ID) {
-                h->data.num_com = count;
-                h->data.num_splay = this->splay(h);
-                break;
-
-            } else if (ID.compare(h->data.ID) < 0) {
+            } else if (i < h->data.level) {         //for level lower
                 if (h->left_child == nullptr) {
-                    return this->look_up(ID, level - 1, count);
+                    break;
                 }
                 h = h->left_child;
 
-            } else if (ID.compare(h->data.ID) > 0) {
-                if (h->right_child == nullptr) {
-                    return this->look_up(ID, level - 1, count);
+            } else {                                //compare ID
+                if (ID == h->data.ID) {
+                    h->data.num_com = count;
+                    h->data.num_splay = this->splay(h);
+                    return "find";
+
+                } else if (ID.compare(h->data.ID) < 0) {
+                    if (h->left_child == nullptr) {
+                        break;
+                    }
+                    h = h->left_child;
+
+                } else if (ID.compare(h->data.ID) > 0) {
+                    if (h->right_child == nullptr) {
+                        break;
+                    }
+                    h = h->right_child;
                 }
-                h = h->right_child;
             }
         }
     }
-    return "find";
+    return "no";
 }
 
 void Tree::print(identifier_node* &node) {
@@ -482,11 +465,8 @@ void Tree::print(identifier_node* &node) {
         return;
     }
 
-    if (node == this->root) {
-        cout << node->data.ID << "//" << node->data.level;
-    } else {
-        cout << " " << node->data.ID << "//" << node->data.level;
-    }
+    if (node == this->root) cout << node->data.ID << "//" << node->data.level;
+    else                    cout << " " << node->data.ID << "//" << node->data.level;
 
     print(node->left_child);
     print(node->right_child);

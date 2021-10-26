@@ -1,31 +1,9 @@
-INSERT cD string true
-ASSIGN cD cD
 BEGIN
-PRINT
-INSERT jJK string false
-ASSIGN jJK jJK
 BEGIN
-ASSIGN jJK jJK
-LOOKUP cD
-ASSIGN jJK jJK
-BEGIN
-INSERT w number false
-LOOKUP w
-BEGIN
-LOOKUP w
-PRINT
+INSERT jjqa4u string true
 END
-PRINT
-END
+INSERT lvV (number)->string true
 BEGIN
-BEGIN
-END
-BEGIN
-PRINT
-INSERT uN number false
-PRINT
-END
-LOOKUP w
-END
-LOOKUP uN
-BEGIN
+INSERT w2ggE number false
+LOOKUP jjqa4u
+ASSIGN lvV lvV(w2ggE)
