@@ -1,15 +1,87 @@
-INSERT zv number true
 PRINT
-INSERT z string false
-BEGIN
-INSERT wd number true
-LOOKUP zv
-INSERT nfkq string false
-BEGIN
-INSERT jjqa4u string true
-END
-INSERT eTaD (string,string,string)->string true
-INSERT lvV (number)->string true
 PRINT
 BEGIN
+INSERT rwX0 string false
+BEGIN
+PRINT
+PRINT
+INSERT t string false
 END
+INSERT sL string true
+BEGIN
+END
+INSERT d string false
+PRINT
+PRINT
+LOOKUP sL
+ASSIGN rwX0 sL
+INSERT bvV3Z string true
+BEGIN
+ASSIGN d sL
+END
+PRINT
+PRINT
+END
+LOOKUP sL
+PRINT
+PRINT
+INSERT krPMO number false
+PRINT
+INSERT vJA (number,number)->string false
+LOOKUP sL
+END
+PRINT
+END
+ASSIGN sL sL
+ASSIGN d sL
+BEGIN
+ASSIGN d t
+LOOKUP rwX0
+PRINT
+END
+ASSIGN wo d
+INSERT lws string true
+PRINT
+LOOKUP vJA
+BEGIN
+INSERT dAjWZD ()->number true
+ASSIGN lws rwX0
+LOOKUP vJA
+LOOKUP x
+PRINT
+BEGIN
+BEGIN
+PRINT
+LOOKUP sL
+ASSIGN bvV3Z rwX0
+ASSIGN krPMO vJA(krPMO,bvV3Z)
+ASSIGN rwX0 o
+LOOKUP rwX0
+PRINT
+END
+LOOKUP sL
+ASSIGN d lws
+LOOKUP krPMO
+ASSIGN vJA rwX0
+INSERT c3 ()->string true
+INSERT m3_ (number,string,number)->number true
+INSERT iujaR (string)->number true
+BEGIN
+LOOKUP bWHvC
+LOOKUP krPMO
+ASSIGN krPMO vJA(912,767)
+INSERT fWj_ number true
+END
+END
+END
+BEGIN
+INSERT k number false
+BEGIN
+INSERT tXl3Dt (number)->number false
+LOOKUP ckfNGr
+ASSIGN m3_ m3_(krPMO,'DRe7J',k)
+INSERT zZSdZ number false
+LOOKUP vJA
+BEGIN
+PRINT
+PRINT

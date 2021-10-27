@@ -259,6 +259,8 @@ void LinkedLisst::delete_level(const int& level) {
         this->head = this->head->next;
         delete h;
         h = this->head;
+        this->head->prev = nullptr;
+        this->curent_level = this->head;
     }
 }
 
