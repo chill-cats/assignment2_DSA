@@ -36,7 +36,6 @@ class Identifier{
 public:
     Identifier(string name, string type);
     Identifier();
-    ~Identifier();
     void assignLevel(int level);
     string getName(){return this->name;}
     string getType(){return this->type;}
@@ -45,7 +44,7 @@ public:
     string name;
     string type;
     string value;
-    string returnType;
+    string returnType; //for assign
     int level;
 };
 
@@ -58,7 +57,7 @@ public:
     Node*left = nullptr;
     Node*right = nullptr;
     Identifier data;
-    string *paramList;
+    string *paramList = nullptr;
     int numParam;
 };
 class SplayTree{
@@ -67,12 +66,10 @@ public:
     Node *root = nullptr;
     int count;
     ~SplayTree();
-    Node*find(const string& name, int level, int& num_comp);
+    Node* find(const string& name, int level, int& num_comp);
     Node* TreeMax(Node*);
     void insert_node(Node*, Node*, int &comp);
-    void addLeft(Node*&, Node*&);
-    void addRight(Node*&, Node*&);
-    void deleteNode(Node*);
+    void deleteNodeSplay(Node*);
     void rightRotate(Node* node);
     void leftRotate(Node* node) ;
     void rightZZ(Node* node);
@@ -81,8 +78,8 @@ public:
     void rightRoll(Node* node);
     void splay(Node* node, int &splay);
     void destroy(Node* node);
-    void deleteNodeSplay(Node*);
 };
+
 class LixtNode{
 public:
     LixtNode();
@@ -105,9 +102,9 @@ public:
     Node* pop_front();
     bool isEmpty();
 };
+
 class SymbolTable {
 public:
-    friend class SplayTree;
     SymbolTable();
     ~SymbolTable();
     int currentLevel;
@@ -120,11 +117,10 @@ public:
     void print(Node*, bool&);
     void new_scope() ;
     void end_scope();
-
-    void handle_exception_insert(const string& line);
-    int handle_exception_assign(const string& line);
+    void handle_exception_insert(const string& line) const;
     void handle_end_file() const;
     const string process(const string& line);
-
+    void printIn(Node*, bool& flag);
+    void printPost(Node*, bool& flag);
 };
 #endif

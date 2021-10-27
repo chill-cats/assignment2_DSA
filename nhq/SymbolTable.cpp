@@ -55,7 +55,6 @@ Node* HangDoi::pop_front(){
     }
     tmp_data = tmp->data;
     delete tmp;
-
     this->size--;
     return tmp_data;
 }
@@ -135,7 +134,7 @@ Node::~Node(){
 SymbolTable::~SymbolTable(){
     delete this->hangdoi;
     delete this->tree;
-} //HANDLE END FILE
+} 
 void SymbolTable::run(string filename)
 {
     string line;
@@ -146,11 +145,9 @@ void SymbolTable::run(string filename)
         while(getline(infile, line)){
             //Doing the main function
             const string command = process(line);
-            if(command == "INSERT"){
+            if(command == "INSERT")
                 this->insert(line);
-                this->tree->count++;
-                
-            }
+
             else if (command == "ASSIGN"){
                 int ass_comp = 0, ass_splay = 0;
                 this->assign(line, ass_comp, ass_splay);
@@ -159,7 +156,8 @@ void SymbolTable::run(string filename)
             else if (command == "BEGIN")
                 this->new_scope();
 
-            else if (command== "END"){this->end_scope();}
+            else if (command== "END")
+                this->end_scope();
 
             else if (command == "LOOKUP"){
                 
@@ -168,7 +166,7 @@ void SymbolTable::run(string filename)
                 ValidMachine tester = ValidMachine(line);
                 tester.parseLookup();
                 const string name = tester.name;
-                Node*tmp = this->lookup(name,currentLevel,comp);
+                Node* tmp = this->lookup(name,currentLevel,comp);
                 if(tmp == nullptr) throw Undeclared(line);
                 else{
                     cout << tmp->data.level<<"\n";
@@ -182,8 +180,20 @@ void SymbolTable::run(string filename)
                 if(printed == true) 
                     cout << "\n";
             }
+            else if (command == "PRINTIN"){
+                bool printed = false;
+                this->printIn(this->tree->root, printed);
+                if(printed == true) 
+                    cout << "\n";
+            }
+            else if (command == "PRINTPOST"){
+                bool printed = false;
+                this->printPost(this->tree->root, printed);
+                if(printed == true) 
+                    cout << "\n";
+            }
         }
-        handle_end_file();
+        handle_end_file(); //Check unclosed block
     }
     //HANDLE END OF FILE
     infile.close();
@@ -223,6 +233,14 @@ const string SymbolTable::process(const string& line){ //CHECK LỖI NGỮ NGHĨ
         command = "PRINT"; 
         return command;
     }
+    else if(line == "PRINTIN"){
+        command = "PRINT"; 
+        return command;
+    }
+    else if(line == "PRINTPOST"){
+        command = "PRINT"; 
+        return command;
+    }
     else throw InvalidInstruction(line);
 }
 
@@ -241,20 +259,20 @@ void SymbolTable::insert(const string& line) const{
     else    type = tester.type;
     Identifier a = Identifier(name, type);
     a.assignLevel(initLevel);
-    Node* add = new Node(a);
+    Node* add = new Node(a); //create a node tree
 
     if(type == "func"){
         string param = tester.param;
         add->data.returnType = tester.returnType;
         //Count the number of param
-        if(param != ""){
+        if(!param.empty()){
             int paramSize = param.size();
-            for(int i = 0; i < paramSize; i++){
+            for(int i = 0; i < paramSize; i++){ //std::count()
                 if(param[i] == ',') add->numParam++;
             }
             add->paramList = new string[++add->numParam];
         }
-        //Add param to parameter 
+    
         if(add->numParam == 1)  add->paramList[0] = param;
         if(add->numParam > 1){
             int start = 0, comma = 0, num = add->numParam, idx =0 ;
@@ -270,8 +288,10 @@ void SymbolTable::insert(const string& line) const{
     }
     this->tree->insert_node(this->tree->root, add, comp);
     this->tree->splay(add, splay);
+
     if(initLevel != 0)  
         this->hangdoi->append(add, initLevel);
+
     cout << comp << " " << splay << endl; 
 }
 
@@ -296,7 +316,6 @@ void SymbolTable::assign(const string& line, int& comp, int& splay){
         return;
     }
     
-    //If assign a string
     if(valueAssign[0] == '\''){ //Match with the first hyphen
         
         int tmpLev = this->currentLevel;
@@ -311,7 +330,6 @@ void SymbolTable::assign(const string& line, int& comp, int& splay){
         return;
     }
 
-    //If call a function to assign for identifier
     if(valueAssign[valueAssign.size()-1] == ')'){
         
         int start = 0, curLevel = this->currentLevel;
@@ -343,7 +361,6 @@ void SymbolTable::assign(const string& line, int& comp, int& splay){
                 comma = realParam.find(',', start);
                 string tmpStr = realParam.substr(start, comma-start); //Tokenize each key in args
 
-                //if key is a identifier
                 if(tmpStr[0] != '\'' && (tmpStr[0] > '9' || tmpStr[0] < '0') && tmpStr[(int)tmpStr.size()-1] != ')'){
                     
                     Node* paramNode = nullptr; int curLev = this->currentLevel;
@@ -355,19 +372,18 @@ void SymbolTable::assign(const string& line, int& comp, int& splay){
                     if(!paramNode) throw Undeclared(line);
                 }
                 
-                //If key is number
                 if(tmpStr[0] <= '9' && tmpStr[0] >=  '0'){
                     if(tmpFuncNode->paramList[idx] != "number")
                         throw TypeMismatch(line);
                     
                 }
-                //If key is string
+            
                 if(tmpStr[0] == '\''){
                     if(tmpFuncNode->paramList[idx] != "string")
                         throw TypeMismatch(line);
                     
                 }
-                //if key is a function
+            
                 if(tmpStr[tmpStr.size() - 1] == ')')    throw TypeMismatch(line);
                 start = comma+1;
             }
@@ -385,7 +401,6 @@ void SymbolTable::assign(const string& line, int& comp, int& splay){
     
     }
     
-    //If assign an identifier which does not have a close bracket at the end
     else{
         int tmpComp = 0;
         int currentLevel = this->currentLevel;
@@ -433,12 +448,12 @@ Node* SymbolTable::lookup(const string&  name, int destLevel, int& num_comp)
         } 
         else break;
     }
+
     num_comp += tmp_comp; //The number of parisons
     return tmp;
 }
 void SymbolTable::new_scope(){this->currentLevel += 1;}
-void SymbolTable::end_scope()
-{
+void SymbolTable::end_scope(){
     if(this->currentLevel ==0)  throw UnknownBlock();
     if(this->hangdoi->front){
         while(this->hangdoi->front){
@@ -451,8 +466,7 @@ void SymbolTable::end_scope()
     }
     this->currentLevel--;            
 }
-void SymbolTable::print(Node* node, bool& printed)
-{
+void SymbolTable::print(Node* node, bool& printed){
     if(node)
     {   
         printed = true;
@@ -467,9 +481,40 @@ void SymbolTable::print(Node* node, bool& printed)
         }
     }
 }
+void SymbolTable::printIn(Node* node, bool& printed){
+    if(node)
+    {   
+        printed = true;
+        if(node->left){
+            cout <<" ";
+            print(node->left, printed);
+        }
+        cout << node->data.name <<"//"<<node->data.level;
+        if(node->right){
+            cout << " ";
+            print(node->right, printed);
+        }
+    }
+}
+void SymbolTable::printPost(Node* node, bool& printed){
+    if(node)
+    {   
+        printed = true;
+        if(node->left){
+            cout <<" ";
+            print(node->left, printed);
+        }
+        if(node->right){
+            cout << " ";
+            print(node->right, printed);
+        }
+        cout << node->data.name <<"//"<<node->data.level;
+    }
+}
 
-void SymbolTable::handle_exception_insert(const string& line) //CHECK LỖI LOGIC TRƯỚC KHI THỰC HIỆN INSERT
-{
+
+
+void SymbolTable::handle_exception_insert(const string& line) const{ //CHECK LỖI LOGIC TRƯỚC KHI THỰC HIỆN INSERT
     int comp = 0;
     ValidMachine tester = ValidMachine(line);
     tester.parseInsert(false);
@@ -486,13 +531,11 @@ void SymbolTable::handle_exception_insert(const string& line) //CHECK LỖI LOGI
     if(tmp) throw Redeclared(line);
 
 }
-void SymbolTable::handle_end_file() const
-{
+void SymbolTable::handle_end_file() const {
     if(this->currentLevel != 0){throw UnclosedBlock(this->currentLevel);}
 }
-//==================== Splay Tree =====================================
-
-void SplayTree::destroy(Node *node) {
+//==================== Splay Tree ===========================================
+void SplayTree::destroy(Node *node){
     if(node == nullptr)
         return;
     destroy(node->left);
@@ -500,8 +543,7 @@ void SplayTree::destroy(Node *node) {
     delete node;
     return;
 }
-Node* SplayTree::find(const string& name, int destLevel, int& num_comp)
-{
+Node* SplayTree::find(const string& name, int destLevel, int& num_comp){
     //So sanh level -> So sanh ten
     Node* searchNode = this->root;
     Node*found = nullptr;
@@ -533,8 +575,7 @@ Node* SplayTree::find(const string& name, int destLevel, int& num_comp)
     return found;
 }
 
-void SplayTree::rightRotate(Node* node)
-{
+void SplayTree::rightRotate(Node* node){
     if(!node)   return;
     Node* tmpLeft = node->left; //x
     Node* tmpParent = node->parent; //w
@@ -553,8 +594,7 @@ void SplayTree::rightRotate(Node* node)
     node->parent = tmpLeft;
     tmpLeft->parent = tmpParent;
 }
-void SplayTree::leftRotate(Node* node)
-{
+void SplayTree::leftRotate(Node* node){
     Node* tmpParent = node->parent; //w
     Node* tmpRight = node->right; // y
     Node* tmpRightLeft = tmpRight->left; //z
@@ -572,43 +612,35 @@ void SplayTree::leftRotate(Node* node)
     tmpRight->parent = tmpParent;
 }
 
-void SplayTree::leftZZ(Node* node)
-{  
+void SplayTree::leftZZ(Node* node){  
     Node*tmp = node->left;
     leftRotate(tmp);
     rightRotate(node);   
 }
 
-void SplayTree::rightZZ(Node* node)
-{
+void SplayTree::rightZZ(Node* node){
     Node*tmp = node->right;
     rightRotate(tmp);
     leftRotate(node);
 }
 
-void SplayTree::leftRoll(Node* node)
-{
+void SplayTree::leftRoll(Node* node){
     Node* tmp = node->right;
     leftRotate(node);
     leftRotate(tmp);
 }
-
-void SplayTree::rightRoll(Node* node)
-{
+void SplayTree::rightRoll(Node* node){
     Node*tmp = node->left;
     rightRotate(node);
     rightRotate(tmp);
 }
 
-void SplayTree::splay(Node* node, int &splay)
-{
+void SplayTree::splay(Node* node, int &splay){
     if(node->parent == nullptr)
         return; //If root then do nothing
     splay += 1;
     while(node->parent != nullptr)
     {
-        //cout << "Parent of "<< node->data.name <<"//"<<node->data.level <<" :" << node->parent->data.name <<"//"<<node->parent->data.level<< endl;//Testing
-        // cout << "Splay: " << node->data.name <<"//"<<node->data.level << endl;
         Node* tmpParent = node->parent;
         if(tmpParent->parent == nullptr)
         {   
@@ -631,17 +663,13 @@ void SplayTree::splay(Node* node, int &splay)
                 else    rightZZ(tmp);
             }
         }
-        // cout << "After Splay: " ;
-        // this->inorder(this->root);
-        // cout << endl;
     }
     this->root = node;
     //node->parent = nullptr; // the parent of root is nullptr
     return;
 }
 
-void SplayTree::insert_node(Node* root, Node*add, int& comp)
-{
+void SplayTree::insert_node(Node* root, Node*add, int& comp){
     if(this->root == nullptr)
     {
         this->root = add;
@@ -695,21 +723,11 @@ void SplayTree::insert_node(Node* root, Node*add, int& comp)
 }
 
 void SplayTree::deleteNodeSplay(Node* tobeDel){
-    /*
-        1. Splay node cần xóa lên root.
-        2. Nếu sau khi splay, chỉ có một trong hai cây con thì không cần thay thế, chỉ việc xóa
-            Nếu sau khi splay, có cả hai cây con thì thay thế root bằng right most của sub left.
-            Nếu không có cây con nào, thì xóa chính node đó và xet root = nulptr
-        3. Cập nhật các node
-    */
-    if(tobeDel == nullptr){
-        // cout << "Null!" << endl; //Testing
-        return;
-    } 
+
+    if(tobeDel == nullptr)
+        return; 
     int splay = 0;
-    // cout << "Tobe splay: " << tobeDel->data.name <<"//"<<tobeDel->data.level << endl; //Testing
     this->splay(tobeDel, splay);
-    // cout <<"Deleting " <<tobeDel->data.name<<"//"<<tobeDel->data.level << endl;// Testing
     if(this->root->left == nullptr && this->root->right == nullptr){
         // cout << "Node root " << endl;
         this->root = nullptr;
@@ -717,27 +735,20 @@ void SplayTree::deleteNodeSplay(Node* tobeDel){
         return;
     }   
     if(tobeDel->left && tobeDel->right == nullptr){ //Neu chi co 1 cay con trai
-        // cout << "Just left" << endl;
         Node*tmp = this->root;
         this->root = this->root->left;
         this->root->parent = nullptr;
         delete tmp;        
-        // cout << "End delete..." << endl;    
-
         return;
     }
     if(tobeDel->left == nullptr && tobeDel->right){ //Neu chi co 1 cay con phai
-        // cout << "Just right" << endl;
         Node*tmp = this->root;
         this->root = this->root->right;
         this->root->parent = nullptr;
         delete tmp;
-                // cout << "End delete..." << endl;    
-
         return;
     }
     if(tobeDel->left && tobeDel->right){ //Neu co ca hai cay con
-        // cout << "Both" << endl;
         Node* tmpLeft = this->root->left; 
         Node* tmpRight = this->root->right;
         Node* tmp = this->root;
@@ -761,13 +772,11 @@ void SplayTree::deleteNodeSplay(Node* tobeDel){
             this->root->parent = nullptr;
         }
         delete tmp;
-        // cout << "End delete..." << endl;    
-        //cout <<"Tree :"; this->inorder(this->root);
         return;
     }
 }
 
-Node *SplayTree::TreeMax(Node *node) {
+Node *SplayTree::TreeMax(Node *node){
     Node*tmp = node;
     if(tmp){
         while(tmp->right)
@@ -775,11 +784,10 @@ Node *SplayTree::TreeMax(Node *node) {
     }
     return tmp;
 }
-
 //================ IDENTIFIER ==================
 Identifier::Identifier(string name, string type) {
     this->name = std::move(name);   this->type = std::move(type);
     this->level = 0; 
 }
 void Identifier:: assignLevel(int level_scope){this->level = level_scope;}
-Identifier::Identifier(){this->level = 0; } Identifier::~Identifier(){}
+Identifier::Identifier(){this->level = 0;}
