@@ -229,20 +229,20 @@ void LinkedLisst::insert_lisst(string ID, int level) {
         this->head->prev = new_node;
         this->head = this->head->prev;
         this->curent_level = this->head;
-        return;
-    }
-    if (this->curent_level == this->tail) {
-        this->tail->next = new_node;
-        new_node->prev = this->tail;
-        this->tail = this->tail->next;
-        this->curent_level = this->tail;
     } else {
-        auto *tmp = this->curent_level->next;
-        this->curent_level->next = new_node;
-        new_node->next = tmp;
-        tmp->prev = new_node;
-        new_node->prev = this->curent_level;
-        this->curent_level = this->curent_level->next;
+        if (this->curent_level == this->tail) {
+            this->tail->next = new_node;
+            new_node->prev = this->tail;
+            this->tail = this->tail->next;
+            this->curent_level = this->tail;
+        } else {
+            auto *tmp = this->curent_level->next;
+            this->curent_level->next = new_node;
+            new_node->next = tmp;
+            tmp->prev = new_node;
+            new_node->prev = this->curent_level;
+            this->curent_level = this->curent_level->next;
+        }
     }
 }
 
@@ -261,6 +261,10 @@ void LinkedLisst::delete_level(const int& level) {
         h = this->head;
         this->head->prev = nullptr;
         this->curent_level = this->head;
+    }
+    while (this->curent_level->next) {
+        if (this->curent_level->next->level != this->curent_level->level) break;
+        this->curent_level = this->curent_level->next;
     }
 }
 

@@ -1,6 +1,5 @@
 #ifndef SYMBOLTABLE_H
 #define SYMBOLTABLE_H
-#include <utility>
 
 #include "main.h"
 
@@ -30,7 +29,7 @@ public:
 
 class identifier_name {
 public:
-    identifier_name(): ID(""), type(""), level(0), static_check(""), num_com(0), num_splay(0) {}
+    identifier_name(): ID(), type(), level(0), static_check(), num_com(0), num_splay(0) {}
     identifier_name(string ID, string type,
                     int level, string static_check, int num_com, int num_splay): ID(std::move(ID)), type(std::move(type)),
                                                                                   level(level), static_check(std::move(static_check)),
@@ -46,15 +45,14 @@ public:
 class identifier_node {
 public:
     identifier_node(): data(identifier_name()), parent(nullptr), left_child(nullptr), right_child(nullptr) {}
-    identifier_node(identifier_name data, identifier_node* left_child,
-                    identifier_node* right_child,
-                    identifier_node* parent): data(std::move(data)), left_child(left_child),
-                                               right_child(right_child), parent(parent) {}
-
+    identifier_node(identifier_name data, identifier_node* parent, identifier_node* left_child,
+                    identifier_node* right_child): data(std::move(data)), parent(parent), left_child(left_child),
+                                               right_child(right_child) {}
     identifier_name data;
     identifier_node* parent;
     identifier_node* left_child;
     identifier_node* right_child;
+
 };
 
 class Tree {

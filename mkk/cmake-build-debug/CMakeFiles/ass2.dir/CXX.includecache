@@ -6,17 +6,15 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/Dell/CLionProjects/ass2/SymbolTable.cpp
+/home/ngmkhanh/CLionProjects/ass2/SymbolTable.cpp
 SymbolTable.h
-C:/Users/Dell/CLionProjects/ass2/SymbolTable.h
+/home/ngmkhanh/CLionProjects/ass2/SymbolTable.h
 
-C:/Users/Dell/CLionProjects/ass2/SymbolTable.h
-utility
--
+/home/ngmkhanh/CLionProjects/ass2/SymbolTable.h
 main.h
-C:/Users/Dell/CLionProjects/ass2/main.h
+/home/ngmkhanh/CLionProjects/ass2/main.h
 
-C:/Users/Dell/CLionProjects/ass2/error.h
+/home/ngmkhanh/CLionProjects/ass2/error.h
 string
 -
 stdio.h
@@ -26,13 +24,13 @@ string.h
 iostream
 -
 
-C:/Users/Dell/CLionProjects/ass2/main.cpp
+/home/ngmkhanh/CLionProjects/ass2/main.cpp
 SymbolTable.h
-C:/Users/Dell/CLionProjects/ass2/SymbolTable.h
+/home/ngmkhanh/CLionProjects/ass2/SymbolTable.h
 SymbolTable.cpp
-C:/Users/Dell/CLionProjects/ass2/SymbolTable.cpp
+/home/ngmkhanh/CLionProjects/ass2/SymbolTable.cpp
 
-C:/Users/Dell/CLionProjects/ass2/main.h
+/home/ngmkhanh/CLionProjects/ass2/main.h
 iostream
 -
 string
@@ -42,5 +40,5 @@ fstream
 regex
 -
 error.h
-C:/Users/Dell/CLionProjects/ass2/error.h
+/home/ngmkhanh/CLionProjects/ass2/error.h
 
