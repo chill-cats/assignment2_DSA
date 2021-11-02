@@ -1,0 +1,80 @@
+BEGIN
+END
+BEGIN
+END
+BEGIN
+INSERT tpdPby string false
+INSERT x4pTvE string false
+LOOKUP qOjVho
+END
+LOOKUP hZwyex
+END
+BEGIN
+LOOKUP qsysys
+LOOKUP wfhXvI
+END
+BEGIN
+END
+INSERT bvr6qP number false
+END
+BEGIN
+BEGIN
+INSERT wfhXvI (string,number,string,number,string,number,number,string,string,number,string,number,string,string,number)->number false
+LOOKUP bvr6qP
+END
+BEGIN
+LOOKUP bKcenM
+LOOKUP bKcenM
+BEGIN
+INSERT hVeCwF (number,number,string,number,string,string,number,string,number,number,string,number,number,string,number,number,number,number,string,string,string,string,string,string,string,number,string,number,string,string,string,number,string,string,number,number,string,number,number,number,number,number,number,string,number,number,string,string,number)->number true
+LOOKUP qOjVho
+LOOKUP gpa5oU
+END
+LOOKUP hZwyex
+LOOKUP vBadgf
+BEGIN
+INSERT gccjex number false
+BEGIN
+LOOKUP extKc5
+INSERT hZwyex number false
+BEGIN
+END
+END
+END
+INSERT hVzQxR string true
+INSERT qOjVho ()->number true
+INSERT qsysys (string,number,string,number,string,number,string,number,string,number,number,string,number,string,string,number,number,number,number,string,string,number,number,number,number,number,number,string,number,string,number,string,number,number,string,string,string,number,number,number,number,number,number,number,string,number,string,string,number,number,number,number,string,string,string,number,number,number,string,number,number,string,string,number,string,number,number,number,number,number)->number true
+END
+LOOKUP w4sEep
+END
+BEGIN
+END
+LOOKUP vBadgf
+BEGIN
+BEGIN
+INSERT wVlkzs string true
+BEGIN
+LOOKUP xwsBup
+LOOKUP extKc5
+END
+LOOKUP lSaCnp
+INSERT lSaCnp number true
+INSERT dkgxf3 string false
+INSERT hZwyex string false
+BEGIN
+INSERT x4pTvE string true
+INSERT hZwyex number false
+BEGIN
+END
+INSERT hZwyex ()->number false
+END
+INSERT gpa5oU number false
+LOOKUP bKcenM
+INSERT vBadgf string true
+BEGIN
+END
+INSERT xNpYiI ()->number false
+BEGIN
+LOOKUP xNpYiI
+LOOKUP lSaCnp
+END

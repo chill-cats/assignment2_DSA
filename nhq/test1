@@ -1,0 +1,26 @@
+INSERT x string true
+PRINT
+INSERT quang string false
+PRINT
+BEGIN
+BEGIN
+INSERT y string true
+PRINT
+INSERT quang string false
+PRINT
+INSERT thu string true
+PRINT
+END
+BEGIN
+INSERT xas string true
+PRINT
+INSERT x string false
+PRINT
+INSERT asda string false
+PRINT
+INSERT z number false
+PRINT
+LOOKUP x
+BEGIN
+PRINT
+END

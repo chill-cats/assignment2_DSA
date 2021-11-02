@@ -1,0 +1,80 @@
+END
+LOOKUP wgzoxS
+LOOKUP eooFuC
+END
+INSERT zSnDs7 (string,number)->number true
+END
+LOOKUP wHawxD
+BEGIN
+LOOKUP eooFuC
+BEGIN
+BEGIN
+LOOKUP p2wTkd
+LOOKUP lflmbz
+LOOKUP ymvLyH
+INSERT hUzQcD string false
+BEGIN
+INSERT kZlzwH number true
+LOOKUP lflmbz
+BEGIN
+INSERT eooFuC number false
+END
+LOOKUP sUxvlX
+END
+LOOKUP eooFuC
+BEGIN
+BEGIN
+INSERT wHawxD string false
+END
+BEGIN
+BEGIN
+BEGIN
+INSERT iPzSk3 string true
+INSERT jreGvp ()->string false
+LOOKUP iPzSk3
+END
+END
+BEGIN
+BEGIN
+END
+LOOKUP zSnDs7
+INSERT eooFuC string false
+BEGIN
+END
+INSERT m6o7e7 number true
+END
+INSERT eooFuC string false
+LOOKUP wgzoxS
+INSERT t0hyk_ string false
+INSERT hUzQcD ()->number false
+LOOKUP mgbho7
+BEGIN
+END
+BEGIN
+BEGIN
+LOOKUP iPzSk3
+END
+INSERT m6o7e7 string false
+LOOKUP eooFuC
+END
+BEGIN
+LOOKUP ymvLyH
+INSERT crnubU string true
+INSERT p2wTkd (string,number,number,number,number,number,number,string,number,number,string,number,string,number,number,string,number,number,number,string,string,string,string,string,string,number,number,number,number,string,number,number,number,number,string,string,string,string,string,number,string,number,number,string,number,string,string,number,string,number,string,string,string,number,number,number,number,number,number,number,number,string)->string false
+END
+LOOKUP eooFuC
+INSERT wnsfyx (number,string,string,number,string,number,string,string,number,string,number,number,string,string,number,string,string,number,number,string,number,number,string,number,number,number,string,number)->string true
+BEGIN
+LOOKUP hUzQcD
+END
+BEGIN
+INSERT sUxvlX number false
+INSERT wHawxD number false
+END
+LOOKUP wgzoxS
+END
+INSERT t0hyk_ string false
+INSERT hUzQcD (number,string,number,number,string,number,number,string,number,number,string,number,string,number,number,number,number,number,number,string,string,string,string,number,string,string,string,number,number,number,number,number,string,number,number,number,string,string,number,string,number,string,string,number,number,string,number,number,number,string,string,number,number,string,number,string,string,number,string,string,string,number,string,number)->string true
+BEGIN
+END
+END

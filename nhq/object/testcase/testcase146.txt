@@ -1,0 +1,80 @@
+INSERT hecscL string false
+LOOKUP u3vgmk
+END
+END
+LOOKUP pOqcei
+END
+INSERT jreyxe string false
+INSERT jreyxe string false
+BEGIN
+END
+INSERT oEvwup number true
+END
+LOOKUP nomwuH
+LOOKUP kCldcf
+END
+INSERT kCldcf ()->string false
+BEGIN
+BEGIN
+INSERT hecscL string true
+INSERT hecscL ()->string true
+LOOKUP r2vadW
+END
+LOOKUP oEvwup
+END
+BEGIN
+LOOKUP udgkbz
+END
+BEGIN
+END
+LOOKUP ckdMo8
+BEGIN
+END
+END
+BEGIN
+INSERT fwokau (string,number,string,number,string,string,number,string,string,number,number,string,string,number,number,number,number,number,string,string,number,string,string,number,string,number,string,string,string,number,string,string,string,string,string,string,number,number,string,number,number,number,string,string,number,string,string,string,number,number,string,number,string,number,string,number,number,number,number,string,number,number,number,string,string,number,number,string,number,string,string,string,string,number,string,string,number,number,number,number,number,number,string,number,number,string,number,string,string,number,string,string,number,number,number)->number true
+END
+BEGIN
+END
+INSERT rjcljy string false
+LOOKUP u3vgmk
+END
+LOOKUP kCldcf
+BEGIN
+BEGIN
+END
+INSERT fwokau string true
+LOOKUP msmokq
+END
+INSERT ckdMo8 ()->string true
+LOOKUP u3vgmk
+BEGIN
+LOOKUP hecscL
+INSERT bJfelR number true
+LOOKUP hecscL
+BEGIN
+BEGIN
+INSERT bJfelR string false
+LOOKUP r2vadW
+BEGIN
+END
+INSERT u3vgmk string false
+END
+LOOKUP oEvwup
+INSERT pSylbx number false
+LOOKUP oEvwup
+BEGIN
+BEGIN
+INSERT u3vgmk (string,number,string,string,number,number,string,string,number,string,string,string,string,number,string,string,number,number,string,string,number,number,number,string,number,number,string,number,number,string,string,number,number,number,number,number,number,string,string,string,number,string,string,string,string,string,string,string,number,number,string,number,number,string,string,number,number,number,string,string,string,number,string,number,string,string,number,string,string,number,string,number,number,number)->number false
+LOOKUP jSvQwg
+INSERT pSylbx string true
+INSERT pSylbx string false
+INSERT nXtbeQ number false
+BEGIN
+BEGIN
+BEGIN
+END
+BEGIN
+INSERT pSylbx string true
+LOOKUP nXtbeQ
+LOOKUP hecscL

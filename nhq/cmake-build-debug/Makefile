@@ -57,10 +57,10 @@ RM = /app/extra/clion/bin/cmake/linux/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2"
+CMAKE_SOURCE_DIR = "/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/cmake-build-debug"
+CMAKE_BINARY_DIR = "/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/cmake-build-debug/CMakeFiles" "/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/cmake-build-debug//CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/CMakeFiles" "/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug//CMakeFiles/progress.marks"
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/cmake-build-debug/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
@@ -129,6 +129,30 @@ assignment2/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/assignment2.dir/build.make CMakeFiles/assignment2.dir/build
 .PHONY : assignment2/fast
 
+a.o: a.cpp.o
+.PHONY : a.o
+
+# target to build an object file
+a.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/assignment2.dir/build.make CMakeFiles/assignment2.dir/a.cpp.o
+.PHONY : a.cpp.o
+
+a.i: a.cpp.i
+.PHONY : a.i
+
+# target to preprocess a source file
+a.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/assignment2.dir/build.make CMakeFiles/assignment2.dir/a.cpp.i
+.PHONY : a.cpp.i
+
+a.s: a.cpp.s
+.PHONY : a.s
+
+# target to generate assembly for a file
+a.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/assignment2.dir/build.make CMakeFiles/assignment2.dir/a.cpp.s
+.PHONY : a.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -162,6 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... assignment2"
+	@echo "... a.o"
+	@echo "... a.i"
+	@echo "... a.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

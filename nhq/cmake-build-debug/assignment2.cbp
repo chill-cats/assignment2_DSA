@@ -8,38 +8,38 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/nhqcs/Desktop/Sem3/Data Structure &amp; Algorithms/BTL/Ass2/assignment2/cmake-build-debug"/>
+				<Option working_dir="/home/nhqcs/Desktop/Sem3/Data Structure &amp; Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/Ass2/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/Ass2/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/Ass2/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/Ass2/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/nhqcs/Desktop/Sem3/Data Structure &amp; Algorithms/BTL/Ass2/assignment2/cmake-build-debug"/>
+				<Option working_dir="/home/nhqcs/Desktop/Sem3/Data Structure &amp; Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/Ass2/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/Ass2/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/Ass2/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/Ass2/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/nhqcs/Desktop/Sem3/Data Structure &amp; Algorithms/BTL/Ass2/assignment2/cmake-build-debug"/>
+				<Option working_dir="/home/nhqcs/Desktop/Sem3/Data Structure &amp; Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/Ass2/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/Ass2/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/Ass2/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/Ass2/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="assignment2">
-				<Option output="/home/nhqcs/Desktop/Sem3/Data Structure &amp; Algorithms/BTL/Ass2/assignment2/cmake-build-debug/assignment2" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/nhqcs/Desktop/Sem3/Data Structure &amp; Algorithms/BTL/Ass2/assignment2/cmake-build-debug"/>
+				<Option output="/home/nhqcs/Desktop/Sem3/Data Structure &amp; Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/assignment2" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/nhqcs/Desktop/Sem3/Data Structure &amp; Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -53,15 +53,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/Ass2/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 assignment2"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/Ass2/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/Ass2/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/Ass2/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/Makefile&quot;  VERBOSE=1 assignment2"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="assignment2/fast">
-				<Option output="/home/nhqcs/Desktop/Sem3/Data Structure &amp; Algorithms/BTL/Ass2/assignment2/cmake-build-debug/assignment2" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/nhqcs/Desktop/Sem3/Data Structure &amp; Algorithms/BTL/Ass2/assignment2/cmake-build-debug"/>
+				<Option output="/home/nhqcs/Desktop/Sem3/Data Structure &amp; Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/assignment2" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/nhqcs/Desktop/Sem3/Data Structure &amp; Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -75,20 +75,23 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/Ass2/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 assignment2/fast"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/Ass2/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/Ass2/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/Ass2/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/Makefile&quot;  VERBOSE=1 assignment2/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/nhqcs/Desktop/Sem3/Data\ Structure\ &amp;\ Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/nhqcs/Desktop/Sem3/Data Structure &amp; Algorithms/BTL/Ass2/assignment2/main.cpp">
+		<Unit filename="/home/nhqcs/Desktop/Sem3/Data Structure &amp; Algorithms/BTL/assignment2_DSA/nhq/a.cpp">
 			<Option target="assignment2"/>
 		</Unit>
-		<Unit filename="/home/nhqcs/Desktop/Sem3/Data Structure &amp; Algorithms/BTL/Ass2/assignment2/main.h">
+		<Unit filename="/home/nhqcs/Desktop/Sem3/Data Structure &amp; Algorithms/BTL/assignment2_DSA/nhq/main.cpp">
 			<Option target="assignment2"/>
 		</Unit>
-		<Unit filename="/home/nhqcs/Desktop/Sem3/Data Structure &amp; Algorithms/BTL/Ass2/assignment2/CMakeLists.txt">
+		<Unit filename="/home/nhqcs/Desktop/Sem3/Data Structure &amp; Algorithms/BTL/assignment2_DSA/nhq/main.h">
+			<Option target="assignment2"/>
+		</Unit>
+		<Unit filename="/home/nhqcs/Desktop/Sem3/Data Structure &amp; Algorithms/BTL/assignment2_DSA/nhq/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

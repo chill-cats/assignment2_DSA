@@ -1,0 +1,80 @@
+LOOKUP vidwkT
+END
+BEGIN
+END
+END
+INSERT ngxpv5 number true
+BEGIN
+LOOKUP eFyux_
+INSERT oOoAfJ number false
+BEGIN
+BEGIN
+INSERT vidwkT string true
+BEGIN
+BEGIN
+INSERT wviWvT string false
+INSERT vidwkT string true
+INSERT vapwhP number true
+END
+LOOKUP frlMma
+LOOKUP ngxpv5
+LOOKUP u0dXiP
+END
+LOOKUP fgsSuX
+END
+BEGIN
+END
+LOOKUP ngxpv5
+INSERT hRhphP ()->string false
+INSERT pmk4uB string true
+INSERT u0dXiP string true
+BEGIN
+LOOKUP fgsSuX
+INSERT vidwkT number false
+END
+INSERT oOoAfJ ()->number true
+INSERT r2wwft number true
+END
+END
+END
+BEGIN
+BEGIN
+BEGIN
+BEGIN
+LOOKUP vapwhP
+END
+END
+END
+END
+INSERT vidwkT (number,string,number,string,string,string,number,number,string,number,string,number,string,number,string)->string true
+END
+BEGIN
+LOOKUP aFqEl1
+LOOKUP hRhphP
+END
+LOOKUP ngxpv5
+LOOKUP urils6
+BEGIN
+END
+END
+LOOKUP aFqEl1
+BEGIN
+LOOKUP oOoAfJ
+LOOKUP ngxpv5
+LOOKUP u0dXiP
+INSERT urils6 ()->number false
+LOOKUP vapwhP
+LOOKUP v9yTbO
+INSERT u0dXiP string false
+BEGIN
+INSERT ngxpv5 number false
+INSERT r9d9rc ()->string true
+LOOKUP r2wwft
+BEGIN
+BEGIN
+INSERT surNle ()->number false
+INSERT r9d9rc string true
+BEGIN
+BEGIN
+INSERT vmdddi string true
+END

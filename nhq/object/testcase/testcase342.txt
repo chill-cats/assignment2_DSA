@@ -1,0 +1,80 @@
+BEGIN
+INSERT bdwRkb number true
+BEGIN
+BEGIN
+LOOKUP l6pSkh
+INSERT fBuNgr number true
+BEGIN
+LOOKUP fBuNgr
+END
+END
+LOOKUP qYokoy
+INSERT jwbzdg string true
+BEGIN
+LOOKUP o6dpzO
+END
+LOOKUP eNbra2
+END
+INSERT nHcDrx ()->string true
+LOOKUP qYokoy
+INSERT g7lky3 number true
+BEGIN
+BEGIN
+INSERT fBuNgr number true
+INSERT dKzzeu number true
+BEGIN
+LOOKUP o6dpzO
+END
+BEGIN
+BEGIN
+INSERT bdwRkb number true
+LOOKUP v3p_aP
+LOOKUP hpkeuy
+BEGIN
+END
+INSERT hpkeuy string false
+LOOKUP b9hOmr
+LOOKUP nHcDrx
+INSERT bdwRkb (string,number,string,string,string,number,string,number,number,number,number,string,string,string,string,number,number,string,number,number,string,string,number,number,string,string,number,string,number,string,number,number,number,string,string,number,string,string,number,string,number,string,string,string,string,number,string,string,number,number,string,number,string,number,number)->number false
+INSERT eNbra2 number true
+END
+END
+BEGIN
+END
+INSERT owjmkh string true
+BEGIN
+END
+INSERT eNbra2 string false
+BEGIN
+END
+LOOKUP bdwRkb
+END
+LOOKUP tlwlv0
+INSERT g7lky3 (string,number,string,string,string,number,number,number,string,number,string,string,number,number,string,string,string,string,number,number,string,string,number,string,string,string,string,string,string,string,number,number,number,string,string,string,string,number,string,string,number,number,number,string,string,number,string)->number false
+LOOKUP v3p_aP
+LOOKUP fBuNgr
+LOOKUP hpkeuy
+END
+INSERT l6pSkh ()->string true
+INSERT cYwmad number false
+BEGIN
+BEGIN
+END
+END
+LOOKUP g7lky3
+BEGIN
+END
+INSERT fBuNgr string true
+LOOKUP nHcDrx
+END
+END
+BEGIN
+LOOKUP x4lShL
+LOOKUP cYwmad
+INSERT eNbra2 (number,string,string,number,number,string,string,string,number,number,number,string,string,number,number,number,string,number,string,number,string,number,string,number,string,number,number,string,number,number,number,number,number,number,string,number,string,string,number,number,string,number,number,number,number,string,string,string,number,number,string,string,string,number,number,string,number,string,number,string,number,number,string,number,number,number)->string false
+INSERT cYwmad string false
+INSERT owjmkh string true
+END
+BEGIN
+END
+BEGIN

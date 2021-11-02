@@ -1,0 +1,80 @@
+INSERT aDemct string false
+BEGIN
+INSERT goerzs number true
+BEGIN
+LOOKUP tznNg1
+INSERT z7mrnF ()->string false
+END
+LOOKUP rgpDyV
+INSERT b7dIdL ()->string true
+END
+LOOKUP lmnFdV
+BEGIN
+END
+BEGIN
+END
+LOOKUP lmnFdV
+BEGIN
+END
+LOOKUP vCpyqz
+BEGIN
+INSERT iTjPbZ number true
+INSERT vznbry string true
+LOOKUP goerzs
+BEGIN
+BEGIN
+INSERT vhnGoU number false
+LOOKUP renAnS
+LOOKUP z7mrnF
+LOOKUP lmnFdV
+LOOKUP z7mrnF
+BEGIN
+LOOKUP rgpDyV
+END
+LOOKUP kEt8q3
+INSERT lmnFdV ()->string false
+BEGIN
+INSERT goerzs ()->string true
+END
+BEGIN
+BEGIN
+BEGIN
+END
+LOOKUP mFxKo0
+LOOKUP zKtLxj
+END
+INSERT mFxKo0 (string,number,number,string,number,number,string,string,number,string,number,string,number,number,number,string,number,string,number,number,number,string,number,number,number,number,string,number,number,number,number,string,string,string,string,string,string,string,number,number,string,string,number,number,string,string,number,string,string,string,string,number,number,string,number,string,number,number,number,number,number,number,string,string,number,string,number,number,number,number,string)->number false
+BEGIN
+END
+END
+END
+INSERT iTjPbZ string false
+INSERT hEkrlp ()->number false
+INSERT goerzs string true
+INSERT k1ghmN string true
+LOOKUP aDemct
+END
+BEGIN
+INSERT b7dIdL string false
+INSERT rgpDyV string true
+END
+END
+LOOKUP z7mrnF
+LOOKUP z7mrnF
+BEGIN
+END
+LOOKUP vhnGoU
+INSERT b7dIdL ()->number false
+BEGIN
+END
+BEGIN
+LOOKUP kEt8q3
+LOOKUP iTjPbZ
+BEGIN
+BEGIN
+END
+INSERT mFxKo0 string true
+INSERT renAnS (number,number,number,string,string,string,number,string,number,string,string,string,number,string,string,string,string,number,string,string,string,number,number,string,number,string,number,number,number,string,string,number,number,number,string,string,string,string,string,number,number,string,number,number,string,string,string,string,number,string,number,string,string,number,string,string,number,string,number,number,number,string,number,string,string,string,number,string,number,string,string,string,string,number,number,string,number,number,string,number,number,string,string,string,number,string,string,number,number,number)->string false
+INSERT aDemct ()->number true
+END
+END

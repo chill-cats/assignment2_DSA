@@ -1,0 +1,80 @@
+BEGIN
+END
+BEGIN
+BEGIN
+INSERT qTefov (number,string,number,string,number,number,string,string,number,number,string,string,string,number,number,number,string,string,string,number,number,string,number,number,number,string,number,number,number,string,number,number,string,string,number,string,number,number,number,string,string,number,string,number,number,string,number,string,number,string,number,string,string,string,string,number,string,number,number,number,string,string,string,number,number,string,number,string,number,number,number,string,number,string,string,string,number,number,string)->number true
+END
+BEGIN
+INSERT dthfl4 string false
+INSERT pZlcrt number false
+INSERT pZlcrt ()->number false
+INSERT t_ihwf string true
+BEGIN
+INSERT leb1ro number false
+BEGIN
+LOOKUP wlfpvW
+LOOKUP dthfl4
+BEGIN
+LOOKUP bGfqxZ
+END
+LOOKUP bXcWza
+LOOKUP wMgiaP
+INSERT nkz_pi (string,string,number,string,number,number,string,string,string,string,number,number,string,number,number,number,number,string,number,number,number,string,string,number,string,number,number,number,number,string,number,number)->number true
+END
+BEGIN
+END
+LOOKUP t_ihwf
+INSERT wMgiaP number false
+LOOKUP bXcWza
+BEGIN
+LOOKUP pZlcrt
+BEGIN
+END
+BEGIN
+INSERT kkz8a8 string false
+INSERT wpcXut ()->number false
+END
+BEGIN
+END
+LOOKUP tysury
+END
+LOOKUP pZlcrt
+LOOKUP nkz_pi
+END
+INSERT pZlcrt number true
+END
+END
+END
+INSERT wMgiaP number true
+BEGIN
+INSERT pKvPvm string false
+END
+LOOKUP xhpRxu
+LOOKUP leb1ro
+INSERT wlfpvW ()->number true
+BEGIN
+LOOKUP tSmbrS
+BEGIN
+END
+BEGIN
+END
+END
+LOOKUP wMgiaP
+END
+LOOKUP kkz8a8
+BEGIN
+INSERT nkz_pi ()->string true
+INSERT bGfqxZ number true
+END
+INSERT pKvPvm string true
+INSERT pZlcrt (string,string,string,number,string,string,number,string)->number false
+LOOKUP eyongR
+BEGIN
+LOOKUP dthfl4
+LOOKUP wpcXut
+INSERT qUuLgg ()->number false
+BEGIN
+INSERT bXcWza string true
+END
+LOOKUP bGfqxZ
+BEGIN

@@ -1,4 +1,4 @@
-# Install script for directory: /home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2
+# Install script for directory: /home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

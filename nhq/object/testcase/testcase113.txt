@@ -1,0 +1,80 @@
+LOOKUP gvsFks
+BEGIN
+END
+BEGIN
+INSERT oyoarq number false
+BEGIN
+BEGIN
+INSERT wYwrui number true
+END
+END
+INSERT nVnZd4 number false
+LOOKUP y1fFbV
+BEGIN
+LOOKUP pTp8yv
+LOOKUP gvsFks
+LOOKUP gvsFks
+END
+INSERT pTp8yv number false
+END
+END
+BEGIN
+INSERT aChcgT number true
+END
+BEGIN
+BEGIN
+END
+LOOKUP nVnZd4
+LOOKUP dTo3q2
+INSERT hvqpig string true
+LOOKUP aChcgT
+INSERT wYwrui number true
+END
+INSERT jBwPaE ()->string true
+LOOKUP iVzdhZ
+LOOKUP pTp8yv
+LOOKUP fTpajt
+INSERT iVzdhZ string true
+BEGIN
+LOOKUP jBwPaE
+END
+LOOKUP hvqpig
+INSERT iVzdhZ (string,string,string,string,number,string,string,number,string,string,string,number,number,number,number,number,number,string,number,number,string,string,number,number,string,string,number,number,number,string,string,number,string,string,number,string,number,number,string,number,number,string,string,number,number,string,number,string,string,number,string,number,string,number,string,string,string,string,string,number)->number false
+END
+END
+END
+LOOKUP hvqpig
+END
+INSERT iVzdhZ string true
+END
+BEGIN
+BEGIN
+INSERT aChcgT ()->string false
+LOOKUP xknreu
+LOOKUP aChcgT
+INSERT wYwrui number true
+BEGIN
+BEGIN
+INSERT smvirB string false
+INSERT oyoarq (number,string,string,number,string,number,string,string,string)->string false
+BEGIN
+END
+END
+INSERT gvsFks (number,number,number,number,string,string,string,string,string,number,number)->string false
+LOOKUP jBwPaE
+BEGIN
+END
+END
+INSERT oyoarq number false
+BEGIN
+INSERT xknreu (number,number,number,string,number,number,number,string,number,string,string,number,string,number,string,string,string,string,number)->number false
+BEGIN
+END
+LOOKUP hvqpig
+BEGIN
+BEGIN
+INSERT vYl4bd string false
+LOOKUP yty9vZ
+INSERT fTpajt ()->number false
+LOOKUP vYl4bd
+BEGIN

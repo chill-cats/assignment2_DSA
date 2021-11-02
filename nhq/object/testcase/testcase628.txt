@@ -1,0 +1,80 @@
+BEGIN
+LOOKUP xqkmfH
+BEGIN
+BEGIN
+END
+END
+BEGIN
+BEGIN
+INSERT fog2l6 string false
+LOOKUP fog2l6
+BEGIN
+END
+END
+END
+INSERT ygkdom (string,string,number,number,number,string,string,number,string,string,number,number,number,number,string,string,number,string,number,string,number,number,string,string,string,string,string,string,string,string,string,string,string,string,string,number,number,string,string,number,string,number,string,number,string,string,string,string,number,string,string,string,string,string,string,string,number,string,string,number,string,number,number,number,string,string,number,number,number)->number true
+BEGIN
+LOOKUP psk0ha
+BEGIN
+INSERT dLzweU number false
+INSERT v1w5fs number true
+BEGIN
+INSERT hndcgj string false
+END
+END
+LOOKUP r5fGet
+INSERT dLzweU (string,number,number,string,number,number,string,number,string,number,string,string,string,number,string,string,number,number,number,string,string,number,string,string,number,number,number,string,number,number,number,string,number,string,number,number,string,number,number,string,number,string,number,string,number,number,string,number,number,string,number,number,string,number,string,string,number,string)->number true
+BEGIN
+LOOKUP zrdAti
+LOOKUP ygkdom
+END
+LOOKUP egmXa2
+LOOKUP ygkdom
+INSERT hndcgj ()->number true
+END
+END
+BEGIN
+LOOKUP xqkmfH
+INSERT xqkmfH string true
+BEGIN
+BEGIN
+END
+BEGIN
+BEGIN
+INSERT pJbrmE string true
+INSERT psk0ha number true
+INSERT psk0ha string false
+END
+BEGIN
+LOOKUP piw6sB
+LOOKUP rviboF
+END
+LOOKUP fog2l6
+BEGIN
+INSERT zrdAti number false
+INSERT pJbrmE string false
+END
+BEGIN
+LOOKUP ygkdom
+LOOKUP xqkmfH
+INSERT r5fGet string true
+INSERT ygkdom string true
+INSERT psk0ha string true
+LOOKUP r5fGet
+END
+END
+END
+INSERT bDwOf4 (number,string,number,number,string,string,string,number,string,number,number,string,number,number,string,number,string,string,number,number,string,number,number,string,string,string,string,number,number,number,number,string,number,number,string,string,string,number)->string false
+INSERT piw6sB ()->string true
+INSERT tBtWe8 string false
+BEGIN
+LOOKUP fog2l6
+LOOKUP xqkmfH
+LOOKUP fWx9cM
+END
+LOOKUP tBtWe8
+END
+BEGIN
+LOOKUP fWx9cM
+END
+INSERT wOzyk0 number true

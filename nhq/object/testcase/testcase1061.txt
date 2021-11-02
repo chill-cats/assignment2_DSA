@@ -1,0 +1,80 @@
+BEGIN
+LOOKUP eBbZrw
+END
+INSERT r5jsx7 string true
+INSERT mTa8x8 string false
+END
+END
+BEGIN
+INSERT mTa8x8 number false
+LOOKUP rXvEsy
+END
+BEGIN
+END
+BEGIN
+LOOKUP iFdhct
+END
+LOOKUP eBbZrw
+LOOKUP f3tesx
+END
+INSERT d6hVvt (string,number,number,string,string,number,string,string,string,string,number,number,number,string,number,number)->string false
+LOOKUP eBbZrw
+BEGIN
+INSERT usuqr5 string true
+INSERT r5jsx7 string true
+INSERT gTzCuv ()->string false
+END
+BEGIN
+BEGIN
+INSERT pTb4r8 number true
+BEGIN
+END
+BEGIN
+LOOKUP usuqr5
+BEGIN
+BEGIN
+END
+INSERT a2avyX string true
+LOOKUP rXvEsy
+LOOKUP akqBtA
+INSERT rXvEsy ()->string false
+LOOKUP lvtjy_
+END
+BEGIN
+BEGIN
+INSERT a2avyX string true
+BEGIN
+INSERT f3tesx number true
+END
+END
+BEGIN
+BEGIN
+LOOKUP qouJf0
+END
+LOOKUP kLw8wo
+INSERT xqmixc (string,string,number,string,string,number,string,number,number,string,number,number,string,string,string,number,string,number,number,number,number,string,number,string,string,number,number,string,number,string,string,string,number,number,number,number,string,number,number,string,string,string)->string true
+INSERT pTb4r8 (number,string,number,string,number,number,string,string,string,string,string,string,string,string,number,number,string,string,number,string,string,number,string,string,string,number,number,number,number,string,number,number,number,number,string,string,string,number,string,string,string,number,number,number,number,number,number,string,string,string,number,string,number,number,number,number,number,string,string,number,number,string,number,number,number,string,number,string,string,number,number,number,string,number,string,string)->number true
+LOOKUP d6hVvt
+BEGIN
+END
+BEGIN
+INSERT eJdlop ()->number true
+INSERT xqmixc ()->string true
+INSERT f3tesx number true
+END
+LOOKUP usuqr5
+LOOKUP f3tesx
+LOOKUP pTb4r8
+INSERT lvtjy_ string true
+END
+INSERT n1vjaz string false
+END
+BEGIN
+LOOKUP eJdlop
+BEGIN
+LOOKUP kLw8wo
+LOOKUP mTa8x8
+LOOKUP mTa8x8
+END
+INSERT kLw8wo string false
+END

@@ -1,0 +1,80 @@
+BEGIN
+INSERT pwbUzY ()->number false
+INSERT ecrYp_ number false
+BEGIN
+LOOKUP pwbUzY
+BEGIN
+LOOKUP jaf5ej
+INSERT q0bSgb string true
+END
+LOOKUP cefWvv
+LOOKUP lJzqaA
+END
+LOOKUP cZxQeu
+INSERT vhhbf4 string false
+END
+LOOKUP cZxQeu
+BEGIN
+LOOKUP dvp0vM
+INSERT ecrYp_ string true
+BEGIN
+END
+LOOKUP j9qIvB
+END
+LOOKUP jaf5ej
+LOOKUP xVjDuc
+END
+INSERT j9qIvB (number,number,number,string,string,number)->number false
+BEGIN
+LOOKUP pwbUzY
+BEGIN
+BEGIN
+INSERT t8pif0 number true
+LOOKUP cefWvv
+END
+LOOKUP rAzhnA
+INSERT jaf5ej number false
+INSERT pwbUzY ()->string true
+BEGIN
+INSERT eFiewH (string,number,string,string,number,number,string,number,number,number,number,number,string,number,string,string,string,string,number,string,string,number,number,number,number,number,number,number,number,string)->string true
+LOOKUP lJzqaA
+BEGIN
+LOOKUP pwbUzY
+INSERT iYoqbR string true
+END
+INSERT lJzqaA (number,string,number,string,string,string,string,string,number,string,string,number,number,string)->number true
+END
+BEGIN
+INSERT pwbUzY string true
+BEGIN
+LOOKUP etd6bv
+LOOKUP jaf5ej
+INSERT tOghnH string false
+END
+BEGIN
+BEGIN
+END
+BEGIN
+INSERT ecrYp_ string true
+LOOKUP vhhbf4
+BEGIN
+INSERT iYoqbR string true
+LOOKUP cefWvv
+LOOKUP tOghnH
+INSERT kWc2yx number true
+BEGIN
+END
+END
+END
+INSERT iYoqbR number false
+INSERT t8pif0 string true
+END
+BEGIN
+END
+END
+END
+END
+BEGIN
+BEGIN
+INSERT vhhbf4 number true
+END

@@ -1,0 +1,80 @@
+BEGIN
+LOOKUP hrwEvd
+BEGIN
+END
+END
+INSERT a4xodL number true
+END
+LOOKUP pTclyH
+BEGIN
+END
+BEGIN
+LOOKUP eYaPqn
+INSERT pTclyH ()->string true
+LOOKUP o7nTkU
+END
+BEGIN
+BEGIN
+INSERT wjclum ()->string false
+END
+BEGIN
+LOOKUP o7nTkU
+INSERT nGlRnF (string,number,string,number,string,number,string,string,string,string)->string true
+BEGIN
+END
+BEGIN
+BEGIN
+BEGIN
+BEGIN
+BEGIN
+LOOKUP hrwEvd
+INSERT ijhWkh number false
+END
+LOOKUP sNayz9
+INSERT nGlRnF (number,number,string,number,string,number,string,string,number,number,number,number,number,number,number,number,string,number,string,number,number,number,string,number,string,number,number,string,string,string,string,number,string,string,number,string,string,string,number,number,string,number,string,number,string,number,number,number,string,number,number,number,number,string,string,string,string,number,number,string,number,string,number,string,number,string,string,string,number,number,string,number,string,number,string,number,string,string,number,string,string,string,string,number,string,string,string,number,number,number,string,string)->string true
+END
+END
+LOOKUP agwzio
+END
+INSERT eYaPqn string false
+BEGIN
+LOOKUP eYaPqn
+END
+LOOKUP l_ekxu
+LOOKUP ijhWkh
+END
+LOOKUP nGlRnF
+BEGIN
+INSERT agwzio ()->number false
+BEGIN
+INSERT k2g5rF number false
+END
+BEGIN
+INSERT wjclum string false
+INSERT xycyks number false
+LOOKUP qRuWn9
+INSERT sNayz9 (string,number,string,number,number,number,string,string,number,string,string,string,number,string,number,number,number,string,string,string,number,number,number,string,number,number,string,string,string,string,string,string,string,string,string,string,string,number,string,number,number,number,number,string,number)->string false
+INSERT iIfcrM ()->number false
+LOOKUP agwzio
+LOOKUP a4xodL
+LOOKUP nGlRnF
+END
+BEGIN
+LOOKUP a4xodL
+END
+INSERT k2g5rF string true
+INSERT o7nTkU ()->number false
+LOOKUP cGohmL
+INSERT hrwEvd number false
+BEGIN
+END
+INSERT wjclum ()->string true
+LOOKUP ijhWkh
+END
+INSERT a4xodL string true
+INSERT agwzio number false
+END
+END
+INSERT agwzio string false
+BEGIN
+LOOKUP hrwEvd

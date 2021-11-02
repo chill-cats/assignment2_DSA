@@ -1,0 +1,80 @@
+INSERT bPmRsj number true
+LOOKUP aus_ad
+END
+BEGIN
+BEGIN
+LOOKUP zGw5dr
+END
+LOOKUP mOcuoA
+INSERT bztTgT string false
+INSERT aus_ad number false
+LOOKUP eioLh2
+END
+END
+END
+END
+LOOKUP eioLh2
+INSERT eioLh2 string true
+BEGIN
+INSERT kAaqf3 number true
+LOOKUP qSlFwi
+BEGIN
+BEGIN
+INSERT mOcuoA number true
+INSERT lPzFdj string true
+INSERT tzlzrP number false
+LOOKUP xWdOuN
+BEGIN
+END
+END
+INSERT x8tvoS string true
+LOOKUP bztTgT
+BEGIN
+BEGIN
+LOOKUP knnwmR
+BEGIN
+LOOKUP qSlFwi
+END
+LOOKUP mOcuoA
+END
+INSERT eioLh2 (number,string,string,string,string,number,number,string,string,string,string,string,number,number,number,number,string,string,string,string,number,string,string,string,number,number,string,number,string,string,number,string,string,number,string)->number true
+BEGIN
+BEGIN
+INSERT eioLh2 ()->string false
+INSERT bPmRsj number true
+LOOKUP zGw5dr
+END
+INSERT buv4zk string false
+LOOKUP w6kRyu
+BEGIN
+END
+END
+BEGIN
+LOOKUP dtqemc
+END
+BEGIN
+LOOKUP x8tvoS
+LOOKUP eIfNtV
+INSERT mOcuoA number false
+BEGIN
+END
+INSERT aus_ad ()->number true
+END
+BEGIN
+END
+INSERT x8tvoS string true
+INSERT xWdOuN number false
+BEGIN
+LOOKUP w6kRyu
+LOOKUP lPzFdj
+END
+INSERT tzlzrP number false
+BEGIN
+LOOKUP aus_ad
+INSERT dtqemc ()->number true
+INSERT lPzFdj string true
+END
+BEGIN
+END
+BEGIN
+LOOKUP tzlzrP

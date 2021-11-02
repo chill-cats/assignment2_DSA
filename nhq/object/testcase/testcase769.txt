@@ -1,0 +1,80 @@
+INSERT nrcDe8 (string,number,number,number,string,string,string,string,number,number,string,string,string,string,string,string,string,number,number,number,number,string,number,string,number,number,number,number,string,string,string,string,string,number,string,string,string,number,number,string,number,string,number,string,string,number,number,number,number,string,number,number,string,number,string,string,number,number,number,string,number,number,number,number,number,number,string,string,string,number)->number true
+END
+END
+BEGIN
+BEGIN
+LOOKUP nrcDe8
+BEGIN
+BEGIN
+LOOKUP pFj4ni
+END
+LOOKUP pGmAjs
+END
+LOOKUP zBjVjG
+BEGIN
+LOOKUP gqyScF
+END
+END
+END
+INSERT gqyScF number true
+LOOKUP l_izlA
+BEGIN
+BEGIN
+BEGIN
+INSERT gqyScF (number,number,number,string,string,number,string,number,string,number,number,string,number,string,string,number,number,number,string,string,string,string,string,number,number,string,string,string,number,number,string,string,number,number,number,number,number,number,number,string,number,string,string,number,number,string,number,string,string,number,string,string,number,number,number,string,string,number,string,string,string,string,string,number,number,string,string,number,number,number,string,number)->number false
+LOOKUP hDz0zL
+BEGIN
+LOOKUP kNz0fB
+INSERT l_izlA (string,string,number,string,string,number,number,string,string,string,number,string,string,number,string,string,number,number,string,number,string,number,number,number,string,string,number,string,number,number,string,number,number,string,string,number,string,string,number,string,number,number,string,number,number,number,number,number,number,string,number,number,string,number,number,string,number,number,string,number,string,number,number,string,number,string,number,string,number,number,string,string,string,string,number,number,string)->string false
+LOOKUP wbc8ke
+INSERT l_izlA (string,string,string,number,number,number,string,number,string,string,number,number,number,number,string,string,string,number,string,number,number)->string false
+LOOKUP zWvUeD
+END
+INSERT bAsDzj string true
+BEGIN
+INSERT hDz0zL ()->string false
+BEGIN
+INSERT l_izlA string false
+INSERT l0f6f6 number true
+INSERT r2monO string true
+LOOKUP wbc8ke
+BEGIN
+LOOKUP zWvUeD
+LOOKUP jlotxN
+INSERT l_izlA (string,number,string,string,string,number,string,string,number)->number true
+INSERT wbc8ke string true
+LOOKUP bAsDzj
+LOOKUP zWvUeD
+INSERT iejjnb string true
+LOOKUP kNz0fB
+END
+BEGIN
+INSERT wbc8ke number true
+INSERT bAsDzj ()->string true
+END
+END
+BEGIN
+END
+BEGIN
+END
+END
+END
+LOOKUP jlotxN
+LOOKUP ujiVnr
+END
+BEGIN
+END
+BEGIN
+INSERT jlotxN string true
+INSERT zBjVjG string true
+INSERT kNz0fB ()->number false
+BEGIN
+LOOKUP gqyScF
+END
+BEGIN
+INSERT bAsDzj string true
+END
+INSERT e7fljj ()->string true
+END
+LOOKUP r2monO
+BEGIN

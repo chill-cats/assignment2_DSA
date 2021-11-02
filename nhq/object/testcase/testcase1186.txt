@@ -1,0 +1,80 @@
+INSERT cwq6as number true
+LOOKUP sOuhky
+END
+BEGIN
+END
+INSERT wxbXxk ()->number true
+LOOKUP tFt6rP
+BEGIN
+INSERT iEhLms string false
+LOOKUP tMqdme
+INSERT wxbXxk string true
+INSERT rQzFog string false
+END
+LOOKUP cwq6as
+LOOKUP txvYcE
+END
+INSERT tFt6rP number true
+END
+LOOKUP eSvVu1
+BEGIN
+INSERT rwsyyl number false
+INSERT wxbXxk ()->number false
+BEGIN
+BEGIN
+END
+INSERT rwsyyl ()->string true
+END
+BEGIN
+BEGIN
+END
+BEGIN
+END
+LOOKUP ugtCj9
+END
+LOOKUP denegX
+END
+BEGIN
+LOOKUP rwsyyl
+BEGIN
+LOOKUP efbgz9
+LOOKUP ugtCj9
+INSERT cwq6as (number,string,string,string,string,string,string,string,string,string,string,string,number,string,string)->number true
+END
+INSERT iEhLms (number,string,string,string,string,string,number,string,number,number,number,number,number,string,string,number,string,string,string,number,string,string,number,string,number,number,number,string,number,number,number,string,number,number,number,number,string,string,number,number,string,string,string,string,number,string,number,string,number,string,number,string,number,number,number,string,string,string,number,string,string,number,number,number,number,string,number,number,string,string,number,string,string,string,string,string,number,number,number,number,string,string,string,number,string,string,number,number,number,string,string,string,string,number,number,number)->string true
+END
+BEGIN
+BEGIN
+BEGIN
+END
+INSERT zLsaf2 (string,string,number,number,number,number,string,string,number,number,string,string,string,number,number,number,string,number,string,number,number,string,number,number,number,string,number,string,number,number,number,string,number,string,number,number,string,number,string,string,number,number,number,string,number,string,number,string,number,string,string,number,number,string,number,string,string,number,string,number,number,number,number)->number false
+LOOKUP ugtCj9
+LOOKUP cwq6as
+LOOKUP zLsaf2
+INSERT sdlSiu string false
+INSERT tMqdme ()->string true
+LOOKUP sdlSiu
+LOOKUP eSvVu1
+INSERT denegX number false
+END
+BEGIN
+BEGIN
+BEGIN
+END
+INSERT tFt6rP (number,string,string,number,string,number,number,number,number,string,number,number,number,string,string,string,string,number,string,number,number,string,string,number,number,number,string,string,string,string,string,string,number,string,number,number,string,number,number)->string false
+BEGIN
+LOOKUP lLpqoW
+BEGIN
+BEGIN
+INSERT txvYcE number true
+LOOKUP iEhLms
+END
+INSERT rQzFog number true
+INSERT txvYcE number true
+BEGIN
+LOOKUP zLsaf2
+END
+END
+INSERT sOuhky ()->string true
+LOOKUP efbgz9
+END

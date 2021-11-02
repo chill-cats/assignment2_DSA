@@ -1,0 +1,80 @@
+LOOKUP tuanoe
+LOOKUP dKyFhb
+LOOKUP fufNxc
+END
+END
+BEGIN
+END
+LOOKUP bLbTyW
+LOOKUP cKxtls
+BEGIN
+END
+INSERT kwy5p1 string true
+END
+BEGIN
+LOOKUP w4oiql
+BEGIN
+INSERT sdhLea number true
+END
+LOOKUP kwy5p1
+LOOKUP xQnht3
+END
+BEGIN
+INSERT sBzddI number false
+END
+INSERT w6qMmq number true
+LOOKUP azeolI
+INSERT cKxtls number false
+END
+END
+LOOKUP w4oiql
+INSERT thjvfd (string,string,number,string,string,string,string,string,number,number,number,number,number,number,string,string,string,number,number,number,string,number,number,string,string,number,number,string,string,number,number,number,number,number,number,string,string,number,string,number,number,string,number,number,number,number,number,string,number,string,number,number,number,number,number,number,string,string,string,number,string,string,string,string,string,string,number,string,number,number,string,string,string,string,number,number)->string true
+BEGIN
+BEGIN
+BEGIN
+BEGIN
+LOOKUP thjvfd
+INSERT xQnht3 number true
+BEGIN
+INSERT xQnht3 string false
+END
+INSERT njr8dN ()->string true
+BEGIN
+LOOKUP jLcphT
+END
+BEGIN
+BEGIN
+INSERT sBzddI string false
+BEGIN
+END
+LOOKUP xQnht3
+LOOKUP tuanoe
+END
+INSERT w4oiql string true
+LOOKUP njr8dN
+BEGIN
+INSERT jLcphT number true
+INSERT sBzddI (string,number,string,string,number,string,number,number,string,string,number,string,number,string,number,string,number,number,number,number,string,number,string,string,string,number,number,string,string,string,string,string,number,number,number,string,number,number,string,string,number,number,string,number,number,number,string,string,string,number,string,string,string,number,number,number,number,number,number,string,string,string,number,string,string,number,string,string,string,string,number,number,number,string,number,number,string,string,string,string,number)->string false
+LOOKUP g1azqr
+BEGIN
+END
+END
+BEGIN
+INSERT jVvxcd number true
+INSERT w6qMmq ()->string false
+END
+LOOKUP tuanoe
+INSERT azeolI (number,number,string,number,string,string,string,number,number,string,string,number,number,number,string,string,string,number,number,string,string,string,string,number,string,string,string,number,string,string,string,number,number,number,number,string,number,number,number,string,string,number,number,number,string,number,string,string,number,string,string,string,string,number,number,string,string,number,string,string,number,number,string,number,number,string,number,number,string,number,number,number,number,number,number,number,string,number,number,number,string,number,number,number,number,number,number,string,number,number,number,number)->number true
+BEGIN
+INSERT jVvxcd string false
+INSERT azeolI number true
+END
+LOOKUP dKyFhb
+BEGIN
+INSERT tuanoe number false
+INSERT g1azqr string false
+LOOKUP sdhLea
+LOOKUP juuUbI
+BEGIN
+END
+END

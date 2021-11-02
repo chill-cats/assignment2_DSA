@@ -1,0 +1,80 @@
+INSERT pJuqhc number false
+INSERT tMiWlB ()->string true
+INSERT hauhia (string,number,string,string,string,number,number,string,string,number,number,number,string,number,string,number,string,string,number,number,number,string,string,string,string,number,string,number,number,string,string,number,number,number,number,number,number,number,number,string,string,number,string,number,number,string,number,number,number,number,number,string,string,number,number,number,number,number,number,number,string,string,string,number,number,string,string,number,string,string,string,string,number,number)->number true
+BEGIN
+INSERT ifg7rm number false
+INSERT hauhia number true
+BEGIN
+END
+END
+BEGIN
+INSERT kXiaqi ()->string false
+END
+BEGIN
+END
+LOOKUP tMiWlB
+LOOKUP kXiaqi
+BEGIN
+END
+END
+LOOKUP vRnodt
+LOOKUP fSa6dI
+INSERT tMiWlB ()->string false
+LOOKUP vRnodt
+END
+LOOKUP zvaM
+BEGIN
+END
+END
+END
+END
+INSERT fSa6dI number false
+END
+INSERT vRnodt number true
+LOOKUP qh
+LOOKUP q2osiS
+INSERT xFc7eo number true
+INSERT hauhia (number,string,string,string,string,string,number,string,number,number,number,number,string,number,number,number,number,number,number,string,string,number,number,number,number,string,number,string,number,string,string,number,number,number,string,number,string,string,number,number,string,number,string,string)->string true
+END
+INSERT q2osiS number true
+INSERT muwPuw (string,number,string,number,number,number,string,number,string,number,number,string,string,string,number,string,string,string,number,string,number,string,number,string,number,number,number,number,string,string,number,string,string,string,number,string,string,number,number,number,string,number,number,string,number,string,number,number,string,string,number,number,string,number,number,string,number,number,string,string,number,string,number,string,string,number,number,number,string,number,number,number,string,string,number,number,string,number,number,string,number,string,string,string)->string false
+END
+END
+BEGIN
+INSERT zvaM string false
+END
+BEGIN
+INSERT qh string false
+INSERT tMiWlB number true
+END
+BEGIN
+BEGIN
+END
+INSERT muwPuw string true
+LOOKUP xFc7eo
+BEGIN
+BEGIN
+LOOKUP qh
+BEGIN
+BEGIN
+END
+LOOKUP zvaM
+BEGIN
+BEGIN
+LOOKUP vFaGsY
+INSERT lNsHwa number false
+LOOKUP muwPuw
+LOOKUP q2osiS
+INSERT kXiaqi number false
+BEGIN
+LOOKUP xFc7eo
+LOOKUP xFc7eo
+LOOKUP pJuqhc
+BEGIN
+INSERT pJuqhc number true
+LOOKUP bIjzjc
+LOOKUP qnrtkl
+BEGIN
+BEGIN
+LOOKUP qnrtkl
+END

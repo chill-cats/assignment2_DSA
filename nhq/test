@@ -1,0 +1,15 @@
+BEGIN
+BEGIN
+END
+INSERT a string false
+PRINT
+INSERT b string false
+INSERT cas string false
+PRINT
+BEGIN
+INSERT c string true
+PRINT
+INSERT d string false
+PRINT
+BEGIN
+LOOKUP y

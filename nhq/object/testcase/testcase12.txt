@@ -1,0 +1,80 @@
+LOOKUP pkcrpK
+LOOKUP hGmUrp
+INSERT hGmUrp number true
+INSERT tvuZor ()->string false
+BEGIN
+BEGIN
+END
+END
+INSERT wTpVbC string false
+INSERT hGmUrp string true
+INSERT  ()->string true
+BEGIN
+INSERT z9rQzJ number true
+LOOKUP mukhaM
+END
+INSERT mukhaM number true
+INSERT p5xetr string true
+END
+LOOKUP oYprpL
+BEGIN
+LOOKUP wDc3ya
+BEGIN
+END
+BEGIN
+END
+INSERT wTpVbC (string,string,string,string,number,string,string,string,number,string,string,string,string,number,number,number,string,string,number,number,string,string,string,string,string,string,number,string,string,number,number,string,number,string,number,string,string,string,number,string,number,string,number,string,string,number,number,number,number,string,number,number,string,string,number,number,string,string,string,string,number,string,number,number,string,number)->string true
+END
+BEGIN
+BEGIN
+BEGIN
+END
+BEGIN
+END
+LOOKUP oYprpL
+INSERT myaGeu number true
+LOOKUP z9rQzJ
+LOOKUP myaGeu
+BEGIN
+LOOKUP pmsffx
+LOOKUP myaGeu
+END
+BEGIN
+LOOKUP tvuZor
+INSERT wTpVbC string true
+BEGIN
+BEGIN
+LOOKUP wDc3ya
+BEGIN
+INSERT j0r_vV ()->number false
+LOOKUP qSwAkg
+BEGIN
+BEGIN
+LOOKUP hGmUrp
+LOOKUP m1y0my
+BEGIN
+INSERT pkcrpK ()->number false
+END
+END
+LOOKUP pkcrpK
+END
+INSERT uDyMcN string false
+LOOKUP qSwAkg
+INSERT aGn7ei string false
+END
+INSERT uDyMcN string false
+BEGIN
+INSERT wDc3ya string true
+END
+INSERT tvuZor ()->number false
+BEGIN
+LOOKUP q3uSg5
+END
+END
+LOOKUP p5xetr
+INSERT aLmLce (number,string,string,string,number,number,number,string,string,number,string,string,number,number,string,number,string,number,number,string,number,number,string,string,string,number,number,string,number,number,number,string,number,string,string,string,string,string,string,string,number,number,number,number,string,number,number,string,number,number,string,number,number,number,number,number,string,string,string,number,number,number,number,number,string,string,string,number,number,number,string,number,number,number,number,string,number)->number false
+INSERT aLmLce string false
+END
+END
+END
+LOOKUP oYprpL

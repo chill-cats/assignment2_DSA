@@ -1,0 +1,80 @@
+LOOKUP d9kCgu
+BEGIN
+END
+INSERT acqtjI string true
+BEGIN
+LOOKUP hix9z6
+LOOKUP jte0tR
+END
+BEGIN
+LOOKUP tQk_mz
+END
+INSERT sucLnF string false
+LOOKUP aoyzen
+END
+LOOKUP jWc7do
+END
+INSERT smpEmv string true
+INSERT eCknkA (number,number,string,string,string,number,string,string,string,string,number,string,string,string,number,string,number,string,number,string,number,string,string,string,string,string,number,string,string,number,string,number,number,number,string,number,number,number,number,string,string,string,number,number,number,string,number,number,number,number,string,number,string,number,string,number,number,number,number,string,number,number,string,number,number,string,string,string)->number false
+BEGIN
+END
+BEGIN
+INSERT eCknkA (number,number,string,number,number,string,string,string,string,string,string,number,number,string,number,number,number,string,string,number,number,string,number,number,number,string,string,number,number,string,string,number,string,number,number,string,string,number,string,number,number,string,string,number,number,string,string,string,string,number,string,number,number,string,string,string,number,string,string,string,number,number,string,string,string,number,number,string,number,string,number,number,number,number,number,string,number,number,string,string,string,string)->string true
+INSERT aoyzen ()->string true
+BEGIN
+BEGIN
+INSERT zgu7he (number,string,number,number,number,number,string,string,number,string,number,string,number,number,string,string,string,string,string,number,number,string,string,number,number,string,string,string,string,string,string,number,string,number,number,number,string,number,string,string,number,number,string)->string false
+LOOKUP d9kCgu
+INSERT eCknkA string true
+BEGIN
+END
+END
+INSERT eht1lD string false
+INSERT e1nmaU number true
+END
+END
+INSERT aoyzen number false
+END
+END
+END
+LOOKUP smpEmv
+BEGIN
+INSERT eht1lD ()->string true
+LOOKUP nEpuwK
+INSERT aoyzen ()->number false
+BEGIN
+END
+LOOKUP nEpuwK
+LOOKUP hix9z6
+LOOKUP nAlOlA
+INSERT eht1lD number false
+LOOKUP nAlOlA
+LOOKUP nEpuwK
+END
+BEGIN
+LOOKUP smpEmv
+LOOKUP jWc7do
+INSERT smpEmv string false
+BEGIN
+END
+LOOKUP hDoFtX
+BEGIN
+INSERT hDoFtX (number,number,string,string,string,number,number,number,number,string,number,string,string,string,number,string,number,number,number,number,number,string,number,number,string,number,string,string,string,string,number,number,number,number,string,string,string,number,number,number,number,string,number,number,string,number,string,number,string,number,number,string,string,string,number,string,number,number,string,string,string,number,string,string,number,string,number,string,string,string,number,string,string)->number true
+LOOKUP hix9z6
+INSERT smpEmv ()->string false
+BEGIN
+END
+BEGIN
+LOOKUP e1nmaU
+INSERT yNfggI ()->number false
+BEGIN
+END
+BEGIN
+LOOKUP vckJue
+INSERT jte0tR number true
+BEGIN
+BEGIN
+BEGIN
+END
+END
+INSERT bvs1yo string false

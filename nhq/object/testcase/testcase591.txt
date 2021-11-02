@@ -1,0 +1,80 @@
+END
+INSERT dMicni ()->string false
+INSERT ugw0qe number true
+END
+INSERT rSiEhC number false
+INSERT nqw0bn number true
+BEGIN
+END
+BEGIN
+END
+END
+INSERT oLeVff (string,number,number,number,string,string,number,string,string,number,string,string,string,number,string,string,number,number,string,number,string,string,string,string,number,number,string,string,string,number,number,number,number,string,number,string,string,string,number,string,string,string,string,number,number,string,string,number,number,number,string,number,string,string,string,number,string,number,number,number,string,string,string,string,number,number,string,number,string,number,number,number,number,number,number,number)->string false
+END
+INSERT ttx1so ()->number false
+INSERT rSiEhC string false
+END
+INSERT dMicni ()->number false
+END
+LOOKUP yge5rB
+LOOKUP ngypo2
+BEGIN
+INSERT ttx1so number true
+END
+LOOKUP dCiRfX
+END
+INSERT kPm7pk number false
+END
+END
+LOOKUP yge5rB
+BEGIN
+LOOKUP dMicni
+LOOKUP kdo4yd
+LOOKUP hgynvl
+LOOKUP f9uguS
+END
+END
+LOOKUP yge5rB
+BEGIN
+BEGIN
+END
+INSERT f9uguS number true
+LOOKUP nqw0bn
+LOOKUP tIpces
+BEGIN
+BEGIN
+BEGIN
+LOOKUP flxiwv
+END
+LOOKUP f9uguS
+LOOKUP kdo4yd
+BEGIN
+LOOKUP dCiRfX
+LOOKUP yge5rB
+INSERT ttx1so string true
+END
+INSERT kPm7pk number true
+END
+BEGIN
+INSERT ttx1so ()->string true
+INSERT dMicni string true
+BEGIN
+LOOKUP flxiwv
+INSERT kPm7pk ()->string true
+INSERT tdvigF number true
+END
+BEGIN
+BEGIN
+LOOKUP nqw0bn
+BEGIN
+LOOKUP flxiwv
+BEGIN
+BEGIN
+BEGIN
+INSERT ttx1so ()->string true
+BEGIN
+END
+BEGIN
+LOOKUP dMicni
+INSERT ttx1so string true
+INSERT kdo4yd ()->number true

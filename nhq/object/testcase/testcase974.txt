@@ -1,0 +1,80 @@
+LOOKUP vkqGxB
+END
+LOOKUP oiqMjM
+BEGIN
+INSERT m5b4sn number false
+BEGIN
+END
+INSERT m5b4sn ()->number true
+BEGIN
+LOOKUP kfe4oG
+BEGIN
+LOOKUP qriVsH
+INSERT oiqMjM number true
+BEGIN
+LOOKUP oiqMjM
+END
+INSERT dFvdhW string false
+INSERT qriVsH number false
+END
+INSERT vkqGxB number true
+LOOKUP dFvdhW
+LOOKUP sfpYg2
+BEGIN
+BEGIN
+BEGIN
+LOOKUP oiqMjM
+BEGIN
+LOOKUP fXxBsL
+LOOKUP a8jCph
+BEGIN
+BEGIN
+END
+LOOKUP qriVsH
+INSERT q9rKon string false
+BEGIN
+END
+INSERT gyqpzQ string false
+INSERT kAmXdx ()->string false
+END
+LOOKUP gkfaof
+END
+END
+INSERT rVqavO string true
+END
+INSERT kfe4oG string true
+LOOKUP qriVsH
+LOOKUP vkqGxB
+INSERT vkqGxB (number,string,string,string,number,string,string,string,string,string,number,string,string,string)->string false
+BEGIN
+BEGIN
+INSERT kfe4oG (number,string,number,number,number,number,string,number,number,number,string,number,number,number,string,number,number,number,string,string,number,number,string,string,number,string,string,string,number,string,string,number,string,number,string,number,number,string,string,number,string,string,number,string,string,number,number,string,number,number,number,string,number,string,string,number,number,number,number,number,number,number,number,number,number,string,string,string,string,string,string,string,string,string,string,string,string,number,string,number,number,string)->number true
+INSERT dFvdhW (number,number,number,number,number,string,string,string,number,string,string,string,number,string,string,number,string,string,number,number,number,number,number,number,string,string,number,string,string,string,string,number,string,string,number,number,string,number,string,number,number,number,number,number,number,string,number,number,number,number,number,string,string,string,number,string,number,number,number,string,number,number)->number true
+END
+END
+LOOKUP bQdNzJ
+BEGIN
+BEGIN
+END
+END
+LOOKUP xouIqH
+END
+END
+INSERT rVqavO string false
+END
+INSERT q9rKon number false
+END
+BEGIN
+BEGIN
+END
+BEGIN
+LOOKUP gkfaof
+LOOKUP a8jCph
+INSERT gkfaof string false
+BEGIN
+LOOKUP xouIqH
+INSERT q9rKon number false
+INSERT q4x6qz string true
+LOOKUP gyqpzQ
+END
+INSERT kfe4oG string true

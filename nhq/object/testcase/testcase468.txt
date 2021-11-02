@@ -1,0 +1,80 @@
+INSERT yApwp5 ()->number true
+INSERT bscJe4 ()->string false
+INSERT yApwp5 string false
+LOOKUP 
+LOOKUP bscJe4
+END
+LOOKUP uWiks2
+LOOKUP uib_bT
+BEGIN
+LOOKUP oviucW
+INSERT uib_bT string false
+END
+END
+INSERT hVnizO number true
+END
+LOOKUP sGfiaN
+INSERT dGdEvV (number,string,number,string,string,number,number,string,number,string,string,string,number,number,string,string,number,string,string,number,number,string,string,number,number,string,number,number,string,string,number,string,string,string,string,number,string,number)->number true
+END
+BEGIN
+BEGIN
+END
+INSERT uib_bT (string,number,string,number,string,string,number,number,number,string)->number false
+BEGIN
+INSERT uWiks2 (string,number,number,string,string,string,string,string,string,string,number,number,string,string,string,number,string,string,string,number,number,string,string,number,string,string,number,number,string,string,number,string,number,string,string,number,string,string,number,number,number,string,string,number,string)->string true
+END
+BEGIN
+BEGIN
+INSERT sGfiaN number false
+BEGIN
+INSERT kMzmlS number true
+INSERT sGfiaN string true
+END
+END
+INSERT eWfDqc ()->string false
+INSERT yApwp5 (string,string,number,string,string,string,string,string,string,string,number,number,string,number,number,string,string,number,string,string,number,number,string,number,string,number,number,number,string,string,string,string,number,string,string,string,number,string,string,number,string,string,number,number,number,string,string,string,number,number,string,string,number,number,number,number,number,string,string,string,string,number,number,string,number,string,string)->string true
+END
+BEGIN
+END
+INSERT bscJe4 ()->number true
+INSERT dGdEvV number true
+BEGIN
+INSERT oMgQhV string false
+END
+BEGIN
+INSERT  string true
+LOOKUP sGfiaN
+BEGIN
+BEGIN
+BEGIN
+BEGIN
+LOOKUP dGdEvV
+END
+END
+INSERT tH number false
+BEGIN
+END
+END
+LOOKUP oMgQhV
+LOOKUP nrdQhm
+BEGIN
+LOOKUP nrdQhm
+LOOKUP gIkhrQ
+LOOKUP kMzmlS
+LOOKUP egywr1
+LOOKUP yApwp5
+INSERT oMgQhV string true
+END
+END
+END
+LOOKUP uib_bT
+INSERT  string false
+LOOKUP tH
+BEGIN
+END
+BEGIN
+LOOKUP 
+LOOKUP tH
+BEGIN
+LOOKUP kMzmlS
+BEGIN

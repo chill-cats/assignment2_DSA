@@ -1,0 +1,80 @@
+INSERT q7z2ic string true
+BEGIN
+BEGIN
+LOOKUP n4qpo5
+BEGIN
+INSERT aJtAcP string false
+BEGIN
+END
+INSERT kxmC number true
+LOOKUP cigVrS
+LOOKUP oYb1dM
+BEGIN
+INSERT fhwNkk string false
+BEGIN
+INSERT p4wxjr ()->number false
+END
+END
+BEGIN
+END
+BEGIN
+END
+INSERT uehzuv string false
+BEGIN
+LOOKUP iuqEp2
+LOOKUP f8gwy9
+BEGIN
+INSERT uugus2 ()->string true
+BEGIN
+INSERT p4wxjr number false
+END
+INSERT uugus2 string true
+BEGIN
+INSERT pUtIhS ()->string true
+INSERT onpItQ ()->number true
+INSERT ySwqoZ (string,string,string,string,number,string,string,number,string,number,string,number,string,number,string,number,string,number,number,string,string,number,number,string,number,string,number,string,number,string,string,number,number,number,string,string,number,string,number,string,string,number,number,number,string,number,string,number,string,number,string,number,string,number,number,number,string,number,number,string,number,string,number,number,number,number,string,number,string,string,number,string,string,number,number,string,string,number,number,string,string,number,number,number,number,number,string,number,number,string)->number true
+END
+LOOKUP exyX
+INSERT onpItQ string true
+END
+LOOKUP aJtAcP
+LOOKUP iuqEp2
+INSERT cigVrS string false
+LOOKUP fhwNkk
+LOOKUP iuqEp2
+LOOKUP n4qpo5
+END
+BEGIN
+INSERT ySwqoZ string false
+BEGIN
+BEGIN
+END
+INSERT vOx8fP number true
+INSERT iuqEp2 string false
+BEGIN
+END
+BEGIN
+LOOKUP xzlAna
+INSERT uehzuv ()->string false
+END
+LOOKUP ySwqoZ
+INSERT exyX string true
+LOOKUP p7xjxI
+END
+END
+LOOKUP f8gwy9
+BEGIN
+LOOKUP uehzuv
+END
+INSERT kxmC (string,number,number,string,number,number,string,number,string,number,string,string,number,number,number,string,string,string,string,number,number,string,number,string,number,number,string,string,number,number,number,number,string,string,string,number,number,string,string,number,string,string,number,string,number,string,number,string,string,string,string,number,number,number,string)->string true
+BEGIN
+LOOKUP exyX
+LOOKUP uehzuv
+END
+END
+END
+END
+BEGIN
+END
+LOOKUP uehzuv
+LOOKUP f8gwy9

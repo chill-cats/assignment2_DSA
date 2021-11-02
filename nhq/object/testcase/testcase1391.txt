@@ -1,0 +1,80 @@
+BEGIN
+BEGIN
+END
+BEGIN
+LOOKUP aJetj7
+BEGIN
+INSERT tDfBx1 number true
+END
+END
+BEGIN
+END
+END
+BEGIN
+LOOKUP aJetj7
+LOOKUP symYnR
+END
+END
+END
+END
+BEGIN
+END
+LOOKUP hjwLmi
+END
+INSERT borbsI ()->number false
+LOOKUP hjwLmi
+INSERT des5 string true
+END
+BEGIN
+INSERT kpp7rc ()->number true
+BEGIN
+BEGIN
+LOOKUP aJetj7
+LOOKUP symYnR
+LOOKUP pcg8e1
+LOOKUP dYjGtP
+END
+INSERT des5 ()->string false
+LOOKUP dYjGtP
+LOOKUP jUqkxz
+BEGIN
+INSERT vSeTtt (string,string,number,string,string,number,number,number,number,number,number,string,number,number,string,string,string,number,string,string,string,number,number,number,number,number,number,number,number,string,number,string,string,number,number,string,string,number,string,string,string,string,number,string,number,number,number,number,string,number,string,string,number,string,string,number,string,number,string,string,string,string,number,number,number,string,string,number,string,number,number,string,string,string,string,string,number,string)->string true
+INSERT zgp0yo number true
+INSERT tDfBx1 string false
+INSERT pcg8e1 ()->string true
+BEGIN
+INSERT zgp0yo number false
+BEGIN
+LOOKUP dYjGtP
+INSERT vSeTtt number true
+END
+END
+BEGIN
+LOOKUP i8bEtw
+END
+BEGIN
+LOOKUP i8bEtw
+INSERT tDfBx1 number true
+BEGIN
+INSERT vSeTtt number true
+LOOKUP iNwWxV
+LOOKUP symYnR
+LOOKUP kpp7rc
+INSERT rdtEhC ()->string false
+LOOKUP tDfBx1
+BEGIN
+INSERT pcg8e1 string false
+INSERT des5 string true
+END
+END
+LOOKUP zgp0yo
+INSERT symYnR ()->number false
+END
+INSERT o3yReU string true
+BEGIN
+END
+LOOKUP i8bEtw
+INSERT k5iMsV number true
+BEGIN
+BEGIN
+INSERT o3yReU (number,number,string,number,number,number,string,string,string,number,string,number,number,string,number,string,string,string,string,number,number,number,number,string,number,string,number,string,number,number,string,string,string,number,string,number,number,string,number,number,number,number,number,number,number,number,number,number,number,number,string,string,string,string,number,string,string,number,number,number,string,string,number,string,string,number,number,number)->string true

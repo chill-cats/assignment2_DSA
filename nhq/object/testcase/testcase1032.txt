@@ -1,0 +1,80 @@
+INSERT cTnumC number true
+INSERT ttfstR (number,string,string,number,string,number,number,number,number,number,number,number,number,number,string,string,string,number,string,string,string,number,number,string,string,string,number,string,number,string,number,string,string,number,string,string,number,number,string,string,number,number,string,string,string,number,string,string,number,string,string,number,string,number,string,number,string,string,number,string,number,number,string,string,string,number,number,string,number,number,string,number,number)->string false
+INSERT itfdyy (string,string,number,number,number,number,number,string,string,string,string,number,string,string,string,number,string,string,number,string,number,string,number,number,string,string,string,number,string,number,number,string,string,number,string,number,string,number,number,number,string,string,number,number,string,number,string,number,string,string,number,string,string,string,string,string,string,string,number,string,number,number,string,number,number,string,number,string,string,number,string,number,number,number,string,string,string,string,string,number,number,string,number,number,string,number,number,number,string,number,number)->number true
+END
+INSERT aWkew3 string true
+INSERT kOy1cs number true
+INSERT kOy1cs number true
+LOOKUP d5fr
+INSERT mhl3au number false
+INSERT d5fr ()->number false
+BEGIN
+INSERT itfdyy ()->number false
+LOOKUP nAkEsC
+END
+BEGIN
+INSERT nAkEsC number false
+INSERT jVp8bz string true
+END
+END
+BEGIN
+LOOKUP rnbKuM
+LOOKUP ttfstR
+END
+LOOKUP jal7gJ
+LOOKUP qDf9x2
+INSERT m_qRxD ()->number false
+INSERT z7l4kF ()->number true
+END
+LOOKUP itfdyy
+END
+LOOKUP ghhonp
+INSERT cTnumC number true
+BEGIN
+LOOKUP z7l4kF
+END
+END
+LOOKUP hibBvd
+INSERT qQe7xu number false
+INSERT jVp8bz string false
+LOOKUP aWkew3
+END
+LOOKUP cTnumC
+END
+END
+BEGIN
+LOOKUP nex6dX
+BEGIN
+BEGIN
+END
+BEGIN
+LOOKUP rnbKuM
+INSERT aWkew3 string true
+BEGIN
+END
+END
+BEGIN
+END
+END
+LOOKUP xdociB
+BEGIN
+LOOKUP rnbKuM
+INSERT itfdyy (number,number,number,number,number,string,number,string,number,number,number,string,string,number,number,string,string,string,number,number,number,string,number,number,number)->string false
+LOOKUP ttfstR
+BEGIN
+BEGIN
+BEGIN
+INSERT qQe7xu number false
+LOOKUP xizAt_
+BEGIN
+END
+INSERT ghhonp number true
+LOOKUP qQe7xu
+BEGIN
+END
+BEGIN
+BEGIN
+BEGIN
+END
+BEGIN
+LOOKUP aWkew3

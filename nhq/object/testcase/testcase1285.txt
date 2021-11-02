@@ -1,0 +1,80 @@
+END
+END
+LOOKUP nTadyi
+BEGIN
+INSERT icqPuw ()->number true
+INSERT sinbcz number false
+LOOKUP yshMxF
+INSERT yshMxF ()->string false
+END
+INSERT floTzo string true
+END
+BEGIN
+BEGIN
+END
+BEGIN
+LOOKUP sinbcz
+LOOKUP fUmmrS
+LOOKUP mdjxwL
+INSERT wil8hs string false
+INSERT fUmmrS string false
+INSERT t8mqf0 string false
+END
+BEGIN
+INSERT m1izgO (number,number,number,number,string,number,number,string,string,number,string,number,number,string,number,number,string,number,number,string,number,number,number,string,string,string,string,string,number,string,number,string,string,number,number,string,number,number,number,string,number,string,string,number,number,string,string,string,string,string,string,string,number,string)->number true
+LOOKUP nTadyi
+BEGIN
+END
+INSERT kTaOqa ()->string false
+LOOKUP kTaOqa
+LOOKUP wil8hs
+LOOKUP uYpcwg
+LOOKUP m1izgO
+INSERT yjtXpS (number,number,number,number,number,number,number,number,string,number,string,number,string,number,number,string,string,number,string,number,number,string,string,number,string,string,number,string,number,number,string,number,number,number,string,number,number,number,number,string,string,string,string,number,string,number,string,string,number,number,string,number,string,string,string,string,number,number,number,string,string,number,number,string,string,string,number,string,string,string,string)->number true
+END
+BEGIN
+LOOKUP kTaOqa
+LOOKUP m1izgO
+BEGIN
+BEGIN
+LOOKUP yshMxF
+END
+END
+INSERT uYpcwg string false
+LOOKUP wlzJrS
+END
+BEGIN
+INSERT nZcedt string true
+LOOKUP sSeSic
+INSERT wlzJrS string false
+INSERT uYpcwg number false
+END
+END
+BEGIN
+LOOKUP dXwKvH
+BEGIN
+END
+END
+INSERT icqPuw ()->number true
+END
+INSERT sinbcz string true
+END
+BEGIN
+BEGIN
+LOOKUP wil8hs
+LOOKUP dXwKvH
+END
+LOOKUP dIhljH
+INSERT bqgxys number false
+BEGIN
+LOOKUP t8mqf0
+END
+INSERT wlzJrS (string,string,number,number,string,number,string,string,string,number,string,string,string,number,number,string,string,string,string,string,string,string,string,number,number,string,number,number,number,string,number,string,number,number,string,number,number,number,string,string,string,number,string,string,string,number,string,number,string,string,string,string,string,string,string,number,number,number,string,string,string,string,string,string,string,number,string,string,string,number,number)->number true
+BEGIN
+BEGIN
+BEGIN
+INSERT kTaOqa number false
+INSERT wil8hs string false
+BEGIN
+BEGIN
+END

@@ -1,0 +1,80 @@
+INSERT as string false
+LOOKUP bkl9vM
+LOOKUP mFoayU
+END
+BEGIN
+END
+LOOKUP kfzSmp
+LOOKUP g3dTfK
+END
+INSERT kfzSmp (number,number,string,string,number,number,number,string,number,string,number,number,string)->number true
+BEGIN
+INSERT pfyEdI string false
+BEGIN
+BEGIN
+BEGIN
+END
+BEGIN
+END
+INSERT dmuQwe string true
+LOOKUP nndAiy
+BEGIN
+END
+INSERT lNihqa number false
+INSERT u3xNpP string true
+BEGIN
+INSERT kfzSmp ()->number true
+INSERT kfzSmp string true
+INSERT kfzSmp number true
+LOOKUP kfzSmp
+INSERT rCpVrz number true
+LOOKUP qbeIdN
+BEGIN
+BEGIN
+INSERT u3xNpP number false
+END
+LOOKUP g3dTfK
+BEGIN
+BEGIN
+END
+LOOKUP kxsXwT
+INSERT pNjLah string true
+BEGIN
+INSERT pNjLah number false
+END
+END
+INSERT mtyMdF ()->number false
+BEGIN
+END
+END
+INSERT rTsTwr string false
+LOOKUP lNihqa
+END
+LOOKUP pfyEdI
+LOOKUP rCpVrz
+BEGIN
+BEGIN
+END
+END
+LOOKUP kfzSmp
+BEGIN
+LOOKUP kxsXwT
+LOOKUP pNweg_
+LOOKUP bkl9vM
+INSERT bkl9vM string false
+INSERT mFoayU number false
+INSERT u3xNpP (string,string,string,number,number,number,string,string,string,number,string,number,number,number,string,number,string,number,string,string,string,string,number,string,number,number,number,number,number,number,string,number,string,number,number,string,number,number,string,number,string,number,number,number,string,string,number,number,string,number,number,number,string,string,string,string,number,string,string,number,number,number,number,number,number,string,string,number)->string true
+END
+BEGIN
+LOOKUP bkl9vM
+INSERT a8irlJ ()->number false
+BEGIN
+END
+INSERT mFoayU string true
+END
+BEGIN
+LOOKUP lPi_k1
+LOOKUP guspb1
+END
+END
+LOOKUP kfzSmp

@@ -1,0 +1,80 @@
+BEGIN
+INSERT j2xtw7 string true
+INSERT knkBmB number true
+END
+END
+BEGIN
+INSERT hgjjyz ()->number false
+BEGIN
+END
+INSERT vxkthR number true
+END
+BEGIN
+END
+LOOKUP s9t8ht
+LOOKUP yhfwiw
+BEGIN
+LOOKUP aBrzeG
+INSERT pIpYlW string false
+LOOKUP 
+BEGIN
+END
+BEGIN
+END
+INSERT m4sJnr string true
+END
+BEGIN
+LOOKUP cgifzB
+END
+INSERT vxkthR ()->number false
+INSERT m4sJnr number false
+END
+INSERT aBrzeG string true
+END
+BEGIN
+LOOKUP cgifzB
+BEGIN
+INSERT mfzWhJ ()->string true
+INSERT atuJkt number true
+INSERT mwp3uu number false
+LOOKUP s9fwhD
+BEGIN
+END
+LOOKUP m4sJnr
+BEGIN
+INSERT rUqaaT string false
+INSERT m4sJnr number false
+BEGIN
+LOOKUP j2xtw7
+BEGIN
+END
+END
+LOOKUP cDxdbL
+BEGIN
+LOOKUP mwp3uu
+INSERT aBrzeG ()->string true
+INSERT pIpYlW number true
+LOOKUP sostuh
+LOOKUP 
+LOOKUP rUqaaT
+INSERT syy4pq string false
+LOOKUP rUqaaT
+LOOKUP knkBmB
+END
+INSERT vxkthR ()->string false
+LOOKUP sostuh
+BEGIN
+LOOKUP m4sJnr
+END
+INSERT m4sJnr ()->string false
+LOOKUP syy4pq
+BEGIN
+END
+END
+INSERT sostuh number false
+BEGIN
+BEGIN
+END
+LOOKUP vxkthR
+BEGIN
+END

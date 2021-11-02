@@ -1,0 +1,80 @@
+BEGIN
+INSERT efmFb5 number false
+INSERT uuxAdf number false
+END
+END
+END
+END
+BEGIN
+BEGIN
+LOOKUP egpsug
+INSERT rabkkA ()->number true
+BEGIN
+LOOKUP zI
+LOOKUP zI
+LOOKUP uuxAdf
+LOOKUP egpsug
+END
+LOOKUP xit7mB
+END
+BEGIN
+BEGIN
+INSERT c5s7ic number false
+BEGIN
+END
+END
+INSERT c5s7ic ()->string false
+BEGIN
+INSERT rabkkA number false
+BEGIN
+BEGIN
+LOOKUP xit7mB
+BEGIN
+LOOKUP a5chcH
+INSERT q_nTmM (number,number,number,string,number,number,string,string,string,string,number,number,number,number,string,string,number,string,number,number,string,number,number,number,string,number,number,number,number,number,string,number,number,string,string,string)->string true
+LOOKUP efmFb5
+BEGIN
+BEGIN
+LOOKUP q_nTmM
+LOOKUP c5s7ic
+BEGIN
+END
+BEGIN
+END
+INSERT c5s7ic string false
+END
+INSERT tRmih8 (string,string,string,string,number,string,string,string,number,string,number,number,string,string,number,number,string,string,number,string,string,number,string,string,string,string,number,string,string,number,number,string,string,number,string,string,string,number,number,string,string,string,number,number,number,string,number,number,number,string,number,number,number,number,string,number,number,string,string,number,number,string,number,string,number,number,string,string,number,string,number,string,string,number)->number false
+BEGIN
+LOOKUP qBodpZ
+END
+INSERT upgsur number true
+INSERT uuxAdf number false
+LOOKUP abaSsz
+LOOKUP jesYpB
+LOOKUP upgsur
+END
+BEGIN
+INSERT vnw4yF number false
+INSERT yKtKp7 number true
+INSERT efmFb5 number true
+END
+LOOKUP rabkkA
+LOOKUP qBodpZ
+END
+END
+INSERT tRmih8 ()->string false
+LOOKUP uuxAdf
+INSERT zI number false
+BEGIN
+INSERT jesYpB number true
+END
+END
+INSERT abaSsz (string,number,number,string,string,string,number,string,string,number,number,string,string,string,number,number,number,number,string,number,number,number,number,number,number,number,number,string,string)->string false
+BEGIN
+END
+BEGIN
+LOOKUP r8nLu4
+LOOKUP egpsug
+END
+INSERT vnw4yF string false
+INSERT c5s7ic ()->string true

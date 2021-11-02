@@ -1,0 +1,80 @@
+INSERT r9ylfu number true
+INSERT nOuNu9 number false
+INSERT k9ejdj string false
+LOOKUP tsw2gL
+INSERT f7ggxo (number,number,string,string,string,number,number,number,string,string,number,number,number,number,number,number,string,string,string,number,string,string,number,string,string,number,number,number,number,string,number,number,string,number,string,number,number,string,string,string,string,string,number,number,string,number,number,number,string,number)->number false
+END
+INSERT qCtpvh ()->string false
+BEGIN
+END
+END
+INSERT eckyfE string true
+END
+INSERT mSt9zi string false
+INSERT f7ggxo number false
+LOOKUP smwwra
+INSERT eckyfE number true
+LOOKUP abeie5
+INSERT abeie5 string true
+INSERT xYgEeV (number,string,string,string,string,number,number,string,number,string,number,number,number,string,number,string,string,number,number,number,string,string,string,number,string,string)->number false
+LOOKUP tsw2gL
+INSERT r9ylfu ()->number false
+LOOKUP yVcshu
+END
+LOOKUP smwwra
+END
+BEGIN
+END
+INSERT r9ylfu string false
+BEGIN
+LOOKUP xYgEeV
+BEGIN
+BEGIN
+END
+LOOKUP yVcshu
+INSERT smwwra (string,number,number,string,number,string,string,number,number,string,string,string,number,string,string,string,number,string,string,number,string,number,string,string,number,number,number)->number true
+LOOKUP f7ggxo
+END
+INSERT hypxxJ number true
+BEGIN
+BEGIN
+BEGIN
+BEGIN
+LOOKUP q5s6cl
+BEGIN
+LOOKUP abeie5
+END
+LOOKUP xYgEeV
+INSERT nOuNu9 (number,number,number,string,string,number,number,number,number,number,string,number,number,number,number,number,number,string,number,number,string,string,string,number,number,number,number,string,string,string,number,string,number,number)->number false
+END
+BEGIN
+END
+BEGIN
+BEGIN
+END
+LOOKUP e2jarc
+END
+END
+LOOKUP nOuNu9
+END
+END
+LOOKUP zNbeaT
+END
+LOOKUP fGfFpA
+LOOKUP eckyfE
+INSERT yVcshu (string,number,number,string,number,number,string,number,string,string,string,string,string,string,string,string,string,string,string,string,number,string,string,string,string,string,number,number,number,number,string,string,string,string,string,string,string,string,number,string,number,string,string,string,number,string,number,number,number,number,number,string,string,string,number,string,number,number,string,number,string,string,string,string,number,number)->number true
+INSERT otx3o_ number true
+LOOKUP fGfFpA
+BEGIN
+END
+LOOKUP hon6if
+INSERT q5s6cl string false
+BEGIN
+BEGIN
+BEGIN
+INSERT smwwra string false
+END
+BEGIN
+BEGIN
+LOOKUP k9ejdj
+BEGIN

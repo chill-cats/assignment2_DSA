@@ -1,0 +1,80 @@
+BEGIN
+BEGIN
+LOOKUP gxoysk
+LOOKUP oxuziA
+BEGIN
+END
+BEGIN
+LOOKUP vpsHx0
+END
+BEGIN
+INSERT jrfRdV number false
+END
+INSERT oxuziA string false
+BEGIN
+END
+END
+END
+END
+LOOKUP hqjBrt
+INSERT gxoysk string true
+INSERT naxMp1 ()->string false
+LOOKUP jitJlE
+LOOKUP oxuziA
+BEGIN
+BEGIN
+LOOKUP bQnode
+BEGIN
+LOOKUP lYfsz2
+INSERT bQnode number false
+BEGIN
+LOOKUP zwdxxt
+BEGIN
+LOOKUP oxuziA
+INSERT oxuziA string true
+INSERT aojrey (string,number,number,number,string,number,number,number,number,string,number,number,string,string,number,number,number,string,string,string,number,number,number,number,number,number,number,string,string,number,string,string,number,number,number,string,string,string,string,string,number,string,number,number,number,string,string,number,string)->string false
+LOOKUP naxMp1
+INSERT dMu2kX ()->number true
+INSERT aojrey number false
+LOOKUP uApElv
+INSERT wEcbnQ number false
+END
+BEGIN
+LOOKUP naxMp1
+END
+END
+END
+LOOKUP wRhCbc
+BEGIN
+LOOKUP lYfsz2
+INSERT zwdxxt number false
+LOOKUP wRhCbc
+BEGIN
+END
+END
+END
+END
+END
+INSERT uV number false
+LOOKUP vsgmcW
+BEGIN
+LOOKUP oxuziA
+END
+INSERT lYfsz2 number false
+INSERT vsgmcW string true
+BEGIN
+END
+INSERT jitJlE ()->number true
+END
+INSERT jitJlE string false
+INSERT gxoysk number false
+BEGIN
+BEGIN
+LOOKUP zwdxxt
+LOOKUP naxMp1
+INSERT oxuziA string true
+BEGIN
+END
+BEGIN
+INSERT dVb0kP string true
+INSERT dVb0kP number true

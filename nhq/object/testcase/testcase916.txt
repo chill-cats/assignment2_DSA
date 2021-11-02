@@ -1,0 +1,80 @@
+INSERT uTxTpa string false
+LOOKUP xYmTc0
+BEGIN
+END
+END
+LOOKUP vdtRq7
+END
+BEGIN
+END
+END
+BEGIN
+LOOKUP sXvLud
+END
+END
+LOOKUP wxrod4
+END
+LOOKUP hXkayw
+INSERT b5aAeY number true
+END
+INSERT yYwqu4 number false
+LOOKUP vdtRq7
+BEGIN
+LOOKUP icokc0
+INSERT zBuplN ()->number false
+LOOKUP zMlA
+END
+BEGIN
+BEGIN
+LOOKUP vdtRq7
+INSERT xSwTx8 number true
+BEGIN
+END
+INSERT xSwTx8 number true
+LOOKUP xSwTx8
+INSERT zBuplN ()->string true
+INSERT zMlA ()->number true
+INSERT vdtRq7 string true
+BEGIN
+LOOKUP qgwXpi
+LOOKUP zBuplN
+BEGIN
+BEGIN
+END
+INSERT alaByu number false
+LOOKUP zBuplN
+BEGIN
+INSERT yYwqu4 number false
+END
+LOOKUP yYwqu4
+END
+LOOKUP mcmtyS
+BEGIN
+BEGIN
+LOOKUP xflHk6
+INSERT ikkyha string true
+INSERT vdtRq7 string false
+BEGIN
+INSERT ikkyha string false
+LOOKUP qgwXpi
+LOOKUP sXvLud
+END
+BEGIN
+INSERT ydisbf string true
+END
+BEGIN
+END
+END
+END
+END
+BEGIN
+BEGIN
+INSERT qgwXpi (string,string,number,string,string,number,string,number,number,string,number)->string true
+INSERT vdtRq7 number true
+BEGIN
+INSERT uTxTpa ()->string true
+BEGIN
+INSERT sXvLud string true
+LOOKUP zMlA
+LOOKUP sXvLud
+INSERT zBuplN number true

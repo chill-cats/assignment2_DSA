@@ -1,0 +1,80 @@
+BEGIN
+END
+END
+BEGIN
+LOOKUP ocmsj6
+BEGIN
+END
+BEGIN
+INSERT ocmsj6 string true
+END
+BEGIN
+INSERT m0tLeh string false
+INSERT i2fjkt number false
+END
+END
+BEGIN
+BEGIN
+LOOKUP m5sCaA
+END
+LOOKUP xdnyzM
+BEGIN
+END
+INSERT w5kXb5 ()->number false
+LOOKUP w5kXb5
+BEGIN
+END
+LOOKUP dKsAnK
+END
+LOOKUP ocmsj6
+BEGIN
+BEGIN
+LOOKUP mSmvnO
+END
+INSERT i2fjkt ()->number true
+INSERT dKsAnK string false
+INSERT aluidt number true
+BEGIN
+INSERT mSmvnO string true
+INSERT eDoVhJ ()->number false
+BEGIN
+LOOKUP k_yNiu
+INSERT hUjauE number true
+BEGIN
+END
+INSERT m5sCaA (number,number,string,string,string,string,number,string,number,string,number,number,number,string,string,number,number,number,number,string,number,string,number,number,string,string,string,string,number,string,number,number,number,string,number,string,string,number,string,number,string,string,string,string,string,string,number,string,string,string,string,number,number,number,string,number,number,string,number,string,number,string,string,number,string,string,string,string,number,number,string,string,string,string,string,number,number,number,number,number,number,number,string,number,string,number,number,number,number,string,string,string,number,string,string,number)->string true
+LOOKUP dMpHfm
+END
+LOOKUP m5sCaA
+BEGIN
+LOOKUP vnyXl7
+END
+LOOKUP eDoVhJ
+BEGIN
+LOOKUP rbyNzL
+END
+LOOKUP vnyXl7
+LOOKUP dMpHfm
+LOOKUP m0tLeh
+BEGIN
+INSERT xdnyzM (string,string,number,number,number,string,string,number,number,string,string,string,number,number,number,string,string,string,number,string,number,number,number,number,string,number,number,string,number,number,number,number,number,string,number,number,string,number,string,number,number,string,number,string,number,number,string,string,number,number,string,string,number,number,number,number,string,string,string,number,number,number,number,number,number,number,string,string,number,string,string,string,string,number,string,string,string,string,string,string,number,string,string)->number false
+END
+INSERT rbyNzL string false
+BEGIN
+INSERT vnyXl7 number true
+END
+INSERT zbcZxx string false
+BEGIN
+LOOKUP tzduno
+INSERT m5sCaA string true
+LOOKUP rbyNzL
+INSERT dMpHfm ()->number false
+INSERT vnyXl7 number true
+LOOKUP mSmvnO
+END
+LOOKUP dMpHfm
+INSERT rLw7hb number true
+END
+END
+INSERT m5sCaA number true
+BEGIN

@@ -1,0 +1,80 @@
+LOOKUP drtLiE
+LOOKUP dOiZeD
+BEGIN
+LOOKUP wyg_sv
+LOOKUP jeoIaL
+BEGIN
+INSERT nXnRsU (string,string,number,string,string,number,number,number,string,string,number,string)->number false
+LOOKUP drtLiE
+END
+INSERT t1elrk (number,number,string,string,number)->string false
+END
+BEGIN
+INSERT yYaZia number false
+END
+END
+END
+INSERT dOiZeD number false
+INSERT bEfsuv ()->string false
+LOOKUP dOiZeD
+BEGIN
+LOOKUP v5oLrQ
+LOOKUP yYaZia
+INSERT n6hQtn ()->string true
+END
+INSERT a9odki ()->number false
+LOOKUP wyg_sv
+INSERT dOiZeD string true
+INSERT yYaZia string false
+BEGIN
+INSERT t1elrk string false
+INSERT jeoIaL number false
+END
+END
+BEGIN
+LOOKUP jeoIaL
+LOOKUP t1elrk
+END
+INSERT wyg_sv number false
+BEGIN
+INSERT uUniuB number true
+INSERT v5oLrQ number false
+BEGIN
+BEGIN
+END
+LOOKUP lSikko
+BEGIN
+LOOKUP a9odki
+BEGIN
+BEGIN
+END
+END
+INSERT eYbfqF number true
+BEGIN
+BEGIN
+END
+INSERT dOiZeD number true
+LOOKUP uUniuB
+INSERT yYaZia ()->number false
+BEGIN
+END
+LOOKUP lSikko
+LOOKUP eYbfqF
+INSERT eYbfqF number true
+INSERT lppUeY string false
+BEGIN
+END
+INSERT uUniuB number false
+END
+END
+LOOKUP wyg_sv
+END
+LOOKUP jldGkL
+BEGIN
+BEGIN
+LOOKUP yYaZia
+END
+BEGIN
+BEGIN
+END
+LOOKUP y4foms

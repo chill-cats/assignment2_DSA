@@ -6,17 +6,21 @@
 
 #IncludeRegexTransform: 
 
-/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/SymbolTable.cpp
+/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq/SymbolTable.cpp
 SymbolTable.h
-/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/SymbolTable.h
-utility
+/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq/SymbolTable.h
+
+/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq/SymbolTable.h
+main.h
+/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq/main.h
+
+/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq/a.cpp
+iostream
+-
+string
 -
 
-/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/SymbolTable.h
-main.h
-/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/main.h
-
-/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/error.h
+/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq/error.h
 string
 -
 stdio.h
@@ -26,13 +30,13 @@ string.h
 iostream
 -
 
-/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/main.cpp
+/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq/main.cpp
 SymbolTable.h
-/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/SymbolTable.h
+/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq/SymbolTable.h
 SymbolTable.cpp
-/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/SymbolTable.cpp
+/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq/SymbolTable.cpp
 
-/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/main.h
+/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq/main.h
 iostream
 -
 string
@@ -42,5 +46,5 @@ fstream
 regex
 -
 error.h
-/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/error.h
+/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq/error.h
 

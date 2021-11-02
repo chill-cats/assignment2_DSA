@@ -1,0 +1,80 @@
+INSERT fFaBtv (number,string,string,number,string,number,number)->string true
+BEGIN
+INSERT a_fCeH number false
+END
+BEGIN
+INSERT akzkki number true
+LOOKUP wchEpo
+INSERT tDv4t3 string false
+LOOKUP fYp7lS
+END
+BEGIN
+INSERT wchEpo number false
+INSERT a_fCeH number true
+END
+BEGIN
+BEGIN
+END
+END
+END
+BEGIN
+END
+INSERT uhxBoE string true
+BEGIN
+INSERT vWhNdQ string true
+LOOKUP gCn5cW
+END
+LOOKUP bIuPbi
+INSERT wQtryo string true
+BEGIN
+BEGIN
+LOOKUP ffh_xM
+INSERT cJmHnW number false
+LOOKUP uhxBoE
+LOOKUP akzkki
+END
+LOOKUP oBrrjc
+INSERT hpgnkQ ()->string false
+INSERT wchEpo string false
+END
+END
+LOOKUP tGkiw8
+LOOKUP gCn5cW
+LOOKUP vWhNdQ
+BEGIN
+LOOKUP hpgnkQ
+BEGIN
+INSERT bIuPbi string false
+BEGIN
+END
+END
+INSERT czm2sx number true
+END
+LOOKUP a_fCeH
+END
+END
+LOOKUP fFaBtv
+LOOKUP tGkiw8
+BEGIN
+INSERT tGkiw8 number false
+LOOKUP tGkiw8
+LOOKUP uhxBoE
+BEGIN
+INSERT fFaBtv (number,string,string,number,string,number,number,string,string,number,number,number,string,number,number,string,string,string,number,string,number,number,number,number,string)->number true
+BEGIN
+INSERT wQtryo number false
+END
+LOOKUP fFaBtv
+BEGIN
+LOOKUP ffh_xM
+BEGIN
+BEGIN
+END
+INSERT wchEpo number false
+INSERT gCn5cW string false
+END
+BEGIN
+INSERT czm2sx ()->string true
+LOOKUP cJmHnW
+END
+BEGIN

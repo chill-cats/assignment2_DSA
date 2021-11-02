@@ -1,0 +1,80 @@
+INSERT dnjNez (number,string,number,string,number,number,string,string,string,number,string,string,string,string,string,string,string,number,number,string,number,string,number,number,string,number,string,string,number,string,string,string,string,number,string,string,number,number,number,string,number,string,string,number,number,number,number,string,string,string,string,number,number,number,number,number,number,string,string,number,number,number,string,number,string,number,string,string,string,number,string,string,string,string,number,string,string,number,number,string,number,number,string,number,string,string,number,number,number,string,number,number,string,string,number,number,number,number,string,string)->string true
+INSERT tyyFyR number true
+BEGIN
+INSERT dnjNez ()->string true
+BEGIN
+END
+INSERT dnjNez string true
+INSERT gPzffT number true
+BEGIN
+END
+BEGIN
+LOOKUP jZhEeL
+INSERT johpcm number true
+END
+BEGIN
+BEGIN
+INSERT uMzCjh number false
+LOOKUP r5ulpk
+LOOKUP oInRhX
+END
+LOOKUP nktOwk
+LOOKUP ggb4rp
+LOOKUP jNlHbz
+INSERT wYcsoB ()->number false
+LOOKUP jNlHbz
+BEGIN
+END
+BEGIN
+INSERT gniUhx string false
+END
+BEGIN
+LOOKUP iNbnkP
+BEGIN
+END
+LOOKUP c9omsB
+BEGIN
+LOOKUP jZhEeL
+END
+END
+BEGIN
+INSERT gniUhx (number,number,number,number,number,number,number,number,number,string,string,number,number,string,number,string,string,string,number,string,number,number,string,number,string,number,string,string,string,number,string,number,string,string,number,string)->string true
+END
+INSERT jZhEeL ()->string false
+BEGIN
+END
+END
+INSERT dnjNez string false
+END
+INSERT c9omsB string false
+INSERT gniUhx ()->number true
+LOOKUP r5ulpk
+END
+LOOKUP johpcm
+INSERT c9omsB number false
+END
+BEGIN
+BEGIN
+INSERT wEhblE string true
+END
+LOOKUP jZhEeL
+INSERT johpcm string false
+BEGIN
+BEGIN
+BEGIN
+END
+LOOKUP oInRhX
+LOOKUP c9pznj
+END
+END
+INSERT nktOwk string false
+LOOKUP wEhblE
+LOOKUP wEhblE
+LOOKUP ggb4rp
+END
+LOOKUP tyyFyR
+INSERT johpcm string false
+LOOKUP tyyFyR
+BEGIN
+INSERT r5ulpk string true
+BEGIN

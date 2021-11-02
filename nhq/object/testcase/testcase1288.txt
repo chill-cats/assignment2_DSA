@@ -1,0 +1,80 @@
+BEGIN
+INSERT vRbkrs ()->number false
+BEGIN
+LOOKUP oNnRnq
+END
+END
+INSERT oykKxj number true
+END
+LOOKUP rtiCmM
+INSERT  number true
+END
+BEGIN
+LOOKUP oNnRnq
+END
+LOOKUP jqeHbB
+END
+LOOKUP dgpJqw
+INSERT kkbNbp number false
+LOOKUP eOsoxe
+END
+BEGIN
+BEGIN
+BEGIN
+END
+INSERT asily7 (number,string,number,string,number,number,number,string,string,number,number,number,string,number,number,number,string,string,string,string,string,string,number,string,string,number,string,number,number,string,string,string,number,number,number,number,string,number,string,string,string,string,number,string,string,string,number,number,string,string,number,string,string,string,number,number,string,number,number,string,string)->string false
+INSERT thp9iw number false
+INSERT c0jGan ()->string true
+INSERT ucv8hs number false
+INSERT  number false
+BEGIN
+BEGIN
+LOOKUP kkbNbp
+LOOKUP nZm4kW
+LOOKUP ohlBtn
+END
+END
+END
+LOOKUP ffiZp4
+INSERT  number true
+INSERT ucv8hs number true
+END
+INSERT reiYhT number true
+END
+BEGIN
+BEGIN
+END
+BEGIN
+INSERT oNnRnq string true
+BEGIN
+BEGIN
+END
+LOOKUP c6kXvd
+BEGIN
+LOOKUP oNnRnq
+LOOKUP thp9iw
+BEGIN
+END
+INSERT rtiCmM ()->string true
+LOOKUP kkbNbp
+INSERT hVzfcp number false
+LOOKUP reiYhT
+INSERT asily7 (string,string,string,number,string,string,string,string,number,number,string,number,number,string,number,number,number,number,string,number,number,string,number,number,string,number,string,string,string,number,string,number,number,number,number,string,number,number,string,string,string,string,string,string,string,number,number,number,string,number,number,number,number,number,string,string,number,number,number,string,number,number,string,number,string,string,string,number,number,string,string,string,number,string,string,string,number,number,string,string,string,string,string,number,number,number)->string false
+LOOKUP eOsoxe
+END
+INSERT asily7 string true
+LOOKUP jZhrnQ
+BEGIN
+INSERT ucv8hs string true
+BEGIN
+LOOKUP 
+LOOKUP vRbkrs
+BEGIN
+INSERT vRbkrs string true
+END
+INSERT c0jGan string false
+END
+LOOKUP c0jGan
+BEGIN
+END
+BEGIN

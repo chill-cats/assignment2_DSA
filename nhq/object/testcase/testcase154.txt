@@ -1,0 +1,80 @@
+INSERT lFyumm ()->number false
+INSERT yffsyH (string,number,string,number,number,number,string,number,string,number,string,string,number,string,number,number,number,string,string,number,number,number,string,string,string,string,number,string,number,number)->number false
+INSERT h7b7s7 string false
+LOOKUP iPd0x5
+BEGIN
+INSERT h7b7s7 number false
+LOOKUP vFxbpj
+INSERT iPd0x5 number true
+LOOKUP yCiUuu
+END
+LOOKUP h7b7s7
+END
+LOOKUP vNeZsp
+END
+LOOKUP fjs_zw
+BEGIN
+INSERT iPd0x5 number true
+BEGIN
+END
+LOOKUP vDtFoG
+END
+INSERT qEcvrq string false
+END
+BEGIN
+END
+BEGIN
+LOOKUP qEcvrq
+END
+INSERT gCh6qo ()->string true
+INSERT lFyumm ()->string true
+END
+BEGIN
+END
+END
+BEGIN
+LOOKUP yCiUuu
+END
+LOOKUP vNeZsp
+BEGIN
+END
+LOOKUP fPdpie
+INSERT vNeZsp number false
+BEGIN
+LOOKUP yffsyH
+INSERT vFxbpj string true
+BEGIN
+END
+BEGIN
+END
+INSERT yffsyH ()->string true
+INSERT qEcvrq number true
+END
+INSERT iPd0x5 (string,number,string,number,number,number,string,number,number,string,string,string,number,string,string,number,string,number,string,number,number,string,number,number,string,string,number,string,string,string,string,string,number,number,string,string,number,string,number,string,number,number,number,string,number,number,string,number,string,number,string,string,string,string,number,number,string,string,string,string,number,number,string,string,number,string,string,string,string,number,number,string,string,string,string,string,number,string,number,string,number,string,number,number,string,number,number,number,number,string,string,number,number,string,string)->number true
+END
+INSERT iPd0x5 number false
+LOOKUP qMa2tv
+BEGIN
+LOOKUP d0bjo6
+INSERT vDtFoG (string,number,number,number,number,string,number,string,number,string,number,number,string,number,number,string,string,number,string,string,string,number,string,number,number,number,string,number,string,number,number,number,number,string,number,number,string,string)->string true
+BEGIN
+LOOKUP vDtFoG
+INSERT bBrAzx number true
+BEGIN
+INSERT iPd0x5 string true
+LOOKUP vDtFoG
+LOOKUP vNeZsp
+INSERT fPdpie string true
+BEGIN
+BEGIN
+LOOKUP vFxbpj
+LOOKUP d0bjo6
+BEGIN
+BEGIN
+LOOKUP vDtFoG
+INSERT kMeRet (number,string,string,string,number,number,number,string,string,number,number,number,number,number,number,string,string,number,number,number,string,number,string,string,number,number,string,number,number,string,number)->string false
+BEGIN
+BEGIN
+END
+END
+END

@@ -1,0 +1,80 @@
+INSERT rsacg3 ()->number false
+INSERT rsacg3 number true
+INSERT sZa8uY ()->string true
+BEGIN
+LOOKUP sZa8uY
+BEGIN
+BEGIN
+LOOKUP sXhfk6
+BEGIN
+BEGIN
+END
+END
+LOOKUP w_lmmv
+INSERT kOoIo6 number false
+INSERT ycgrh1 (string,string,string)->string false
+BEGIN
+END
+BEGIN
+LOOKUP sZa8uY
+BEGIN
+LOOKUP cfm6ur
+INSERT  number true
+BEGIN
+END
+END
+LOOKUP myk0hw
+END
+END
+END
+INSERT ycgrh1 ()->string false
+BEGIN
+BEGIN
+INSERT sZa8uY number false
+BEGIN
+INSERT myk0hw string true
+INSERT wrhNns number false
+BEGIN
+END
+INSERT eCmIv2 number false
+BEGIN
+END
+LOOKUP 
+END
+END
+BEGIN
+END
+END
+LOOKUP eCmIv2
+LOOKUP myk0hw
+LOOKUP sXhfk6
+INSERT c3qalw string false
+BEGIN
+LOOKUP eCmIv2
+INSERT rsacg3 number false
+LOOKUP wrhNns
+LOOKUP mTljxS
+INSERT b5pKbk number false
+LOOKUP myk0hw
+END
+LOOKUP nmfAaS
+LOOKUP myk0hw
+LOOKUP sXhfk6
+INSERT kOoIo6 ()->number false
+LOOKUP 
+END
+BEGIN
+INSERT yeontQ string true
+BEGIN
+END
+INSERT w_lmmv string false
+BEGIN
+INSERT nzcndT number false
+INSERT g2cNjh string false
+END
+LOOKUP 
+END
+BEGIN
+END
+INSERT lXtGa9 ()->number true
+LOOKUP eCmIv2

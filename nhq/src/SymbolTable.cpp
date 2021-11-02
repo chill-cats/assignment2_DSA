@@ -130,7 +130,7 @@ pair<string, int> SymbolTable::process(const string& line){ //CHECK LỖI NGỮ 
 
 void SymbolTable::insert(const string& line) const{
     int comp = 0, splay = 0, initLevel = 0;
-    string name="", type="", isStatic="", returnType="";
+    string name="", type="", isStatic="", returnType="";k
     tokenizeIns(line, name, type, isStatic, returnType);
 
     if(isStatic == "false") 
@@ -280,7 +280,6 @@ Node* SplayTree::find(const string& name, Node* node, int destLevel)
         }
     }
 }
-
 void SplayTree::rightRotate(Node* node)
 {
     Node* tmpLeft = node->getLeft(); //x
@@ -317,35 +316,30 @@ void SplayTree::leftRotate(Node* node)
     tmpRight->setParent(tmpParent);
     node->setParent(tmpRight);
 }
-
 void SplayTree::leftZZ(Node* node)
 {  
     Node*tmp = node->getLeft();
     leftRotate(tmp);
     rightRotate(node);   
 }
-
 void SplayTree::rightZZ(Node* node)
 {
     Node*tmp = node->getRight();
     rightRotate(tmp);
     leftRotate(node);
 }
-
 void SplayTree::leftRoll(Node* node)
 {
     Node* tmp = node->getRight();
     leftRotate(node);
     leftRotate(tmp);
 }
-
 void SplayTree::rightRoll(Node* node)
 {
     Node*tmp = node->getLeft();
     rightRotate(node);
     rightRotate(tmp);
 }
-
 void SplayTree::splay(Node* node, int &splay)
 {
     if(node->getParent() == nullptr)
@@ -382,7 +376,6 @@ void SplayTree::splay(Node* node, int &splay)
         }
     }
 }
-
 void SplayTree::insert_node(Node* root, Node*add, int& comp)
 {
     if(this->root == nullptr)
@@ -433,7 +426,6 @@ void SplayTree::insert_node(Node* root, Node*add, int& comp)
         }
     }
 }
-
 void SplayTree::deleteNode(Node*tobeDel)
 {
     if(tobeDel == nullptr) //Base case
@@ -473,7 +465,6 @@ void SplayTree::deleteNode(Node*tobeDel)
         }
     }
 }
-
 Node *SplayTree::TreeMin(Node *node)
 {
     Node*tmp = node;
@@ -544,6 +535,51 @@ int SplayTree::countNode(Node* node){
     if(node == nullptr) return 0;
     return 1+countNode(node->getLeft()) + countNode(node->getRight());
 }
+
+//================ List =========================
+DLL::DLL():head(nullptr),tail(nullptr){}
+DLL::~DLL(){this->destroy();}
+DLL::ListNode::ListNode(string data):next(nullptr),prev(nullptr), data(data){}
+DLL::ListNode::~ListNode(){}
+bool DLL::isEmpty(){
+    if(this->head ==nullptr)    return true;
+    else return false;
+}
+void DLL::append(string str){
+    ListNode*add = new ListNode(str);
+    if(this->head == nullptr){
+        this->head = add;
+        this->tail = add;
+    }
+    else{
+        this->tail->next = add;
+        add->prev = this->tail;
+        this->tail = this->tail->next;
+    }
+}
+void DLL::addfront(string str){
+    ListNode*add = new ListNode(str);
+    if(this->head == nullptr){
+        this->head=  add;
+        this->tail = add;
+    }
+    else{
+        this->head->prev = add;
+        add->next = this->head;
+        this->head = this->head->prev;
+    }
+}
+string DLL::pop_front(){
+    if(!this->isEmpty()){
+        ListNode* tmp = this->head;
+        this->head = this->head->next;
+        string ans = tmp->data;
+        delete tmp;
+        return ans;
+    }
+}
+
+
 
 //================ NODE =======================
 Node* Node::getLeft() const {return this->left;}

@@ -1,0 +1,80 @@
+INSERT oasco_ string true
+END
+INSERT wOnugE ()->number false
+END
+END
+LOOKUP oasco_
+BEGIN
+BEGIN
+END
+BEGIN
+BEGIN
+END
+END
+INSERT a0q2yt ()->number false
+END
+LOOKUP l4kjnN
+LOOKUP sodMnk
+LOOKUP wOnugE
+LOOKUP kgsLwY
+BEGIN
+INSERT sodMnk (number,number,string,number,string,string,string,number,number,number,string,number,number,string,string,string,string,string,string,number,string,string,string,number,string,number,number,string,string,string,number,number,string,string,number,string,number,number,number,string,string)->string true
+BEGIN
+LOOKUP gyvZe9
+END
+LOOKUP akaZw1
+LOOKUP sjj5nR
+BEGIN
+INSERT a0q2yt number false
+END
+INSERT l4kjnN ()->string true
+INSERT sodMnk string true
+END
+LOOKUP hKwwoq
+LOOKUP l4kjnN
+BEGIN
+LOOKUP nppoeJ
+INSERT jOo9ka string false
+LOOKUP jOo9ka
+BEGIN
+INSERT oasco_ ()->number false
+END
+INSERT uBwitz string true
+END
+LOOKUP yIgOd2
+BEGIN
+BEGIN
+LOOKUP sodMnk
+INSERT gyvZe9 string false
+INSERT sodMnk string true
+END
+BEGIN
+LOOKUP oasco_
+BEGIN
+END
+BEGIN
+LOOKUP l4kjnN
+BEGIN
+INSERT qjtvtl number false
+LOOKUP a0q2yt
+LOOKUP oasco_
+LOOKUP c4a7iI
+END
+BEGIN
+BEGIN
+INSERT uBwitz number false
+INSERT crdfh3 string true
+BEGIN
+END
+LOOKUP gyvZe9
+BEGIN
+END
+END
+END
+END
+INSERT oasco_ (number,string,number,string,number,string,number)->number false
+INSERT a0q2yt number true
+INSERT kgsLwY string false
+INSERT l4kjnN string false
+INSERT sodMnk number true
+BEGIN

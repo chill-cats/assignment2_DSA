@@ -1,0 +1,80 @@
+BEGIN
+BEGIN
+LOOKUP mzhBeo
+END
+END
+BEGIN
+LOOKUP znsquy
+BEGIN
+INSERT zEynfz ()->number false
+INSERT bba9sm number true
+BEGIN
+LOOKUP iPytll
+INSERT zQuNlZ number false
+END
+INSERT iCnDeu ()->number true
+BEGIN
+BEGIN
+BEGIN
+END
+LOOKUP mzhBeo
+INSERT tdhsbe (string,number,string,number,string,string)->string true
+LOOKUP bba9sm
+LOOKUP bba9sm
+INSERT xMrdny ()->string true
+END
+BEGIN
+LOOKUP wOqAcA
+END
+END
+END
+INSERT znsquy (string,number,string,string,number,number,number,number,string,string,string)->number false
+LOOKUP bmbEbR
+INSERT iCnDeu (number,string,string,number,number,number,number,string,number,string,number)->string false
+BEGIN
+INSERT bmbEbR string true
+LOOKUP qTuuwd
+BEGIN
+END
+LOOKUP uddabB
+INSERT zQuNlZ number false
+LOOKUP zEynfz
+LOOKUP znsquy
+BEGIN
+BEGIN
+BEGIN
+INSERT pugqw0 number true
+INSERT hjuwxO string true
+LOOKUP uddabB
+END
+BEGIN
+BEGIN
+INSERT mzhBeo number true
+INSERT hjuwxO number false
+INSERT wOqAcA string false
+INSERT bba9sm string true
+LOOKUP zEynfz
+INSERT rhlWfN string true
+INSERT iPytll number false
+LOOKUP znsquy
+END
+END
+INSERT dql5iM number false
+INSERT zQuNlZ number true
+BEGIN
+END
+END
+LOOKUP uddabB
+LOOKUP mzhBeo
+BEGIN
+END
+END
+LOOKUP uddabB
+END
+END
+BEGIN
+END
+LOOKUP pugqw0
+BEGIN
+LOOKUP pugqw0
+END

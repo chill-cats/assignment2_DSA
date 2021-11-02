@@ -1,0 +1,80 @@
+LOOKUP vahdwL
+INSERT tlutq8 ()->string true
+INSERT iepAl0 ()->number false
+END
+BEGIN
+END
+INSERT oZgTtF (string,number,string,string,string,number)->string true
+BEGIN
+LOOKUP nmfSiW
+END
+BEGIN
+INSERT oKogwK string true
+INSERT nYtlnA string true
+LOOKUP dsgBu6
+LOOKUP nmfSiW
+INSERT nYtlnA number true
+END
+BEGIN
+BEGIN
+END
+LOOKUP aBa0k_
+END
+LOOKUP aBa0k_
+INSERT qxsfoE number false
+END
+BEGIN
+INSERT oKogwK number false
+BEGIN
+LOOKUP oKogwK
+LOOKUP qxsfoE
+BEGIN
+LOOKUP sMsGaH
+INSERT qxsfoE number true
+END
+LOOKUP oZgTtF
+END
+INSERT tPoqke ()->number true
+BEGIN
+END
+BEGIN
+BEGIN
+END
+LOOKUP sMsGaH
+INSERT tPoqke number false
+BEGIN
+BEGIN
+END
+INSERT yFzB number false
+LOOKUP dsgBu6
+BEGIN
+LOOKUP oZgTtF
+END
+BEGIN
+LOOKUP nmfSiW
+END
+END
+INSERT xkjtcY number false
+INSERT v6eoyi string false
+INSERT v6eoyi (number,number,number,string,string,string,number,string,string,string,number,string,number,string,number,string,number,string,string,number,string,number,number,string,string,string,number,number,number,number,string,string,number,number,string,string,string,number,number,string,string,number,number,string,number,string,number,number,number,number,number,number,number,number,string,number,number,string,string,number,string,string,number,string,number,string,string,number,number,number,number,number,number,number)->string true
+INSERT nYtlnA string true
+END
+BEGIN
+END
+LOOKUP iepAl0
+INSERT wesna6 string false
+LOOKUP nmfSiW
+LOOKUP qxsfoE
+INSERT aBa0k_ (number,number,number,string,string,number,number,string,number,number,number,string,number,string,number,number,number,string,string,number,number,string,string,number,string,number,number,string,string,string,string,number,string,string,string,string,number,number,number,number,string,number,string,number,string,string,number,number,string,number,number,string,number,string,string,number,string,number,string)->string false
+BEGIN
+LOOKUP akfjlW
+LOOKUP yFzB
+END
+BEGIN
+BEGIN
+END
+END
+BEGIN
+INSERT tPoqke string true
+INSERT nYtlnA number true
+LOOKUP oZgTtF

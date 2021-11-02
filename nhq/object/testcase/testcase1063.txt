@@ -1,0 +1,80 @@
+BEGIN
+BEGIN
+END
+END
+END
+END
+LOOKUP loqacS
+END
+END
+INSERT mUsNzG number false
+INSERT loqacS number true
+INSERT mneUrV (string,string,number,string,string,string,number,string,string,string,number,number,string,number,number,string,number,number,string,number,string,number,number,number,string,number,string,string,string,string,number,number,string,string,number,number,number,number,string,string,string,number,string,number,number,string,number,string,string,number,number,string,number,string,string,number,string,string,number,string,number,number,number,string,number,number,string,string,number,number,string,number,number,number,number,number,string,string,number,number,string,string,number,string,string,number,string,number,string,number,string,string,number,string,number,string,string,number,string,number,number)->string true
+LOOKUP wdbntx
+END
+BEGIN
+INSERT ovz7ih string true
+END
+END
+BEGIN
+LOOKUP kJpyq4
+BEGIN
+END
+BEGIN
+BEGIN
+BEGIN
+LOOKUP jCxcbA
+LOOKUP kJpyq4
+BEGIN
+LOOKUP xfvRuc
+LOOKUP loqacS
+LOOKUP xztezv
+END
+BEGIN
+INSERT xSiOvx ()->number true
+INSERT dby4zI number false
+INSERT loqacS number false
+END
+END
+LOOKUP ovz7ih
+END
+INSERT xfvRuc string true
+BEGIN
+BEGIN
+LOOKUP xSiOvx
+INSERT mneUrV (string,string,string,number,string,string,number,string,number)->number true
+INSERT c_hI string false
+LOOKUP xSiOvx
+LOOKUP wdbntx
+LOOKUP mUsNzG
+END
+LOOKUP zKwNaZ
+BEGIN
+INSERT cckZbK string true
+INSERT o8rDeg ()->number true
+BEGIN
+END
+LOOKUP iPwWeH
+END
+INSERT ovz7ih (string,string,string,number,string,number,string,number,number,string,string,string,string,number,number,string,number,string,string,number,string,string,number,string,string,string,string,string,number,number,string,string,number,number,string,number,string,string,string,number,number,number,string,number,string,string,number,string,string,string,number,string,string,string,string,number,string,string,string,number,string,number,number,number,string)->number false
+LOOKUP jCxcbA
+END
+BEGIN
+BEGIN
+INSERT iPwWeH ()->number true
+END
+BEGIN
+LOOKUP zKwNaZ
+INSERT loqacS string true
+LOOKUP iPwWeH
+INSERT o8rDeg number false
+INSERT gxmNrt ()->string false
+BEGIN
+INSERT dby4zI number false
+INSERT wdbntx string false
+BEGIN
+LOOKUP xSiOvx
+LOOKUP kJpyq4
+INSERT xSiOvx number true
+END
+BEGIN

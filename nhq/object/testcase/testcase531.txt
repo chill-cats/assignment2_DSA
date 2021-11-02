@@ -1,0 +1,80 @@
+BEGIN
+END
+INSERT zknfu4 ()->string true
+LOOKUP uZahjb
+INSERT kpyfqC number true
+LOOKUP pPvvq4
+INSERT rPxblb string true
+BEGIN
+LOOKUP g8kOhT
+LOOKUP jsgilx
+END
+END
+BEGIN
+INSERT uZahjb number true
+LOOKUP ega2eu
+BEGIN
+INSERT qWnVet string true
+END
+INSERT pghhbX number true
+BEGIN
+LOOKUP g8kOhT
+END
+END
+INSERT u5w5lZ string true
+LOOKUP kdhlub
+LOOKUP gMoTpQ
+END
+LOOKUP uZahjb
+END
+LOOKUP uZahjb
+INSERT g8kOhT string false
+END
+LOOKUP kdhlub
+END
+INSERT nxfGjX ()->string false
+INSERT pPvvq4 string true
+BEGIN
+BEGIN
+END
+INSERT ysuKq2 number false
+END
+INSERT rPxblb number true
+END
+LOOKUP zknfu4
+INSERT jsgilx (number,number,number,string,string,number,string,string,number,string,string,string,number,number,number,number,number,string,number,string,string,string,number,number,string,number,number,string,string,string,number,number,string,string,number,number,number,number,string,string,number,number,number,string,string,number,string,number,string,string,string,string,string,string,number,number,string,number,string,string,number,string,string,number,number,number,string,string,number,number)->number true
+END
+LOOKUP pPvvq4
+LOOKUP k4tek6
+LOOKUP qWnVet
+LOOKUP kVuMqr
+BEGIN
+END
+END
+BEGIN
+END
+BEGIN
+END
+INSERT uZahjb number false
+INSERT rPxblb number false
+BEGIN
+BEGIN
+BEGIN
+INSERT zknfu4 ()->number false
+LOOKUP ega2eu
+INSERT jsgilx (number,string,number,string,string,number,number,string,string,number,string,string,number)->string true
+BEGIN
+BEGIN
+INSERT uZahjb (string,string,string,string,number,string,number,string,string,number,string,number,string,number,number,string,number,string,string,string,number,string,number,number,string,string,number,number,number,string,number,number,number,number,number,string,number,number,string,string,number,number,string,number,string,string,number,string,number,number,string,string,string,string,number,number,number,number,string,string,string,number,string,string,number,number,string,number,string,number,number,number,number,string)->string false
+LOOKUP kpyfqC
+INSERT rPxblb ()->number true
+BEGIN
+END
+END
+BEGIN
+INSERT kdhlub string true
+LOOKUP zknfu4
+BEGIN
+LOOKUP zknfu4
+BEGIN
+BEGIN

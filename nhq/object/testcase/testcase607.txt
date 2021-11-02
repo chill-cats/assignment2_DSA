@@ -1,0 +1,80 @@
+LOOKUP aBtIxs
+BEGIN
+END
+LOOKUP mStGeX
+BEGIN
+INSERT aBtIxs number true
+BEGIN
+INSERT ednong string false
+LOOKUP bDcHsk
+LOOKUP vzuYlE
+BEGIN
+END
+INSERT zegagi string false
+INSERT zegagi string false
+INSERT gAznvD string false
+BEGIN
+INSERT shnUvj string true
+LOOKUP aBtIxs
+BEGIN
+LOOKUP gAznvD
+END
+LOOKUP ednong
+INSERT bznCrn number false
+END
+BEGIN
+END
+INSERT tUmPsR number false
+LOOKUP aBtIxs
+END
+END
+INSERT shnUvj number false
+INSERT ednong (string,number,string,number,string,string,string,string,string,number,number,number,number,number,string,string,number,number,number,number,string,string,string,number,string,number,number,string,number,number,string,string)->number false
+INSERT ednong (number,number,string,number,string,string,number,string,number,number,number,number,string,string,string,string,string,number,string,string,number,string,number,number,string,number,string,string,string,number,number,number,number,number,string,number,string,number,number,number,number,number,string,number,number,string,string,number)->string false
+END
+INSERT xlrmlM number true
+LOOKUP tUmPsR
+BEGIN
+LOOKUP hnqCgq
+END
+LOOKUP zegagi
+END
+INSERT bDcHsk (number,number,string,number,number,number,string,string,number,number,string,number,number,number,number,number,string,string,string,number,number,string,number,string,string,number,number,number)->string false
+END
+BEGIN
+END
+END
+BEGIN
+LOOKUP wegBw2
+LOOKUP wegBw2
+LOOKUP bDcHsk
+BEGIN
+BEGIN
+END
+END
+END
+LOOKUP shnUvj
+END
+LOOKUP tUmPsR
+INSERT fDhXpB string true
+INSERT aBtIxs (string,number,number,number,string,number,number,string,number,string,string,number,number,number,number,string,number,string,string,string,number,number,number,number,string,number,number,string,string,number,string,number,number,string,string,number,string,string,string,number,string,string,string,string,string,number,number,string,string,string,number,number,number,number,string,number,number,number,number,number,string,string,number,string,number,number)->number false
+INSERT ednong number true
+END
+INSERT shnUvj (number,number,number,string,number,number,number,number,number,number,string,string,string,string,number,number,string,number)->string false
+INSERT shnUvj string false
+BEGIN
+LOOKUP iLmmsT
+LOOKUP mStGeX
+BEGIN
+END
+LOOKUP chbev0
+BEGIN
+INSERT zegagi string false
+BEGIN
+LOOKUP sQppps
+INSERT chbev0 number false
+BEGIN
+BEGIN
+END
+BEGIN
+BEGIN

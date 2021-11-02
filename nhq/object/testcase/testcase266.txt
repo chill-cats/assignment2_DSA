@@ -1,0 +1,80 @@
+LOOKUP hGsLkQ
+LOOKUP q1nhiw
+BEGIN
+LOOKUP 
+LOOKUP mCuuh_
+INSERT jcpnt4 ()->number false
+LOOKUP vwaHia
+BEGIN
+INSERT aVo7dN number true
+LOOKUP qwuRdJ
+BEGIN
+END
+END
+LOOKUP aVo7dN
+INSERT k_imia (number,string,number,number,number,string,number,string,number,number,number,number,string,string,number,number,number,number,string,number,string,number,string,string,string,number,number,string,string,number,string,number,string,number,string,number,number,string,number,number,string,string,number,number,number,string,number,string,string,string,string,number,number,string,string,string,number,number,string,string,number,number,number,string,number,string,string,string,number,string,number,number,string,number,string,number,number,number,string,number,number,number,number,string,string,string,number,string,string,string,string,string)->number false
+END
+INSERT dxrght (number,string,string,string,number,number,number,number,number,number,number,number,number,string,number,number,number,number,string,string,number,number,string,string,string,number,string,string,string,string,string,number,string,string,string)->string true
+BEGIN
+BEGIN
+INSERT qwuRdJ string false
+LOOKUP 
+INSERT hGsLkQ number true
+END
+END
+END
+BEGIN
+LOOKUP wJh_u3
+INSERT vwaHia number false
+END
+END
+BEGIN
+BEGIN
+BEGIN
+INSERT k_imia string false
+BEGIN
+END
+LOOKUP oJm7xL
+LOOKUP fuhbiA
+INSERT aVo7dN ()->number true
+INSERT wJh_u3 number false
+END
+INSERT oJm7xL number true
+END
+INSERT nvdEnr string true
+LOOKUP k_imia
+END
+LOOKUP aVo7dN
+BEGIN
+LOOKUP nvdEnr
+BEGIN
+LOOKUP ceqvfI
+INSERT dxrght string true
+LOOKUP lwxSvI
+END
+BEGIN
+END
+END
+BEGIN
+BEGIN
+LOOKUP mCuuh_
+END
+INSERT jcpnt4 string true
+BEGIN
+BEGIN
+LOOKUP fuhbiA
+BEGIN
+BEGIN
+INSERT aVo7dN string false
+INSERT jcpnt4 number false
+END
+LOOKUP vryFnc
+INSERT gEu0kS ()->string false
+INSERT wJh_u3 (number,string,number,number,string,string,string,string,number,number,string,string,number,string,number,number,string,string,string,string,string,number,number)->string false
+END
+BEGIN
+INSERT qwuRdJ ()->number false
+INSERT k_imia number false
+LOOKUP lwxSvI
+END
+END

@@ -1,0 +1,80 @@
+LOOKUP rRd2ry
+END
+LOOKUP egz4li
+BEGIN
+INSERT vSq4g0 number false
+LOOKUP bOxdsH
+END
+END
+BEGIN
+INSERT rshxpT ()->string false
+BEGIN
+LOOKUP zwa_hS
+BEGIN
+BEGIN
+END
+BEGIN
+BEGIN
+INSERT egz4li number true
+INSERT rshxpT ()->number true
+LOOKUP eqpOal
+BEGIN
+END
+BEGIN
+LOOKUP nGisfn
+END
+END
+INSERT eqpOal string true
+INSERT rshxpT ()->string false
+INSERT xmebk2 number true
+END
+BEGIN
+LOOKUP kraXlC
+LOOKUP nGisfn
+BEGIN
+BEGIN
+LOOKUP aOztuB
+END
+END
+BEGIN
+END
+INSERT rshxpT string false
+LOOKUP iMbW
+INSERT iMbW (string,string,number,number,string,string,number,string,number,string,number,string,number,string,number,number)->number true
+LOOKUP egz4li
+BEGIN
+INSERT gRbjlI (number,string,string,string,number,string,string,string,number,string,string,number,string,number,number,string,number,string,number,string,number,string,number,number,string,number,number,string,string,number,number,number,string,string,number,number,string,string,string,number,string,number,number,number,string,string,string,number,number,number,number,string,number,string,number,string,number,number,number,string,number,string,number,number,number,number,number,number,number,string,number)->string false
+END
+LOOKUP nGisfn
+END
+INSERT eqpOal number true
+INSERT zwa_hS number true
+END
+LOOKUP iMbW
+END
+LOOKUP eqpOal
+BEGIN
+INSERT rRd2ry number false
+BEGIN
+INSERT aOztuB string false
+INSERT aOztuB string false
+BEGIN
+LOOKUP rshxpT
+LOOKUP bTdbbU
+LOOKUP tak_rD
+INSERT bOxdsH (string,number,string,string,number,number,string,number,number,string,number,number,string,string,number,number,number,string,string,string,number,number,string,string,string,string,number,number,number,number,number,number,string,number,number,number,number,string,number,string,number,string,string,string)->number true
+END
+INSERT iMbW ()->string true
+BEGIN
+LOOKUP vSq4g0
+LOOKUP zBeApe
+LOOKUP rRd2ry
+INSERT iMbW (string,number,string,string,string,string,string,string,number,string,string,number,string,string)->string false
+END
+END
+END
+END
+INSERT tak_rD ()->string false
+BEGIN
+BEGIN
+INSERT tak_rD ()->number false

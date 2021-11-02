@@ -1,0 +1,80 @@
+INSERT xNfmp4 (number,string)->number false
+BEGIN
+END
+LOOKUP kszZpL
+LOOKUP kszZpL
+LOOKUP zdlTf2
+INSERT kOuXaQ number false
+BEGIN
+INSERT nXdIlf ()->string true
+LOOKUP nZlUwL
+INSERT oho9we ()->string true
+END
+INSERT sLnXiW ()->string true
+LOOKUP xNfmp4
+LOOKUP qavGog
+BEGIN
+BEGIN
+BEGIN
+END
+BEGIN
+INSERT xNfmp4 number true
+INSERT sLnXiW string false
+BEGIN
+BEGIN
+LOOKUP ugb6uU
+END
+BEGIN
+BEGIN
+END
+LOOKUP rTkZiw
+LOOKUP rUgfep
+INSERT oho9we number true
+LOOKUP ugb6uU
+INSERT kOuXaQ string false
+INSERT uPp1tL ()->number true
+END
+END
+END
+BEGIN
+LOOKUP ugb6uU
+END
+END
+BEGIN
+LOOKUP ugb6uU
+BEGIN
+LOOKUP rTkZiw
+INSERT sLnXiW string false
+END
+INSERT sLnXiW number true
+BEGIN
+INSERT kszZpL number true
+INSERT kszZpL string true
+INSERT dZfghq ()->string true
+END
+BEGIN
+END
+INSERT fBpatN number false
+LOOKUP kszZpL
+INSERT oho9we ()->string true
+BEGIN
+INSERT oho9we number true
+END
+END
+BEGIN
+LOOKUP fBpatN
+INSERT cTtDwD number false
+LOOKUP nZlUwL
+END
+LOOKUP nZlUwL
+BEGIN
+END
+LOOKUP rTkZiw
+BEGIN
+END
+LOOKUP kOuXaQ
+INSERT kszZpL number false
+END
+BEGIN
+END
+LOOKUP zdlTf2

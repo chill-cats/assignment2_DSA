@@ -1,0 +1,80 @@
+BEGIN
+INSERT qahUjc number false
+LOOKUP p2xGdd
+LOOKUP kLoOlk
+INSERT wLlKaL string true
+INSERT dohzaW string true
+END
+INSERT jurMzb string true
+INSERT hpbyvX (number,number,string,string,number,number,number,string,string,number,string,string,number,number,string,number,string,number,string,number,number,string,number,number,string,string,string,string,number,string,number)->number true
+INSERT y4eucs number true
+BEGIN
+LOOKUP qahUjc
+LOOKUP f9nSkH
+END
+INSERT qahUjc string false
+INSERT qahUjc (string,number,number,string,number,number,number,number,string,string,string,number,string,string,number,string,number,number,string,string,string,string,string)->string true
+LOOKUP p2xGdd
+LOOKUP wLlKaL
+END
+LOOKUP s0meaT
+END
+BEGIN
+LOOKUP nXhwxP
+END
+END
+INSERT f9nSkH ()->string false
+END
+INSERT q9r5xU string true
+END
+BEGIN
+INSERT hpbyvX number true
+END
+END
+END
+END
+INSERT i4rcx5 ()->number false
+BEGIN
+END
+BEGIN
+LOOKUP s0meaT
+LOOKUP q9r5xU
+LOOKUP s0meaT
+BEGIN
+END
+BEGIN
+BEGIN
+INSERT gKeutY (string,number,number,string,string,string,string,string,number,string,string,number,number,string,string,string,number,number,number,number,number,number,string,string)->string false
+BEGIN
+LOOKUP i4rcx5
+END
+END
+BEGIN
+BEGIN
+BEGIN
+INSERT gKeutY number true
+BEGIN
+BEGIN
+INSERT vFraw3 (string,number,string,string,number,number,string,string,number,number,string,number,number,number,number,number,string,number,string,string,string,number,number,number,number,string,string,string,string,number,number,string,number,number,number,number,string,number,number,number,number,number,number,number,string,number,string,number,number,string,number,string,string,string,string,number,string,string,number,string,string,string,number,number,string,string,string,number,string,number,string)->string false
+BEGIN
+BEGIN
+BEGIN
+END
+INSERT i4rcx5 string false
+END
+BEGIN
+LOOKUP dohzaW
+LOOKUP dohzaW
+INSERT neuTrI ()->number false
+END
+INSERT qahUjc number false
+LOOKUP wLlKaL
+LOOKUP o4gypP
+LOOKUP vFraw3
+BEGIN
+LOOKUP sch1oe
+END
+INSERT vMjavF string true
+LOOKUP wLlKaL
+LOOKUP nXhwxP
+INSERT vMjavF (string,string,string,string,number,string,string,string,string,number,string,string,string,number,string,string,string,number,number,number,string,number,string,string,number,number,string,string,string,string,number,number,string,string,string,number,number,string,string,string,string,string,string,number,number,number,string,string,number,number,number,number,number,string,number,string,string,number,string,string)->number true

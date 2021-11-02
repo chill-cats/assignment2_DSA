@@ -1,0 +1,80 @@
+INSERT bNiGkY string true
+INSERT dFnOvA number false
+LOOKUP doeojb
+INSERT iwuVvy number true
+INSERT uumVtw string false
+INSERT bNiGkY string true
+BEGIN
+INSERT dushu5 number false
+END
+LOOKUP kDpbb8
+INSERT lQnkhj (string,number,number,number,string,string,string,number,string,string,number,string,string,string,string,number,number,string,number)->string true
+LOOKUP doeojb
+END
+LOOKUP uLo3nD
+BEGIN
+INSERT kDpbb8 string false
+INSERT pGorta string true
+INSERT utfNw7 ()->string true
+BEGIN
+LOOKUP utfNw7
+BEGIN
+LOOKUP lQnkhj
+BEGIN
+END
+BEGIN
+LOOKUP lAvipV
+BEGIN
+BEGIN
+END
+INSERT kDpbb8 (string,number,string,number,string,number,number,number,number,string,string,number,number,string,number,string,number,number,string,number,number,number,number,string,number,string,number,number,number,string,string,string,string,number,string,number,string,string)->string true
+END
+END
+BEGIN
+BEGIN
+END
+LOOKUP utfNw7
+END
+LOOKUP uLo3nD
+INSERT uumVtw number true
+BEGIN
+LOOKUP mYptwP
+INSERT dQs5kR number true
+LOOKUP kDpbb8
+LOOKUP vAdkyK
+INSERT dFnOvA number true
+BEGIN
+BEGIN
+END
+END
+LOOKUP utfNw7
+END
+BEGIN
+END
+INSERT doeojb number false
+LOOKUP dushu5
+INSERT wYeyai (number,string,string,string,number,number,number,number,number,string,string,string,string,number,number,string,number,string,string,number,number,string,string,string,string,number,string,number,number,number,number,number,number,number,number,string,number,number,number,number,number,string,string,number,number,number,string,string,string,number,number,number,number,string,string,string,string,number,string,string,number,number,number,string,string,string,number,number,string,string,string,number,string,number,string,string,string,number,string,number,string,string,number,number,string,string,number,string,number,string,string,number,string,number,number,number,string,number,string)->number false
+LOOKUP dushu5
+BEGIN
+END
+INSERT doeojb ()->string false
+BEGIN
+BEGIN
+INSERT f8s5nq string true
+END
+END
+LOOKUP f8s5nq
+END
+END
+LOOKUP oTiRah
+INSERT pGorta string false
+END
+INSERT dushu5 ()->number true
+BEGIN
+END
+END
+BEGIN
+LOOKUP utfNw7
+LOOKUP doeojb
+BEGIN
+LOOKUP lQnkhj

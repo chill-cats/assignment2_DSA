@@ -1,0 +1,80 @@
+BEGIN
+END
+END
+LOOKUP vslNcD
+INSERT dEvQpn number true
+BEGIN
+BEGIN
+LOOKUP sHjjjT
+LOOKUP jCyYd3
+BEGIN
+BEGIN
+LOOKUP asxEmA
+END
+LOOKUP yyopkn
+END
+BEGIN
+INSERT asxEmA (number,number)->number true
+LOOKUP zdr0
+LOOKUP dEvQpn
+INSERT jxkdvB number true
+END
+INSERT yyopkn (string,string,number,string,number,string,string,number,string,string,number,number,string,number,number,string,string,string,string,string,string,string,number,string,string,string,number,string,number,number,number,number,string,string,number,string,number,string,number,string,number,number,string,string,number,string,string,string,number)->number false
+INSERT xPlU ()->number false
+END
+LOOKUP c9jsz5
+BEGIN
+END
+BEGIN
+LOOKUP m3ypx9
+INSERT asxEmA (number,number,number,number,string,number,number,number,string,string,string,string,string,string,number,string,number,number,string,string,string,number,string,number,number,string,string,string,string,string,number,string,string,number,number,string,string,string,string,number,string,string,string,number,number,number,number,string,number,string,number,string,string,number,number,string,string,string,number,string,number,string,number,number,number,number,string,number,number,string,number,number,string,string,string,number,string,number,number)->string true
+LOOKUP xPlU
+LOOKUP ogi7xF
+INSERT m3ypx9 ()->string true
+LOOKUP sHjjjT
+BEGIN
+END
+BEGIN
+BEGIN
+INSERT sHjjjT number false
+LOOKUP zDiSqI
+INSERT zDiSqI number true
+LOOKUP cymZm0
+BEGIN
+INSERT p7bZrB number true
+END
+END
+INSERT c9jsz5 number true
+LOOKUP dEvQpn
+LOOKUP c9jsz5
+INSERT ogi7xF number true
+END
+BEGIN
+BEGIN
+BEGIN
+INSERT vslNcD number false
+INSERT c9jsz5 number true
+BEGIN
+BEGIN
+INSERT asxEmA ()->number false
+INSERT zDiSqI number true
+END
+BEGIN
+END
+BEGIN
+END
+LOOKUP asxEmA
+INSERT aGxCc7 string false
+END
+END
+END
+LOOKUP ogi7xF
+END
+INSERT xPlU string false
+END
+INSERT asxEmA number false
+LOOKUP hSwjkM
+INSERT zdr0 (number,string,number,string,string,number,number,number,string,string,string,number,string,string,number,number,string,string,string,string,number,string,number,string,number,number,number,number,string,number,number,string,number,number,number,number,string,number,string,string,number,number,string,string,number,string,number,string,string,number,number,number,string,number)->string false
+END
+LOOKUP hSwjkM
+BEGIN

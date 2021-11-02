@@ -1,4 +1,4 @@
-/app/extra/clion/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" "/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2"
+/app/extra/clion/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" "/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq"
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/cmake-build-debug
+-- Build files have been written to: /home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug

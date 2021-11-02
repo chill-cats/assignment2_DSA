@@ -1,0 +1,80 @@
+INSERT onna (number,number)->string false
+INSERT xJexry number true
+END
+BEGIN
+INSERT onna number true
+BEGIN
+BEGIN
+BEGIN
+END
+LOOKUP ektVmr
+INSERT xJexry (number,number,number,number,number,string,number,number,number,number,number,number,number,string,number,string,number,string,number)->string true
+END
+BEGIN
+END
+INSERT onna string false
+LOOKUP hUxqrv
+BEGIN
+INSERT ndyFiM number true
+INSERT lhteeL (string,number,number,string,string,string,string,number,number,number,number,string,number,string,string)->string true
+END
+BEGIN
+END
+INSERT xJexry ()->number false
+BEGIN
+END
+LOOKUP yljPfq
+INSERT sYncga string true
+LOOKUP qMbVhJ
+BEGIN
+INSERT vwkocr number false
+BEGIN
+BEGIN
+BEGIN
+BEGIN
+END
+END
+LOOKUP onna
+LOOKUP iUl8v6
+INSERT lhteeL number true
+BEGIN
+LOOKUP xQy0tP
+END
+BEGIN
+END
+END
+END
+BEGIN
+LOOKUP gSs5io
+INSERT yljPfq ()->number true
+LOOKUP iUl8v6
+INSERT mcqmlv string true
+INSERT fJiSmD number true
+LOOKUP mcqmlv
+LOOKUP iUl8v6
+INSERT xunIhR ()->number true
+END
+INSERT xJexry ()->number false
+LOOKUP fJiSmD
+LOOKUP xJexry
+INSERT gSs5io string true
+LOOKUP iUl8v6
+INSERT sYncga (string,number,number,number,number,number,number,string,number)->number true
+BEGIN
+END
+LOOKUP xJexry
+BEGIN
+LOOKUP xBg9xF
+LOOKUP yljPfq
+LOOKUP gSs5io
+BEGIN
+END
+LOOKUP sYncga
+END
+INSERT xunIhR string true
+END
+END
+LOOKUP cdm6tM
+INSERT lhteeL string true
+BEGIN
+END

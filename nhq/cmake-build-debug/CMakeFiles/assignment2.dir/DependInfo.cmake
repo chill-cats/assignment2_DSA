@@ -8,7 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/main.cpp" "/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/Ass2/assignment2/cmake-build-debug/CMakeFiles/assignment2.dir/main.cpp.o"
+  "/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq/a.cpp" "/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/CMakeFiles/assignment2.dir/a.cpp.o"
+  "/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq/main.cpp" "/home/nhqcs/Desktop/Sem3/Data Structure & Algorithms/BTL/assignment2_DSA/nhq/cmake-build-debug/CMakeFiles/assignment2.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

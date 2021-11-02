@@ -1,0 +1,80 @@
+BEGIN
+INSERT eJqlgm ()->number true
+END
+INSERT yBb7c7 (number,string,string,string,number,string,string,number,string,string,string,number,string,string,number,string,number,string,string,string,string,number,string,string,string,number,string,number,string,number,string,string,string,string,string,number,string,string,string,string,number,string,number,string,string,number,string,string,number,number,number,string,string,string,string,number,number,number,number,number,string,number,number,number,number,number,number,string)->number true
+END
+BEGIN
+END
+END
+LOOKUP cdwTeI
+INSERT q2p5dl (number,string,number,number,number,string,number,string,number,string,number,number,number,string,string,number,string,string,number,string,string,string,string,string,number,string,string,string,string,number,number,string,number,number,string,string,number,number,string,number,string,string,string,number,string,number,number,number,string,string,number,number,string,number,number,number,number,number,number,string,string,number,string,number,string,string,string,string,string,number,number,string,number,number,string,number,string,number,string,string,number,number,string,number,string,number,string,string,number,string,number,number,string,string,string,string)->number true
+END
+INSERT q2p5dl string false
+END
+INSERT nDtmeF number true
+INSERT mFnOtY ()->string true
+INSERT tedWxf ()->string true
+LOOKUP cUn1mC
+LOOKUP m3zobM
+INSERT cUn1mC string true
+END
+LOOKUP jlc7xm
+END
+LOOKUP mFnOtY
+END
+BEGIN
+END
+INSERT q2p5dl number false
+LOOKUP mFnOtY
+LOOKUP tedWxf
+INSERT nKj2mD number false
+END
+BEGIN
+BEGIN
+END
+END
+INSERT nKj2mD number true
+LOOKUP s1e8cP
+BEGIN
+LOOKUP cUn1mC
+END
+LOOKUP mFnOtY
+LOOKUP jlc7xm
+LOOKUP nDtmeF
+INSERT ycpldq ()->string false
+LOOKUP cUn1mC
+BEGIN
+LOOKUP cdwTeI
+BEGIN
+BEGIN
+INSERT qFnvzM number true
+LOOKUP jlc7xm
+INSERT yBb7c7 number false
+END
+INSERT bjiOxw string true
+BEGIN
+BEGIN
+BEGIN
+LOOKUP mSt9hI
+INSERT nKj2mD string false
+BEGIN
+INSERT cdwTeI string false
+END
+END
+INSERT cdwTeI number false
+BEGIN
+LOOKUP mFnOtY
+END
+BEGIN
+LOOKUP cdwTeI
+BEGIN
+INSERT qFnvzM (string,number,number,number,string,number,number,string,number,number,number,number,number,string,string,number,string,number,number,string,number,number,number,number,string,string,number,number,number,string,string,number,string,number,number,number,number,number,string,number,number,string,number,string,string,number,string)->string false
+END
+BEGIN
+BEGIN
+INSERT m3zobM number false
+LOOKUP cUn1mC
+LOOKUP mSt9hI
+BEGIN
+BEGIN
+END

@@ -1,0 +1,80 @@
+LOOKUP vleSds
+LOOKUP oOlSug
+END
+INSERT wecCjy number true
+INSERT wecCjy (string,string,number,number,number,string,number,string,string,string,string,string,string,number,number,number,number,string,number,string,number,number,string,string,string,number,string,string,string,string,number,number,number,number,number,number,string,number,number,string,string,string,string,number,number,number,string,string,number,number,string,string,string,number,string,number,string,number,string,number,string)->number true
+INSERT gVaGqZ ()->number true
+LOOKUP vleSds
+INSERT jxiFtV ()->number false
+BEGIN
+END
+BEGIN
+BEGIN
+INSERT kAdRnj ()->number true
+INSERT wecCjy ()->string true
+INSERT cQx3kK ()->number false
+INSERT snf4vI string false
+BEGIN
+LOOKUP oOlSug
+LOOKUP gLukmM
+END
+BEGIN
+BEGIN
+INSERT gLukmM number true
+END
+BEGIN
+LOOKUP gLukmM
+LOOKUP kAdRnj
+END
+LOOKUP gLukmM
+LOOKUP jxiFtV
+BEGIN
+LOOKUP oej5gp
+END
+BEGIN
+BEGIN
+INSERT vleSds ()->string false
+INSERT aJocd0 ()->string true
+BEGIN
+END
+BEGIN
+END
+BEGIN
+END
+INSERT vleSds number true
+INSERT gLukmM ()->number false
+BEGIN
+LOOKUP vleSds
+LOOKUP oej5gp
+LOOKUP wecCjy
+BEGIN
+END
+END
+END
+LOOKUP oOlSug
+LOOKUP kAdRnj
+BEGIN
+INSERT jxiFtV number true
+END
+BEGIN
+INSERT oOlSug string true
+BEGIN
+END
+END
+LOOKUP aJocd0
+LOOKUP s8rgvK
+INSERT wVmpap string true
+END
+LOOKUP q3wS
+INSERT hwzChz string false
+LOOKUP k1vrio
+INSERT wecCjy (string,number,number,string,number,string,string,string,number,number,number,number,number,string,number,number,number,number,string,string,number,string,string,string,string,string,string,string,string,number,number,string,string,number,string,string,number,number,string,string,string,string,number,number,string,string,string,string,number,number,number,string,string,number)->number false
+END
+BEGIN
+LOOKUP a1kGkj
+END
+END
+INSERT bvdEmn (number,string,number,string,string,number,number,string,string,number,number,number,number,number,string,number,number,number,string,number,string,number,string,number,number,string,number,string,string,string,string,number,string,number,string,number,string,number,string,string,string,string,string,number,string,string,string,number,string,string,string,string,string,number,number,number,number,number,number,string,string,number,string,number,number,number,string,string,number,string,string,string,number,string,number,string,string)->number true
+BEGIN
+INSERT wVmpap number false
+END

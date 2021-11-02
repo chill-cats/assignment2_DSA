@@ -1,0 +1,80 @@
+LOOKUP yNeRon
+LOOKUP zWmPnG
+BEGIN
+INSERT c6yiuU number true
+BEGIN
+BEGIN
+LOOKUP meyGmQ
+LOOKUP i2fmha
+END
+BEGIN
+END
+LOOKUP zVkmaT
+END
+LOOKUP dqbdqW
+INSERT zEmPbD number false
+INSERT i2fmha string true
+BEGIN
+BEGIN
+BEGIN
+END
+INSERT zEmPbD number false
+BEGIN
+END
+INSERT jwx5r3 string true
+END
+BEGIN
+INSERT poqsbO number false
+INSERT jwx5r3 ()->number true
+LOOKUP lihAqK
+END
+LOOKUP poqsbO
+INSERT zEmPbD (number,number,string,number,number,string,number,string,number,number,number,number,number,number,string,number,string,string,string,number,string,string,string,string,string,number,string,string,string,number,string,string,string,number)->number false
+LOOKUP dqbdqW
+END
+BEGIN
+END
+BEGIN
+BEGIN
+INSERT qbo0qI string false
+INSERT poqsbO string true
+BEGIN
+LOOKUP lihAqK
+END
+INSERT meyGmQ (string,number,number,string,string,string,number,string,number,string,string,string,number,number,number,number,string,string,string,number,string,number,string,number,number,number,number,number,string,string,number,string,number,number,string,string,string,number,number,string,string,string,number,number,string,number,string,string,string,number,number,string,number,string,number,string,number,number,number,number,string,string,string,string)->string false
+INSERT zWmPnG (number,string,string,string,string)->number false
+END
+LOOKUP mxnCtG
+LOOKUP elcglH
+END
+LOOKUP slfGxG
+LOOKUP zWmPnG
+INSERT lihAqK number false
+END
+LOOKUP aovHzA
+INSERT poqsbO string false
+BEGIN
+BEGIN
+INSERT yNeRon (string,string,string,string,string,number,number,string,number,number,string,string,number,string,number,string,string,number,number,string,number,string,string,string,number,string,string,string,number,number,number,number,number,number,string,string,string,string,string,string,string,number,number,number,string,string,string,string,string,string,string,string,number,number,string,number,string,number,string,number,number,string,number,number,string,string,number,string,number,number,string,string,string,number)->string true
+END
+END
+END
+BEGIN
+BEGIN
+BEGIN
+INSERT slfGxG number false
+END
+INSERT aovHzA number false
+END
+INSERT aovHzA number false
+BEGIN
+END
+INSERT tUyvwB ()->string true
+INSERT jwx5r3 string false
+LOOKUP aovHzA
+LOOKUP yNeRon
+BEGIN
+LOOKUP tUyvwB
+END
+LOOKUP zVkmaT
+LOOKUP k_unuz

@@ -1,0 +1,80 @@
+BEGIN
+BEGIN
+INSERT nseYnS number false
+BEGIN
+LOOKUP glhenr
+END
+LOOKUP oUqFuV
+INSERT hutPrg string true
+END
+INSERT vnoxts number false
+BEGIN
+LOOKUP gCzIwt
+END
+INSERT bzvGtU number false
+BEGIN
+INSERT bzvGtU string true
+END
+LOOKUP hutPrg
+INSERT qXpPgW string true
+BEGIN
+LOOKUP erpom8
+INSERT vnoxts string false
+INSERT qXpPgW (string,number,number,number,number,number,string,number,string,number,number,number,number,number,string,number,number,number,number,number,number,number,number,number,string,string,string,number,string,string,number,string,number,number,number,string,string,string,string,string,string,number,string,number,string,string,string,number,number,string,string,number,string,string,string,number,string,string,string,number,string,string,number,number,number,number,string,string,number,number,number,string,number,string,number,string,number,number,number,number,number,number,string,number,number,number,number,number,number,string,string,string,string,number)->string false
+INSERT gXuhiL (string,string,string,number,string,number,string,string,number,number,number,number,string,string,string,number,string,string,number,string,string,number,number,number,string,string,number,number,string,number,string,number,string,string,number,string,number,string,number,string,string,number,number,number,number,number,number,number,number,string,string,string,string,string,number,string,string,string,string,number,number,string,number,number,string,number,string,number,string,string,string,number,number,number,number,string,string,number,string,string,string,number,number,string,number,number,string,number,string,string,number)->number true
+LOOKUP glhenr
+LOOKUP d8bGjV
+LOOKUP oUqFuV
+LOOKUP mDdQfN
+BEGIN
+INSERT i8l3rN number true
+INSERT i6ktjW string false
+INSERT nseYnS string true
+LOOKUP tulBsD
+END
+LOOKUP oUqFuV
+INSERT i6ktjW number false
+BEGIN
+LOOKUP vnoxts
+BEGIN
+BEGIN
+LOOKUP mDdQfN
+INSERT d8bGjV number false
+BEGIN
+END
+BEGIN
+END
+INSERT gXuhiL string true
+INSERT gCzIwt ()->string true
+END
+INSERT z4s6j2 string true
+BEGIN
+INSERT xwcXsB string true
+LOOKUP d8bGjV
+END
+BEGIN
+END
+LOOKUP z4s6j2
+LOOKUP gCzIwt
+END
+END
+LOOKUP bzvGtU
+LOOKUP biikq_
+BEGIN
+BEGIN
+END
+INSERT i6ktjW number false
+INSERT nseYnS string false
+BEGIN
+END
+END
+LOOKUP qXpPgW
+BEGIN
+END
+LOOKUP bzvGtU
+BEGIN
+END
+END
+END
+END
+BEGIN
